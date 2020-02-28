@@ -385,21 +385,13 @@
                 for (i = 1; i < data.length - 1; i++) {
                     var row = data[i];
                     var cells;
-
-                    //console.log(row[0].indexOf(",", 0));
-
+;
                     if (row[0].indexOf(",", 0) !== -1) {
                         cells = row.join(",").split(",");
-                        //console.log("Условие выполнено");
                     }
                     else {
                         cells = row.join(";").split(";");
-                        //console.log("Условие НЕвыполнено");
                     }
-
-                    //cells = row.join(",").split(",");
-
-
                     myIndex.push(cells[0]);
                     myParentIndex.push(cells[1]);
                     myKey.push(cells[2]);
