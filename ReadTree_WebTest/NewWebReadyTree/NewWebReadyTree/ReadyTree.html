@@ -347,9 +347,8 @@
                     if (myParentIndex[j] == 0) {
                         document.getElementById(`${j + 1}`).setAttribute('class', 'Node IsRoot ExpandOpen');
                     }
-
-                    document.getElementById("0").lastChild.setAttribute('class', 'Node IsRoot IsLast ExpandOpen'));
                 }
+                document.getElementById("0").lastChild.firstChild.setAttribute('class', 'Node IsRoot IsLast ExpandOpen');
             }
 
             $(document).ready(function () {
