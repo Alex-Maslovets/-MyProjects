@@ -116,180 +116,144 @@
         </div>
     </div>
 
-    <div id="myTestDiv"></div>
+    <div onclick="tree_toggle(arguments[0])">
+        <div>K4_ReadyTree</div>
+        <div id="0" class="ContainerTree"></div>
+    </div>
 
-    <div>K4_ReadyTree</div>
-    <div id="0" class="ContainerTree"></div>
+        <script type="text/javascript">
 
-    <script type="text/javascript">
+            var myIndex = new Array();
+            var myParentIndex = new Array();
+            var myKey = new Array();
+            var myParent = new Array();
+            var myDBNumber = new Array();
+            var myByteNumber = new Array();
+            var myBitNumber = new Array();
+            var myCaption = new Array();
+            var myHandle = new Array();
 
-        var myIndex = new Array();
-        var myParentIndex = new Array();
-        var myKey = new Array();
-        var myParent = new Array();
-        var myDBNumber = new Array();
-        var myByteNumber = new Array();
-        var myBitNumber = new Array();
-        var myCaption = new Array();
-        var myHandle = new Array();
+            //var RTVarName = new Array(':="Blockings".ReadyTree_0:', ':="Blockings".ReadyTree_1:', ':="Blockings".ReadyTree_2:', ':="Blockings".ReadyTree_3:', ':="Blockings".ReadyTree_4:', ':="Blockings".ReadyTree_5:', ':="Blockings".ReadyTree_6:', ':="Blockings".ReadyTree_7:', ':="Blockings".ReadyTree_8:', ':="Blockings".ReadyTree_9:');
+            var RTNewValue = new Array();
+            var RTOldValue = new Array();
 
-        var RTVarName = new Array(':="Blockings".ReadyTree_0:', ':="Blockings".ReadyTree_1:', ':="Blockings".ReadyTree_2:', ':="Blockings".ReadyTree_3:', ':="Blockings".ReadyTree_4:', ':="Blockings".ReadyTree_5:', ':="Blockings".ReadyTree_6:', ':="Blockings".ReadyTree_7:', ':="Blockings".ReadyTree_8:', ':="Blockings".ReadyTree_9:');
-        var RTNewValue = new Array();
-        var RTOldValue = new Array();
+            window.onload = init;
 
-        window.onload = init;
-
-        function init() {
-            var button = document.getElementById("testButton1");
-            button.onclick = test1;
-            button = document.getElementById("testButton2");
-            button.onclick = test2;
-        }
-
-        var i = 1;
-        var obj;
-        var serialObj;
-
-        /*Test*/
-        function test1() {
-            /*
-            for (i = 0; i <= 1; i++) {
-                var string = RTVarName[i];
-                console.log(`string_#${i} --- ${string}`);
-                RTNewValue[i] = string;
-                console.log(`elemnt_${i}_${RTNewValue[i]}`);
+            function init() {
+                var button = document.getElementById("testButton1");
+                button.onclick = test1;
+                button = document.getElementById("testButton2");
+                button.onclick = test2;
             }
-            for (i = 0; i <= 1; i++) {
-                if (RTOldValue[i] != RTNewValue[i]) {
-                    RTOldValue[i] = RTNewValue[i];
-                    if (document.getElementById(`img_state_${i}`) != null) {
-                        //var div = document.getElementById(`img_state_${i}`);
-                        //div.setAttribute('src', `Images/state_${RTOldValue[i]}.png`);
-                        $(`img_state_${i}`).attr("src", `Images/state_${RTOldValue[i]}.png`);
-                        console.log(`change_elemnt_${i}`);
-                    }
+
+            var i = 1;
+            var obj;
+            var serialObj;
+
+            /*Test*/
+            function test1() {
+                /*
+                for (i = 0; i <= 1; i++) {
+                    var string = RTVarName[i];
+                    console.log(`string_#${i} --- ${string}`);
+                    RTNewValue[i] = string;
+                    console.log(`elemnt_${i}_${RTNewValue[i]}`);
                 }
-            }
-
-            if (i == 1) {
-                $('#img_state_0').attr("src", "Images/state_1.png");
-                i = 0;
-            }
-            else {
-                $('#img_state_0').attr("src", "Images/state_0.png");
-                i = 1;
-            }
-            */
-
-            // Check for the various File API support.
-            if (window.File && window.FileReader && window.FileList && window.Blob) {
-                alert('Great success! All the File APIs are supported.');
-            }
-            else {
-                alert('The File APIs are not fully supported in this browser.');
-            }
-
-            if (document.getElementById("0") != null) {
-                obj = document.getElementById("0");
-                serialObj = obj.innerHTML;
-                
-                sessionStorage.setItem("myKey", serialObj);
-            }
-        }
-
-        function test2() {
-            var div = document.getElementById("0");
-            div.innerHTML = sessionStorage.getItem("myKey");
-            console.log(document.getElementById("files"));
-        }
-
-        function tree_toggle(event) {
-            event = event || window.event
-            var clickedElem = event.target || event.srcElement
-            if (!hasClass(clickedElem, 'Expand')) {
-                return // клик не там
-            }
-            // Node, на который кликнули
-            var node = clickedElem.parentNode
-            if (hasClass(node, 'ExpandLeaf')) {
-                return // клик на листе
-            }
-
-            // определить новый класс для узла
-            var newClass = hasClass(node, 'ExpandOpen') ? 'ExpandClosed' : 'ExpandOpen'
-            // заменить текущий класс на newClass
-            // регексп находит отдельно стоящий open|close и меняет на newClass
-            var re = /(^|\s)(ExpandOpen|ExpandClosed)(\s|$)/
-            node.className = node.className.replace(re, '$1' + newClass + '$3')
-        }
-        function hasClass(elem, className) {
-            return new RegExp("(^|\\s)" + className + "(\\s|$)").test(elem.className)
-        }
-
-        function buildTree() {
-            //let timerId = setInterval(addLevelTree, 1000);
-
-            /// Построение дерева готовностей из CSV-файла
-            document.getElementById("0").innerHTML = "";
-
-            /// Первый цикл --- Перебор значений для поиска ГЛАВНЫХ (верхних) узлов
-            for (j = 0; j <= myIndex.length; j++) {
-
-                if (myParentIndex[j] == 0) {
-                    /// Создание списка ul - контейнера для элементов il
-                    var ul = document.createElement('ul');
-                    ul.setAttribute('id', `root_${j}`);
-                    /// Задание стиля "ContainerTree" для ul-списка
-                    ul.setAttribute('class', 'ContainerTree');
-                    /// "Прикрепление" ul-элементов к заранее созданному div с id 0
-                    document.getElementById("0").appendChild(ul);
-
-                    for (i = 0; i < myParentIndex.length; i++) {
-                        if (myParentIndex[i] == 0 && i == j) {
-                            /// Создание элементов списка il ГЛАВНЫХ (верхних) узлов
-                            var li = document.createElement('li');
-                            li.setAttribute('id', myIndex[i]);
-                            /// Т.к. для ul-списка ранее был задан стиль "ContainerTree", то сейчас мы можем для li-элементов задавать стили "Node", "IsRoot", "IsLast", "ExpandLeaf", "ExpandOpen", "ExpandClosed"
-                            /// Порядок задания стилей ВАЖЕН
-                            li.setAttribute('class', 'Node IsRoot IsLast ExpandOpen');
-                            li.innerText += myCaption[i];
-
-                            var div = document.createElement('div');
-                            div.setAttribute('class', 'Expand');
-                            li.appendChild(div);
-
-                            /// Добавление изображения состояния state_0/1
-                            div = document.createElement('img');
-                            ///img.setAttribute('src', 'img/state_:="Blockings".ReadyTree_0:.png');
-                            div.setAttribute('id', `img_state_${i}`);
-                            div.setAttribute('src', 'Images/state_1.png');
-                            li.appendChild(div);
-
-                            ul.appendChild(li);
+                for (i = 0; i <= 1; i++) {
+                    if (RTOldValue[i] != RTNewValue[i]) {
+                        RTOldValue[i] = RTNewValue[i];
+                        if (document.getElementById(`img_state_${i}`) != null) {
+                            //var div = document.getElementById(`img_state_${i}`);
+                            //div.setAttribute('src', `Images/state_${RTOldValue[i]}.png`);
+                            $(`img_state_${i}`).attr("src", `Images/state_${RTOldValue[i]}.png`);
+                            console.log(`change_elemnt_${i}`);
                         }
                     }
-                    /// Удаление списка ul, если он не содержит "детей"
-                    if (!ul.hasChildNodes()) {
-                        document.getElementById(`root_${j}`).remove();
-                    }
+                }
+
+                if (i == 1) {
+                    $('#img_state_0').attr("src", "Images/state_1.png");
+                    i = 0;
+                }
+                else {
+                    $('#img_state_0').attr("src", "Images/state_0.png");
+                    i = 1;
+                }
+                */
+
+                // Check for the various File API support.
+                if (window.File && window.FileReader && window.FileList && window.Blob) {
+                    alert('Great success! All the File APIs are supported.');
+                }
+                else {
+                    alert('The File APIs are not fully supported in this browser.');
+                }
+
+                if (document.getElementById("0") != null) {
+                    obj = document.getElementById("0");
+                    serialObj = obj.innerHTML;
+
+                    sessionStorage.setItem("myKey", serialObj);
                 }
             }
-            /// Второй цикл --- Заполнение, созданных ul-списков li-элементами и параллельное создание новых ul-cсписков с их заполнением
-            for (j = 0; j < myIndex.length; j++) {
-                /// Проверка - существует ли ul-список
-                if (document.getElementById(`root_${j}`) != null) {
-                    document.getElementById(`root_${j}`).childNodes.forEach(function (el) {
 
+            function test2() {
+                var div = document.getElementById("0");
+                div.innerHTML = sessionStorage.getItem("myKey");
+                console.log(document.getElementById("files"));
+            }
+
+            function tree_toggle(event) {
+                event = event || window.event
+                var clickedElem = event.target || event.srcElement
+                if (!hasClass(clickedElem, 'Expand')) {
+                    return // клик не там
+                }
+                // Node, на который кликнули
+                var node = clickedElem.parentNode
+                if (hasClass(node, 'ExpandLeaf')) {
+                    return // клик на листе
+                }
+
+                // определить новый класс для узла
+                var newClass = hasClass(node, 'ExpandOpen') ? 'ExpandClosed' : 'ExpandOpen'
+                // заменить текущий класс на newClass
+                // регексп находит отдельно стоящий open|close и меняет на newClass
+                var re = /(^|\s)(ExpandOpen|ExpandClosed)(\s|$)/
+                node.className = node.className.replace(re, '$1' + newClass + '$3')
+            }
+            function hasClass(elem, className) {
+                return new RegExp("(^|\\s)" + className + "(\\s|$)").test(elem.className)
+            }
+
+            function buildTree() {
+                //let timerId = setInterval(addLevelTree, 1000);
+
+                /// Построение дерева готовностей из CSV-файла
+                document.getElementById("0").innerHTML = "";
+
+                /// Первый цикл --- Перебор значений для поиска ГЛАВНЫХ (верхних) узлов
+                for (j = 0; j <= myIndex.length; j++) {
+
+                    if (myParentIndex[j] == 0) {
+                        /// Создание списка ul - контейнера для элементов il
                         var ul = document.createElement('ul');
-                        ul.setAttribute('id', `root_${el.id}`);
+                        ul.setAttribute('id', `root_${j}`);
+                        /// Задание стиля "ContainerTree" для ul-списка
                         ul.setAttribute('class', 'ContainerTree');
-                        document.getElementById(el.id).appendChild(ul);
+                        /// "Прикрепление" ul-элементов к заранее созданному div с id 0
+                        document.getElementById("0").appendChild(ul);
 
                         for (i = 0; i < myParentIndex.length; i++) {
-                            if (myParentIndex[i] == el.id) {
+                            if (myParentIndex[i] == 0 && i == j) {
+                                /// Создание элементов списка il ГЛАВНЫХ (верхних) узлов
                                 var li = document.createElement('li');
                                 li.setAttribute('id', myIndex[i]);
-                                li.setAttribute('class', 'Node ExpandLeaf');
+                                /// Т.к. для ul-списка ранее был задан стиль "ContainerTree", то сейчас мы можем для li-элементов задавать стили "Node", "IsRoot", "IsLast", "ExpandLeaf", "ExpandOpen", "ExpandClosed"
+                                /// Порядок задания стилей ВАЖЕН
+                                //li.setAttribute('class', 'Node IsRoot IsLast ExpandOpen');
+                                li.setAttribute('class', 'Node IsRoot ExpandOpen');
+                                
                                 li.innerText += myCaption[i];
 
                                 var div = document.createElement('div');
@@ -305,107 +269,148 @@
 
                                 ul.appendChild(li);
                             }
+
                         }
                         /// Удаление списка ul, если он не содержит "детей"
                         if (!ul.hasChildNodes()) {
-                            document.getElementById(`root_${el.id}`).remove();
+                            document.getElementById(`root_${j}`).remove();
+                        }
+                    }
+                }
+                /// Второй цикл --- Заполнение, созданных ul-списков li-элементами и параллельное создание новых ul-cсписков с их заполнением
+                for (j = 0; j < myIndex.length; j++) {
+                    /// Проверка - существует ли ul-список
+                    if (document.getElementById(`root_${j}`) != null) {
+                        document.getElementById(`root_${j}`).childNodes.forEach(function (el) {
+
+                            var ul = document.createElement('ul');
+                            ul.setAttribute('id', `root_${el.id}`);
+                            ul.setAttribute('class', 'ContainerTree');
+                            document.getElementById(el.id).appendChild(ul);
+
+                            for (i = 0; i < myParentIndex.length; i++) {
+                                if (myParentIndex[i] == el.id) {
+                                    var li = document.createElement('li');
+                                    li.setAttribute('id', myIndex[i]);
+                                    li.setAttribute('class', 'Node ExpandLeaf');
+                                    li.innerText += myCaption[i];
+
+                                    var div = document.createElement('div');
+                                    div.setAttribute('class', 'Expand');
+                                    li.appendChild(div);
+
+                                    /// Добавление изображения состояния state_0/1
+                                    div = document.createElement('img');
+                                    ///img.setAttribute('src', 'img/state_:="Blockings".ReadyTree_0:.png');
+                                    div.setAttribute('id', `img_state_${i}`);
+                                    div.setAttribute('src', 'Images/state_1.png');
+                                    li.appendChild(div);
+
+                                    ul.appendChild(li);
+                                }
+                            }
+                            /// Удаление списка ul, если он не содержит "детей"
+                            if (!ul.hasChildNodes()) {
+                                document.getElementById(`root_${el.id}`).remove();
+                            }
+                        });
+                    }
+                }
+
+
+                for (j = 0; j < myIndex.length; j++) {
+                    if (document.getElementById(`${j + 1}`) != null) {
+                        if (document.getElementById(`${j + 1}`).lastChild.hasChildNodes() == true) {
+                            document.getElementById(`${j + 1}`).setAttribute('class', 'Node ExpandClosed');
+                        }
+                    }
+                }
+
+                var buffer;
+
+                //console.log(myIndex.length);
+
+                for (j = 0; j < myIndex.length; j++) {
+                    if (document.getElementById(`root_${j}`) != null) {
+                        buffer = document.getElementById(`root_${j}`).childNodes.length;
+                        document.getElementById(`root_${j}`).childNodes[buffer - 1].setAttribute('class', 'Node IsLast ExpandClosed');
+                    }
+
+                    if (document.getElementById(`${j}`) != null) {
+                        if (document.getElementById(`${j}`).lastChild.hasChildNodes() == true) {
+                            if (document.getElementById(`${j}`).lastChild.lastChild.childNodes.length == 3) {
+                                document.getElementById(`${j}`).lastChild.lastChild.setAttribute('class', 'Node ExpandLeaf IsLast');
+                            }
+                        }
+                    }
+
+                    if (myParentIndex[j] == 0) {
+                        document.getElementById(`${j + 1}`).setAttribute('class', 'Node IsRoot ExpandOpen');
+                    }
+
+                    document.getElementById("0").lastChild.setAttribute('class', 'Node IsRoot IsLast ExpandOpen'));
+                }
+            }
+
+            $(document).ready(function () {
+
+                $('#files').on("change", function (e) {
+                    e.preventDefault();
+
+                    $('#files').parse({
+                        config: {
+                            delimiter: "auto",
+                            encoding: "CP1251",
+                            complete: readToArray,
+                        },
+                        before: function (file, inputElem) {
+                            //console.log("Parsing file...", file);
+                        },
+                        error: function (err, file) {
+                            //console.log("ERROR:", err, file);
+                        },
+                        complete: function () {
+                            //console.log("Done with all files");
                         }
                     });
-                }
-            }
-
-
-            for (j = 0; j < myIndex.length; j++) {
-                if (document.getElementById(`${j + 1}`) != null) {
-                    if (document.getElementById(`${j + 1}`).lastChild.hasChildNodes() == true) {
-                        document.getElementById(`${j + 1}`).setAttribute('class', 'Node ExpandClosed');
-                    }
-                }
-            }
-
-            var buffer;
-
-            console.log(myIndex.length);
-
-            for (j = 0; j < myIndex.length; j++) {
-                if (document.getElementById(`root_${j}`) != null) {
-                    buffer = document.getElementById(`root_${j}`).childNodes.length;
-                    document.getElementById(`root_${j}`).childNodes[buffer - 1].setAttribute('class', 'Node IsLast ExpandClosed');
-                }
-
-                if (document.getElementById(`${j}`) != null) {
-                    if (document.getElementById(`${j}`).lastChild.hasChildNodes() == true) {
-                        if (document.getElementById(`${j}`).lastChild.lastChild.childNodes.length == 3) {
-                            document.getElementById(`${j}`).lastChild.lastChild.setAttribute('class', 'Node ExpandLeaf IsLast');
-                        }
-                    }
-                }
-
-                if (myParentIndex[j] == 0) {
-                    document.getElementById(`${j + 1}`).setAttribute('class', 'Node IsRoot IsLast ExpandOpen');
-                }
-            }
-        }
-
-        $(document).ready(function () {
-
-            $('#files').on("change", function (e) {
-                e.preventDefault();
-
-                $('#files').parse({
-                    config: {
-                        delimiter: "auto",
-                        encoding: "CP1251",
-                        complete: readToArray,
-                    },
-                    before: function (file, inputElem) {
-                        //console.log("Parsing file...", file);
-                    },
-                    error: function (err, file) {
-                        //console.log("ERROR:", err, file);
-                    },
-                    complete: function () {
-                        //console.log("Done with all files");
-                    }
                 });
-            });
 
-            function readToArray(results) {
-                myIndex = [];
-                myParentIndex = [];
-                myKey = [];
-                myParent = [];
-                myDBNumber = [];
-                myByteNumber = [];
-                myBitNumber = [];
-                myCaption = [];
-                myHandle = [];
+                function readToArray(results) {
+                    myIndex = [];
+                    myParentIndex = [];
+                    myKey = [];
+                    myParent = [];
+                    myDBNumber = [];
+                    myByteNumber = [];
+                    myBitNumber = [];
+                    myCaption = [];
+                    myHandle = [];
 
-                var data = results.data;
-                for (i = 1; i < data.length - 1; i++) {
-                    var row = data[i];
-                    var cells;
-;
-                    if (row[0].indexOf(",", 0) !== -1) {
-                        cells = row.join(",").split(",");
+                    var data = results.data;
+                    for (i = 1; i < data.length - 1; i++) {
+                        var row = data[i];
+                        var cells;
+                        ;
+                        if (row[0].indexOf(",", 0) !== -1) {
+                            cells = row.join(",").split(",");
+                        }
+                        else {
+                            cells = row.join(";").split(";");
+                        }
+                        myIndex.push(cells[0]);
+                        myParentIndex.push(cells[1]);
+                        myKey.push(cells[2]);
+                        myParent.push(cells[3]);
+                        myDBNumber.push(cells[4]);
+                        myByteNumber.push(cells[5]);
+                        myBitNumber.push(cells[6]);
+                        myCaption.push(cells[7]);
+                        myHandle.push(cells[8]);
                     }
-                    else {
-                        cells = row.join(";").split(";");
-                    }
-                    myIndex.push(cells[0]);
-                    myParentIndex.push(cells[1]);
-                    myKey.push(cells[2]);
-                    myParent.push(cells[3]);
-                    myDBNumber.push(cells[4]);
-                    myByteNumber.push(cells[5]);
-                    myBitNumber.push(cells[6]);
-                    myCaption.push(cells[7]);
-                    myHandle.push(cells[8]);
+                    buildTree();
                 }
-                buildTree();
-            }
-        });
-    </script>
+            });
+        </script>
 
 </body>
 </html>
