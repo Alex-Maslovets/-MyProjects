@@ -6,17 +6,17 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\alexo\Desktop\!Try_ReadyTree\ReadTree_WebTest\NewWebReadyTree\NewWebReadyTree\bin\Release\Publish</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\alexo\OneDrive\Документы\#MyProjects\ReadTree_WebTest\NewWebReadyTree\NewWebReadyTree\bin\Release\Publish</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
-      <publishTime>05/09/2018 16:10:50</publishTime>
+      <publishTime>09/05/2018 16:10:50</publishTime>
     </File>
     <File Include="bin/NewWebReadyTree.dll">
-      <publishTime>02/26/2020 08:59:25</publishTime>
+      <publishTime>04/23/2020 11:56:28</publishTime>
     </File>
     <File Include="bin/NewWebReadyTree.pdb">
-      <publishTime>02/26/2020 08:59:25</publishTime>
+      <publishTime>04/23/2020 11:56:28</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>06/27/2016 20:50:24</publishTime>
@@ -166,7 +166,7 @@
       <publishTime>02/26/2020 08:32:02</publishTime>
     </File>
     <File Include="ReadyTree.html">
-      <publishTime>02/26/2020 08:45:54</publishTime>
+      <publishTime>04/23/2020 11:56:24</publishTime>
     </File>
     <File Include="Scripts/jquery-3.4.1.min.js">
       <publishTime>01/20/2020 08:53:39</publishTime>
@@ -175,7 +175,7 @@
       <publishTime>08/13/2019 00:02:36</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/20/2020 15:26:41</publishTime>
+      <publishTime>04/22/2020 09:23:36</publishTime>
     </File>
   </ItemGroup>
 </Project>
