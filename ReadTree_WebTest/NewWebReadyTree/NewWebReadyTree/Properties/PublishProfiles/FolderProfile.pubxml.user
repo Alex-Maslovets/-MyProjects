@@ -13,10 +13,10 @@
       <publishTime>09/05/2018 16:10:50</publishTime>
     </File>
     <File Include="bin/NewWebReadyTree.dll">
-      <publishTime>04/23/2020 11:56:28</publishTime>
+      <publishTime>04/24/2020 15:01:42</publishTime>
     </File>
     <File Include="bin/NewWebReadyTree.pdb">
-      <publishTime>04/23/2020 11:56:28</publishTime>
+      <publishTime>04/24/2020 15:01:42</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>06/27/2016 20:50:24</publishTime>
@@ -150,11 +150,23 @@
     <File Include="Images/state_0.svg">
       <publishTime>02/26/2020 08:34:50</publishTime>
     </File>
+    <File Include="Images/state_0_0.png">
+      <publishTime>02/26/2020 08:34:50</publishTime>
+    </File>
+    <File Include="Images/state_0_1.png">
+      <publishTime>02/26/2020 08:34:50</publishTime>
+    </File>
     <File Include="Images/state_1.png">
       <publishTime>02/26/2020 08:34:50</publishTime>
     </File>
     <File Include="Images/state_1.svg">
       <publishTime>02/26/2020 08:34:50</publishTime>
+    </File>
+    <File Include="Images/state_1_0.png">
+      <publishTime>04/24/2020 09:29:46</publishTime>
+    </File>
+    <File Include="Images/state_1_1.png">
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Images/t.gif">
       <publishTime>02/26/2020 08:34:50</publishTime>
@@ -162,11 +174,14 @@
     <File Include="jquery-3.4.1.min.js">
       <publishTime>02/26/2020 08:32:02</publishTime>
     </File>
+    <File Include="K4ReadyTree.html">
+      <publishTime>04/24/2020 15:01:34</publishTime>
+    </File>
     <File Include="papaparse.min.js">
       <publishTime>02/26/2020 08:32:02</publishTime>
     </File>
     <File Include="ReadyTree.html">
-      <publishTime>04/23/2020 11:56:24</publishTime>
+      <publishTime>04/24/2020 09:42:55</publishTime>
     </File>
     <File Include="Scripts/jquery-3.4.1.min.js">
       <publishTime>01/20/2020 08:53:39</publishTime>

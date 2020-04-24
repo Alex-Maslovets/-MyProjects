@@ -67,7 +67,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ReadyTree.html" />
+    <Content Include="Images\state_0_0.png" />
+    <Content Include="Images\state_0_1.png" />
+    <Content Include="Images\state_1_0.png" />
+    <Content Include="Images\state_1_1.png" />
+    <Content Include="K4ReadyTree.html" />
     <Content Include="Images\closed.gif" />
     <Content Include="Images\document.gif" />
     <Content Include="Images\expand_leaf.gif" />
@@ -83,10 +87,6 @@
     <Content Include="Images\minus.gif" />
     <Content Include="Images\open.gif" />
     <Content Include="Images\plus.gif" />
-    <Content Include="Images\state_0.png" />
-    <Content Include="Images\state_0.svg" />
-    <Content Include="Images\state_1.png" />
-    <Content Include="Images\state_1.svg" />
     <Content Include="Images\t.gif" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\papaparse.min.js" />

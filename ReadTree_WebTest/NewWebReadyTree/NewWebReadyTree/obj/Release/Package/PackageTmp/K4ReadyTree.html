@@ -138,15 +138,16 @@
 
 
             //////////////////////////////////////////////// ЗАПОЛНИТЬ ПЕРЕД ГЕНЕРАЦИЕЙ ////////////////////////////////////////////////////
-            var RTVarName = new Array();
+            var BDRTVarName = new Array();
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             var RTNewValue = new Array();
             var RTOldValue = new Array();
 
-            var i = 1;
             var obj;
             var serialObj;
+            var maxIndex;
+
 
             window.onload = init;
 
@@ -159,10 +160,10 @@
                     button = document.getElementById("testButton3");
                     button.onclick = test3;
                     
-                    if (sessionStorage.getItem("myIndexArray") != null) {
-                        myIndex = sessionStorage.getItem("myIndexArray").split(",").map(Number);
+                    if (sessionStorage.getItem("maxIndexStorage") != null) {
+                        maxIndex = sessionStorage.getItem("maxIndexStorage");
                     }
-
+                    /*
                     if (sessionStorage.getItem("myParentIndexArray") != null) {
                         myParentIndex = sessionStorage.getItem("myParentIndexArray").split(",").map(Number);
                     }
@@ -202,20 +203,25 @@
                     if (sessionStorage.getItem("RTOldValueArray") != null) {
                         RTOldValue = sessionStorage.getItem("RTOldValueArray").split(",").map(Number);
                     }
-                    
+                    */
                     var div = document.getElementById("0");
 
                     if (sessionStorage.getItem("myPage") != null) {
                         div.innerHTML = sessionStorage.getItem("myPage");
 
-                        for (i = 0; i <= RTVarName.length; i++) {
-                            if (RTOldValue[i] != RTVarName[i]) {
-                                RTOldValue[i] = RTVarName[i];
+                        for (i = 0; i <= myIndex.length; i++) {
+                             
+                            if (document.getElementById(`img_state_${i}`) != null) {
 
-                                if (document.getElementById(`img_state_${i}`) != null) {
-                                    var div = document.getElementById(`img_state_${i}`);
-                                    div.setAttribute('src', `Images/state_${RTOldValue[i]}.png`);
-                                    console.log(`change_elemnt_${i}`);
+                                div = document.getElementById(`img_state_${i}`);
+
+                                if (BDRTVarName[i][0] == 0) {
+                                    if (BDRTVarName[i][1] == 0) div.setAttribute('src', 'Images/state_0_0.png');
+                                    else div.setAttribute('src', 'Images/state_0_1.png');
+                                }
+                                else {
+                                    if (BDRTVarName[i][1] == 0) div.setAttribute('src', 'Images/state_1_0.png');
+                                    else div.setAttribute('src', 'Images/state_1_1.png');
                                 }
                             }
                         }
@@ -247,11 +253,11 @@
                         obj = document.getElementById("0").innerHTML;
                         sessionStorage.setItem("myPage", obj);
                     }
-
-                    obj = myIndex.slice(0);
-                    sessionStorage.setItem("myIndexArray", obj);
-                    obj = [];
-
+                    
+                    //obj = maxIndex;
+                    sessionStorage.setItem("maxIndexStorage", maxIndex);
+                    //obj = [];
+                    /*
                     obj = myParentIndex.slice(0);
                     sessionStorage.setItem("myParentIndexArray", obj);
                     obj = [];
@@ -291,7 +297,7 @@
                     obj = RTOldValue.slice(0);
                     sessionStorage.setItem("RTOldValueArray", obj);
                     obj = [];
-
+                    */
                     window.location.reload(true);
                 }
                 catch (ex) {
@@ -363,11 +369,20 @@
 
                                     /// Добавление изображения состояния state_0/1
                                     div = document.createElement('img');
-                                    ///img.setAttribute('src', 'img/state_:="Blockings".ReadyTree_0:.png');
                                     div.setAttribute('id', `img_state_${i}`);
-                                    div.setAttribute('src', 'Images/state_1.png');
-                                    li.appendChild(div);
 
+                                    //div.setAttribute('src', 'Images/state_0_0.png');
+
+                                    if (BDRTVarName[i][0] == 0) {
+                                        if (BDRTVarName[i][1] == 0) div.setAttribute('src', 'Images/state_0_0.png');
+                                        else div.setAttribute('src', 'Images/state_0_1.png');
+                                    }
+                                    else {
+                                        if (BDRTVarName[i][1] == 0) div.setAttribute('src', 'Images/state_1_0.png');
+                                        else div.setAttribute('src', 'Images/state_1_1.png');
+                                    }
+
+                                    li.appendChild(div);
                                     ul.appendChild(li);
                                 }
                             }
@@ -404,11 +419,21 @@
 
                                         /// Добавление изображения состояния state_0/1
                                         div = document.createElement('img');
-                                        ///img.setAttribute('src', 'img/state_:="Blockings".ReadyTree_0:.png');
-                                        div.setAttribute('id', `img_state_${i}`);
-                                        div.setAttribute('src', 'Images/state_1.png');
-                                        li.appendChild(div);
 
+                                        div.setAttribute('id', `img_state_${i}`);
+                                        
+                                        //div.setAttribute('src', 'Images/state_0_0.png');
+
+                                        if (BDRTVarName[i][0] == 0) {
+                                            if (BDRTVarName[i][1] == 0) div.setAttribute('src', 'Images/state_0_0.png');
+                                            else div.setAttribute('src', 'Images/state_0_1.png');
+                                        }
+                                        else {
+                                            if (BDRTVarName[i][1] == 0) div.setAttribute('src', 'Images/state_1_0.png');
+                                            else div.setAttribute('src', 'Images/state_1_1.png');
+                                        }
+
+                                        li.appendChild(div);
                                         ul.appendChild(li);
                                     }
                                 }
@@ -447,6 +472,7 @@
                             document.getElementById(`${j + 1}`).setAttribute('class', 'Node IsRoot ExpandOpen');
                         }
                     }
+                    maxIndex = myIndex.length;
                     document.getElementById("0").lastChild.firstChild.setAttribute('class', 'Node IsRoot IsLast ExpandOpen');
                 }
                 catch(ex) {
@@ -497,7 +523,7 @@
                             var row = data[i];
                             var cells;
                             ;
-                            if (row[0].indexOf(",", 0) !== -1) {
+                            if (row[0].indexOf(",", 0) < 10) {
                                 cells = row.join(",").split(",");
                             }
                             else {
