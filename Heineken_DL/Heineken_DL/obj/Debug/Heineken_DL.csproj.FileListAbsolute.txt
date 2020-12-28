@@ -66,3 +66,12 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heinek
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\System.ValueTuple.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\obj\Debug\Heineken_DL.csproj.CopyComplete
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\PushSharp.Amazon.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\PushSharp.Apple.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\PushSharp.Blackberry.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\PushSharp.Core.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\PushSharp.Firefox.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\PushSharp.Google.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\PushSharp.Windows.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Newtonsoft.Json.xml

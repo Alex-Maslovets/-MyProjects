@@ -21,25 +21,31 @@ namespace Heineken_DL
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string s = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss:fff");
+            Console.WriteLine(s);
+
             var cs = "Host=localhost;Username=postgres;Password=123456789;Database=postgres";
 
             var con = new NpgsqlConnection(cs);
             con.Open();
 
-            var sql = "SELECT version()";
+            /*var sql = "SELECT version()";
 
             var cmd = new NpgsqlCommand(sql, con);
 
             var version = cmd.ExecuteScalar().ToString();
             Console.WriteLine($"PostgreSQL version: {version}");
-
+            */
             var cmd_insert = new NpgsqlCommand();
             cmd_insert.Connection = con;
-
-            cmd_insert.CommandText = "INSERT INTO _test_table (id, value, date_time) VALUES ( 2, 33, '2000-01-10 07:08:09')";
+           
+            cmd_insert.CommandText = "INSERT INTO _test_table (id, value, date_time) VALUES ( 2, 33, '" + s + "')";
             cmd_insert.ExecuteNonQuery();
 
             con.Close();
+
+            s = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss:fff");
+            Console.WriteLine(s);
         }
 
         private void button2_Click(object sender, EventArgs e)
