@@ -19,35 +19,6 @@ namespace Heineken_DL
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string s = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss:fff");
-            Console.WriteLine(s);
-
-            var cs = "Host=localhost;Username=postgres;Password=123456789;Database=postgres";
-
-            var con = new NpgsqlConnection(cs);
-            con.Open();
-
-            /*var sql = "SELECT version()";
-
-            var cmd = new NpgsqlCommand(sql, con);
-
-            var version = cmd.ExecuteScalar().ToString();
-            Console.WriteLine($"PostgreSQL version: {version}");
-            */
-            var cmd_insert = new NpgsqlCommand();
-            cmd_insert.Connection = con;
-           
-            cmd_insert.CommandText = "INSERT INTO _test_table (id, value, date_time) VALUES ( 2, 33, '" + s + "')";
-            cmd_insert.ExecuteNonQuery();
-
-            con.Close();
-
-            s = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss:fff");
-            Console.WriteLine(s);
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             // Create and connect the client
@@ -87,6 +58,36 @@ namespace Heineken_DL
 
             // Disconnect the client
             client.Disconnect();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+            string s = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff");
+            Console.WriteLine(s);
+
+            List <string> querySQL = new List<string> ();
+
+            string temp;
+            int test;
+
+            temp = "Host=" + tB_PGSQL_host.Text + ";Username=" + tB_PGSQL_userName.Text + ";Password=" + tB_PGSQL_password.Text + ";Database=" + tB_PGSQL_DB.Text + "";
+
+            querySQL.Add(temp);
+            test = querySQL.Count;
+
+            var cs = "Host=" + tB_PGSQL_host.Text + ";Username=" + tB_PGSQL_userName.Text + ";Password=" + tB_PGSQL_password.Text + ";Database=" + tB_PGSQL_DB.Text + "";
+
+            var con = new NpgsqlConnection(cs);
+            con.Open();
+
+            var cmd_insert = new NpgsqlCommand();
+            cmd_insert.Connection = con;
+
+            cmd_insert.CommandText = "INSERT INTO _test_table (id, value, date_time) VALUES ( 2, 33, '" + s + "')";
+            cmd_insert.ExecuteNonQuery();
+
+            con.Close();
         }
     }
 }
