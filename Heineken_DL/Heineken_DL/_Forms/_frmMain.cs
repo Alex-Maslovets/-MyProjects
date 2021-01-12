@@ -66,16 +66,6 @@ namespace Heineken_DL
             string s = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff");
             Console.WriteLine(s);
 
-            List <string> querySQL = new List<string> ();
-
-            string temp;
-            int test;
-
-            temp = "Host=" + tB_PGSQL_host.Text + ";Username=" + tB_PGSQL_userName.Text + ";Password=" + tB_PGSQL_password.Text + ";Database=" + tB_PGSQL_DB.Text + "";
-
-            querySQL.Add(temp);
-            test = querySQL.Count;
-
             var cs = "Host=" + tB_PGSQL_host.Text + ";Username=" + tB_PGSQL_userName.Text + ";Password=" + tB_PGSQL_password.Text + ";Database=" + tB_PGSQL_DB.Text + "";
 
             var con = new NpgsqlConnection(cs);
@@ -88,6 +78,76 @@ namespace Heineken_DL
             cmd_insert.ExecuteNonQuery();
 
             con.Close();
+        }
+
+
+        public class ComboboxItem
+        {
+            public string Text { get; set; }
+            public object Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
+
+        private void b_PGSQL_saveConf_Click(object sender, EventArgs e)
+        {
+            ComboboxItem item = new ComboboxItem();
+            int temp;
+            temp = cB_PGSQL_savedConf.Items.Count + 1;
+            item.Text = "Configuration #" + temp.ToString();
+            item.Value = "Host=" + tB_PGSQL_host.Text + ";Username=" + tB_PGSQL_userName.Text + ";Password=" + tB_PGSQL_password.Text + ";Database=" + tB_PGSQL_DB.Text + "";
+
+            cB_PGSQL_savedConf.Items.Add(item);
+
+            cB_PGSQL_savedConf.SelectedIndex = 0;
+
+            Console.WriteLine((cB_PGSQL_savedConf.Items[temp - 1] as ComboboxItem).Value.ToString());
+
+            /*
+                        List<string> querySQL = new List<string>();
+
+                        string temp;
+                        
+
+                        temp = 
+                        querySQL.Add(temp);
+                        cB_PGSQL_savedConf.Items.Add()
+            */
+        }
+
+        private void cB_PGSQL_savedConf_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string temp;
+            temp = (cB_PGSQL_savedConf.SelectedItem as ComboboxItem).Value.ToString();
+            Console.WriteLine(temp);
+            
+            string[] subs = temp.Split(';');
+
+            foreach (string sub in subs)
+            {
+                string[] subsubs = sub.Split('=');
+
+                for (int i = 0; i < subsubs.Length; i ++)
+                {
+                    if (i == 1)
+                    Console.WriteLine($"SubSubstring: {subsubs[i]}" + i.ToString());
+                }
+                //Console.WriteLine($"Substring: {sub}");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            chart1.Series["Series1"].Points.AddXY(1, 2);
+            chart1.Series["Series1"].Points.AddXY(2, 4);
+            chart1.Series["Series1"].Points.AddXY(4, 8);
+            chart1.Series["Series1"].Points.AddXY(8, 16);
+            chart1.Series["Series1"].Points.AddXY(16, 32);
+            chart1.Series["Series1"].Points.AddXY(32, 64);
+            chart1.Series["Series1"].Points.AddXY(64, 128);
         }
     }
 }
