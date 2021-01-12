@@ -60,27 +60,46 @@ namespace Heineken_DL
             client.Disconnect();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
 
             string s = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff");
             Console.WriteLine(s);
 
+            // Установка соединения с PostgreSQL
             var cs = "Host=" + tB_PGSQL_host.Text + ";Username=" + tB_PGSQL_userName.Text + ";Password=" + tB_PGSQL_password.Text + ";Database=" + tB_PGSQL_DB.Text + "";
 
             var con = new NpgsqlConnection(cs);
             con.Open();
-
+            
+            // Запиись данных в PostgreSQL
             var cmd_insert = new NpgsqlCommand();
             cmd_insert.Connection = con;
 
             cmd_insert.CommandText = "INSERT INTO _test_table (id, value, date_time) VALUES ( 2, 33, '" + s + "')";
             cmd_insert.ExecuteNonQuery();
 
+            // Чтение данных из PostgreSQL
+            string sql = "Select * from _test_table";
+
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, con))
+            {
+                //int val;
+                NpgsqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    //val = Int32.Parse(reader[0].ToString());
+                    Console.WriteLine(reader[0].ToString());
+                    Console.WriteLine(reader[1].ToString());
+                    Console.WriteLine(reader[2].ToString());
+                    //do whatever you like
+                }
+            }
+            // Закрытие соединения
             con.Close();
         }
 
-
+        // Класс для записи в комбобокс текста в переменную Text и доп. информации в переменную Value
         public class ComboboxItem
         {
             public string Text { get; set; }
@@ -106,16 +125,6 @@ namespace Heineken_DL
 
             Console.WriteLine((cB_PGSQL_savedConf.Items[temp - 1] as ComboboxItem).Value.ToString());
 
-            /*
-                        List<string> querySQL = new List<string>();
-
-                        string temp;
-                        
-
-                        temp = 
-                        querySQL.Add(temp);
-                        cB_PGSQL_savedConf.Items.Add()
-            */
         }
 
         private void cB_PGSQL_savedConf_SelectedIndexChanged(object sender, EventArgs e)

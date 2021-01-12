@@ -47,11 +47,12 @@ namespace Heineken_DL
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,10 +73,11 @@ namespace Heineken_DL
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(788, 438);
+            this.tabControl1.Size = new System.Drawing.Size(797, 441);
             this.tabControl1.TabIndex = 8;
             // 
             // tabPage1
@@ -91,7 +93,7 @@ namespace Heineken_DL
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(780, 412);
+            this.tabPage1.Size = new System.Drawing.Size(789, 415);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "SQL";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -164,29 +166,37 @@ namespace Heineken_DL
             this.button1.TabIndex = 7;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button3);
-            this.tabPage2.Controls.Add(this.chart1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(780, 412);
+            this.tabPage2.Size = new System.Drawing.Size(789, 415);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "S7PLC";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.button3);
+            this.tabPage3.Controls.Add(this.chart1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(789, 415);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Chart";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(699, 148);
+            this.button3.Location = new System.Drawing.Point(703, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 19;
+            this.button3.TabIndex = 21;
             this.button3.Text = "Chart";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // chart1
             // 
@@ -198,7 +208,7 @@ namespace Heineken_DL
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(6, 177);
+            this.chart1.Location = new System.Drawing.Point(10, 32);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -206,8 +216,8 @@ namespace Heineken_DL
             series1.Name = "Series1";
             series1.YValuesPerPoint = 6;
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(768, 229);
-            this.chart1.TabIndex = 18;
+            this.chart1.Size = new System.Drawing.Size(768, 380);
+            this.chart1.TabIndex = 20;
             this.chart1.Text = "chart1";
             // 
             // Form1
@@ -222,7 +232,7 @@ namespace Heineken_DL
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -245,6 +255,7 @@ namespace Heineken_DL
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ComboBox cB_PGSQL_savedConf;
+        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
