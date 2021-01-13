@@ -1,7 +1,6 @@
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Heineken_DL.exe.config
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Heineken_DL.exe
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Heineken_DL.pdb
-C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\obj\Debug\Heineken_DL.csprojAssemblyReference.cache
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\obj\Debug\Heineken_DL.Properties.Resources.resources
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\obj\Debug\Heineken_DL.csproj.GenerateResource.cache
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\obj\Debug\Heineken_DL.csproj.CoreCompileInputs.cache
@@ -25,7 +24,6 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heinek
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Microsoft.Extensions.Options.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Microsoft.Extensions.Primitives.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Npgsql.dll
-C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\System.Buffers.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\System.Collections.Immutable.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\System.ComponentModel.Annotations.dll
@@ -53,7 +51,6 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heinek
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Microsoft.Extensions.Options.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Microsoft.Extensions.Primitives.xml
-C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Npgsql.pdb
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Npgsql.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\System.Buffers.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\System.Collections.Immutable.xml
@@ -75,3 +72,5 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heinek
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\PushSharp.Google.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\PushSharp.Windows.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\System.Threading.Channels.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\System.Threading.Channels.xml
