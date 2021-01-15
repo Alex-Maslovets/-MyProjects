@@ -74,4 +74,3 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heinek
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\Newtonsoft.Json.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\System.Threading.Channels.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\bin\Debug\System.Threading.Channels.xml
-C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DL\Heineken_DL\obj\Debug\Heineken_DL.csprojAssemblyReference.cache

@@ -19,6 +19,7 @@ namespace Heineken_DL
             InitializeComponent();
         }
 
+
         private void button2_Click(object sender, EventArgs e)
         {
             // Create and connect the client
@@ -64,7 +65,7 @@ namespace Heineken_DL
         {
 
             string s = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff");
-            Console.WriteLine(s);
+            //Console.WriteLine(s);
 
             // Установка соединения с PostgreSQL
             var cs = "Host=" + tB_PGSQL_host.Text + ";Username=" + tB_PGSQL_userName.Text + ";Password=" + tB_PGSQL_password.Text + ";Database=" + tB_PGSQL_DB.Text + "";
@@ -82,6 +83,7 @@ namespace Heineken_DL
             // Чтение данных из PostgreSQL
             string sql = "Select * from _test_table";
 
+            Console.WriteLine(s);
             using (NpgsqlCommand command = new NpgsqlCommand(sql, con))
             {
                 //int val;
@@ -95,6 +97,7 @@ namespace Heineken_DL
                     //do whatever you like
                 }
             }
+
             // Закрытие соединения
             con.Close();
         }
