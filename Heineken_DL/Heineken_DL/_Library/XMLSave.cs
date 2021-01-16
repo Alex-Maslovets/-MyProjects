@@ -1,9 +1,9 @@
-﻿using System.Xml.Serialization;
-using System.IO;
+﻿using System.IO;
+using System.Xml.Serialization;
 
-namespace Heineken_DL._Library
+namespace Heineken_DL
 {
-    class XMLconfig
+    public class XMLSave
     {
         /// <summary>
         /// Writes the given object instance to an XML file.

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sharp7;
 using Npgsql;
+using System.IO;
+using System.Resources;
 
 namespace Heineken_DL
 {
@@ -18,7 +20,6 @@ namespace Heineken_DL
         {
             InitializeComponent();
         }
-
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -118,48 +119,112 @@ namespace Heineken_DL
         {
             ComboboxItem item = new ComboboxItem();
             int temp;
-            temp = cB_PGSQL_savedConf.Items.Count + 1;
-            item.Text = "Configuration #" + temp.ToString();
+            temp = comboB_PGSQL_savedConf.Items.Count + 1;
+            item.Text = "Конфигурация #" + temp.ToString();
             item.Value = "Host=" + tB_PGSQL_host.Text + ";Username=" + tB_PGSQL_userName.Text + ";Password=" + tB_PGSQL_password.Text + ";Database=" + tB_PGSQL_DB.Text + "";
 
-            cB_PGSQL_savedConf.Items.Add(item);
+            comboB_PGSQL_savedConf.Items.Add(item);
 
-            cB_PGSQL_savedConf.SelectedIndex = 0;
+            comboB_PGSQL_savedConf.SelectedIndex = comboB_PGSQL_savedConf.Items.Count - 1;
 
-            Console.WriteLine((cB_PGSQL_savedConf.Items[temp - 1] as ComboboxItem).Value.ToString());
+            Console.WriteLine((comboB_PGSQL_savedConf.Items[temp - 1] as ComboboxItem).Value.ToString());
 
+            checkB_createConfig.Checked = false;
+            checkB_chooseConfig.Checked = true;
+
+            comboB_PGSQL_savedConf.Enabled = true;
+            tB_PGSQL_DB.Enabled = false;
+            tB_PGSQL_host.Enabled = false;
+            tB_PGSQL_password.Enabled = false;
+            tB_PGSQL_userName.Enabled = false;
+            b_PGSQL_saveConf.Enabled = false;
         }
 
         private void cB_PGSQL_savedConf_SelectedIndexChanged(object sender, EventArgs e)
         {
             string temp;
-            temp = (cB_PGSQL_savedConf.SelectedItem as ComboboxItem).Value.ToString();
-            Console.WriteLine(temp);
-            
+            temp = (comboB_PGSQL_savedConf.SelectedItem as ComboboxItem).Value.ToString();
+
             string[] subs = temp.Split(';');
 
-            foreach (string sub in subs)
+            //foreach (string sub in subs)
+            for (int t = 0; t < subs.Length; t ++)
             {
+                string sub = subs[t];
                 string[] subsubs = sub.Split('=');
 
                 for (int i = 0; i < subsubs.Length; i ++)
                 {
                     if (i == 1)
-                    Console.WriteLine($"SubSubstring: {subsubs[i]}" + i.ToString());
+                    Console.WriteLine($"SubSubstring: {subsubs[i]}");
                 }
-                //Console.WriteLine($"Substring: {sub}");
+                Console.WriteLine(t);
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            chart1.Series["Series1"].Points.AddXY(1, 2);
+            chart1.Series["Series1"].Points.Clear();
+            chart1.Series["Series1"].Points.AddXY(1, 1);
             chart1.Series["Series1"].Points.AddXY(2, 4);
-            chart1.Series["Series1"].Points.AddXY(4, 8);
-            chart1.Series["Series1"].Points.AddXY(8, 16);
-            chart1.Series["Series1"].Points.AddXY(16, 32);
-            chart1.Series["Series1"].Points.AddXY(32, 64);
-            chart1.Series["Series1"].Points.AddXY(64, 128);
+            chart1.Series["Series1"].Points.AddXY(3, 9);
+            chart1.Series["Series1"].Points.AddXY(4, 16);
+            chart1.Series["Series1"].Points.AddXY(5, 25);
+            chart1.Series["Series1"].Points.AddXY(6, 36);
+            chart1.Series["Series1"].Points.AddXY(7, 49);
+        }
+
+        private void checkB_chooseConfig_Click(object sender, EventArgs e)
+        {
+            checkB_createConfig.Checked = false;
+            checkB_chooseConfig.Checked = true;
+
+            comboB_PGSQL_savedConf.Enabled = true;
+            tB_PGSQL_DB.Enabled = false;
+            tB_PGSQL_host.Enabled = false;
+            tB_PGSQL_password.Enabled = false;
+            tB_PGSQL_userName.Enabled = false;
+            b_PGSQL_saveConf.Enabled = false;
+        }
+
+        private void checkB_chreateConfig_Click(object sender, EventArgs e)
+        {
+            checkB_chooseConfig.Checked = false;
+            checkB_createConfig.Checked = true;
+
+            comboB_PGSQL_savedConf.Enabled = false;
+            tB_PGSQL_DB.Enabled = true;
+            tB_PGSQL_host.Enabled = true;
+            tB_PGSQL_password.Enabled = true;
+            tB_PGSQL_userName.Enabled = true;
+            b_PGSQL_saveConf.Enabled = true;
+        }
+
+        private void b_PGSQL_deleteConf_Click(object sender, EventArgs e)
+        {
+            comboB_PGSQL_savedConf.Items.RemoveAt(comboB_PGSQL_savedConf.SelectedIndex);
+        }
+
+        private void b_PGSQL_connect_Click(object sender, EventArgs e)
+        {
+            string workingDirectory = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+
+            //Console.WriteLine(projectDirectory + "/_Resources/configPGSQL.xml");
+
+            List <string> tempList = new List<string>();
+            for (int i = 0; i < comboB_PGSQL_savedConf.Items.Count; i++)
+            {
+                tempList.Add((comboB_PGSQL_savedConf.SelectedItem as ComboboxItem).Value.ToString());
+            }
+
+            //string RunningPath = AppDomain.CurrentDomain.BaseDirectory;
+            string FileName = string.Format("{0}Resources\\configPGSQL.xml", Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\")));
+
+            //Console.WriteLine(FileName);
+            XMLSave.WriteToXmlFile<List<string>>(FileName, tempList);
+
+            //XMLSave.WriteToXmlFile<List<string>>("C:/Users/alexo/OneDrive/Документы/GitHub/-MyProjects/Heineken_DL/Heineken_DL/_Resources/configPGSQL.xml", tempList);
         }
     }
 }

@@ -35,7 +35,11 @@ namespace Heineken_DL
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.cB_PGSQL_savedConf = new System.Windows.Forms.ComboBox();
+            this.b_PGSQL_deleteConf = new System.Windows.Forms.Button();
+            this.b_PGSQL_connect = new System.Windows.Forms.Button();
+            this.checkB_createConfig = new System.Windows.Forms.CheckBox();
+            this.checkB_chooseConfig = new System.Windows.Forms.CheckBox();
+            this.comboB_PGSQL_savedConf = new System.Windows.Forms.ComboBox();
             this.tB_PGSQL_DB = new System.Windows.Forms.TextBox();
             this.tB_PGSQL_password = new System.Windows.Forms.TextBox();
             this.tB_PGSQL_userName = new System.Windows.Forms.TextBox();
@@ -66,7 +70,13 @@ namespace Heineken_DL
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.cB_PGSQL_savedConf);
+            this.tabPage1.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage1.Controls.Add(this.b_PGSQL_deleteConf);
+            this.tabPage1.Controls.Add(this.b_PGSQL_connect);
+            this.tabPage1.Controls.Add(this.checkB_createConfig);
+            this.tabPage1.Controls.Add(this.checkB_chooseConfig);
+            this.tabPage1.Controls.Add(this.comboB_PGSQL_savedConf);
             this.tabPage1.Controls.Add(this.tB_PGSQL_DB);
             this.tabPage1.Controls.Add(this.tB_PGSQL_password);
             this.tabPage1.Controls.Add(this.tB_PGSQL_userName);
@@ -80,20 +90,61 @@ namespace Heineken_DL
             this.tabPage1.Size = new System.Drawing.Size(789, 415);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "SQL";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // cB_PGSQL_savedConf
+            // b_PGSQL_deleteConf
             // 
-            this.cB_PGSQL_savedConf.FormattingEnabled = true;
-            this.cB_PGSQL_savedConf.Location = new System.Drawing.Point(6, 6);
-            this.cB_PGSQL_savedConf.Name = "cB_PGSQL_savedConf";
-            this.cB_PGSQL_savedConf.Size = new System.Drawing.Size(206, 21);
-            this.cB_PGSQL_savedConf.TabIndex = 15;
-            this.cB_PGSQL_savedConf.SelectedIndexChanged += new System.EventHandler(this.cB_PGSQL_savedConf_SelectedIndexChanged);
+            this.b_PGSQL_deleteConf.Location = new System.Drawing.Point(220, 58);
+            this.b_PGSQL_deleteConf.Name = "b_PGSQL_deleteConf";
+            this.b_PGSQL_deleteConf.Size = new System.Drawing.Size(80, 21);
+            this.b_PGSQL_deleteConf.TabIndex = 19;
+            this.b_PGSQL_deleteConf.Text = "УДАЛИТЬ";
+            this.b_PGSQL_deleteConf.UseVisualStyleBackColor = true;
+            this.b_PGSQL_deleteConf.Click += new System.EventHandler(this.b_PGSQL_deleteConf_Click);
+            // 
+            // b_PGSQL_connect
+            // 
+            this.b_PGSQL_connect.Location = new System.Drawing.Point(92, 83);
+            this.b_PGSQL_connect.Name = "b_PGSQL_connect";
+            this.b_PGSQL_connect.Size = new System.Drawing.Size(120, 21);
+            this.b_PGSQL_connect.TabIndex = 18;
+            this.b_PGSQL_connect.Text = "ПОДКЛЮЧИТЬСЯ";
+            this.b_PGSQL_connect.UseVisualStyleBackColor = true;
+            this.b_PGSQL_connect.Click += new System.EventHandler(this.b_PGSQL_connect_Click);
+            // 
+            // checkB_createConfig
+            // 
+            this.checkB_createConfig.AutoSize = true;
+            this.checkB_createConfig.Location = new System.Drawing.Point(306, 35);
+            this.checkB_createConfig.Name = "checkB_createConfig";
+            this.checkB_createConfig.Size = new System.Drawing.Size(68, 17);
+            this.checkB_createConfig.TabIndex = 17;
+            this.checkB_createConfig.Text = "Создать";
+            this.checkB_createConfig.UseVisualStyleBackColor = true;
+            this.checkB_createConfig.Click += new System.EventHandler(this.checkB_chreateConfig_Click);
+            // 
+            // checkB_chooseConfig
+            // 
+            this.checkB_chooseConfig.AutoSize = true;
+            this.checkB_chooseConfig.Location = new System.Drawing.Point(6, 35);
+            this.checkB_chooseConfig.Name = "checkB_chooseConfig";
+            this.checkB_chooseConfig.Size = new System.Drawing.Size(70, 17);
+            this.checkB_chooseConfig.TabIndex = 16;
+            this.checkB_chooseConfig.Text = "Выбрать";
+            this.checkB_chooseConfig.UseVisualStyleBackColor = true;
+            this.checkB_chooseConfig.Click += new System.EventHandler(this.checkB_chooseConfig_Click);
+            // 
+            // comboB_PGSQL_savedConf
+            // 
+            this.comboB_PGSQL_savedConf.FormattingEnabled = true;
+            this.comboB_PGSQL_savedConf.Location = new System.Drawing.Point(6, 58);
+            this.comboB_PGSQL_savedConf.Name = "comboB_PGSQL_savedConf";
+            this.comboB_PGSQL_savedConf.Size = new System.Drawing.Size(206, 21);
+            this.comboB_PGSQL_savedConf.TabIndex = 15;
+            this.comboB_PGSQL_savedConf.SelectedIndexChanged += new System.EventHandler(this.cB_PGSQL_savedConf_SelectedIndexChanged);
             // 
             // tB_PGSQL_DB
             // 
-            this.tB_PGSQL_DB.Location = new System.Drawing.Point(390, 58);
+            this.tB_PGSQL_DB.Location = new System.Drawing.Point(306, 110);
             this.tB_PGSQL_DB.Name = "tB_PGSQL_DB";
             this.tB_PGSQL_DB.Size = new System.Drawing.Size(212, 20);
             this.tB_PGSQL_DB.TabIndex = 13;
@@ -101,7 +152,7 @@ namespace Heineken_DL
             // 
             // tB_PGSQL_password
             // 
-            this.tB_PGSQL_password.Location = new System.Drawing.Point(390, 84);
+            this.tB_PGSQL_password.Location = new System.Drawing.Point(306, 136);
             this.tB_PGSQL_password.Name = "tB_PGSQL_password";
             this.tB_PGSQL_password.Size = new System.Drawing.Size(212, 20);
             this.tB_PGSQL_password.TabIndex = 12;
@@ -109,7 +160,7 @@ namespace Heineken_DL
             // 
             // tB_PGSQL_userName
             // 
-            this.tB_PGSQL_userName.Location = new System.Drawing.Point(390, 32);
+            this.tB_PGSQL_userName.Location = new System.Drawing.Point(306, 84);
             this.tB_PGSQL_userName.Name = "tB_PGSQL_userName";
             this.tB_PGSQL_userName.Size = new System.Drawing.Size(212, 20);
             this.tB_PGSQL_userName.TabIndex = 11;
@@ -117,7 +168,7 @@ namespace Heineken_DL
             // 
             // tB_PGSQL_host
             // 
-            this.tB_PGSQL_host.Location = new System.Drawing.Point(390, 6);
+            this.tB_PGSQL_host.Location = new System.Drawing.Point(306, 58);
             this.tB_PGSQL_host.Name = "tB_PGSQL_host";
             this.tB_PGSQL_host.Size = new System.Drawing.Size(212, 20);
             this.tB_PGSQL_host.TabIndex = 10;
@@ -125,9 +176,9 @@ namespace Heineken_DL
             // 
             // b_PGSQL_saveConf
             // 
-            this.b_PGSQL_saveConf.Location = new System.Drawing.Point(497, 110);
+            this.b_PGSQL_saveConf.Location = new System.Drawing.Point(398, 162);
             this.b_PGSQL_saveConf.Name = "b_PGSQL_saveConf";
-            this.b_PGSQL_saveConf.Size = new System.Drawing.Size(105, 21);
+            this.b_PGSQL_saveConf.Size = new System.Drawing.Size(120, 21);
             this.b_PGSQL_saveConf.TabIndex = 9;
             this.b_PGSQL_saveConf.Text = "СОХРАНИТЬ";
             this.b_PGSQL_saveConf.UseVisualStyleBackColor = true;
@@ -135,7 +186,7 @@ namespace Heineken_DL
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(66, 93);
+            this.button2.Location = new System.Drawing.Point(6, 369);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(146, 40);
             this.button2.TabIndex = 8;
@@ -144,7 +195,7 @@ namespace Heineken_DL
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(66, 47);
+            this.button1.Location = new System.Drawing.Point(6, 323);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(146, 40);
             this.button1.TabIndex = 7;
@@ -181,6 +232,7 @@ namespace Heineken_DL
             this.button3.TabIndex = 21;
             this.button3.Text = "Chart";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // chart1
             // 
@@ -209,7 +261,7 @@ namespace Heineken_DL
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(821, 478);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -235,10 +287,14 @@ namespace Heineken_DL
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ComboBox cB_PGSQL_savedConf;
+        private System.Windows.Forms.ComboBox comboB_PGSQL_savedConf;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.CheckBox checkB_createConfig;
+        private System.Windows.Forms.CheckBox checkB_chooseConfig;
+        private System.Windows.Forms.Button b_PGSQL_connect;
+        private System.Windows.Forms.Button b_PGSQL_deleteConf;
     }
 }
 
