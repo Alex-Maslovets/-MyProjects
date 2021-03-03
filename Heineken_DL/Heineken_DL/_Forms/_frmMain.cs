@@ -57,7 +57,7 @@ namespace Heineken_DL
 
             double db1dbw16 = S7.GetWordAt(db1Buffer, 16);
             Console.WriteLine("DB1.DBD16: " + db1dbw16);
-
+            
             // Disconnect the client
             client.Disconnect();
         }
@@ -66,7 +66,52 @@ namespace Heineken_DL
         {
 
             string s = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff");
-            //Console.WriteLine(s);
+            Console.WriteLine(s);
+
+            // Create and connect the client
+            var client = new S7Client();
+            int result = client.ConnectTo("192.168.100.150", 0, 1);
+            if (result == 0)
+            {
+                Console.WriteLine("Connected to 192.168.100.150");
+            }
+            else
+            {
+                Console.WriteLine(client.ErrorText(result));
+            }
+
+            //Console.WriteLine("\n---- Read DB 2000");
+
+            byte[] db1Buffer = new byte[400];
+            result = client.DBRead(2000, 432, 400, db1Buffer);
+            if (result != 0)
+            {
+                Console.WriteLine("Error: " + client.ErrorText(result));
+            }
+
+            foreach (byte bt in db1Buffer)
+            { 
+            
+            }
+
+            /*
+            int db1dbw2 = S7.GetIntAt(db1Buffer, 2);
+            Console.WriteLine("DB1.DBW2: " + db1dbw2);
+
+            double db1ddd4 = S7.GetRealAt(db1Buffer, 4);
+            Console.WriteLine("DB1.DBD4: " + db1ddd4);
+
+            double db1dbd8 = S7.GetDIntAt(db1Buffer, 8);
+            Console.WriteLine("DB1.DBD8: " + db1dbd8);
+
+            double db1dbd12 = S7.GetDWordAt(db1Buffer, 12);
+            Console.WriteLine("DB1.DBD12: " + db1dbd12);
+
+            double db1dbw16 = S7.GetWordAt(db1Buffer, 16);
+            Console.WriteLine("DB1.DBD16: " + db1dbw16);
+            */
+            // Disconnect the client
+            client.Disconnect();
 
             // Установка соединения с PostgreSQL
             var cs = "Host=" + tB_PGSQL_host.Text + ";Username=" + tB_PGSQL_userName.Text + ";Password=" + tB_PGSQL_password.Text + ";Database=" + tB_PGSQL_DB.Text + "";
@@ -207,8 +252,8 @@ namespace Heineken_DL
 
         private void b_PGSQL_connect_Click(object sender, EventArgs e)
         {
-            string workingDirectory = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+            //string workingDirectory = Environment.CurrentDirectory;
+            //string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
 
             //Console.WriteLine(projectDirectory + "/_Resources/configPGSQL.xml");
 
@@ -225,6 +270,24 @@ namespace Heineken_DL
             XMLSave.WriteToXmlFile<List<string>>(FileName, tempList);
 
             //XMLSave.WriteToXmlFile<List<string>>("C:/Users/alexo/OneDrive/Документы/GitHub/-MyProjects/Heineken_DL/Heineken_DL/_Resources/configPGSQL.xml", tempList);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            
+            
+            richTextBox1.Clear();
+            List<string> tempList = new List<string>();
+            tempList.Add("newString 1");
+            tempList.Add("newString 2");
+            tempList.Add("newString 3");
+            tempList.Add("newString 4");
+            tempList.Add("newString 5");
+            string[] myArray = tempList.ToArray();
+            foreach (string str in myArray)
+            {
+                richTextBox1.Text += str + "\n";
+            }   
         }
     }
 }

@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <string>Host=localhost;Username=postgres;Password=123456789;Database=postgres</string>
-  <string>Host=localhost;Username=postgres;Password=123456789;Database=postgres</string>
-  <string>Host=localhost;Username=postgres;Password=123456789;Database=postgres</string>
-  <string>Host=localhost;Username=postgres;Password=123456789;Database=postgres</string>
 </ArrayOfString>
