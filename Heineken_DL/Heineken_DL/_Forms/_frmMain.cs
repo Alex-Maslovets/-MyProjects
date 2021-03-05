@@ -73,7 +73,7 @@ namespace Heineken_DL
             int result = client.ConnectTo("192.168.100.150", 0, 1);
             if (result == 0)
             {
-                Console.WriteLine("Connected to 192.168.100.150");
+                //Console.WriteLine("Connected to 192.168.100.150");
             }
             else
             {
@@ -82,37 +82,46 @@ namespace Heineken_DL
 
             //Console.WriteLine("\n---- Read DB 2000");
 
-            byte[] db1Buffer = new byte[400];
-            result = client.DBRead(2000, 432, 400, db1Buffer);
+            byte[] db1Buffer = new byte[1600];
+            result = client.DBRead(2000, 432, 1600, db1Buffer);
             if (result != 0)
             {
                 Console.WriteLine("Error: " + client.ErrorText(result));
             }
 
-            foreach (byte bt in db1Buffer)
-            { 
-            
+            //foreach (byte bt in db1Buffer)
+            //{
+            //    Console.WriteLine(bt.ToString());
+            //}
+
+
+            //int db1dbw2 = S7.GetIntAt(db1Buffer, 2);
+            //Console.WriteLine("DB1.DBW2: " + db1dbw2);
+
+            List<string> myList = new List<string>();
+
+            for (int i = 0; i <= 399; i++)
+            {
+                double db1ddd4 = S7.GetRealAt(db1Buffer, 4*i);
+                //Console.WriteLine("Real[" + i +"] = " + db1ddd4);
+                myList.Add("(" + i + "," + db1ddd4.ToString().Replace(",", ".") + ",'" + s + "')");
             }
 
-            /*
-            int db1dbw2 = S7.GetIntAt(db1Buffer, 2);
-            Console.WriteLine("DB1.DBW2: " + db1dbw2);
+            var test = String.Join(", ", myList.ToArray());
+            //Console.WriteLine(test);
 
-            double db1ddd4 = S7.GetRealAt(db1Buffer, 4);
-            Console.WriteLine("DB1.DBD4: " + db1ddd4);
 
-            double db1dbd8 = S7.GetDIntAt(db1Buffer, 8);
-            Console.WriteLine("DB1.DBD8: " + db1dbd8);
+            //double db1dbd8 = S7.GetDIntAt(db1Buffer, 8);
+            //Console.WriteLine("DB1.DBD8: " + db1dbd8);
 
-            double db1dbd12 = S7.GetDWordAt(db1Buffer, 12);
-            Console.WriteLine("DB1.DBD12: " + db1dbd12);
+            //double db1dbd12 = S7.GetDWordAt(db1Buffer, 12);
+            //Console.WriteLine("DB1.DBD12: " + db1dbd12);
 
-            double db1dbw16 = S7.GetWordAt(db1Buffer, 16);
-            Console.WriteLine("DB1.DBD16: " + db1dbw16);
-            */
+            //double db1dbw16 = S7.GetWordAt(db1Buffer, 16);
+            //Console.WriteLine("DB1.DBD16: " + db1dbw16);
+
             // Disconnect the client
-            client.Disconnect();
-
+            
             // Установка соединения с PostgreSQL
             var cs = "Host=" + tB_PGSQL_host.Text + ";Username=" + tB_PGSQL_userName.Text + ";Password=" + tB_PGSQL_password.Text + ";Database=" + tB_PGSQL_DB.Text + "";
 
@@ -123,13 +132,15 @@ namespace Heineken_DL
             var cmd_insert = new NpgsqlCommand();
             cmd_insert.Connection = con;
 
-            cmd_insert.CommandText = "INSERT INTO _test_table (id, value, date_time) VALUES ( 2, 33, '" + s + "')";
+            //cmd_insert.CommandText = "INSERT INTO _test_table (id, value, date_time) VALUES ( 2, 33, '" + s + "')";
+            cmd_insert.CommandText = "INSERT INTO _test_table (id, value, date_time) VALUES " + test;
+ //           Console.WriteLine(cmd_insert.CommandText);
             cmd_insert.ExecuteNonQuery();
 
             // Чтение данных из PostgreSQL
             string sql = "Select * from _test_table";
 
-            Console.WriteLine(s);
+            //Console.WriteLine(s);
             using (NpgsqlCommand command = new NpgsqlCommand(sql, con))
             {
                 //int val;
@@ -137,15 +148,22 @@ namespace Heineken_DL
                 while (reader.Read())
                 {
                     //val = Int32.Parse(reader[0].ToString());
-                    Console.WriteLine(reader[0].ToString());
-                    Console.WriteLine(reader[1].ToString());
-                    Console.WriteLine(reader[2].ToString());
+                    //Console.WriteLine(reader[0].ToString());
+                    //Console.WriteLine(reader[1].ToString());
+                    //Console.WriteLine(reader[2].ToString());
                     //do whatever you like
                 }
             }
 
+            //s = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff");
+            //Console.WriteLine(s);
+
             // Закрытие соединения
             con.Close();
+            client.Disconnect();
+
+            s = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff");
+            Console.WriteLine(s);
         }
 
         // Класс для записи в комбобокс текста в переменную Text и доп. информации в переменную Value
