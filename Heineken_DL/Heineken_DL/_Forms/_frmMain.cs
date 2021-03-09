@@ -80,48 +80,42 @@ namespace Heineken_DL
                 Console.WriteLine(client.ErrorText(result));
             }
 
-            //Console.WriteLine("\n---- Read DB 2000");
-
-            byte[] db1Buffer = new byte[1600];
-            result = client.DBRead(2000, 432, 1600, db1Buffer);
-            if (result != 0)
-            {
-                Console.WriteLine("Error: " + client.ErrorText(result));
-            }
-
-            //foreach (byte bt in db1Buffer)
-            //{
-            //    Console.WriteLine(bt.ToString());
-            //}
-
-
-            //int db1dbw2 = S7.GetIntAt(db1Buffer, 2);
-            //Console.WriteLine("DB1.DBW2: " + db1dbw2);
-
             List<string> myList = new List<string>();
 
-            for (int i = 0; i <= 399; i++)
+            for (int i = 0; i <= 99; i++)
             {
-                double db1ddd4 = S7.GetRealAt(db1Buffer, 4*i);
-                //Console.WriteLine("Real[" + i +"] = " + db1ddd4);
+                byte[] db1Buffer = new byte[4];
+                result = client.DBRead(2000, 432 + 4*i, 4, db1Buffer);
+                if (result != 0)
+                {
+                    Console.WriteLine("Error: " + client.ErrorText(result));
+                }
+
+                double db1ddd4 = S7.GetRealAt(db1Buffer, 0);
                 myList.Add("(" + i + "," + db1ddd4.ToString().Replace(",", ".") + ",'" + s + "')");
             }
-
             var test = String.Join(", ", myList.ToArray());
-            //Console.WriteLine(test);
+            /*
+                        byte[] db1Buffer = new byte[1600];
+                        result = client.DBRead(2000, 432, 1600, db1Buffer);
+                        if (result != 0)
+                        {
+                            Console.WriteLine("Error: " + client.ErrorText(result));
+                        }
 
+                        List<string> myList = new List<string>();
 
-            //double db1dbd8 = S7.GetDIntAt(db1Buffer, 8);
-            //Console.WriteLine("DB1.DBD8: " + db1dbd8);
+                        for (int i = 0; i <= 399; i++)
+                        {
+                            double db1ddd4 = S7.GetRealAt(db1Buffer, 4*i);
+                            //Console.WriteLine("Real[" + i +"] = " + db1ddd4);
+                            myList.Add("(" + i + "," + db1ddd4.ToString().Replace(",", ".") + ",'" + s + "')");
+                        }
 
-            //double db1dbd12 = S7.GetDWordAt(db1Buffer, 12);
-            //Console.WriteLine("DB1.DBD12: " + db1dbd12);
-
-            //double db1dbw16 = S7.GetWordAt(db1Buffer, 16);
-            //Console.WriteLine("DB1.DBD16: " + db1dbw16);
-
+                        var test = String.Join(", ", myList.ToArray());
+            */
             // Disconnect the client
-            
+
             // Установка соединения с PostgreSQL
             var cs = "Host=" + tB_PGSQL_host.Text + ";Username=" + tB_PGSQL_userName.Text + ";Password=" + tB_PGSQL_password.Text + ";Database=" + tB_PGSQL_DB.Text + "";
 
