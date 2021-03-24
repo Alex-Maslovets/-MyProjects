@@ -38,6 +38,7 @@ namespace Heineken_DL
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
             this.b_PGSQL_deleteConf = new System.Windows.Forms.Button();
             this.b_PGSQL_connect = new System.Windows.Forms.Button();
             this.checkB_createConfig = new System.Windows.Forms.CheckBox();
@@ -54,6 +55,7 @@ namespace Heineken_DL
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -104,6 +106,8 @@ namespace Heineken_DL
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Transparent;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage1.Controls.Add(this.textBox2);
+            this.tabPage1.Controls.Add(this.button5);
             this.tabPage1.Controls.Add(this.b_PGSQL_deleteConf);
             this.tabPage1.Controls.Add(this.b_PGSQL_connect);
             this.tabPage1.Controls.Add(this.checkB_createConfig);
@@ -122,6 +126,16 @@ namespace Heineken_DL
             this.tabPage1.Size = new System.Drawing.Size(789, 415);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "SQL";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(650, 264);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(115, 59);
+            this.button5.TabIndex = 20;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // b_PGSQL_deleteConf
             // 
@@ -297,6 +311,14 @@ namespace Heineken_DL
             this.chart1.Size = new System.Drawing.Size(768, 380);
             this.chart1.TabIndex = 20;
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(650, 162);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(115, 20);
+            this.textBox2.TabIndex = 21;
+            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(textBox2_KeyDown);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -342,6 +364,8 @@ namespace Heineken_DL
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 

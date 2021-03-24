@@ -11,6 +11,9 @@ using Sharp7;
 using Npgsql;
 using System.IO;
 using System.Resources;
+using ReadWriteS7;
+using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace Heineken_DL
 {
@@ -300,6 +303,93 @@ namespace Heineken_DL
             {
                 richTextBox1.Text += str + "\n";
             }   
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DateTime dtStart = DateTime.Now;
+            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff"));
+
+            // Create and connect the client
+            var client = new S7Client();
+            int result = client.ConnectTo("192.168.100.150", 0, 1);
+            if (result == 0)
+            {
+                //Console.WriteLine("Connected to 192.168.100.150");
+            }
+            else
+            {
+                Console.WriteLine(client.ErrorText(result));
+            }
+
+            var readClient = new ReadS7();
+
+
+            byte[] db1Buffer = new byte[4];
+            result = client.MBRead(510,4,db1Buffer);
+            double db1ddd4 = S7.GetRealAt(db1Buffer, 0);
+
+            double mReal = readClient.M_ReadReal(client,510);
+
+            Console.WriteLine(db1ddd4.ToString() + " --- "+ mReal.ToString());
+
+            // Закрытие соединения
+            client.Disconnect();
+
+            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff"));
+
+            TimeSpan dtEnd = DateTime.Now.Subtract(dtStart);
+            Console.WriteLine(dtEnd.ToString());
+        }
+
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string adress = textBox2.Text.Replace(" ", string.Empty);
+                adress = adress.Trim().Replace(" ", string.Empty);
+                bool result;
+
+                if (adress.StartsWith("M") || adress.StartsWith("m"))
+                {
+                    result = adressCompare(adress);
+                    if (result) MessageBox.Show("Add"); 
+                    else MessageBox.Show("Not Add");
+                }
+                else if (adress.StartsWith("DB") || adress.StartsWith("dB") || adress.StartsWith("Db") || adress.StartsWith("db"))
+                {
+                    result = adressCompare(adress);
+                }
+
+            }
+        }
+
+        private bool adressCompare(string adress)
+        {
+            string oneCutAdress = adress.Substring(1);
+            // работа с меркерным адрессом
+            if (oneCutAdress.StartsWith("B") || oneCutAdress.StartsWith("W") || oneCutAdress.StartsWith("D"))
+            {
+                string twoCutAdress = oneCutAdress.Substring(1);
+                foreach (char ch in twoCutAdress.ToCharArray())
+                {
+                    if (!Char.IsDigit(ch))
+                    {
+                        Console.WriteLine("Адрес содержит лишние символы");
+                        return false;
+                        break;
+                    }
+                }
+                return true;
+            }
+            else if (oneCutAdress.Contains("."))
+            {
+                int amount = new Regex("[.]").Matches(oneCutAdress).Count;
+                if (amount > 1) return false;
+                else return true;
+            }
+            else return false;
         }
     }
 }
