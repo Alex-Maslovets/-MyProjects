@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sharp7;
 using Npgsql;
 using System.IO;
-using System.Resources;
 using ReadWriteS7;
-using System.Threading;
 using System.Text.RegularExpressions;
+using NModbus;
 
 namespace Heineken_DL
 {
@@ -222,18 +216,6 @@ namespace Heineken_DL
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            chart1.Series["Series1"].Points.Clear();
-            chart1.Series["Series1"].Points.AddXY(1, 1);
-            chart1.Series["Series1"].Points.AddXY(2, 4);
-            chart1.Series["Series1"].Points.AddXY(3, 9);
-            chart1.Series["Series1"].Points.AddXY(4, 16);
-            chart1.Series["Series1"].Points.AddXY(5, 25);
-            chart1.Series["Series1"].Points.AddXY(6, 36);
-            chart1.Series["Series1"].Points.AddXY(7, 49);
-        }
-
         private void checkB_chooseConfig_Click(object sender, EventArgs e)
         {
             checkB_createConfig.Checked = false;
@@ -286,26 +268,6 @@ namespace Heineken_DL
 
             //XMLSave.WriteToXmlFile<List<string>>("C:/Users/alexo/OneDrive/Документы/GitHub/-MyProjects/Heineken_DL/Heineken_DL/_Resources/configPGSQL.xml", tempList);
         }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            
-            
-            richTextBox1.Clear();
-            List<string> tempList = new List<string>();
-            tempList.Add("newString 1");
-            tempList.Add("newString 2");
-            tempList.Add("newString 3");
-            tempList.Add("newString 4");
-            tempList.Add("newString 5");
-            string[] myArray = tempList.ToArray();
-            foreach (string str in myArray)
-            {
-                richTextBox1.Text += str + "\n";
-            }   
-
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
             DateTime dtStart = DateTime.Now;
@@ -349,45 +311,185 @@ namespace Heineken_DL
             {
                 string adress = textBox2.Text.Replace(" ", string.Empty);
                 adress = adress.Trim().Replace(" ", string.Empty);
+                adress = adress.ToUpper();
                 bool result;
 
-                if (adress.StartsWith("M") || adress.StartsWith("m"))
+                if (adress.StartsWith("M"))
                 {
-                    result = adressCompare(adress);
-                    if (result) MessageBox.Show("Add"); 
+                    result = mAdressCompare(adress);
+                    if (result) {
+                        listBox1.Items.Add(adress);
+                        listBoxUpdate(listBox1);
+                    }
                     else MessageBox.Show("Not Add");
                 }
-                else if (adress.StartsWith("DB") || adress.StartsWith("dB") || adress.StartsWith("Db") || adress.StartsWith("db"))
+                else if (adress.StartsWith("DB"))
                 {
-                    result = adressCompare(adress);
+                    result = dbAdressCompare(adress);
+                    if (result)
+                    {
+                        listBox1.Items.Add(adress);
+                        listBoxUpdate(listBox1);
+                    }
+                    else MessageBox.Show("Not Add");
                 }
-
+                else MessageBox.Show("Not Add");
             }
         }
 
-        private bool adressCompare(string adress)
+        public void listBoxUpdate(ListBox listBox)
+        {
+            string[] arrayStr = listBox.Items.OfType<string>().ToArray();
+            listBox.Items.Clear();
+
+            foreach (string str in arrayStr.Distinct())
+            {
+                listBox.Items.Add(str);
+            }
+        }
+
+
+        private bool mAdressCompare(string adress)
         {
             string oneCutAdress = adress.Substring(1);
-            // работа с меркерным адрессом
+            // работа с меркерным адресом
             if (oneCutAdress.StartsWith("B") || oneCutAdress.StartsWith("W") || oneCutAdress.StartsWith("D"))
             {
                 string twoCutAdress = oneCutAdress.Substring(1);
-                foreach (char ch in twoCutAdress.ToCharArray())
+                if (twoCutAdress.ToCharArray().Length != 0)
                 {
-                    if (!Char.IsDigit(ch))
+                    foreach (char ch in twoCutAdress.ToCharArray())
                     {
-                        Console.WriteLine("Адрес содержит лишние символы");
-                        return false;
-                        break;
+                        if (!Char.IsDigit(ch))
+                        {
+                            return false;
+                            break;
+                        }
                     }
+                    return true;
                 }
-                return true;
+                else return false;
             }
             else if (oneCutAdress.Contains("."))
             {
-                int amount = new Regex("[.]").Matches(oneCutAdress).Count;
-                if (amount > 1) return false;
+                int mPointAmount = new Regex("[.]").Matches(oneCutAdress).Count;
+                if (mPointAmount > 1) return false;
                 else return true;
+            }
+            else return false;
+        }
+        private bool dbAdressCompare(string adress)
+        {
+            string oneCutAdress = adress.Substring(2);
+            // работа с адресом DB-области
+            if (oneCutAdress.Contains("."))
+            {
+                int dbPointAmount = new Regex("[.]").Matches(oneCutAdress).Count;
+                switch (dbPointAmount) {
+                    case 1:
+                        string[] twoStrings = oneCutAdress.Split('.');
+                        
+                        bool sw1_partOne, sw1_partTwo;
+
+                        if (twoStrings[0].ToCharArray().Length != 0)
+                        {
+                            sw1_partOne = true;
+                            foreach (char ch in twoStrings[0].ToCharArray())
+                            {
+                                if (!Char.IsDigit(ch))
+                                {
+                                    sw1_partOne = false;
+                                }
+                            }
+                        }
+                        else sw1_partOne = false;
+
+                        if (twoStrings[1].StartsWith("DB"))
+                        {
+                            string twoStringCautAdress = twoStrings[1].Substring(2);
+                            if (twoStringCautAdress.StartsWith("D") || twoStringCautAdress.StartsWith("W") || twoStringCautAdress.StartsWith("B"))
+                            {
+                                if (twoStringCautAdress.Substring(1).ToCharArray().Length != 0)
+                                {
+                                    sw1_partTwo = true;
+                                    foreach (char ch in twoStringCautAdress.Substring(1).ToCharArray())
+                                    {
+                                        if (!Char.IsDigit(ch))
+                                        {
+                                            sw1_partTwo = false;
+                                        }
+                                    }
+                                }
+                                else sw1_partTwo = false;
+                            }
+                            else sw1_partTwo = false;
+                        }
+                        else sw1_partTwo = false;
+
+                        return sw1_partOne && sw1_partTwo;
+
+                        break;
+                    case 2:
+                        string[] threeStrings = oneCutAdress.Split('.');
+                        bool sw2_partOne, sw2_partTwo, sw2_partThree;
+
+                        if (threeStrings[0].ToCharArray().Length != 0)
+                        {
+                            sw2_partOne = true;
+                            foreach (char ch in threeStrings[0].ToCharArray())
+                            {
+                                if (!Char.IsDigit(ch))
+                                {
+                                    sw2_partOne = false;
+                                }
+                            }
+                        }
+                        else sw2_partOne = false;
+
+                        if (threeStrings[1].StartsWith("DBX"))
+                        {
+                            if (threeStrings[1].Substring(3).ToCharArray().Length != 0)
+                            {
+                                sw2_partTwo = true;
+                                foreach (char ch in threeStrings[1].Substring(3).ToCharArray())
+                                {
+                                    if (!Char.IsDigit(ch))
+                                    {
+                                        sw2_partTwo = false;
+                                    }
+                                }
+                            }
+                            else sw2_partTwo = false;
+                        }
+                        else sw2_partTwo = false;
+
+                        if (threeStrings[2].ToCharArray().Length != 0)
+                        {
+                            bool chIsDigit = true;
+                            bool chIsInRange = true;
+
+                            foreach (char ch in threeStrings[2].ToCharArray())
+                            {
+                                if (!Char.IsDigit(ch))
+                                {
+                                    chIsDigit = false;
+                                }
+                                else {
+                                    int chToInt = Int32.Parse(ch.ToString());
+                                    if (chToInt <= 0 || chToInt >= 7) chIsInRange = false;
+                                }
+                            }
+                            sw2_partThree = chIsDigit && chIsInRange;
+                        }
+                        else sw2_partThree = false;
+                        
+                        return sw2_partOne && sw2_partTwo && sw2_partThree;
+                        
+                        break;
+                    default:
+                        return false;
+                        break;
+                }
             }
             else return false;
         }

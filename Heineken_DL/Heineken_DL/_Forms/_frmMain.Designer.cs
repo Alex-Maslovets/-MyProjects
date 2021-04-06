@@ -29,46 +29,32 @@ namespace Heineken_DL
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tB_PGSQL_DB = new System.Windows.Forms.TextBox();
+            this.tB_PGSQL_password = new System.Windows.Forms.TextBox();
+            this.tB_PGSQL_userName = new System.Windows.Forms.TextBox();
+            this.tB_PGSQL_host = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.b_PGSQL_deleteConf = new System.Windows.Forms.Button();
             this.b_PGSQL_connect = new System.Windows.Forms.Button();
             this.checkB_createConfig = new System.Windows.Forms.CheckBox();
             this.checkB_chooseConfig = new System.Windows.Forms.CheckBox();
             this.comboB_PGSQL_savedConf = new System.Windows.Forms.ComboBox();
-            this.tB_PGSQL_DB = new System.Windows.Forms.TextBox();
-            this.tB_PGSQL_password = new System.Windows.Forms.TextBox();
-            this.tB_PGSQL_userName = new System.Windows.Forms.TextBox();
-            this.tB_PGSQL_host = new System.Windows.Forms.TextBox();
             this.b_PGSQL_saveConf = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage2.Controls.Add(this.richTextBox1);
-            this.tabPage2.Controls.Add(this.textBox1);
-            this.tabPage2.Controls.Add(this.button4);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -76,47 +62,22 @@ namespace Heineken_DL
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "S7PLC";
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(583, 51);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(170, 292);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(261, 48);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(172, 20);
-            this.textBox1.TabIndex = 1;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(439, 48);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(129, 32);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Transparent;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage1.Controls.Add(this.listBox1);
             this.tabPage1.Controls.Add(this.textBox2);
+            this.tabPage1.Controls.Add(this.tB_PGSQL_DB);
+            this.tabPage1.Controls.Add(this.tB_PGSQL_password);
+            this.tabPage1.Controls.Add(this.tB_PGSQL_userName);
+            this.tabPage1.Controls.Add(this.tB_PGSQL_host);
             this.tabPage1.Controls.Add(this.button5);
             this.tabPage1.Controls.Add(this.b_PGSQL_deleteConf);
             this.tabPage1.Controls.Add(this.b_PGSQL_connect);
             this.tabPage1.Controls.Add(this.checkB_createConfig);
             this.tabPage1.Controls.Add(this.checkB_chooseConfig);
             this.tabPage1.Controls.Add(this.comboB_PGSQL_savedConf);
-            this.tabPage1.Controls.Add(this.tB_PGSQL_DB);
-            this.tabPage1.Controls.Add(this.tB_PGSQL_password);
-            this.tabPage1.Controls.Add(this.tB_PGSQL_userName);
-            this.tabPage1.Controls.Add(this.tB_PGSQL_host);
             this.tabPage1.Controls.Add(this.b_PGSQL_saveConf);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.button1);
@@ -127,9 +88,61 @@ namespace Heineken_DL
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "SQL";
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(663, 7);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(120, 394);
+            this.listBox1.TabIndex = 22;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(541, 6);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(115, 20);
+            this.textBox2.TabIndex = 21;
+            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
+            // 
+            // tB_PGSQL_DB
+            // 
+            this.tB_PGSQL_DB.Enabled = false;
+            this.tB_PGSQL_DB.Location = new System.Drawing.Point(306, 110);
+            this.tB_PGSQL_DB.Name = "tB_PGSQL_DB";
+            this.tB_PGSQL_DB.Size = new System.Drawing.Size(212, 20);
+            this.tB_PGSQL_DB.TabIndex = 13;
+            this.tB_PGSQL_DB.Text = "postgres";
+            // 
+            // tB_PGSQL_password
+            // 
+            this.tB_PGSQL_password.Enabled = false;
+            this.tB_PGSQL_password.Location = new System.Drawing.Point(306, 136);
+            this.tB_PGSQL_password.Name = "tB_PGSQL_password";
+            this.tB_PGSQL_password.Size = new System.Drawing.Size(212, 20);
+            this.tB_PGSQL_password.TabIndex = 12;
+            this.tB_PGSQL_password.Text = "123456789";
+            // 
+            // tB_PGSQL_userName
+            // 
+            this.tB_PGSQL_userName.Enabled = false;
+            this.tB_PGSQL_userName.Location = new System.Drawing.Point(306, 84);
+            this.tB_PGSQL_userName.Name = "tB_PGSQL_userName";
+            this.tB_PGSQL_userName.Size = new System.Drawing.Size(212, 20);
+            this.tB_PGSQL_userName.TabIndex = 11;
+            this.tB_PGSQL_userName.Text = "postgres";
+            // 
+            // tB_PGSQL_host
+            // 
+            this.tB_PGSQL_host.Enabled = false;
+            this.tB_PGSQL_host.Location = new System.Drawing.Point(306, 58);
+            this.tB_PGSQL_host.Name = "tB_PGSQL_host";
+            this.tB_PGSQL_host.Size = new System.Drawing.Size(212, 20);
+            this.tB_PGSQL_host.TabIndex = 10;
+            this.tB_PGSQL_host.Text = "localhost";
+            // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(650, 264);
+            this.button5.Location = new System.Drawing.Point(524, 336);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(115, 59);
             this.button5.TabIndex = 20;
@@ -190,42 +203,6 @@ namespace Heineken_DL
             this.comboB_PGSQL_savedConf.TabIndex = 15;
             this.comboB_PGSQL_savedConf.SelectedIndexChanged += new System.EventHandler(this.cB_PGSQL_savedConf_SelectedIndexChanged);
             // 
-            // tB_PGSQL_DB
-            // 
-            this.tB_PGSQL_DB.Enabled = false;
-            this.tB_PGSQL_DB.Location = new System.Drawing.Point(306, 110);
-            this.tB_PGSQL_DB.Name = "tB_PGSQL_DB";
-            this.tB_PGSQL_DB.Size = new System.Drawing.Size(212, 20);
-            this.tB_PGSQL_DB.TabIndex = 13;
-            this.tB_PGSQL_DB.Text = "postgres";
-            // 
-            // tB_PGSQL_password
-            // 
-            this.tB_PGSQL_password.Enabled = false;
-            this.tB_PGSQL_password.Location = new System.Drawing.Point(306, 136);
-            this.tB_PGSQL_password.Name = "tB_PGSQL_password";
-            this.tB_PGSQL_password.Size = new System.Drawing.Size(212, 20);
-            this.tB_PGSQL_password.TabIndex = 12;
-            this.tB_PGSQL_password.Text = "123456789";
-            // 
-            // tB_PGSQL_userName
-            // 
-            this.tB_PGSQL_userName.Enabled = false;
-            this.tB_PGSQL_userName.Location = new System.Drawing.Point(306, 84);
-            this.tB_PGSQL_userName.Name = "tB_PGSQL_userName";
-            this.tB_PGSQL_userName.Size = new System.Drawing.Size(212, 20);
-            this.tB_PGSQL_userName.TabIndex = 11;
-            this.tB_PGSQL_userName.Text = "postgres";
-            // 
-            // tB_PGSQL_host
-            // 
-            this.tB_PGSQL_host.Enabled = false;
-            this.tB_PGSQL_host.Location = new System.Drawing.Point(306, 58);
-            this.tB_PGSQL_host.Name = "tB_PGSQL_host";
-            this.tB_PGSQL_host.Size = new System.Drawing.Size(212, 20);
-            this.tB_PGSQL_host.TabIndex = 10;
-            this.tB_PGSQL_host.Text = "localhost";
-            // 
             // b_PGSQL_saveConf
             // 
             this.b_PGSQL_saveConf.Enabled = false;
@@ -260,64 +237,11 @@ namespace Heineken_DL
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(797, 441);
             this.tabControl1.TabIndex = 8;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage3.Controls.Add(this.button3);
-            this.tabPage3.Controls.Add(this.chart1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(789, 415);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Chart";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(703, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 21;
-            this.button3.Text = "Chart";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // chart1
-            // 
-            this.chart1.BackColor = System.Drawing.Color.Transparent;
-            this.chart1.BorderlineColor = System.Drawing.Color.Transparent;
-            chartArea1.CursorX.IsUserEnabled = true;
-            chartArea1.CursorX.IsUserSelectionEnabled = true;
-            chartArea1.CursorY.IsUserEnabled = true;
-            chartArea1.CursorY.IsUserSelectionEnabled = true;
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(10, 32);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.YValuesPerPoint = 6;
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(768, 380);
-            this.chart1.TabIndex = 20;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(650, 162);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(115, 20);
-            this.textBox2.TabIndex = 21;
-            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(textBox2_KeyDown);
             // 
             // Form1
             // 
@@ -330,13 +254,9 @@ namespace Heineken_DL
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Heineken_DL";
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -344,28 +264,23 @@ namespace Heineken_DL
         #endregion
 
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tB_PGSQL_DB;
+        private System.Windows.Forms.TextBox tB_PGSQL_password;
+        private System.Windows.Forms.TextBox tB_PGSQL_userName;
+        private System.Windows.Forms.TextBox tB_PGSQL_host;
+        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button b_PGSQL_deleteConf;
         private System.Windows.Forms.Button b_PGSQL_connect;
         private System.Windows.Forms.CheckBox checkB_createConfig;
         private System.Windows.Forms.CheckBox checkB_chooseConfig;
         private System.Windows.Forms.ComboBox comboB_PGSQL_savedConf;
-        private System.Windows.Forms.TextBox tB_PGSQL_DB;
-        private System.Windows.Forms.TextBox tB_PGSQL_password;
-        private System.Windows.Forms.TextBox tB_PGSQL_userName;
-        private System.Windows.Forms.TextBox tB_PGSQL_host;
         private System.Windows.Forms.Button b_PGSQL_saveConf;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.TextBox textBox2;
     }
 }
 
