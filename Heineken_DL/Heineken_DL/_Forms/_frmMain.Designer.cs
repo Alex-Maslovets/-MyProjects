@@ -48,6 +48,8 @@ namespace Heineken_DL
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.b_ModBus = new System.Windows.Forms.Button();
+            this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
@@ -55,6 +57,7 @@ namespace Heineken_DL
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage2.Controls.Add(this.b_ModBus);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -243,6 +246,16 @@ namespace Heineken_DL
             this.tabControl1.Size = new System.Drawing.Size(797, 441);
             this.tabControl1.TabIndex = 8;
             // 
+            // b_ModBus
+            // 
+            this.b_ModBus.Location = new System.Drawing.Point(20, 20);
+            this.b_ModBus.Name = "b_ModBus";
+            this.b_ModBus.Size = new System.Drawing.Size(75, 23);
+            this.b_ModBus.TabIndex = 0;
+            this.b_ModBus.Text = "ModBus";
+            this.b_ModBus.UseVisualStyleBackColor = true;
+            this.b_ModBus.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -254,6 +267,7 @@ namespace Heineken_DL
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Heineken_DL";
+            this.tabPage2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -281,6 +295,7 @@ namespace Heineken_DL
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.Button b_ModBus;
     }
 }
 

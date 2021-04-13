@@ -4,10 +4,11 @@ using System.Linq;
 using System.Windows.Forms;
 using Sharp7;
 using Npgsql;
+using NModbus.Device;
 using System.IO;
+using System.IO.Ports;
 using ReadWriteS7;
 using System.Text.RegularExpressions;
-using NModbus;
 
 namespace Heineken_DL
 {
@@ -249,24 +250,15 @@ namespace Heineken_DL
 
         private void b_PGSQL_connect_Click(object sender, EventArgs e)
         {
-            //string workingDirectory = Environment.CurrentDirectory;
-            //string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-
-            //Console.WriteLine(projectDirectory + "/_Resources/configPGSQL.xml");
-
             List <string> tempList = new List<string>();
             for (int i = 0; i < comboB_PGSQL_savedConf.Items.Count; i++)
             {
                 tempList.Add((comboB_PGSQL_savedConf.SelectedItem as ComboboxItem).Value.ToString());
             }
-
-            //string RunningPath = AppDomain.CurrentDomain.BaseDirectory;
             string FileName = string.Format("{0}Resources\\configPGSQL.xml", Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\")));
 
-            //Console.WriteLine(FileName);
             XMLSave.WriteToXmlFile<List<string>>(FileName, tempList);
 
-            //XMLSave.WriteToXmlFile<List<string>>("C:/Users/alexo/OneDrive/Документы/GitHub/-MyProjects/Heineken_DL/Heineken_DL/_Resources/configPGSQL.xml", tempList);
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -287,14 +279,59 @@ namespace Heineken_DL
 
             var readClient = new ReadS7();
 
-
-            byte[] db1Buffer = new byte[4];
+            /*byte[] db1Buffer = new byte[4];
             result = client.MBRead(510,4,db1Buffer);
             double db1ddd4 = S7.GetRealAt(db1Buffer, 0);
 
             double mReal = readClient.M_ReadReal(client,510);
 
             Console.WriteLine(db1ddd4.ToString() + " --- "+ mReal.ToString());
+            */
+
+            for (int i = 0; i <= 99; i++)
+            {
+                /*
+                var s7MultiVar = new S7MultiVar(client);
+                byte[] db1 = new byte[16];
+                s7MultiVar.Add(S7Consts.S7AreaDB, S7Consts.S7WLByte, 2000, 432, 16, ref db1);
+                byte[] db3 = new byte[16];
+                s7MultiVar.Add(S7Consts.S7AreaDB, S7Consts.S7WLByte, 2000, 532, 16, ref db3);
+                result = s7MultiVar.Read();
+                if (result != 0)
+                {
+                    Console.WriteLine("Error on s7MultiVar.Read()");
+                }
+                */
+                
+                List<double> mReal = readClient.DB_ReadRealArray(client,2000,432,4);
+                List<double> mReal_532 = readClient.DB_ReadRealArray(client, 2000, 532, 4);
+                
+            }
+            /*
+            double db2000dbd432 = S7.GetRealAt(db1, 0);
+            Console.WriteLine("DB2000.DBD432 = {0}", db2000dbd432);
+
+            db2000dbd432 = S7.GetRealAt(db1, 4);
+            Console.WriteLine("DB2000.DBD436 = {0}", db2000dbd432);
+
+            db2000dbd432 = S7.GetRealAt(db1, 8);
+            Console.WriteLine("DB2000.DBD440 = {0}", db2000dbd432);
+            
+            db2000dbd432 = S7.GetRealAt(db1, 12);
+            Console.WriteLine("DB2000.DBD444 = {0}", db2000dbd432);
+
+            double db2000dbd532 = S7.GetRealAt(db3, 0);
+            Console.WriteLine("DB2000.DBD532 = {0}", db2000dbd532);
+
+            db2000dbd532 = S7.GetRealAt(db3, 4);
+            Console.WriteLine("DB2000.DBD536 = {0}", db2000dbd532);
+
+            db2000dbd532 = S7.GetRealAt(db3, 8);
+            Console.WriteLine("DB2000.DBD540 = {0}", db2000dbd532);
+
+            db2000dbd532 = S7.GetRealAt(db3, 12);
+            Console.WriteLine("DB2000.DBD544 = {0}", db2000dbd532);
+            */
 
             // Закрытие соединения
             client.Disconnect();
@@ -492,6 +529,29 @@ namespace Heineken_DL
                 }
             }
             else return false;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            /*
+            SerialPort serialPort = new SerialPort(); //Create a new SerialPort object.
+            serialPort.PortName = "COM1";
+            serialPort.BaudRate = 9600;
+            serialPort.DataBits = 8;
+            serialPort.Parity = Parity.None;
+            serialPort.StopBits = StopBits.One;
+            serialPort.Open();
+            
+            ModbusSerialMaster master = ModbusSerialMaster.CreateRtu(serialPort);
+
+            byte slaveID = 1;
+            ushort startAddress = 0;
+            ushort numOfPoints = 1;
+            ushort[] holding_register = master.ReadHoldingRegisters(slaveID, startAddress,
+            numOfPoints);
+            Console.WriteLine(holding_register);
+            Console.ReadKey();
+            */
         }
     }
 }
