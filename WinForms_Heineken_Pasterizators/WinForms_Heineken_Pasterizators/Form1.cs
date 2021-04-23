@@ -16,6 +16,5 @@ namespace WinForms_Heineken_Pasterizators
         {
             InitializeComponent();
         }
-
     }
 }

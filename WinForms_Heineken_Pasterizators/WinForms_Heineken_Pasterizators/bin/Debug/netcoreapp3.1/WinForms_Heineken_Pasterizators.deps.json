@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "WinForms_Heineken_Pasterizators/1.0.0": {
+        "runtime": {
+          "WinForms_Heineken_Pasterizators.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WinForms_Heineken_Pasterizators/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
