@@ -1,11 +1,39 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "Sharp7/1.1.79": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Sharp7.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Sharp7.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Sharp7/1.1.79": {
+      "sha512": "fXR0+USIi85YwhoapbQe3+wTcm5GK9TkT1jZUJjgmqxjC5yBR0CQlO8U79U156jnnGCjI8KkG+VzOZwYdUMGBA==",
+      "type": "package",
+      "path": "sharp7/1.1.79",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Sharp7.dll",
+        "lib/net40/Sharp7.pdb",
+        "lib/netstandard2.0/Sharp7.dll",
+        "lib/netstandard2.0/Sharp7.pdb",
+        "sharp7.1.1.79.nupkg.sha512",
+        "sharp7.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "Sharp7 >= 1.1.79"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\alexo\\.nuget\\packages\\": {}
@@ -45,6 +73,12 @@
     "frameworks": {
       "netcoreapp3.1": {
         "targetAlias": "netcoreapp3.1",
+        "dependencies": {
+          "Sharp7": {
+            "target": "Package",
+            "version": "[1.1.79, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

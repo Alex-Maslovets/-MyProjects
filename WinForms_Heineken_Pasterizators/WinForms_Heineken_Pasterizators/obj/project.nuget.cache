@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "nlexAjpxHIiVJIKKDmqVcjwdUfbu1kPMKkix73eFVHlbl4Zikw8KOFbp7eFNrdrurSTrgmC/mnx0bA9adLTfag==",
+  "dgSpecHash": "AAqd92qB8KXdmSqhOxceLl06VJ7oM/mO57Ud1dha0BTvcTllyd6YVd6Xx/rLHsAizgFwYMC+WTmYwFwx4gQ4aw==",
   "success": true,
   "projectFilePath": "C:\\Users\\alexo\\OneDrive\\Документы\\GitHub\\-MyProjects\\WinForms_Heineken_Pasterizators\\WinForms_Heineken_Pasterizators\\WinForms_Heineken_Pasterizators.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\alexo\\.nuget\\packages\\sharp7\\1.1.79\\sharp7.1.1.79.nupkg.sha512"
+  ],
   "logs": []
 }
