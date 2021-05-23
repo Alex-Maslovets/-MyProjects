@@ -45,7 +45,7 @@ namespace WinForms_Heineken_Pasterizators
             this.label5 = new System.Windows.Forms.Label();
             this.pb_KEG_V20 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.pb_KEG_86 = new System.Windows.Forms.PictureBox();
+            this.pb_KEG_V86 = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.pb_KEG_V73 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -98,7 +98,7 @@ namespace WinForms_Heineken_Pasterizators
             this.pb_KEG_INDICAT04 = new System.Windows.Forms.PictureBox();
             this.pb_KEG_INDICAT03 = new System.Windows.Forms.PictureBox();
             this.pb_KEG_INDICAT02 = new System.Windows.Forms.PictureBox();
-            this.AI__KEG_14PT = new System.Windows.Forms.Label();
+            this.AI_KEG_14PT = new System.Windows.Forms.Label();
             this.AI_KEG_08FT = new System.Windows.Forms.Label();
             this.AI_KEG_11PT = new System.Windows.Forms.Label();
             this.AI_KEG_10TT = new System.Windows.Forms.Label();
@@ -109,13 +109,15 @@ namespace WinForms_Heineken_Pasterizators
             this.AI_KEG_01QT = new System.Windows.Forms.Label();
             this.AI_KEG_07PT = new System.Windows.Forms.Label();
             this.AI_KEG_65PT = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.pb_KEG_V24 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V74)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V25)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V20)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_86)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V86)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V73)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V72)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V71)).BeginInit();
@@ -151,6 +153,7 @@ namespace WinForms_Heineken_Pasterizators
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_INDICAT04)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_INDICAT03)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_INDICAT02)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V24)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -307,16 +310,16 @@ namespace WinForms_Heineken_Pasterizators
             this.label6.TabIndex = 14;
             this.label6.Text = "86";
             // 
-            // pb_KEG_86
+            // pb_KEG_V86
             // 
-            this.pb_KEG_86.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Vertical_0;
-            this.pb_KEG_86.Location = new System.Drawing.Point(304, 403);
-            this.pb_KEG_86.Name = "pb_KEG_86";
-            this.pb_KEG_86.Size = new System.Drawing.Size(20, 25);
-            this.pb_KEG_86.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pb_KEG_86.TabIndex = 13;
-            this.pb_KEG_86.TabStop = false;
-            this.pb_KEG_86.Tag = "VV_0";
+            this.pb_KEG_V86.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Vertical_0;
+            this.pb_KEG_V86.Location = new System.Drawing.Point(304, 403);
+            this.pb_KEG_V86.Name = "pb_KEG_V86";
+            this.pb_KEG_V86.Size = new System.Drawing.Size(20, 25);
+            this.pb_KEG_V86.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_KEG_V86.TabIndex = 13;
+            this.pb_KEG_V86.TabStop = false;
+            this.pb_KEG_V86.Tag = "VV_0";
             // 
             // label7
             // 
@@ -890,21 +893,19 @@ namespace WinForms_Heineken_Pasterizators
             this.pb_KEG_INDICAT02.TabStop = false;
             this.pb_KEG_INDICAT02.Tag = "";
             // 
-            // AI__KEG_14PT
+            // AI_KEG_14PT
             // 
-            this.AI__KEG_14PT.AutoSize = true;
-            this.AI__KEG_14PT.BackColor = System.Drawing.SystemColors.Control;
-            this.AI__KEG_14PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.AI__KEG_14PT.Location = new System.Drawing.Point(23, 63);
-            this.AI__KEG_14PT.Name = "AI__KEG_14PT";
-            this.AI__KEG_14PT.Size = new System.Drawing.Size(42, 17);
-            this.AI__KEG_14PT.TabIndex = 67;
-            this.AI__KEG_14PT.Text = "9999.9";
-            this.AI__KEG_14PT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.AI_KEG_14PT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_KEG_14PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_KEG_14PT.Location = new System.Drawing.Point(23, 63);
+            this.AI_KEG_14PT.Name = "AI_KEG_14PT";
+            this.AI_KEG_14PT.Size = new System.Drawing.Size(42, 17);
+            this.AI_KEG_14PT.TabIndex = 67;
+            this.AI_KEG_14PT.Text = "9999.9";
+            this.AI_KEG_14PT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AI_KEG_08FT
             // 
-            this.AI_KEG_08FT.AutoSize = true;
             this.AI_KEG_08FT.BackColor = System.Drawing.SystemColors.Control;
             this.AI_KEG_08FT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.AI_KEG_08FT.Location = new System.Drawing.Point(169, 195);
@@ -916,7 +917,6 @@ namespace WinForms_Heineken_Pasterizators
             // 
             // AI_KEG_11PT
             // 
-            this.AI_KEG_11PT.AutoSize = true;
             this.AI_KEG_11PT.BackColor = System.Drawing.SystemColors.Control;
             this.AI_KEG_11PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.AI_KEG_11PT.Location = new System.Drawing.Point(122, 245);
@@ -928,7 +928,6 @@ namespace WinForms_Heineken_Pasterizators
             // 
             // AI_KEG_10TT
             // 
-            this.AI_KEG_10TT.AutoSize = true;
             this.AI_KEG_10TT.BackColor = System.Drawing.SystemColors.Control;
             this.AI_KEG_10TT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.AI_KEG_10TT.Location = new System.Drawing.Point(43, 238);
@@ -940,7 +939,6 @@ namespace WinForms_Heineken_Pasterizators
             // 
             // AI_KEG_12PT
             // 
-            this.AI_KEG_12PT.AutoSize = true;
             this.AI_KEG_12PT.BackColor = System.Drawing.SystemColors.Control;
             this.AI_KEG_12PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.AI_KEG_12PT.Location = new System.Drawing.Point(43, 264);
@@ -952,7 +950,6 @@ namespace WinForms_Heineken_Pasterizators
             // 
             // AI_KEG_PE
             // 
-            this.AI_KEG_PE.AutoSize = true;
             this.AI_KEG_PE.BackColor = System.Drawing.SystemColors.Control;
             this.AI_KEG_PE.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.AI_KEG_PE.Location = new System.Drawing.Point(43, 290);
@@ -964,7 +961,6 @@ namespace WinForms_Heineken_Pasterizators
             // 
             // AI_KEG_24TT
             // 
-            this.AI_KEG_24TT.AutoSize = true;
             this.AI_KEG_24TT.BackColor = System.Drawing.SystemColors.Control;
             this.AI_KEG_24TT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.AI_KEG_24TT.Location = new System.Drawing.Point(51, 383);
@@ -976,7 +972,6 @@ namespace WinForms_Heineken_Pasterizators
             // 
             // AI_KEG_17TT
             // 
-            this.AI_KEG_17TT.AutoSize = true;
             this.AI_KEG_17TT.BackColor = System.Drawing.SystemColors.Control;
             this.AI_KEG_17TT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.AI_KEG_17TT.Location = new System.Drawing.Point(222, 384);
@@ -988,7 +983,6 @@ namespace WinForms_Heineken_Pasterizators
             // 
             // AI_KEG_01QT
             // 
-            this.AI_KEG_01QT.AutoSize = true;
             this.AI_KEG_01QT.BackColor = System.Drawing.SystemColors.Control;
             this.AI_KEG_01QT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.AI_KEG_01QT.Location = new System.Drawing.Point(222, 405);
@@ -1000,7 +994,6 @@ namespace WinForms_Heineken_Pasterizators
             // 
             // AI_KEG_07PT
             // 
-            this.AI_KEG_07PT.AutoSize = true;
             this.AI_KEG_07PT.BackColor = System.Drawing.SystemColors.Control;
             this.AI_KEG_07PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.AI_KEG_07PT.Location = new System.Drawing.Point(415, 232);
@@ -1012,7 +1005,6 @@ namespace WinForms_Heineken_Pasterizators
             // 
             // AI_KEG_65PT
             // 
-            this.AI_KEG_65PT.AutoSize = true;
             this.AI_KEG_65PT.BackColor = System.Drawing.SystemColors.Control;
             this.AI_KEG_65PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.AI_KEG_65PT.Location = new System.Drawing.Point(574, 341);
@@ -1022,12 +1014,36 @@ namespace WinForms_Heineken_Pasterizators
             this.AI_KEG_65PT.Text = "9999.9";
             this.AI_KEG_65PT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.BackColor = System.Drawing.Color.Transparent;
+            this.label24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label24.Location = new System.Drawing.Point(526, 228);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(21, 17);
+            this.label24.TabIndex = 79;
+            this.label24.Text = "24";
+            // 
+            // pb_KEG_V24
+            // 
+            this.pb_KEG_V24.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Horizont_0;
+            this.pb_KEG_V24.Location = new System.Drawing.Point(524, 248);
+            this.pb_KEG_V24.Name = "pb_KEG_V24";
+            this.pb_KEG_V24.Size = new System.Drawing.Size(25, 20);
+            this.pb_KEG_V24.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_KEG_V24.TabIndex = 78;
+            this.pb_KEG_V24.TabStop = false;
+            this.pb_KEG_V24.Tag = "VV_0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.label24);
+            this.Controls.Add(this.pb_KEG_V24);
             this.Controls.Add(this.AI_KEG_65PT);
             this.Controls.Add(this.AI_KEG_07PT);
             this.Controls.Add(this.AI_KEG_01QT);
@@ -1038,7 +1054,7 @@ namespace WinForms_Heineken_Pasterizators
             this.Controls.Add(this.AI_KEG_10TT);
             this.Controls.Add(this.AI_KEG_11PT);
             this.Controls.Add(this.AI_KEG_08FT);
-            this.Controls.Add(this.AI__KEG_14PT);
+            this.Controls.Add(this.AI_KEG_14PT);
             this.Controls.Add(this.pb_KEG_INDICAT02);
             this.Controls.Add(this.pb_KEG_INDICAT03);
             this.Controls.Add(this.pb_KEG_INDICAT04);
@@ -1092,7 +1108,7 @@ namespace WinForms_Heineken_Pasterizators
             this.Controls.Add(this.label7);
             this.Controls.Add(this.pb_KEG_V73);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.pb_KEG_86);
+            this.Controls.Add(this.pb_KEG_V86);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.pb_KEG_V20);
             this.Controls.Add(this.label4);
@@ -1117,7 +1133,7 @@ namespace WinForms_Heineken_Pasterizators
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V20)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_86)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V86)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V73)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V72)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V71)).EndInit();
@@ -1153,6 +1169,7 @@ namespace WinForms_Heineken_Pasterizators
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_INDICAT04)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_INDICAT03)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_INDICAT02)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V24)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1175,7 +1192,7 @@ namespace WinForms_Heineken_Pasterizators
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox pb_KEG_V20;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.PictureBox pb_KEG_86;
+        private System.Windows.Forms.PictureBox pb_KEG_V86;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.PictureBox pb_KEG_V73;
         private System.Windows.Forms.Label label8;
@@ -1228,7 +1245,7 @@ namespace WinForms_Heineken_Pasterizators
         private System.Windows.Forms.PictureBox pb_KEG_INDICAT04;
         private System.Windows.Forms.PictureBox pb_KEG_INDICAT03;
         private System.Windows.Forms.PictureBox pb_KEG_INDICAT02;
-        private System.Windows.Forms.Label AI__KEG_14PT;
+        private System.Windows.Forms.Label AI_KEG_14PT;
         private System.Windows.Forms.Label AI_KEG_08FT;
         private System.Windows.Forms.Label AI_KEG_11PT;
         private System.Windows.Forms.Label AI_KEG_10TT;
@@ -1239,6 +1256,8 @@ namespace WinForms_Heineken_Pasterizators
         private System.Windows.Forms.Label AI_KEG_01QT;
         private System.Windows.Forms.Label AI_KEG_07PT;
         private System.Windows.Forms.Label AI_KEG_65PT;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.PictureBox pb_KEG_V24;
     }
 }
 
