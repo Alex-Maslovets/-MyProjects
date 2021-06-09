@@ -29,6 +29,7 @@ namespace WinForms_Heineken_Pasterizators
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pb_KEG_V74 = new System.Windows.Forms.PictureBox();
@@ -111,6 +112,134 @@ namespace WinForms_Heineken_Pasterizators
             this.AI_KEG_65PT = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.pb_KEG_V24 = new System.Windows.Forms.PictureBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.pictureBox16 = new System.Windows.Forms.PictureBox();
+            this.pictureBox17 = new System.Windows.Forms.PictureBox();
+            this.pictureBox18 = new System.Windows.Forms.PictureBox();
+            this.pictureBox19 = new System.Windows.Forms.PictureBox();
+            this.pictureBox20 = new System.Windows.Forms.PictureBox();
+            this.pictureBox21 = new System.Windows.Forms.PictureBox();
+            this.pictureBox22 = new System.Windows.Forms.PictureBox();
+            this.pictureBox23 = new System.Windows.Forms.PictureBox();
+            this.pictureBox24 = new System.Windows.Forms.PictureBox();
+            this.pictureBox25 = new System.Windows.Forms.PictureBox();
+            this.pictureBox26 = new System.Windows.Forms.PictureBox();
+            this.pictureBox27 = new System.Windows.Forms.PictureBox();
+            this.pictureBox15 = new System.Windows.Forms.PictureBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.pb_PET_V71 = new System.Windows.Forms.PictureBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.pb_PET_V70 = new System.Windows.Forms.PictureBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.pb_PET_V72 = new System.Windows.Forms.PictureBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.pb_PET_V15_Paster = new System.Windows.Forms.PictureBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.pb_PET_M21 = new System.Windows.Forms.PictureBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.pb_PET_M04 = new System.Windows.Forms.PictureBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.pb_PET_M03 = new System.Windows.Forms.PictureBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.pb_PET_V69 = new System.Windows.Forms.PictureBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.pb_PET_V22 = new System.Windows.Forms.PictureBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.pb_PET_V23 = new System.Windows.Forms.PictureBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.pb_PET_V05 = new System.Windows.Forms.PictureBox();
+            this.pictureBox28 = new System.Windows.Forms.PictureBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.pb_PET_M30 = new System.Windows.Forms.PictureBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.pb_PET_V16 = new System.Windows.Forms.PictureBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.pb_PET_V15 = new System.Windows.Forms.PictureBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.pb_PET_V14 = new System.Windows.Forms.PictureBox();
+            this.pictureBox30 = new System.Windows.Forms.PictureBox();
+            this.pictureBox31 = new System.Windows.Forms.PictureBox();
+            this.pictureBox32 = new System.Windows.Forms.PictureBox();
+            this.pictureBox33 = new System.Windows.Forms.PictureBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.pb_PET_V87 = new System.Windows.Forms.PictureBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.pb_PET_V86 = new System.Windows.Forms.PictureBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.pb_PET_V85 = new System.Windows.Forms.PictureBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.pb_PET_V24 = new System.Windows.Forms.PictureBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.pb_PET_V22_Buffer = new System.Windows.Forms.PictureBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.pb_PET_V23_Buffer = new System.Windows.Forms.PictureBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.pb_PET_V25 = new System.Windows.Forms.PictureBox();
+            this.pb_PET_INDICAT02 = new System.Windows.Forms.PictureBox();
+            this.pb_PET_INDICAT03 = new System.Windows.Forms.PictureBox();
+            this.pb_PET_INDICAT04 = new System.Windows.Forms.PictureBox();
+            this.pb_PET_INDICAT05 = new System.Windows.Forms.PictureBox();
+            this.pb_PET_INDICAT06 = new System.Windows.Forms.PictureBox();
+            this.AI_PET_PE = new System.Windows.Forms.Label();
+            this.AI_PET_12PT = new System.Windows.Forms.Label();
+            this.AI_PET_10TT = new System.Windows.Forms.Label();
+            this.AI_PET_11PT = new System.Windows.Forms.Label();
+            this.AI_PET_08FT = new System.Windows.Forms.Label();
+            this.AI_PET_14PT = new System.Windows.Forms.Label();
+            this.AI_PET_01QT = new System.Windows.Forms.Label();
+            this.AI_PET_17TT = new System.Windows.Forms.Label();
+            this.AI_PET_24TT = new System.Windows.Forms.Label();
+            this.AI_PET_65PT = new System.Windows.Forms.Label();
+            this.AI_PET_07PT = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.pb_PET_V20 = new System.Windows.Forms.PictureBox();
+            this.pictureBox29 = new System.Windows.Forms.PictureBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V4539 = new System.Windows.Forms.PictureBox();
+            this.pb_GLASS_V4538 = new System.Windows.Forms.PictureBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V4544 = new System.Windows.Forms.PictureBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.pb_GLASS_M4504 = new System.Windows.Forms.PictureBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.pb_GLASS_M4503 = new System.Windows.Forms.PictureBox();
+            this.label53 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V4519 = new System.Windows.Forms.PictureBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V4505 = new System.Windows.Forms.PictureBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V4523 = new System.Windows.Forms.PictureBox();
+            this.label56 = new System.Windows.Forms.Label();
+            this.pb_GLASS_M4521 = new System.Windows.Forms.PictureBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V4522 = new System.Windows.Forms.PictureBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V5503 = new System.Windows.Forms.PictureBox();
+            this.label59 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V5509 = new System.Windows.Forms.PictureBox();
+            this.label60 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V5520 = new System.Windows.Forms.PictureBox();
+            this.label61 = new System.Windows.Forms.Label();
+            this.pb_GLASS_M5519 = new System.Windows.Forms.PictureBox();
+            this.label62 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V5516 = new System.Windows.Forms.PictureBox();
+            this.pb_GLASS_V5515 = new System.Windows.Forms.Label();
+            this.pictureBox37 = new System.Windows.Forms.PictureBox();
+            this.label64 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V5514 = new System.Windows.Forms.PictureBox();
+            this.pb_GLASS_INDICAT02 = new System.Windows.Forms.PictureBox();
+            this.pb_GLASS_INDICAT04 = new System.Windows.Forms.PictureBox();
+            this.pb_GLASS_INDICAT05 = new System.Windows.Forms.PictureBox();
+            this.pb_GLASS_INDICAT06 = new System.Windows.Forms.PictureBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V5524 = new System.Windows.Forms.PictureBox();
+            this.label65 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V5521 = new System.Windows.Forms.PictureBox();
+            this.label66 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V5523 = new System.Windows.Forms.PictureBox();
+            this.label67 = new System.Windows.Forms.Label();
+            this.pb_GLASS_V5525 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V74)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V25)).BeginInit();
@@ -154,6 +283,78 @@ namespace WinForms_Heineken_Pasterizators
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_INDICAT03)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_INDICAT02)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V24)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox23)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox25)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V71)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V70)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V72)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V15_Paster)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_M21)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_M04)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_M03)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V69)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V22)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V23)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V05)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox28)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_M30)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox30)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox31)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox32)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox33)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V87)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V86)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V85)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V24)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V22_Buffer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V23_Buffer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V25)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_INDICAT02)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_INDICAT03)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_INDICAT04)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_INDICAT05)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_INDICAT06)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox29)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V4539)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V4538)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V4544)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_M4504)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_M4503)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V4519)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V4505)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V4523)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_M4521)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V4522)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5503)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5509)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5520)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_M5519)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5516)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox37)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5514)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_INDICAT02)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_INDICAT04)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_INDICAT05)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_INDICAT06)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5524)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5521)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5523)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5525)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -1036,12 +1237,1535 @@ namespace WinForms_Heineken_Pasterizators
             this.pb_KEG_V24.TabStop = false;
             this.pb_KEG_V24.Tag = "VV_0";
             // 
+            // pictureBox16
+            // 
+            this.pictureBox16.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Horizont;
+            this.pictureBox16.Location = new System.Drawing.Point(1164, 207);
+            this.pictureBox16.Name = "pictureBox16";
+            this.pictureBox16.Size = new System.Drawing.Size(20, 15);
+            this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox16.TabIndex = 92;
+            this.pictureBox16.TabStop = false;
+            this.pictureBox16.Tag = "";
+            // 
+            // pictureBox17
+            // 
+            this.pictureBox17.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Horizont;
+            this.pictureBox17.Location = new System.Drawing.Point(1098, 291);
+            this.pictureBox17.Name = "pictureBox17";
+            this.pictureBox17.Size = new System.Drawing.Size(20, 15);
+            this.pictureBox17.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox17.TabIndex = 91;
+            this.pictureBox17.TabStop = false;
+            this.pictureBox17.Tag = "";
+            // 
+            // pictureBox18
+            // 
+            this.pictureBox18.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Horizont;
+            this.pictureBox18.Location = new System.Drawing.Point(1015, 291);
+            this.pictureBox18.Name = "pictureBox18";
+            this.pictureBox18.Size = new System.Drawing.Size(20, 15);
+            this.pictureBox18.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox18.TabIndex = 90;
+            this.pictureBox18.TabStop = false;
+            this.pictureBox18.Tag = "";
+            // 
+            // pictureBox19
+            // 
+            this.pictureBox19.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Vertical;
+            this.pictureBox19.Location = new System.Drawing.Point(1196, 307);
+            this.pictureBox19.Name = "pictureBox19";
+            this.pictureBox19.Size = new System.Drawing.Size(15, 20);
+            this.pictureBox19.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox19.TabIndex = 89;
+            this.pictureBox19.TabStop = false;
+            this.pictureBox19.Tag = "";
+            // 
+            // pictureBox20
+            // 
+            this.pictureBox20.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Vertical;
+            this.pictureBox20.Location = new System.Drawing.Point(1241, 242);
+            this.pictureBox20.Name = "pictureBox20";
+            this.pictureBox20.Size = new System.Drawing.Size(15, 20);
+            this.pictureBox20.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox20.TabIndex = 88;
+            this.pictureBox20.TabStop = false;
+            this.pictureBox20.Tag = "";
+            // 
+            // pictureBox21
+            // 
+            this.pictureBox21.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Vertical;
+            this.pictureBox21.Location = new System.Drawing.Point(1241, 120);
+            this.pictureBox21.Name = "pictureBox21";
+            this.pictureBox21.Size = new System.Drawing.Size(15, 20);
+            this.pictureBox21.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox21.TabIndex = 87;
+            this.pictureBox21.TabStop = false;
+            this.pictureBox21.Tag = "";
+            // 
+            // pictureBox22
+            // 
+            this.pictureBox22.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Vertical;
+            this.pictureBox22.Location = new System.Drawing.Point(1216, 242);
+            this.pictureBox22.Name = "pictureBox22";
+            this.pictureBox22.Size = new System.Drawing.Size(15, 20);
+            this.pictureBox22.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox22.TabIndex = 86;
+            this.pictureBox22.TabStop = false;
+            this.pictureBox22.Tag = "";
+            // 
+            // pictureBox23
+            // 
+            this.pictureBox23.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Vertical;
+            this.pictureBox23.Location = new System.Drawing.Point(1215, 120);
+            this.pictureBox23.Name = "pictureBox23";
+            this.pictureBox23.Size = new System.Drawing.Size(15, 20);
+            this.pictureBox23.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox23.TabIndex = 85;
+            this.pictureBox23.TabStop = false;
+            this.pictureBox23.Tag = "";
+            // 
+            // pictureBox24
+            // 
+            this.pictureBox24.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Vertical;
+            this.pictureBox24.Location = new System.Drawing.Point(1179, 242);
+            this.pictureBox24.Name = "pictureBox24";
+            this.pictureBox24.Size = new System.Drawing.Size(15, 20);
+            this.pictureBox24.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox24.TabIndex = 84;
+            this.pictureBox24.TabStop = false;
+            this.pictureBox24.Tag = "";
+            // 
+            // pictureBox25
+            // 
+            this.pictureBox25.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Vertical;
+            this.pictureBox25.Location = new System.Drawing.Point(1179, 120);
+            this.pictureBox25.Name = "pictureBox25";
+            this.pictureBox25.Size = new System.Drawing.Size(15, 20);
+            this.pictureBox25.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox25.TabIndex = 83;
+            this.pictureBox25.TabStop = false;
+            this.pictureBox25.Tag = "";
+            // 
+            // pictureBox26
+            // 
+            this.pictureBox26.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Vertical;
+            this.pictureBox26.Location = new System.Drawing.Point(860, 71);
+            this.pictureBox26.Name = "pictureBox26";
+            this.pictureBox26.Size = new System.Drawing.Size(15, 20);
+            this.pictureBox26.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox26.TabIndex = 82;
+            this.pictureBox26.TabStop = false;
+            this.pictureBox26.Tag = "";
+            // 
+            // pictureBox27
+            // 
+            this.pictureBox27.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Vertical;
+            this.pictureBox27.Location = new System.Drawing.Point(837, 71);
+            this.pictureBox27.Name = "pictureBox27";
+            this.pictureBox27.Size = new System.Drawing.Size(15, 20);
+            this.pictureBox27.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox27.TabIndex = 81;
+            this.pictureBox27.TabStop = false;
+            this.pictureBox27.Tag = "";
+            // 
+            // pictureBox15
+            // 
+            this.pictureBox15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox15.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox15.Image")));
+            this.pictureBox15.Location = new System.Drawing.Point(640, 15);
+            this.pictureBox15.Name = "pictureBox15";
+            this.pictureBox15.Size = new System.Drawing.Size(620, 500);
+            this.pictureBox15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox15.TabIndex = 93;
+            this.pictureBox15.TabStop = false;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.BackColor = System.Drawing.Color.Transparent;
+            this.label25.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label25.Location = new System.Drawing.Point(763, 153);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(21, 17);
+            this.label25.TabIndex = 95;
+            this.label25.Text = "71";
+            // 
+            // pb_PET_V71
+            // 
+            this.pb_PET_V71.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources._2PosValves_0;
+            this.pb_PET_V71.Location = new System.Drawing.Point(764, 126);
+            this.pb_PET_V71.Name = "pb_PET_V71";
+            this.pb_PET_V71.Size = new System.Drawing.Size(20, 25);
+            this.pb_PET_V71.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V71.TabIndex = 94;
+            this.pb_PET_V71.TabStop = false;
+            this.pb_PET_V71.Tag = "VV_0";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.BackColor = System.Drawing.Color.Transparent;
+            this.label26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label26.Location = new System.Drawing.Point(697, 153);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(21, 17);
+            this.label26.TabIndex = 97;
+            this.label26.Text = "70";
+            // 
+            // pb_PET_V70
+            // 
+            this.pb_PET_V70.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Horizont_0;
+            this.pb_PET_V70.Location = new System.Drawing.Point(695, 132);
+            this.pb_PET_V70.Name = "pb_PET_V70";
+            this.pb_PET_V70.Size = new System.Drawing.Size(25, 20);
+            this.pb_PET_V70.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V70.TabIndex = 96;
+            this.pb_PET_V70.TabStop = false;
+            this.pb_PET_V70.Tag = "VV_0";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.BackColor = System.Drawing.Color.Transparent;
+            this.label27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label27.Location = new System.Drawing.Point(763, 66);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(21, 17);
+            this.label27.TabIndex = 99;
+            this.label27.Text = "72";
+            // 
+            // pb_PET_V72
+            // 
+            this.pb_PET_V72.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Horizont_0;
+            this.pb_PET_V72.Location = new System.Drawing.Point(761, 86);
+            this.pb_PET_V72.Name = "pb_PET_V72";
+            this.pb_PET_V72.Size = new System.Drawing.Size(25, 20);
+            this.pb_PET_V72.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V72.TabIndex = 98;
+            this.pb_PET_V72.TabStop = false;
+            this.pb_PET_V72.Tag = "VV_0";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.BackColor = System.Drawing.Color.Transparent;
+            this.label28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label28.Location = new System.Drawing.Point(878, 131);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(21, 17);
+            this.label28.TabIndex = 101;
+            this.label28.Text = "15";
+            // 
+            // pb_PET_V15_Paster
+            // 
+            this.pb_PET_V15_Paster.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.RegValve_Vertical_0;
+            this.pb_PET_V15_Paster.Location = new System.Drawing.Point(855, 126);
+            this.pb_PET_V15_Paster.Name = "pb_PET_V15_Paster";
+            this.pb_PET_V15_Paster.Size = new System.Drawing.Size(20, 25);
+            this.pb_PET_V15_Paster.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V15_Paster.TabIndex = 100;
+            this.pb_PET_V15_Paster.TabStop = false;
+            this.pb_PET_V15_Paster.Tag = "VV_0";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.BackColor = System.Drawing.Color.Transparent;
+            this.label29.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label29.Location = new System.Drawing.Point(786, 412);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(21, 17);
+            this.label29.TabIndex = 113;
+            this.label29.Text = "21";
+            // 
+            // pb_PET_M21
+            // 
+            this.pb_PET_M21.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Pump_Down_0;
+            this.pb_PET_M21.Location = new System.Drawing.Point(752, 405);
+            this.pb_PET_M21.Name = "pb_PET_M21";
+            this.pb_PET_M21.Size = new System.Drawing.Size(30, 30);
+            this.pb_PET_M21.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_M21.TabIndex = 112;
+            this.pb_PET_M21.TabStop = false;
+            this.pb_PET_M21.Tag = "";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.BackColor = System.Drawing.Color.Transparent;
+            this.label30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label30.Location = new System.Drawing.Point(761, 211);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(21, 17);
+            this.label30.TabIndex = 111;
+            this.label30.Text = "04";
+            // 
+            // pb_PET_M04
+            // 
+            this.pb_PET_M04.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Pump_Left_0;
+            this.pb_PET_M04.Location = new System.Drawing.Point(757, 231);
+            this.pb_PET_M04.Name = "pb_PET_M04";
+            this.pb_PET_M04.Size = new System.Drawing.Size(30, 30);
+            this.pb_PET_M04.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_M04.TabIndex = 110;
+            this.pb_PET_M04.TabStop = false;
+            this.pb_PET_M04.Tag = "";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.BackColor = System.Drawing.Color.Transparent;
+            this.label31.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label31.Location = new System.Drawing.Point(779, 185);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(21, 17);
+            this.label31.TabIndex = 109;
+            this.label31.Text = "03";
+            // 
+            // pb_PET_M03
+            // 
+            this.pb_PET_M03.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Pump_Down_0;
+            this.pb_PET_M03.Location = new System.Drawing.Point(803, 179);
+            this.pb_PET_M03.Name = "pb_PET_M03";
+            this.pb_PET_M03.Size = new System.Drawing.Size(30, 30);
+            this.pb_PET_M03.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_M03.TabIndex = 108;
+            this.pb_PET_M03.TabStop = false;
+            this.pb_PET_M03.Tag = "";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.BackColor = System.Drawing.Color.Transparent;
+            this.label32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label32.Location = new System.Drawing.Point(731, 169);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(21, 17);
+            this.label32.TabIndex = 107;
+            this.label32.Text = "69";
+            // 
+            // pb_PET_V69
+            // 
+            this.pb_PET_V69.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.SafeValve_Left_0;
+            this.pb_PET_V69.Location = new System.Drawing.Point(731, 190);
+            this.pb_PET_V69.Name = "pb_PET_V69";
+            this.pb_PET_V69.Size = new System.Drawing.Size(20, 25);
+            this.pb_PET_V69.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V69.TabIndex = 106;
+            this.pb_PET_V69.TabStop = false;
+            this.pb_PET_V69.Tag = "VV_0";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.BackColor = System.Drawing.Color.Transparent;
+            this.label33.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label33.Location = new System.Drawing.Point(688, 412);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(21, 17);
+            this.label33.TabIndex = 105;
+            this.label33.Text = "22";
+            // 
+            // pb_PET_V22
+            // 
+            this.pb_PET_V22.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.RegValve_Vertical_0;
+            this.pb_PET_V22.Location = new System.Drawing.Point(710, 408);
+            this.pb_PET_V22.Name = "pb_PET_V22";
+            this.pb_PET_V22.Size = new System.Drawing.Size(20, 25);
+            this.pb_PET_V22.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V22.TabIndex = 104;
+            this.pb_PET_V22.TabStop = false;
+            this.pb_PET_V22.Tag = "VV_0";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.BackColor = System.Drawing.Color.Transparent;
+            this.label35.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label35.Location = new System.Drawing.Point(689, 464);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(21, 17);
+            this.label35.TabIndex = 115;
+            this.label35.Text = "23";
+            // 
+            // pb_PET_V23
+            // 
+            this.pb_PET_V23.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Horizont_0;
+            this.pb_PET_V23.Location = new System.Drawing.Point(687, 483);
+            this.pb_PET_V23.Name = "pb_PET_V23";
+            this.pb_PET_V23.Size = new System.Drawing.Size(25, 20);
+            this.pb_PET_V23.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V23.TabIndex = 114;
+            this.pb_PET_V23.TabStop = false;
+            this.pb_PET_V23.Tag = "VV_0";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.BackColor = System.Drawing.Color.Transparent;
+            this.label34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label34.Location = new System.Drawing.Point(893, 415);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(21, 17);
+            this.label34.TabIndex = 117;
+            this.label34.Text = "05";
+            // 
+            // pb_PET_V05
+            // 
+            this.pb_PET_V05.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.RegValve_Horizont_0;
+            this.pb_PET_V05.Location = new System.Drawing.Point(891, 394);
+            this.pb_PET_V05.Name = "pb_PET_V05";
+            this.pb_PET_V05.Size = new System.Drawing.Size(25, 20);
+            this.pb_PET_V05.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V05.TabIndex = 116;
+            this.pb_PET_V05.TabStop = false;
+            this.pb_PET_V05.Tag = "VV_0";
+            // 
+            // pictureBox28
+            // 
+            this.pictureBox28.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Horizont;
+            this.pictureBox28.Location = new System.Drawing.Point(961, 256);
+            this.pictureBox28.Name = "pictureBox28";
+            this.pictureBox28.Size = new System.Drawing.Size(20, 15);
+            this.pictureBox28.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox28.TabIndex = 118;
+            this.pictureBox28.TabStop = false;
+            this.pictureBox28.Tag = "";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.BackColor = System.Drawing.Color.Transparent;
+            this.label36.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label36.Location = new System.Drawing.Point(1172, 349);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(21, 17);
+            this.label36.TabIndex = 126;
+            this.label36.Text = "30";
+            // 
+            // pb_PET_M30
+            // 
+            this.pb_PET_M30.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Pump_Right_0;
+            this.pb_PET_M30.Location = new System.Drawing.Point(1168, 369);
+            this.pb_PET_M30.Name = "pb_PET_M30";
+            this.pb_PET_M30.Size = new System.Drawing.Size(30, 30);
+            this.pb_PET_M30.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_M30.TabIndex = 125;
+            this.pb_PET_M30.TabStop = false;
+            this.pb_PET_M30.Tag = "";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.BackColor = System.Drawing.Color.Transparent;
+            this.label37.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label37.Location = new System.Drawing.Point(1056, 392);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(21, 17);
+            this.label37.TabIndex = 124;
+            this.label37.Text = "16";
+            // 
+            // pb_PET_V16
+            // 
+            this.pb_PET_V16.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Horizont_0;
+            this.pb_PET_V16.Location = new System.Drawing.Point(1054, 371);
+            this.pb_PET_V16.Name = "pb_PET_V16";
+            this.pb_PET_V16.Size = new System.Drawing.Size(25, 20);
+            this.pb_PET_V16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V16.TabIndex = 123;
+            this.pb_PET_V16.TabStop = false;
+            this.pb_PET_V16.Tag = "VV_0";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.BackColor = System.Drawing.Color.Transparent;
+            this.label38.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label38.Location = new System.Drawing.Point(1105, 346);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(21, 17);
+            this.label38.TabIndex = 122;
+            this.label38.Text = "15";
+            // 
+            // pb_PET_V15
+            // 
+            this.pb_PET_V15.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Vertical_0;
+            this.pb_PET_V15.Location = new System.Drawing.Point(1081, 342);
+            this.pb_PET_V15.Name = "pb_PET_V15";
+            this.pb_PET_V15.Size = new System.Drawing.Size(20, 25);
+            this.pb_PET_V15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V15.TabIndex = 121;
+            this.pb_PET_V15.TabStop = false;
+            this.pb_PET_V15.Tag = "VV_0";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.BackColor = System.Drawing.Color.Transparent;
+            this.label39.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label39.Location = new System.Drawing.Point(1000, 346);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(21, 17);
+            this.label39.TabIndex = 120;
+            this.label39.Text = "14";
+            // 
+            // pb_PET_V14
+            // 
+            this.pb_PET_V14.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Vertical_0;
+            this.pb_PET_V14.Location = new System.Drawing.Point(1024, 342);
+            this.pb_PET_V14.Name = "pb_PET_V14";
+            this.pb_PET_V14.Size = new System.Drawing.Size(20, 25);
+            this.pb_PET_V14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V14.TabIndex = 119;
+            this.pb_PET_V14.TabStop = false;
+            this.pb_PET_V14.Tag = "VV_0";
+            // 
+            // pictureBox30
+            // 
+            this.pictureBox30.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Vertical;
+            this.pictureBox30.Location = new System.Drawing.Point(402, 396);
+            this.pictureBox30.Name = "pictureBox30";
+            this.pictureBox30.Size = new System.Drawing.Size(15, 20);
+            this.pictureBox30.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox30.TabIndex = 127;
+            this.pictureBox30.TabStop = false;
+            this.pictureBox30.Tag = "";
+            // 
+            // pictureBox31
+            // 
+            this.pictureBox31.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Vertical;
+            this.pictureBox31.Location = new System.Drawing.Point(457, 396);
+            this.pictureBox31.Name = "pictureBox31";
+            this.pictureBox31.Size = new System.Drawing.Size(15, 20);
+            this.pictureBox31.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox31.TabIndex = 128;
+            this.pictureBox31.TabStop = false;
+            this.pictureBox31.Tag = "";
+            // 
+            // pictureBox32
+            // 
+            this.pictureBox32.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Vertical;
+            this.pictureBox32.Location = new System.Drawing.Point(1085, 396);
+            this.pictureBox32.Name = "pictureBox32";
+            this.pictureBox32.Size = new System.Drawing.Size(15, 20);
+            this.pictureBox32.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox32.TabIndex = 130;
+            this.pictureBox32.TabStop = false;
+            this.pictureBox32.Tag = "";
+            // 
+            // pictureBox33
+            // 
+            this.pictureBox33.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.HandValves_Vertical;
+            this.pictureBox33.Location = new System.Drawing.Point(1029, 396);
+            this.pictureBox33.Name = "pictureBox33";
+            this.pictureBox33.Size = new System.Drawing.Size(15, 20);
+            this.pictureBox33.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox33.TabIndex = 129;
+            this.pictureBox33.TabStop = false;
+            this.pictureBox33.Tag = "";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.BackColor = System.Drawing.Color.Transparent;
+            this.label40.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label40.Location = new System.Drawing.Point(993, 424);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(21, 17);
+            this.label40.TabIndex = 132;
+            this.label40.Text = "87";
+            // 
+            // pb_PET_V87
+            // 
+            this.pb_PET_V87.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.SafeValve_Down_0;
+            this.pb_PET_V87.Location = new System.Drawing.Point(991, 400);
+            this.pb_PET_V87.Name = "pb_PET_V87";
+            this.pb_PET_V87.Size = new System.Drawing.Size(25, 20);
+            this.pb_PET_V87.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V87.TabIndex = 131;
+            this.pb_PET_V87.TabStop = false;
+            this.pb_PET_V87.Tag = "VV_0";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.BackColor = System.Drawing.Color.Transparent;
+            this.label41.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label41.Location = new System.Drawing.Point(964, 416);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(21, 17);
+            this.label41.TabIndex = 134;
+            this.label41.Text = "86";
+            // 
+            // pb_PET_V86
+            // 
+            this.pb_PET_V86.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Horizont_0;
+            this.pb_PET_V86.Location = new System.Drawing.Point(962, 395);
+            this.pb_PET_V86.Name = "pb_PET_V86";
+            this.pb_PET_V86.Size = new System.Drawing.Size(25, 20);
+            this.pb_PET_V86.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V86.TabIndex = 133;
+            this.pb_PET_V86.TabStop = false;
+            this.pb_PET_V86.Tag = "VV_0";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.BackColor = System.Drawing.Color.Transparent;
+            this.label42.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label42.Location = new System.Drawing.Point(937, 416);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(21, 17);
+            this.label42.TabIndex = 136;
+            this.label42.Text = "85";
+            // 
+            // pb_PET_V85
+            // 
+            this.pb_PET_V85.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources._2PosValves_0;
+            this.pb_PET_V85.Location = new System.Drawing.Point(938, 379);
+            this.pb_PET_V85.Name = "pb_PET_V85";
+            this.pb_PET_V85.Size = new System.Drawing.Size(20, 35);
+            this.pb_PET_V85.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V85.TabIndex = 135;
+            this.pb_PET_V85.TabStop = false;
+            this.pb_PET_V85.Tag = "VV_0";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.BackColor = System.Drawing.Color.Transparent;
+            this.label43.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label43.Location = new System.Drawing.Point(1153, 243);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(21, 17);
+            this.label43.TabIndex = 144;
+            this.label43.Text = "24";
+            // 
+            // pb_PET_V24
+            // 
+            this.pb_PET_V24.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Horizont_0;
+            this.pb_PET_V24.Location = new System.Drawing.Point(1151, 263);
+            this.pb_PET_V24.Name = "pb_PET_V24";
+            this.pb_PET_V24.Size = new System.Drawing.Size(25, 20);
+            this.pb_PET_V24.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V24.TabIndex = 143;
+            this.pb_PET_V24.TabStop = false;
+            this.pb_PET_V24.Tag = "VV_0";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.BackColor = System.Drawing.Color.Transparent;
+            this.label44.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label44.Location = new System.Drawing.Point(1085, 37);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(21, 17);
+            this.label44.TabIndex = 142;
+            this.label44.Text = "22";
+            // 
+            // pb_PET_V22_Buffer
+            // 
+            this.pb_PET_V22_Buffer.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.SafeValve_Right_0;
+            this.pb_PET_V22_Buffer.Location = new System.Drawing.Point(1088, 57);
+            this.pb_PET_V22_Buffer.Name = "pb_PET_V22_Buffer";
+            this.pb_PET_V22_Buffer.Size = new System.Drawing.Size(20, 25);
+            this.pb_PET_V22_Buffer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V22_Buffer.TabIndex = 141;
+            this.pb_PET_V22_Buffer.TabStop = false;
+            this.pb_PET_V22_Buffer.Tag = "VV_0";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.BackColor = System.Drawing.Color.Transparent;
+            this.label45.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label45.Location = new System.Drawing.Point(1028, 75);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(21, 17);
+            this.label45.TabIndex = 140;
+            this.label45.Text = "23";
+            // 
+            // pb_PET_V23_Buffer
+            // 
+            this.pb_PET_V23_Buffer.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve23_0;
+            this.pb_PET_V23_Buffer.Location = new System.Drawing.Point(1029, 94);
+            this.pb_PET_V23_Buffer.Name = "pb_PET_V23_Buffer";
+            this.pb_PET_V23_Buffer.Size = new System.Drawing.Size(20, 15);
+            this.pb_PET_V23_Buffer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V23_Buffer.TabIndex = 139;
+            this.pb_PET_V23_Buffer.TabStop = false;
+            this.pb_PET_V23_Buffer.Tag = "";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.BackColor = System.Drawing.Color.Transparent;
+            this.label46.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label46.Location = new System.Drawing.Point(1151, 294);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(21, 17);
+            this.label46.TabIndex = 138;
+            this.label46.Text = "25";
+            // 
+            // pb_PET_V25
+            // 
+            this.pb_PET_V25.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Vertical_0;
+            this.pb_PET_V25.Location = new System.Drawing.Point(1128, 289);
+            this.pb_PET_V25.Name = "pb_PET_V25";
+            this.pb_PET_V25.Size = new System.Drawing.Size(20, 25);
+            this.pb_PET_V25.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V25.TabIndex = 137;
+            this.pb_PET_V25.TabStop = false;
+            this.pb_PET_V25.Tag = "VV_0";
+            // 
+            // pb_PET_INDICAT02
+            // 
+            this.pb_PET_INDICAT02.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Indicator_0;
+            this.pb_PET_INDICAT02.Location = new System.Drawing.Point(1115, 396);
+            this.pb_PET_INDICAT02.Name = "pb_PET_INDICAT02";
+            this.pb_PET_INDICAT02.Size = new System.Drawing.Size(20, 20);
+            this.pb_PET_INDICAT02.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_INDICAT02.TabIndex = 149;
+            this.pb_PET_INDICAT02.TabStop = false;
+            this.pb_PET_INDICAT02.Tag = "";
+            // 
+            // pb_PET_INDICAT03
+            // 
+            this.pb_PET_INDICAT03.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Indicator_0;
+            this.pb_PET_INDICAT03.Location = new System.Drawing.Point(1000, 244);
+            this.pb_PET_INDICAT03.Name = "pb_PET_INDICAT03";
+            this.pb_PET_INDICAT03.Size = new System.Drawing.Size(20, 20);
+            this.pb_PET_INDICAT03.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_INDICAT03.TabIndex = 148;
+            this.pb_PET_INDICAT03.TabStop = false;
+            this.pb_PET_INDICAT03.Tag = "";
+            // 
+            // pb_PET_INDICAT04
+            // 
+            this.pb_PET_INDICAT04.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Indicator_0;
+            this.pb_PET_INDICAT04.Location = new System.Drawing.Point(1000, 203);
+            this.pb_PET_INDICAT04.Name = "pb_PET_INDICAT04";
+            this.pb_PET_INDICAT04.Size = new System.Drawing.Size(20, 20);
+            this.pb_PET_INDICAT04.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_INDICAT04.TabIndex = 147;
+            this.pb_PET_INDICAT04.TabStop = false;
+            this.pb_PET_INDICAT04.Tag = "";
+            // 
+            // pb_PET_INDICAT05
+            // 
+            this.pb_PET_INDICAT05.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Indicator_0;
+            this.pb_PET_INDICAT05.Location = new System.Drawing.Point(1000, 169);
+            this.pb_PET_INDICAT05.Name = "pb_PET_INDICAT05";
+            this.pb_PET_INDICAT05.Size = new System.Drawing.Size(20, 20);
+            this.pb_PET_INDICAT05.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_INDICAT05.TabIndex = 146;
+            this.pb_PET_INDICAT05.TabStop = false;
+            this.pb_PET_INDICAT05.Tag = "";
+            // 
+            // pb_PET_INDICAT06
+            // 
+            this.pb_PET_INDICAT06.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Indicator_0;
+            this.pb_PET_INDICAT06.Location = new System.Drawing.Point(1000, 136);
+            this.pb_PET_INDICAT06.Name = "pb_PET_INDICAT06";
+            this.pb_PET_INDICAT06.Size = new System.Drawing.Size(20, 20);
+            this.pb_PET_INDICAT06.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_INDICAT06.TabIndex = 145;
+            this.pb_PET_INDICAT06.TabStop = false;
+            this.pb_PET_INDICAT06.Tag = "";
+            // 
+            // AI_PET_PE
+            // 
+            this.AI_PET_PE.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_PET_PE.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_PET_PE.Location = new System.Drawing.Point(671, 306);
+            this.AI_PET_PE.Name = "AI_PET_PE";
+            this.AI_PET_PE.Size = new System.Drawing.Size(42, 17);
+            this.AI_PET_PE.TabIndex = 155;
+            this.AI_PET_PE.Text = "9999.9";
+            this.AI_PET_PE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_PET_12PT
+            // 
+            this.AI_PET_12PT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_PET_12PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_PET_12PT.Location = new System.Drawing.Point(671, 280);
+            this.AI_PET_12PT.Name = "AI_PET_12PT";
+            this.AI_PET_12PT.Size = new System.Drawing.Size(42, 17);
+            this.AI_PET_12PT.TabIndex = 154;
+            this.AI_PET_12PT.Text = "9999.9";
+            this.AI_PET_12PT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_PET_10TT
+            // 
+            this.AI_PET_10TT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_PET_10TT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_PET_10TT.Location = new System.Drawing.Point(671, 254);
+            this.AI_PET_10TT.Name = "AI_PET_10TT";
+            this.AI_PET_10TT.Size = new System.Drawing.Size(42, 17);
+            this.AI_PET_10TT.TabIndex = 153;
+            this.AI_PET_10TT.Text = "9999.9";
+            this.AI_PET_10TT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_PET_11PT
+            // 
+            this.AI_PET_11PT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_PET_11PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_PET_11PT.Location = new System.Drawing.Point(750, 263);
+            this.AI_PET_11PT.Name = "AI_PET_11PT";
+            this.AI_PET_11PT.Size = new System.Drawing.Size(42, 17);
+            this.AI_PET_11PT.TabIndex = 152;
+            this.AI_PET_11PT.Text = "9999.9";
+            this.AI_PET_11PT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_PET_08FT
+            // 
+            this.AI_PET_08FT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_PET_08FT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_PET_08FT.Location = new System.Drawing.Point(797, 213);
+            this.AI_PET_08FT.Name = "AI_PET_08FT";
+            this.AI_PET_08FT.Size = new System.Drawing.Size(42, 17);
+            this.AI_PET_08FT.TabIndex = 151;
+            this.AI_PET_08FT.Text = "9999.9";
+            this.AI_PET_08FT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_PET_14PT
+            // 
+            this.AI_PET_14PT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_PET_14PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_PET_14PT.Location = new System.Drawing.Point(797, 157);
+            this.AI_PET_14PT.Name = "AI_PET_14PT";
+            this.AI_PET_14PT.Size = new System.Drawing.Size(42, 17);
+            this.AI_PET_14PT.TabIndex = 150;
+            this.AI_PET_14PT.Text = "9999.9";
+            this.AI_PET_14PT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_PET_01QT
+            // 
+            this.AI_PET_01QT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_PET_01QT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_PET_01QT.Location = new System.Drawing.Point(844, 437);
+            this.AI_PET_01QT.Name = "AI_PET_01QT";
+            this.AI_PET_01QT.Size = new System.Drawing.Size(42, 17);
+            this.AI_PET_01QT.TabIndex = 158;
+            this.AI_PET_01QT.Text = "9999.9";
+            this.AI_PET_01QT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_PET_17TT
+            // 
+            this.AI_PET_17TT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_PET_17TT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_PET_17TT.Location = new System.Drawing.Point(844, 416);
+            this.AI_PET_17TT.Name = "AI_PET_17TT";
+            this.AI_PET_17TT.Size = new System.Drawing.Size(42, 17);
+            this.AI_PET_17TT.TabIndex = 157;
+            this.AI_PET_17TT.Text = "9999.9";
+            this.AI_PET_17TT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_PET_24TT
+            // 
+            this.AI_PET_24TT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_PET_24TT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_PET_24TT.Location = new System.Drawing.Point(679, 388);
+            this.AI_PET_24TT.Name = "AI_PET_24TT";
+            this.AI_PET_24TT.Size = new System.Drawing.Size(42, 17);
+            this.AI_PET_24TT.TabIndex = 156;
+            this.AI_PET_24TT.Text = "9999.9";
+            this.AI_PET_24TT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_PET_65PT
+            // 
+            this.AI_PET_65PT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_PET_65PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_PET_65PT.Location = new System.Drawing.Point(1200, 355);
+            this.AI_PET_65PT.Name = "AI_PET_65PT";
+            this.AI_PET_65PT.Size = new System.Drawing.Size(42, 17);
+            this.AI_PET_65PT.TabIndex = 160;
+            this.AI_PET_65PT.Text = "9999.9";
+            this.AI_PET_65PT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_PET_07PT
+            // 
+            this.AI_PET_07PT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_PET_07PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_PET_07PT.Location = new System.Drawing.Point(1043, 246);
+            this.AI_PET_07PT.Name = "AI_PET_07PT";
+            this.AI_PET_07PT.Size = new System.Drawing.Size(42, 17);
+            this.AI_PET_07PT.TabIndex = 159;
+            this.AI_PET_07PT.Text = "9999.9";
+            this.AI_PET_07PT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.BackColor = System.Drawing.Color.Transparent;
+            this.label47.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label47.Location = new System.Drawing.Point(953, 301);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(21, 17);
+            this.label47.TabIndex = 162;
+            this.label47.Text = "20";
+            // 
+            // pb_PET_V20
+            // 
+            this.pb_PET_V20.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Vertical_0;
+            this.pb_PET_V20.Location = new System.Drawing.Point(976, 297);
+            this.pb_PET_V20.Name = "pb_PET_V20";
+            this.pb_PET_V20.Size = new System.Drawing.Size(20, 25);
+            this.pb_PET_V20.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_PET_V20.TabIndex = 161;
+            this.pb_PET_V20.TabStop = false;
+            this.pb_PET_V20.Tag = "VV_0";
+            // 
+            // pictureBox29
+            // 
+            this.pictureBox29.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox29.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox29.Image")));
+            this.pictureBox29.Location = new System.Drawing.Point(1270, 15);
+            this.pictureBox29.Name = "pictureBox29";
+            this.pictureBox29.Size = new System.Drawing.Size(620, 500);
+            this.pictureBox29.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox29.TabIndex = 163;
+            this.pictureBox29.TabStop = false;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.BackColor = System.Drawing.Color.Transparent;
+            this.label48.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label48.Location = new System.Drawing.Point(1338, 139);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(33, 17);
+            this.label48.TabIndex = 167;
+            this.label48.Text = "4539";
+            // 
+            // pb_GLASS_V4539
+            // 
+            this.pb_GLASS_V4539.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Horizont_0;
+            this.pb_GLASS_V4539.Location = new System.Drawing.Point(1342, 117);
+            this.pb_GLASS_V4539.Name = "pb_GLASS_V4539";
+            this.pb_GLASS_V4539.Size = new System.Drawing.Size(25, 20);
+            this.pb_GLASS_V4539.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V4539.TabIndex = 166;
+            this.pb_GLASS_V4539.TabStop = false;
+            this.pb_GLASS_V4539.Tag = "VV_0";
+            // 
+            // pb_GLASS_V4538
+            // 
+            this.pb_GLASS_V4538.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources._2PosValves_0;
+            this.pb_GLASS_V4538.Location = new System.Drawing.Point(1411, 111);
+            this.pb_GLASS_V4538.Name = "pb_GLASS_V4538";
+            this.pb_GLASS_V4538.Size = new System.Drawing.Size(20, 25);
+            this.pb_GLASS_V4538.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V4538.TabIndex = 164;
+            this.pb_GLASS_V4538.TabStop = false;
+            this.pb_GLASS_V4538.Tag = "VV_0";
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.BackColor = System.Drawing.Color.Transparent;
+            this.label49.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label49.Location = new System.Drawing.Point(1405, 139);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(33, 17);
+            this.label49.TabIndex = 168;
+            this.label49.Text = "4538";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.BackColor = System.Drawing.Color.Transparent;
+            this.label50.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label50.Location = new System.Drawing.Point(1307, 36);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(33, 17);
+            this.label50.TabIndex = 170;
+            this.label50.Text = "4544";
+            // 
+            // pb_GLASS_V4544
+            // 
+            this.pb_GLASS_V4544.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Vertical_0;
+            this.pb_GLASS_V4544.Location = new System.Drawing.Point(1344, 33);
+            this.pb_GLASS_V4544.Name = "pb_GLASS_V4544";
+            this.pb_GLASS_V4544.Size = new System.Drawing.Size(20, 25);
+            this.pb_GLASS_V4544.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V4544.TabIndex = 169;
+            this.pb_GLASS_V4544.TabStop = false;
+            this.pb_GLASS_V4544.Tag = "VV_0";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.BackColor = System.Drawing.Color.Transparent;
+            this.label51.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label51.Location = new System.Drawing.Point(1386, 201);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(33, 17);
+            this.label51.TabIndex = 174;
+            this.label51.Text = "4504";
+            // 
+            // pb_GLASS_M4504
+            // 
+            this.pb_GLASS_M4504.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Pump_Left_0;
+            this.pb_GLASS_M4504.Location = new System.Drawing.Point(1387, 221);
+            this.pb_GLASS_M4504.Name = "pb_GLASS_M4504";
+            this.pb_GLASS_M4504.Size = new System.Drawing.Size(30, 30);
+            this.pb_GLASS_M4504.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_M4504.TabIndex = 173;
+            this.pb_GLASS_M4504.TabStop = false;
+            this.pb_GLASS_M4504.Tag = "";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.BackColor = System.Drawing.Color.Transparent;
+            this.label52.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label52.Location = new System.Drawing.Point(1448, 227);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(33, 17);
+            this.label52.TabIndex = 172;
+            this.label52.Text = "4503";
+            // 
+            // pb_GLASS_M4503
+            // 
+            this.pb_GLASS_M4503.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Pump_Down_0;
+            this.pb_GLASS_M4503.Location = new System.Drawing.Point(1483, 221);
+            this.pb_GLASS_M4503.Name = "pb_GLASS_M4503";
+            this.pb_GLASS_M4503.Size = new System.Drawing.Size(30, 30);
+            this.pb_GLASS_M4503.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_M4503.TabIndex = 171;
+            this.pb_GLASS_M4503.TabStop = false;
+            this.pb_GLASS_M4503.Tag = "";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.BackColor = System.Drawing.Color.Transparent;
+            this.label53.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label53.Location = new System.Drawing.Point(1356, 158);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(33, 17);
+            this.label53.TabIndex = 176;
+            this.label53.Text = "4519";
+            // 
+            // pb_GLASS_V4519
+            // 
+            this.pb_GLASS_V4519.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.SafeValve_Left_0;
+            this.pb_GLASS_V4519.Location = new System.Drawing.Point(1362, 179);
+            this.pb_GLASS_V4519.Name = "pb_GLASS_V4519";
+            this.pb_GLASS_V4519.Size = new System.Drawing.Size(20, 25);
+            this.pb_GLASS_V4519.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V4519.TabIndex = 175;
+            this.pb_GLASS_V4519.TabStop = false;
+            this.pb_GLASS_V4519.Tag = "VV_0";
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.BackColor = System.Drawing.Color.Transparent;
+            this.label54.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label54.Location = new System.Drawing.Point(1516, 418);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(33, 17);
+            this.label54.TabIndex = 178;
+            this.label54.Text = "4505";
+            // 
+            // pb_GLASS_V4505
+            // 
+            this.pb_GLASS_V4505.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.RegValve_Horizont_0;
+            this.pb_GLASS_V4505.Location = new System.Drawing.Point(1520, 397);
+            this.pb_GLASS_V4505.Name = "pb_GLASS_V4505";
+            this.pb_GLASS_V4505.Size = new System.Drawing.Size(25, 20);
+            this.pb_GLASS_V4505.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V4505.TabIndex = 177;
+            this.pb_GLASS_V4505.TabStop = false;
+            this.pb_GLASS_V4505.Tag = "VV_0";
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.BackColor = System.Drawing.Color.Transparent;
+            this.label55.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label55.Location = new System.Drawing.Point(1312, 473);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(33, 17);
+            this.label55.TabIndex = 184;
+            this.label55.Text = "4523";
+            // 
+            // pb_GLASS_V4523
+            // 
+            this.pb_GLASS_V4523.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Horizont_0;
+            this.pb_GLASS_V4523.Location = new System.Drawing.Point(1316, 492);
+            this.pb_GLASS_V4523.Name = "pb_GLASS_V4523";
+            this.pb_GLASS_V4523.Size = new System.Drawing.Size(25, 20);
+            this.pb_GLASS_V4523.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V4523.TabIndex = 183;
+            this.pb_GLASS_V4523.TabStop = false;
+            this.pb_GLASS_V4523.Tag = "VV_0";
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.BackColor = System.Drawing.Color.Transparent;
+            this.label56.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label56.Location = new System.Drawing.Point(1418, 421);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(33, 17);
+            this.label56.TabIndex = 182;
+            this.label56.Text = "4521";
+            // 
+            // pb_GLASS_M4521
+            // 
+            this.pb_GLASS_M4521.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Pump_Down_0;
+            this.pb_GLASS_M4521.Location = new System.Drawing.Point(1384, 414);
+            this.pb_GLASS_M4521.Name = "pb_GLASS_M4521";
+            this.pb_GLASS_M4521.Size = new System.Drawing.Size(30, 30);
+            this.pb_GLASS_M4521.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_M4521.TabIndex = 181;
+            this.pb_GLASS_M4521.TabStop = false;
+            this.pb_GLASS_M4521.Tag = "";
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.BackColor = System.Drawing.Color.Transparent;
+            this.label57.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label57.Location = new System.Drawing.Point(1306, 421);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(33, 17);
+            this.label57.TabIndex = 180;
+            this.label57.Text = "4522";
+            // 
+            // pb_GLASS_V4522
+            // 
+            this.pb_GLASS_V4522.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.RegValve_Vertical_0;
+            this.pb_GLASS_V4522.Location = new System.Drawing.Point(1341, 417);
+            this.pb_GLASS_V4522.Name = "pb_GLASS_V4522";
+            this.pb_GLASS_V4522.Size = new System.Drawing.Size(20, 25);
+            this.pb_GLASS_V4522.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V4522.TabIndex = 179;
+            this.pb_GLASS_V4522.TabStop = false;
+            this.pb_GLASS_V4522.Tag = "VV_0";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.BackColor = System.Drawing.Color.Transparent;
+            this.label58.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label58.Location = new System.Drawing.Point(1564, 418);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(33, 17);
+            this.label58.TabIndex = 186;
+            this.label58.Text = "5503";
+            // 
+            // pb_GLASS_V5503
+            // 
+            this.pb_GLASS_V5503.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources._2PosValves_0;
+            this.pb_GLASS_V5503.Location = new System.Drawing.Point(1570, 381);
+            this.pb_GLASS_V5503.Name = "pb_GLASS_V5503";
+            this.pb_GLASS_V5503.Size = new System.Drawing.Size(20, 35);
+            this.pb_GLASS_V5503.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V5503.TabIndex = 185;
+            this.pb_GLASS_V5503.TabStop = false;
+            this.pb_GLASS_V5503.Tag = "VV_0";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.BackColor = System.Drawing.Color.Transparent;
+            this.label59.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label59.Location = new System.Drawing.Point(1598, 418);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(33, 17);
+            this.label59.TabIndex = 188;
+            this.label59.Text = "5509";
+            // 
+            // pb_GLASS_V5509
+            // 
+            this.pb_GLASS_V5509.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Horizont_0;
+            this.pb_GLASS_V5509.Location = new System.Drawing.Point(1602, 396);
+            this.pb_GLASS_V5509.Name = "pb_GLASS_V5509";
+            this.pb_GLASS_V5509.Size = new System.Drawing.Size(25, 20);
+            this.pb_GLASS_V5509.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V5509.TabIndex = 187;
+            this.pb_GLASS_V5509.TabStop = false;
+            this.pb_GLASS_V5509.Tag = "VV_0";
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.BackColor = System.Drawing.Color.Transparent;
+            this.label60.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label60.Location = new System.Drawing.Point(1571, 301);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(33, 17);
+            this.label60.TabIndex = 198;
+            this.label60.Text = "5520";
+            // 
+            // pb_GLASS_V5520
+            // 
+            this.pb_GLASS_V5520.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Vertical_0;
+            this.pb_GLASS_V5520.Location = new System.Drawing.Point(1605, 297);
+            this.pb_GLASS_V5520.Name = "pb_GLASS_V5520";
+            this.pb_GLASS_V5520.Size = new System.Drawing.Size(20, 25);
+            this.pb_GLASS_V5520.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V5520.TabIndex = 197;
+            this.pb_GLASS_V5520.TabStop = false;
+            this.pb_GLASS_V5520.Tag = "VV_0";
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.BackColor = System.Drawing.Color.Transparent;
+            this.label61.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label61.Location = new System.Drawing.Point(1796, 349);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(33, 17);
+            this.label61.TabIndex = 196;
+            this.label61.Text = "5519";
+            // 
+            // pb_GLASS_M5519
+            // 
+            this.pb_GLASS_M5519.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Pump_Right_0;
+            this.pb_GLASS_M5519.Location = new System.Drawing.Point(1797, 369);
+            this.pb_GLASS_M5519.Name = "pb_GLASS_M5519";
+            this.pb_GLASS_M5519.Size = new System.Drawing.Size(30, 30);
+            this.pb_GLASS_M5519.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_M5519.TabIndex = 195;
+            this.pb_GLASS_M5519.TabStop = false;
+            this.pb_GLASS_M5519.Tag = "";
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.BackColor = System.Drawing.Color.Transparent;
+            this.label62.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label62.Location = new System.Drawing.Point(1679, 392);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(33, 17);
+            this.label62.TabIndex = 194;
+            this.label62.Text = "5516";
+            // 
+            // pb_GLASS_V5516
+            // 
+            this.pb_GLASS_V5516.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Horizont_0;
+            this.pb_GLASS_V5516.Location = new System.Drawing.Point(1683, 371);
+            this.pb_GLASS_V5516.Name = "pb_GLASS_V5516";
+            this.pb_GLASS_V5516.Size = new System.Drawing.Size(25, 20);
+            this.pb_GLASS_V5516.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V5516.TabIndex = 193;
+            this.pb_GLASS_V5516.TabStop = false;
+            this.pb_GLASS_V5516.Tag = "VV_0";
+            // 
+            // pb_GLASS_V5515
+            // 
+            this.pb_GLASS_V5515.AutoSize = true;
+            this.pb_GLASS_V5515.BackColor = System.Drawing.Color.Transparent;
+            this.pb_GLASS_V5515.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pb_GLASS_V5515.Location = new System.Drawing.Point(1734, 346);
+            this.pb_GLASS_V5515.Name = "pb_GLASS_V5515";
+            this.pb_GLASS_V5515.Size = new System.Drawing.Size(33, 17);
+            this.pb_GLASS_V5515.TabIndex = 192;
+            this.pb_GLASS_V5515.Text = "5515";
+            // 
+            // pictureBox37
+            // 
+            this.pictureBox37.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Vertical_0;
+            this.pictureBox37.Location = new System.Drawing.Point(1710, 342);
+            this.pictureBox37.Name = "pictureBox37";
+            this.pictureBox37.Size = new System.Drawing.Size(20, 25);
+            this.pictureBox37.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox37.TabIndex = 191;
+            this.pictureBox37.TabStop = false;
+            this.pictureBox37.Tag = "VV_0";
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.BackColor = System.Drawing.Color.Transparent;
+            this.label64.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label64.Location = new System.Drawing.Point(1619, 346);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(33, 17);
+            this.label64.TabIndex = 190;
+            this.label64.Text = "5514";
+            // 
+            // pb_GLASS_V5514
+            // 
+            this.pb_GLASS_V5514.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Vertical_0;
+            this.pb_GLASS_V5514.Location = new System.Drawing.Point(1653, 342);
+            this.pb_GLASS_V5514.Name = "pb_GLASS_V5514";
+            this.pb_GLASS_V5514.Size = new System.Drawing.Size(20, 25);
+            this.pb_GLASS_V5514.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V5514.TabIndex = 189;
+            this.pb_GLASS_V5514.TabStop = false;
+            this.pb_GLASS_V5514.Tag = "VV_0";
+            // 
+            // pb_GLASS_INDICAT02
+            // 
+            this.pb_GLASS_INDICAT02.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Indicator_0;
+            this.pb_GLASS_INDICAT02.Location = new System.Drawing.Point(1628, 236);
+            this.pb_GLASS_INDICAT02.Name = "pb_GLASS_INDICAT02";
+            this.pb_GLASS_INDICAT02.Size = new System.Drawing.Size(20, 20);
+            this.pb_GLASS_INDICAT02.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_INDICAT02.TabIndex = 210;
+            this.pb_GLASS_INDICAT02.TabStop = false;
+            this.pb_GLASS_INDICAT02.Tag = "";
+            // 
+            // pb_GLASS_INDICAT04
+            // 
+            this.pb_GLASS_INDICAT04.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Indicator_0;
+            this.pb_GLASS_INDICAT04.Location = new System.Drawing.Point(1628, 192);
+            this.pb_GLASS_INDICAT04.Name = "pb_GLASS_INDICAT04";
+            this.pb_GLASS_INDICAT04.Size = new System.Drawing.Size(20, 20);
+            this.pb_GLASS_INDICAT04.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_INDICAT04.TabIndex = 209;
+            this.pb_GLASS_INDICAT04.TabStop = false;
+            this.pb_GLASS_INDICAT04.Tag = "";
+            // 
+            // pb_GLASS_INDICAT05
+            // 
+            this.pb_GLASS_INDICAT05.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Indicator_0;
+            this.pb_GLASS_INDICAT05.Location = new System.Drawing.Point(1628, 156);
+            this.pb_GLASS_INDICAT05.Name = "pb_GLASS_INDICAT05";
+            this.pb_GLASS_INDICAT05.Size = new System.Drawing.Size(20, 20);
+            this.pb_GLASS_INDICAT05.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_INDICAT05.TabIndex = 208;
+            this.pb_GLASS_INDICAT05.TabStop = false;
+            this.pb_GLASS_INDICAT05.Tag = "";
+            // 
+            // pb_GLASS_INDICAT06
+            // 
+            this.pb_GLASS_INDICAT06.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Indicator_0;
+            this.pb_GLASS_INDICAT06.Location = new System.Drawing.Point(1628, 121);
+            this.pb_GLASS_INDICAT06.Name = "pb_GLASS_INDICAT06";
+            this.pb_GLASS_INDICAT06.Size = new System.Drawing.Size(20, 20);
+            this.pb_GLASS_INDICAT06.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_INDICAT06.TabIndex = 207;
+            this.pb_GLASS_INDICAT06.TabStop = false;
+            this.pb_GLASS_INDICAT06.Tag = "";
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.BackColor = System.Drawing.Color.Transparent;
+            this.label63.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label63.Location = new System.Drawing.Point(1775, 234);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(33, 17);
+            this.label63.TabIndex = 206;
+            this.label63.Text = "5524";
+            // 
+            // pb_GLASS_V5524
+            // 
+            this.pb_GLASS_V5524.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Horizont_0;
+            this.pb_GLASS_V5524.Location = new System.Drawing.Point(1779, 255);
+            this.pb_GLASS_V5524.Name = "pb_GLASS_V5524";
+            this.pb_GLASS_V5524.Size = new System.Drawing.Size(25, 20);
+            this.pb_GLASS_V5524.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V5524.TabIndex = 205;
+            this.pb_GLASS_V5524.TabStop = false;
+            this.pb_GLASS_V5524.Tag = "VV_0";
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.BackColor = System.Drawing.Color.Transparent;
+            this.label65.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label65.Location = new System.Drawing.Point(1710, 18);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(33, 17);
+            this.label65.TabIndex = 204;
+            this.label65.Text = "5521";
+            // 
+            // pb_GLASS_V5521
+            // 
+            this.pb_GLASS_V5521.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.SafeValve_Right_0;
+            this.pb_GLASS_V5521.Location = new System.Drawing.Point(1716, 38);
+            this.pb_GLASS_V5521.Name = "pb_GLASS_V5521";
+            this.pb_GLASS_V5521.Size = new System.Drawing.Size(20, 25);
+            this.pb_GLASS_V5521.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V5521.TabIndex = 203;
+            this.pb_GLASS_V5521.TabStop = false;
+            this.pb_GLASS_V5521.Tag = "VV_0";
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.BackColor = System.Drawing.Color.Transparent;
+            this.label66.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label66.Location = new System.Drawing.Point(1651, 56);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(33, 17);
+            this.label66.TabIndex = 202;
+            this.label66.Text = "5523";
+            // 
+            // pb_GLASS_V5523
+            // 
+            this.pb_GLASS_V5523.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve23_0;
+            this.pb_GLASS_V5523.Location = new System.Drawing.Point(1657, 75);
+            this.pb_GLASS_V5523.Name = "pb_GLASS_V5523";
+            this.pb_GLASS_V5523.Size = new System.Drawing.Size(20, 15);
+            this.pb_GLASS_V5523.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V5523.TabIndex = 201;
+            this.pb_GLASS_V5523.TabStop = false;
+            this.pb_GLASS_V5523.Tag = "";
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.BackColor = System.Drawing.Color.Transparent;
+            this.label67.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label67.Location = new System.Drawing.Point(1779, 286);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(33, 17);
+            this.label67.TabIndex = 200;
+            this.label67.Text = "5525";
+            // 
+            // pb_GLASS_V5525
+            // 
+            this.pb_GLASS_V5525.Image = global::WinForms_Heineken_Pasterizators.Properties.Resources.Valve_Vertical_0;
+            this.pb_GLASS_V5525.Location = new System.Drawing.Point(1756, 281);
+            this.pb_GLASS_V5525.Name = "pb_GLASS_V5525";
+            this.pb_GLASS_V5525.Size = new System.Drawing.Size(20, 25);
+            this.pb_GLASS_V5525.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GLASS_V5525.TabIndex = 199;
+            this.pb_GLASS_V5525.TabStop = false;
+            this.pb_GLASS_V5525.Tag = "VV_0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.pb_GLASS_INDICAT02);
+            this.Controls.Add(this.pb_GLASS_INDICAT04);
+            this.Controls.Add(this.pb_GLASS_INDICAT05);
+            this.Controls.Add(this.pb_GLASS_INDICAT06);
+            this.Controls.Add(this.label63);
+            this.Controls.Add(this.pb_GLASS_V5524);
+            this.Controls.Add(this.label65);
+            this.Controls.Add(this.pb_GLASS_V5521);
+            this.Controls.Add(this.label66);
+            this.Controls.Add(this.pb_GLASS_V5523);
+            this.Controls.Add(this.label67);
+            this.Controls.Add(this.pb_GLASS_V5525);
+            this.Controls.Add(this.label60);
+            this.Controls.Add(this.pb_GLASS_V5520);
+            this.Controls.Add(this.label61);
+            this.Controls.Add(this.pb_GLASS_M5519);
+            this.Controls.Add(this.label62);
+            this.Controls.Add(this.pb_GLASS_V5516);
+            this.Controls.Add(this.pb_GLASS_V5515);
+            this.Controls.Add(this.pictureBox37);
+            this.Controls.Add(this.label64);
+            this.Controls.Add(this.pb_GLASS_V5514);
+            this.Controls.Add(this.label59);
+            this.Controls.Add(this.pb_GLASS_V5509);
+            this.Controls.Add(this.label58);
+            this.Controls.Add(this.pb_GLASS_V5503);
+            this.Controls.Add(this.label55);
+            this.Controls.Add(this.pb_GLASS_V4523);
+            this.Controls.Add(this.label56);
+            this.Controls.Add(this.pb_GLASS_M4521);
+            this.Controls.Add(this.label57);
+            this.Controls.Add(this.pb_GLASS_V4522);
+            this.Controls.Add(this.label54);
+            this.Controls.Add(this.pb_GLASS_V4505);
+            this.Controls.Add(this.label53);
+            this.Controls.Add(this.pb_GLASS_V4519);
+            this.Controls.Add(this.label51);
+            this.Controls.Add(this.pb_GLASS_M4504);
+            this.Controls.Add(this.label52);
+            this.Controls.Add(this.pb_GLASS_M4503);
+            this.Controls.Add(this.label50);
+            this.Controls.Add(this.pb_GLASS_V4544);
+            this.Controls.Add(this.label49);
+            this.Controls.Add(this.label48);
+            this.Controls.Add(this.pb_GLASS_V4539);
+            this.Controls.Add(this.pb_GLASS_V4538);
+            this.Controls.Add(this.pictureBox29);
+            this.Controls.Add(this.label47);
+            this.Controls.Add(this.pb_PET_V20);
+            this.Controls.Add(this.AI_PET_65PT);
+            this.Controls.Add(this.AI_PET_07PT);
+            this.Controls.Add(this.AI_PET_01QT);
+            this.Controls.Add(this.AI_PET_17TT);
+            this.Controls.Add(this.AI_PET_24TT);
+            this.Controls.Add(this.AI_PET_PE);
+            this.Controls.Add(this.AI_PET_12PT);
+            this.Controls.Add(this.AI_PET_10TT);
+            this.Controls.Add(this.AI_PET_11PT);
+            this.Controls.Add(this.AI_PET_08FT);
+            this.Controls.Add(this.AI_PET_14PT);
+            this.Controls.Add(this.pb_PET_INDICAT02);
+            this.Controls.Add(this.pb_PET_INDICAT03);
+            this.Controls.Add(this.pb_PET_INDICAT04);
+            this.Controls.Add(this.pb_PET_INDICAT05);
+            this.Controls.Add(this.pb_PET_INDICAT06);
+            this.Controls.Add(this.label43);
+            this.Controls.Add(this.pb_PET_V24);
+            this.Controls.Add(this.label44);
+            this.Controls.Add(this.pb_PET_V22_Buffer);
+            this.Controls.Add(this.label45);
+            this.Controls.Add(this.pb_PET_V23_Buffer);
+            this.Controls.Add(this.label46);
+            this.Controls.Add(this.pb_PET_V25);
+            this.Controls.Add(this.label42);
+            this.Controls.Add(this.pb_PET_V85);
+            this.Controls.Add(this.label41);
+            this.Controls.Add(this.pb_PET_V86);
+            this.Controls.Add(this.label40);
+            this.Controls.Add(this.pb_PET_V87);
+            this.Controls.Add(this.pictureBox32);
+            this.Controls.Add(this.pictureBox33);
+            this.Controls.Add(this.pictureBox31);
+            this.Controls.Add(this.pictureBox30);
+            this.Controls.Add(this.label36);
+            this.Controls.Add(this.pb_PET_M30);
+            this.Controls.Add(this.label37);
+            this.Controls.Add(this.pb_PET_V16);
+            this.Controls.Add(this.label38);
+            this.Controls.Add(this.pb_PET_V15);
+            this.Controls.Add(this.label39);
+            this.Controls.Add(this.pb_PET_V14);
+            this.Controls.Add(this.pictureBox28);
+            this.Controls.Add(this.label34);
+            this.Controls.Add(this.pb_PET_V05);
+            this.Controls.Add(this.label35);
+            this.Controls.Add(this.pb_PET_V23);
+            this.Controls.Add(this.label29);
+            this.Controls.Add(this.pb_PET_M21);
+            this.Controls.Add(this.label30);
+            this.Controls.Add(this.pb_PET_M04);
+            this.Controls.Add(this.label31);
+            this.Controls.Add(this.pb_PET_M03);
+            this.Controls.Add(this.label32);
+            this.Controls.Add(this.pb_PET_V69);
+            this.Controls.Add(this.label33);
+            this.Controls.Add(this.pb_PET_V22);
+            this.Controls.Add(this.label28);
+            this.Controls.Add(this.pb_PET_V15_Paster);
+            this.Controls.Add(this.label27);
+            this.Controls.Add(this.pb_PET_V72);
+            this.Controls.Add(this.label26);
+            this.Controls.Add(this.pb_PET_V70);
+            this.Controls.Add(this.label25);
+            this.Controls.Add(this.pb_PET_V71);
+            this.Controls.Add(this.pictureBox16);
+            this.Controls.Add(this.pictureBox17);
+            this.Controls.Add(this.pictureBox18);
+            this.Controls.Add(this.pictureBox19);
+            this.Controls.Add(this.pictureBox20);
+            this.Controls.Add(this.pictureBox21);
+            this.Controls.Add(this.pictureBox22);
+            this.Controls.Add(this.pictureBox23);
+            this.Controls.Add(this.pictureBox24);
+            this.Controls.Add(this.pictureBox25);
+            this.Controls.Add(this.pictureBox26);
+            this.Controls.Add(this.pictureBox27);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.pb_KEG_V24);
             this.Controls.Add(this.AI_KEG_65PT);
@@ -1122,6 +2846,7 @@ namespace WinForms_Heineken_Pasterizators
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pb_KEG_V74);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBox15);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -1170,6 +2895,78 @@ namespace WinForms_Heineken_Pasterizators
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_INDICAT03)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_INDICAT02)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V24)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox23)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox25)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V71)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V70)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V72)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V15_Paster)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_M21)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_M04)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_M03)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V69)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V22)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V23)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V05)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox28)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_M30)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox30)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox31)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox32)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox33)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V87)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V86)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V85)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V24)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V22_Buffer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V23_Buffer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V25)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_INDICAT02)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_INDICAT03)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_INDICAT04)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_INDICAT05)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_INDICAT06)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_PET_V20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox29)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V4539)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V4538)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V4544)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_M4504)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_M4503)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V4519)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V4505)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V4523)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_M4521)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V4522)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5503)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5509)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5520)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_M5519)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5516)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox37)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5514)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_INDICAT02)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_INDICAT04)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_INDICAT05)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_INDICAT06)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5524)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5521)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5523)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GLASS_V5525)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1258,6 +3055,135 @@ namespace WinForms_Heineken_Pasterizators
         private System.Windows.Forms.Label AI_KEG_65PT;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.PictureBox pb_KEG_V24;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.PictureBox pictureBox16;
+        private System.Windows.Forms.PictureBox pictureBox17;
+        private System.Windows.Forms.PictureBox pictureBox18;
+        private System.Windows.Forms.PictureBox pictureBox19;
+        private System.Windows.Forms.PictureBox pictureBox20;
+        private System.Windows.Forms.PictureBox pictureBox21;
+        private System.Windows.Forms.PictureBox pictureBox22;
+        private System.Windows.Forms.PictureBox pictureBox23;
+        private System.Windows.Forms.PictureBox pictureBox24;
+        private System.Windows.Forms.PictureBox pictureBox25;
+        private System.Windows.Forms.PictureBox pictureBox26;
+        private System.Windows.Forms.PictureBox pictureBox27;
+        private System.Windows.Forms.PictureBox pictureBox15;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.PictureBox pb_PET_V71;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.PictureBox pb_PET_V70;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.PictureBox pb_PET_V72;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.PictureBox pb_PET_V15_Paster;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.PictureBox pb_PET_M21;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.PictureBox pb_PET_M04;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.PictureBox ET;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.PictureBox pb_PET_V69;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.PictureBox pb_PET_V22;
+        private System.Windows.Forms.PictureBox pb_PET_M03;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.PictureBox pb_PET_V23;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.PictureBox pb_PET_V05;
+        private System.Windows.Forms.PictureBox pictureBox28;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.PictureBox pb_PET_M30;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.PictureBox pb_PET_V16;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.PictureBox pb_PET_V15;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.PictureBox pb_PET_V14;
+        private System.Windows.Forms.PictureBox pictureBox30;
+        private System.Windows.Forms.PictureBox pictureBox31;
+        private System.Windows.Forms.PictureBox pictureBox32;
+        private System.Windows.Forms.PictureBox pictureBox33;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.PictureBox pb_PET_V87;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.PictureBox pb_PET_V86;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.PictureBox pb_PET_V85;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.PictureBox pb_PET_V24;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.PictureBox pb_PET_V22_Buffer;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.PictureBox pb_PET_V23_Buffer;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.PictureBox pb_PET_V25;
+        private System.Windows.Forms.PictureBox pb_PET_INDICAT02;
+        private System.Windows.Forms.PictureBox pb_PET_INDICAT03;
+        private System.Windows.Forms.PictureBox pb_PET_INDICAT04;
+        private System.Windows.Forms.PictureBox pb_PET_INDICAT05;
+        private System.Windows.Forms.PictureBox pb_PET_INDICAT06;
+        private System.Windows.Forms.Label AI_PET_PE;
+        private System.Windows.Forms.Label AI_PET_12PT;
+        private System.Windows.Forms.Label AI_PET_10TT;
+        private System.Windows.Forms.Label AI_PET_11PT;
+        private System.Windows.Forms.Label AI_PET_08FT;
+        private System.Windows.Forms.Label AI_PET_14PT;
+        private System.Windows.Forms.Label AI_PET_01QT;
+        private System.Windows.Forms.Label AI_PET_17TT;
+        private System.Windows.Forms.Label AI_PET_24TT;
+        private System.Windows.Forms.Label AI_PET_65PT;
+        private System.Windows.Forms.Label AI_PET_07PT;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.PictureBox pb_PET_V20;
+        private System.Windows.Forms.PictureBox pictureBox29;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.PictureBox pb_GLASS_V4539;
+        private System.Windows.Forms.PictureBox pb_GLASS_V4538;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.PictureBox pb_GLASS_V4544;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.PictureBox pb_GLASS_M4504;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.PictureBox pb_GLASS_M4503;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.PictureBox pb_GLASS_V4519;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.PictureBox pb_GLASS_V4505;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.PictureBox pb_GLASS_V4523;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.PictureBox pb_GLASS_M4521;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.PictureBox pb_GLASS_V4522;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.PictureBox pb_GLASS_V5503;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.PictureBox pb_GLASS_V5509;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.PictureBox pb_GLASS_V5520;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.PictureBox pb_GLASS_M5519;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.PictureBox pb_GLASS_V5516;
+        private System.Windows.Forms.Label pb_GLASS_V5515;
+        private System.Windows.Forms.PictureBox pictureBox37;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.PictureBox pb_GLASS_V5514;
+        private System.Windows.Forms.PictureBox pb_GLASS_INDICAT02;
+        private System.Windows.Forms.PictureBox pb_GLASS_INDICAT04;
+        private System.Windows.Forms.PictureBox pb_GLASS_INDICAT05;
+        private System.Windows.Forms.PictureBox pb_GLASS_INDICAT06;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.PictureBox pb_GLASS_V5524;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.PictureBox pb_GLASS_V5521;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.PictureBox pb_GLASS_V5523;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.PictureBox pb_GLASS_V5525;
     }
 }
 

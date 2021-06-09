@@ -1,0 +1,28 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Sharp7/1.1.79": {
+        "runtime": {
+          "lib/netstandard2.0/Sharp7.dll": {
+            "assemblyVersion": "1.1.79.0",
+            "fileVersion": "1.1.79.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Sharp7/1.1.79": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fXR0+USIi85YwhoapbQe3+wTcm5GK9TkT1jZUJjgmqxjC5yBR0CQlO8U79U156jnnGCjI8KkG+VzOZwYdUMGBA==",
+      "path": "sharp7/1.1.79",
+      "hashPath": "sharp7.1.1.79.nupkg.sha512"
+    }
+  }
+}

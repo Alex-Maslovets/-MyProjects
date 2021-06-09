@@ -4,7 +4,6 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinForms_Heineken_
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinForms_Heineken_Pasterizators\WinForms_Heineken_Pasterizators\bin\Debug\netcoreapp3.1\WinForms_Heineken_Pasterizators.runtimeconfig.dev.json
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinForms_Heineken_Pasterizators\WinForms_Heineken_Pasterizators\bin\Debug\netcoreapp3.1\WinForms_Heineken_Pasterizators.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinForms_Heineken_Pasterizators\WinForms_Heineken_Pasterizators\bin\Debug\netcoreapp3.1\WinForms_Heineken_Pasterizators.pdb
-C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinForms_Heineken_Pasterizators\WinForms_Heineken_Pasterizators\obj\Debug\netcoreapp3.1\WinForms_Heineken_Pasterizators.csprojAssemblyReference.cache
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinForms_Heineken_Pasterizators\WinForms_Heineken_Pasterizators\obj\Debug\netcoreapp3.1\WinForms_Heineken_Pasterizators.Form1.resources
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinForms_Heineken_Pasterizators\WinForms_Heineken_Pasterizators\obj\Debug\netcoreapp3.1\WinForms_Heineken_Pasterizators.csproj.GenerateResource.cache
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinForms_Heineken_Pasterizators\WinForms_Heineken_Pasterizators\obj\Debug\netcoreapp3.1\WinForms_Heineken_Pasterizators.AssemblyInfoInputs.cache

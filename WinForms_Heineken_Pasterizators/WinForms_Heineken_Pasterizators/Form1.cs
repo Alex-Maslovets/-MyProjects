@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sharp7;
 using System.Threading;
 using System.Diagnostics;
-using System.Reflection;
-using System.Resources;
-using System.IO;
 
 namespace WinForms_Heineken_Pasterizators
 {
@@ -48,7 +41,7 @@ namespace WinForms_Heineken_Pasterizators
                         
                         // Create and connect the client
                         var client = new S7Client();
-                        int result = client.ConnectTo("192.168.100.150", 0, 1);
+                        int result = client.ConnectTo("192.168.100.150", 0, 2);
                         if (result == 0)
                         {
                             //Console.WriteLine("Connected to 192.168.100.150");
@@ -60,7 +53,7 @@ namespace WinForms_Heineken_Pasterizators
 
                         // --- Work with Bits --- //
                         List<bool> bitsInBytes = new List<bool>();
-                        bitsInBytes = DB_ReadBitArray(client, 2000, 40832, 0, 32);
+                        //bitsInBytes = DB_ReadBitArray(client, 2000, 40832, 0, 32);
 
                         /* Images names:
                         1) 2PosValves_
@@ -79,6 +72,9 @@ namespace WinForms_Heineken_Pasterizators
                         12) Valve_Vertical_
                         13) Valve23_
                          */
+
+                        // --- KEGS --- //
+                        bitsInBytes = DB_ReadBitArray(client, 100, 1232, 0, 32);
 
                         pb_KEG_V73.Image = (Image)Properties.Resources.ResourceManager.GetObject("2PosValves_" + Convert.ToInt32(bitsInBytes[2]));
                         pb_KEG_V72.Image = (Image)Properties.Resources.ResourceManager.GetObject("2PosValves_" + Convert.ToInt32(bitsInBytes[3]));
@@ -104,8 +100,8 @@ namespace WinForms_Heineken_Pasterizators
                         pb_KEG_INDICAT05.Image = (Image)Properties.Resources.ResourceManager.GetObject("Indicator_" + Convert.ToInt32(bitsInBytes[22]));
                         pb_KEG_INDICAT06.Image = (Image)Properties.Resources.ResourceManager.GetObject("Indicator_" + Convert.ToInt32(bitsInBytes[23]));
                         
-                        pb_KEG_V23.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve23_" + Convert.ToInt32(bitsInBytes[24]));
-                        pb_KEG_V22.Image = (Image)Properties.Resources.ResourceManager.GetObject("SafeValve_Right_" + Convert.ToInt32(bitsInBytes[25]));
+                        pb_KEG_V23_Buffer.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve23_" + Convert.ToInt32(bitsInBytes[24]));
+                        pb_KEG_V22_Buffer.Image = (Image)Properties.Resources.ResourceManager.GetObject("SafeValve_Right_" + Convert.ToInt32(bitsInBytes[25]));
                         pb_KEG_V24.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve_Horizont_" + Convert.ToInt32(bitsInBytes[26]));
                         pb_KEG_V25.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve_Vertical_" + Convert.ToInt32(bitsInBytes[27]));
                         pb_KEG_V15.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve_Vertical_" + Convert.ToInt32(bitsInBytes[28]));
@@ -113,9 +109,47 @@ namespace WinForms_Heineken_Pasterizators
                         pb_KEG_INDICAT02.Image = (Image)Properties.Resources.ResourceManager.GetObject("Indicator_" + Convert.ToInt32(bitsInBytes[30]));
                         pb_KEG_M30.Image = (Image)Properties.Resources.ResourceManager.GetObject("Pump_Right_" + Convert.ToInt32(bitsInBytes[31]));
 
+                        // --- PETS --- //
+                        bitsInBytes.Clear();
+                        bitsInBytes = DB_ReadBitArray(client, 100, 1232, 0, 32);
+
+                        pb_PET_V70.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve_Horizont_" + Convert.ToInt32(bitsInBytes[0]));
+                        pb_PET_V71.Image = (Image)Properties.Resources.ResourceManager.GetObject("2PosValves_" + Convert.ToInt32(bitsInBytes[1]));
+                        pb_PET_V72.Image = (Image)Properties.Resources.ResourceManager.GetObject("2PosValves_" + Convert.ToInt32(bitsInBytes[2]));
+                        pb_PET_M03.Image = (Image)Properties.Resources.ResourceManager.GetObject("Pump_Down_" + Convert.ToInt32(bitsInBytes[3]));
+                        pb_PET_M04.Image = (Image)Properties.Resources.ResourceManager.GetObject("Pump_Left_" + Convert.ToInt32(bitsInBytes[4]));
+                        pb_PET_V69.Image = (Image)Properties.Resources.ResourceManager.GetObject("SafeValve_Left_" + Convert.ToInt32(bitsInBytes[5]));
+                        pb_PET_M21.Image = (Image)Properties.Resources.ResourceManager.GetObject("Pump_Down_" + Convert.ToInt32(bitsInBytes[6]));
+                        pb_PET_V22.Image = (Image)Properties.Resources.ResourceManager.GetObject("RegValve_Vertical_" + Convert.ToInt32(bitsInBytes[7]));
+                        
+                        pb_PET_V23.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve_Horizont_" + Convert.ToInt32(bitsInBytes[8]));
+                        //pb_PET_V15_Paster.Image = (Image)Properties.Resources.ResourceManager.GetObject("RegValve_Vertical_" + Convert.ToInt32(bitsInBytes[12]));
+                        pb_PET_V05.Image = (Image)Properties.Resources.ResourceManager.GetObject("RegValve_Horizont_" + Convert.ToInt32(bitsInBytes[9]));
+                        pb_PET_V85.Image = (Image)Properties.Resources.ResourceManager.GetObject("2PosValves_" + Convert.ToInt32(bitsInBytes[10]));
+                        pb_PET_V86.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve_Vertical_" + Convert.ToInt32(bitsInBytes[11]));
+                        pb_PET_V87.Image = (Image)Properties.Resources.ResourceManager.GetObject("SafeValve_Down_" + Convert.ToInt32(bitsInBytes[12]));
+                        pb_PET_V20.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve_Vertical_" + Convert.ToInt32(bitsInBytes[13]));
+                        pb_PET_V14.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve_Vertical_" + Convert.ToInt32(bitsInBytes[14]));
+                        pb_PET_V15.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve_Vertical_" + Convert.ToInt32(bitsInBytes[15]));
+
+                        pb_PET_V16.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve_Horizont_" + Convert.ToInt32(bitsInBytes[16]));
+                        pb_PET_INDICAT03.Image = (Image)Properties.Resources.ResourceManager.GetObject("Indicator_" + Convert.ToInt32(bitsInBytes[17]));
+                        pb_PET_INDICAT04.Image = (Image)Properties.Resources.ResourceManager.GetObject("Indicator_" + Convert.ToInt32(bitsInBytes[18]));
+                        pb_PET_INDICAT05.Image = (Image)Properties.Resources.ResourceManager.GetObject("Indicator_" + Convert.ToInt32(bitsInBytes[19]));
+                        pb_PET_INDICAT06.Image = (Image)Properties.Resources.ResourceManager.GetObject("Indicator_" + Convert.ToInt32(bitsInBytes[20]));
+                        pb_PET_V22_Buffer.Image = (Image)Properties.Resources.ResourceManager.GetObject("SafeValve_Right_" + Convert.ToInt32(bitsInBytes[21]));
+                        pb_PET_V23_Buffer.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve23_" + Convert.ToInt32(bitsInBytes[22]));
+                        pb_PET_V24.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve_Horizont_" + Convert.ToInt32(bitsInBytes[23]));
+
+                        pb_PET_V25.Image = (Image)Properties.Resources.ResourceManager.GetObject("Valve_Vertical_" + Convert.ToInt32(bitsInBytes[24]));
+                        pb_PET_INDICAT02.Image = (Image)Properties.Resources.ResourceManager.GetObject("Indicator_" + Convert.ToInt32(bitsInBytes[25]));
+                        pb_PET_M30.Image = (Image)Properties.Resources.ResourceManager.GetObject("Pump_Right_" + Convert.ToInt32(bitsInBytes[26]));
+
                         // --- Work with Reals --- //
                         List<double> realsFromS7 = new List<double>();
-                        realsFromS7 = DB_ReadRealArray(client, 2000, 432, 13);
+                        //realsFromS7 = DB_ReadRealArray(client, 2000, 432, 13);
+                        // --- KEGS --- //
+                        realsFromS7 = DB_ReadRealArray(client, 100, 432, 13);
 
                         AI_KEG_14PT.Invoke(new Action(() => AI_KEG_14PT.Text = realsFromS7[0].ToString()));
                         AI_KEG_08FT.Invoke(new Action(() => AI_KEG_08FT.Text = realsFromS7[1].ToString()));
@@ -128,6 +162,23 @@ namespace WinForms_Heineken_Pasterizators
                         AI_KEG_01QT.Invoke(new Action(() => AI_KEG_01QT.Text = realsFromS7[9].ToString()));
                         AI_KEG_07PT.Invoke(new Action(() => AI_KEG_07PT.Text = realsFromS7[10].ToString()));
                         AI_KEG_65PT.Invoke(new Action(() => AI_KEG_65PT.Text = realsFromS7[11].ToString()));
+
+                        // --- PETS --- //
+                        realsFromS7.Clear();
+                        realsFromS7 = DB_ReadRealArray(client, 100, 432, 13);
+
+                        AI_PET_14PT.Invoke(new Action(() => AI_PET_14PT.Text = realsFromS7[0].ToString()));
+                        AI_PET_08FT.Invoke(new Action(() => AI_PET_08FT.Text = realsFromS7[1].ToString()));
+                        AI_PET_11PT.Invoke(new Action(() => AI_PET_11PT.Text = realsFromS7[3].ToString()));
+                        AI_PET_10TT.Invoke(new Action(() => AI_PET_10TT.Text = realsFromS7[4].ToString()));
+                        AI_PET_12PT.Invoke(new Action(() => AI_PET_12PT.Text = realsFromS7[5].ToString()));
+                        AI_PET_PE.Invoke(new Action(() => AI_PET_PE.Text = realsFromS7[6].ToString()));
+                        AI_PET_24TT.Invoke(new Action(() => AI_PET_24TT.Text = realsFromS7[7].ToString()));
+                        AI_PET_17TT.Invoke(new Action(() => AI_PET_17TT.Text = realsFromS7[8].ToString()));
+                        AI_PET_01QT.Invoke(new Action(() => AI_PET_01QT.Text = realsFromS7[9].ToString()));
+                        AI_PET_07PT.Invoke(new Action(() => AI_PET_07PT.Text = realsFromS7[10].ToString()));
+                        AI_PET_65PT.Invoke(new Action(() => AI_PET_65PT.Text = realsFromS7[11].ToString()));
+
 
                         //Disconnect the client
                         client.Disconnect();
