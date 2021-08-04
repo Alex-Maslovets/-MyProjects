@@ -240,6 +240,19 @@ namespace WinForms_Heineken_Pasterizators
             this.pb_GLASS_V5523 = new System.Windows.Forms.PictureBox();
             this.label67 = new System.Windows.Forms.Label();
             this.pb_GLASS_V5525 = new System.Windows.Forms.PictureBox();
+            this.AI_GLASS_PE = new System.Windows.Forms.Label();
+            this.AI_GLASS_12PT = new System.Windows.Forms.Label();
+            this.AI_GLASS_10TT = new System.Windows.Forms.Label();
+            this.AI_GLASS_08FT = new System.Windows.Forms.Label();
+            this.AI_GLASS_14PT = new System.Windows.Forms.Label();
+            this.AI_GLASS_01QT = new System.Windows.Forms.Label();
+            this.AI_GLASS_24TT = new System.Windows.Forms.Label();
+            this.AI_GLASS_65PT = new System.Windows.Forms.Label();
+            this.AI_GLASS_07PT = new System.Windows.Forms.Label();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label69 = new System.Windows.Forms.Label();
+            this.label70 = new System.Windows.Forms.Label();
+            this.timeLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V74)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_KEG_V25)).BeginInit();
@@ -393,22 +406,22 @@ namespace WinForms_Heineken_Pasterizators
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.Location = new System.Drawing.Point(275, 521);
+            this.button1.Location = new System.Drawing.Point(15, 679);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 36);
+            this.button1.Size = new System.Drawing.Size(169, 36);
             this.button1.TabIndex = 3;
-            this.button1.Text = "StartRead";
+            this.button1.Text = "Начать чтение данных";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.Location = new System.Drawing.Point(275, 563);
+            this.button2.Location = new System.Drawing.Point(15, 721);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(113, 36);
+            this.button2.Size = new System.Drawing.Size(169, 36);
             this.button2.TabIndex = 4;
-            this.button2.Text = "StoptRead";
+            this.button2.Text = "Остановить чтение данных";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -2634,12 +2647,163 @@ namespace WinForms_Heineken_Pasterizators
             this.pb_GLASS_V5525.TabStop = false;
             this.pb_GLASS_V5525.Tag = "VV_0";
             // 
+            // AI_GLASS_PE
+            // 
+            this.AI_GLASS_PE.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_GLASS_PE.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_GLASS_PE.Location = new System.Drawing.Point(1301, 297);
+            this.AI_GLASS_PE.Name = "AI_GLASS_PE";
+            this.AI_GLASS_PE.Size = new System.Drawing.Size(42, 17);
+            this.AI_GLASS_PE.TabIndex = 216;
+            this.AI_GLASS_PE.Text = "9999.9";
+            this.AI_GLASS_PE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_GLASS_12PT
+            // 
+            this.AI_GLASS_12PT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_GLASS_12PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_GLASS_12PT.Location = new System.Drawing.Point(1301, 271);
+            this.AI_GLASS_12PT.Name = "AI_GLASS_12PT";
+            this.AI_GLASS_12PT.Size = new System.Drawing.Size(42, 17);
+            this.AI_GLASS_12PT.TabIndex = 215;
+            this.AI_GLASS_12PT.Text = "9999.9";
+            this.AI_GLASS_12PT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_GLASS_10TT
+            // 
+            this.AI_GLASS_10TT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_GLASS_10TT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_GLASS_10TT.Location = new System.Drawing.Point(1301, 245);
+            this.AI_GLASS_10TT.Name = "AI_GLASS_10TT";
+            this.AI_GLASS_10TT.Size = new System.Drawing.Size(42, 17);
+            this.AI_GLASS_10TT.TabIndex = 214;
+            this.AI_GLASS_10TT.Text = "9999.9";
+            this.AI_GLASS_10TT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_GLASS_08FT
+            // 
+            this.AI_GLASS_08FT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_GLASS_08FT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_GLASS_08FT.Location = new System.Drawing.Point(1477, 255);
+            this.AI_GLASS_08FT.Name = "AI_GLASS_08FT";
+            this.AI_GLASS_08FT.Size = new System.Drawing.Size(42, 17);
+            this.AI_GLASS_08FT.TabIndex = 212;
+            this.AI_GLASS_08FT.Text = "9999.9";
+            this.AI_GLASS_08FT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_GLASS_14PT
+            // 
+            this.AI_GLASS_14PT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_GLASS_14PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_GLASS_14PT.Location = new System.Drawing.Point(1477, 199);
+            this.AI_GLASS_14PT.Name = "AI_GLASS_14PT";
+            this.AI_GLASS_14PT.Size = new System.Drawing.Size(42, 17);
+            this.AI_GLASS_14PT.TabIndex = 211;
+            this.AI_GLASS_14PT.Text = "9999.9";
+            this.AI_GLASS_14PT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_GLASS_01QT
+            // 
+            this.AI_GLASS_01QT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_GLASS_01QT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_GLASS_01QT.Location = new System.Drawing.Point(1468, 418);
+            this.AI_GLASS_01QT.Name = "AI_GLASS_01QT";
+            this.AI_GLASS_01QT.Size = new System.Drawing.Size(42, 17);
+            this.AI_GLASS_01QT.TabIndex = 218;
+            this.AI_GLASS_01QT.Text = "9999.9";
+            this.AI_GLASS_01QT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_GLASS_24TT
+            // 
+            this.AI_GLASS_24TT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_GLASS_24TT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_GLASS_24TT.Location = new System.Drawing.Point(1308, 394);
+            this.AI_GLASS_24TT.Name = "AI_GLASS_24TT";
+            this.AI_GLASS_24TT.Size = new System.Drawing.Size(42, 17);
+            this.AI_GLASS_24TT.TabIndex = 217;
+            this.AI_GLASS_24TT.Text = "9999.9";
+            this.AI_GLASS_24TT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_GLASS_65PT
+            // 
+            this.AI_GLASS_65PT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_GLASS_65PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_GLASS_65PT.Location = new System.Drawing.Point(1835, 348);
+            this.AI_GLASS_65PT.Name = "AI_GLASS_65PT";
+            this.AI_GLASS_65PT.Size = new System.Drawing.Size(42, 17);
+            this.AI_GLASS_65PT.TabIndex = 220;
+            this.AI_GLASS_65PT.Text = "9999.9";
+            this.AI_GLASS_65PT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AI_GLASS_07PT
+            // 
+            this.AI_GLASS_07PT.BackColor = System.Drawing.SystemColors.Control;
+            this.AI_GLASS_07PT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.AI_GLASS_07PT.Location = new System.Drawing.Point(1672, 242);
+            this.AI_GLASS_07PT.Name = "AI_GLASS_07PT";
+            this.AI_GLASS_07PT.Size = new System.Drawing.Size(42, 17);
+            this.AI_GLASS_07PT.TabIndex = 219;
+            this.AI_GLASS_07PT.Text = "9999.9";
+            this.AI_GLASS_07PT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label68.Location = new System.Drawing.Point(86, 528);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(478, 36);
+            this.label68.TabIndex = 221;
+            this.label68.Text = "ПАСТЕРИЗАТОР ЛИНИИ КЕГ";
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label69.Location = new System.Drawing.Point(709, 528);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(482, 36);
+            this.label69.TabIndex = 222;
+            this.label69.Text = "ПАСТЕРИЗАТОР ЛИНИИ ПЭТ";
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label70.Location = new System.Drawing.Point(1306, 528);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(549, 36);
+            this.label70.TabIndex = 223;
+            this.label70.Text = "ПАСТЕРИЗАТОР ЛИНИИ СТЕКЛА";
+            // 
+            // timeLabel
+            // 
+            this.timeLabel.AutoSize = true;
+            this.timeLabel.Location = new System.Drawing.Point(1483, 992);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(44, 15);
+            this.timeLabel.TabIndex = 224;
+            this.timeLabel.Text = "label71";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.timeLabel);
+            this.Controls.Add(this.label70);
+            this.Controls.Add(this.label69);
+            this.Controls.Add(this.label68);
+            this.Controls.Add(this.AI_GLASS_65PT);
+            this.Controls.Add(this.AI_GLASS_07PT);
+            this.Controls.Add(this.AI_GLASS_01QT);
+            this.Controls.Add(this.AI_GLASS_24TT);
+            this.Controls.Add(this.AI_GLASS_PE);
+            this.Controls.Add(this.AI_GLASS_12PT);
+            this.Controls.Add(this.AI_GLASS_10TT);
+            this.Controls.Add(this.AI_GLASS_08FT);
+            this.Controls.Add(this.AI_GLASS_14PT);
             this.Controls.Add(this.pb_GLASS_INDICAT02);
             this.Controls.Add(this.pb_GLASS_INDICAT04);
             this.Controls.Add(this.pb_GLASS_INDICAT05);
@@ -3184,6 +3348,19 @@ namespace WinForms_Heineken_Pasterizators
         private System.Windows.Forms.PictureBox pb_GLASS_V5523;
         private System.Windows.Forms.Label label67;
         private System.Windows.Forms.PictureBox pb_GLASS_V5525;
+        private System.Windows.Forms.Label AI_GLASS_PE;
+        private System.Windows.Forms.Label AI_GLASS_12PT;
+        private System.Windows.Forms.Label AI_GLASS_10TT;
+        private System.Windows.Forms.Label AI_GLASS_08FT;
+        private System.Windows.Forms.Label AI_GLASS_14PT;
+        private System.Windows.Forms.Label AI_GLASS_01QT;
+        private System.Windows.Forms.Label AI_GLASS_24TT;
+        private System.Windows.Forms.Label AI_GLASS_65PT;
+        private System.Windows.Forms.Label AI_GLASS_07PT;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.Label timeLabel;
     }
 }
 
