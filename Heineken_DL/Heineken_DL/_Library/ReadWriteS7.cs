@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Sharp7;
+using System;
 using System.Collections.Generic;
-using Sharp7;
 
 namespace ReadWriteS7
 {
@@ -14,7 +14,7 @@ namespace ReadWriteS7
             int result = client.DBRead(DBNumber, Start, 4, DBBuffer);
             if (result != 0)
             {
-                Console.WriteLine("Error: (Read Real from DB" + DBNumber + ".DBD" + Start + " Text: "+ client.ErrorText(result));
+                Console.WriteLine("Error: (Read Real from DB" + DBNumber + ".DBD" + Start + " Text: " + client.ErrorText(result));
             }
             double value = S7.GetRealAt(DBBuffer, 0);
             return value;
@@ -134,7 +134,7 @@ namespace ReadWriteS7
         public string M_ReadDwordHex(S7Client client, int Start)
         {
             byte[] DBBuffer = new byte[4];
-            int result = client.MBRead( Start, 4, DBBuffer);
+            int result = client.MBRead(Start, 4, DBBuffer);
             if (result != 0)
             {
                 Console.WriteLine("Error: (Read DWord(Hex) from MD" + Start + " Text: " + client.ErrorText(result));
@@ -215,16 +215,16 @@ namespace ReadWriteS7
         #region Считывание из DB-области (DataBlocks)
         public List<double> DB_ReadRealArray(S7Client client, int DBNumber, int Start, int Size)
         {
-            List <double> tempList = new List<double>();
-            byte[] DBBuffer = new byte[4*Size];
-            int result = client.DBRead(DBNumber, Start, 4*Size, DBBuffer);
+            List<double> tempList = new List<double>();
+            byte[] DBBuffer = new byte[4 * Size];
+            int result = client.DBRead(DBNumber, Start, 4 * Size, DBBuffer);
             if (result != 0)
             {
                 Console.WriteLine("Error: (Read Real Array from DB" + DBNumber + ".DBD" + Start + " Text: " + client.ErrorText(result));
             }
             for (int i = 0; i < Size; i++)
             {
-                double value = S7.GetRealAt(DBBuffer, 4*i);
+                double value = S7.GetRealAt(DBBuffer, 4 * i);
                 tempList.Add(value);
             }
             return tempList;
@@ -344,9 +344,9 @@ namespace ReadWriteS7
         public List<bool> DB_ReadBitArray(S7Client client, int DBNumber, int StartByte, int StartBit, int Size)
         {
             List<bool> tempList = new List<bool>();
-            
+
             int quotient = Math.DivRem(StartBit + Size, 8, out int remainder);
-            
+
             byte[] DBBuffer = new byte[remainder == 0 ? quotient : quotient + 1];
             int result = client.DBRead(DBNumber, StartByte, quotient, DBBuffer);
             if (result != 0)
@@ -435,7 +435,7 @@ namespace ReadWriteS7
         {
             List<ushort> tempList = new List<ushort>();
             byte[] DBBuffer = new byte[2 * Size];
-            int result = client.MBRead( Start, 2 * Size, DBBuffer);
+            int result = client.MBRead(Start, 2 * Size, DBBuffer);
             if (result != 0)
             {
                 Console.WriteLine("Error: (Read Word Array from MW" + Start + " Text: " + client.ErrorText(result));

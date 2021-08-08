@@ -365,18 +365,18 @@ namespace Sharp7
         {
             LastError = 0;
             if (!Connected)
-            { 
+            {
                 TCPPing(Host, Port);
                 if (LastError == 0)
-                try
-                {
+                    try
+                    {
                         CreateSocket();
                         TCPSocket.Connect(Host, Port);
-                }
-                catch
-                {
+                    }
+                    catch
+                    {
                         LastError = S7Consts.errTCPConnectionFailed;
-                }
+                    }
             }
             return LastError;
         }
@@ -397,12 +397,12 @@ namespace Sharp7
                     Expired = Environment.TickCount - Elapsed > Timeout;
                     // If timeout we clean the buffer
                     if (Expired && (SizeAvail > 0))
-                    try
-                    {
-                        byte[] Flush = new byte[SizeAvail];
-                        TCPSocket.Receive(Flush, 0, SizeAvail, SocketFlags.None);
-                    }
-                    catch { }
+                        try
+                        {
+                            byte[] Flush = new byte[SizeAvail];
+                            TCPSocket.Receive(Flush, 0, SizeAvail, SocketFlags.None);
+                        }
+                        catch { }
                 }
             }
             catch
@@ -459,7 +459,7 @@ namespace Sharp7
         {
             get
             {
-                return (TCPSocket != null) && (TCPSocket.Connected); 
+                return (TCPSocket != null) && (TCPSocket.Connected);
             }
         }
 
@@ -498,9 +498,9 @@ namespace Sharp7
                 _ConnectTimeout = value;
             }
         }
-    }   
+    }
 #endif
-#endregion
+    #endregion
 
     public static class S7Consts
     {
@@ -509,74 +509,74 @@ namespace Sharp7
         //------------------------------------------------------------------------------
         //                                     ERRORS                 
         //------------------------------------------------------------------------------
-        public const int errTCPSocketCreation         = 0x00000001;
-        public const int errTCPConnectionTimeout      = 0x00000002;
-        public const int errTCPConnectionFailed       = 0x00000003;
-        public const int errTCPReceiveTimeout         = 0x00000004;
-        public const int errTCPDataReceive            = 0x00000005;
-        public const int errTCPSendTimeout            = 0x00000006;
-        public const int errTCPDataSend               = 0x00000007;
-        public const int errTCPConnectionReset        = 0x00000008;
-        public const int errTCPNotConnected           = 0x00000009;
-        public const int errTCPUnreachableHost        = 0x00002751;
+        public const int errTCPSocketCreation = 0x00000001;
+        public const int errTCPConnectionTimeout = 0x00000002;
+        public const int errTCPConnectionFailed = 0x00000003;
+        public const int errTCPReceiveTimeout = 0x00000004;
+        public const int errTCPDataReceive = 0x00000005;
+        public const int errTCPSendTimeout = 0x00000006;
+        public const int errTCPDataSend = 0x00000007;
+        public const int errTCPConnectionReset = 0x00000008;
+        public const int errTCPNotConnected = 0x00000009;
+        public const int errTCPUnreachableHost = 0x00002751;
 
-        public const int errIsoConnect                = 0x00010000; // Connection error
-        public const int errIsoInvalidPDU             = 0x00030000; // Bad format
-        public const int errIsoInvalidDataSize        = 0x00040000; // Bad Datasize passed to send/recv : buffer is invalid
+        public const int errIsoConnect = 0x00010000; // Connection error
+        public const int errIsoInvalidPDU = 0x00030000; // Bad format
+        public const int errIsoInvalidDataSize = 0x00040000; // Bad Datasize passed to send/recv : buffer is invalid
 
-        public const int errCliNegotiatingPDU         = 0x00100000;
-        public const int errCliInvalidParams          = 0x00200000;
-        public const int errCliJobPending             = 0x00300000;
-        public const int errCliTooManyItems           = 0x00400000;
-        public const int errCliInvalidWordLen         = 0x00500000;
-        public const int errCliPartialDataWritten     = 0x00600000;
-        public const int errCliSizeOverPDU            = 0x00700000;
-        public const int errCliInvalidPlcAnswer       = 0x00800000;
-        public const int errCliAddressOutOfRange      = 0x00900000;
-        public const int errCliInvalidTransportSize   = 0x00A00000;
-        public const int errCliWriteDataSizeMismatch  = 0x00B00000;
-        public const int errCliItemNotAvailable       = 0x00C00000;
-        public const int errCliInvalidValue           = 0x00D00000;
-        public const int errCliCannotStartPLC         = 0x00E00000;
-        public const int errCliAlreadyRun             = 0x00F00000;
-        public const int errCliCannotStopPLC          = 0x01000000;
-        public const int errCliCannotCopyRamToRom     = 0x01100000;
-        public const int errCliCannotCompress         = 0x01200000;
-        public const int errCliAlreadyStop            = 0x01300000;
-        public const int errCliFunNotAvailable        = 0x01400000;
-        public const int errCliUploadSequenceFailed   = 0x01500000;
-        public const int errCliInvalidDataSizeRecvd   = 0x01600000;
-        public const int errCliInvalidBlockType       = 0x01700000;
-        public const int errCliInvalidBlockNumber     = 0x01800000;
-        public const int errCliInvalidBlockSize       = 0x01900000;
-        public const int errCliNeedPassword           = 0x01D00000;
-        public const int errCliInvalidPassword        = 0x01E00000;
+        public const int errCliNegotiatingPDU = 0x00100000;
+        public const int errCliInvalidParams = 0x00200000;
+        public const int errCliJobPending = 0x00300000;
+        public const int errCliTooManyItems = 0x00400000;
+        public const int errCliInvalidWordLen = 0x00500000;
+        public const int errCliPartialDataWritten = 0x00600000;
+        public const int errCliSizeOverPDU = 0x00700000;
+        public const int errCliInvalidPlcAnswer = 0x00800000;
+        public const int errCliAddressOutOfRange = 0x00900000;
+        public const int errCliInvalidTransportSize = 0x00A00000;
+        public const int errCliWriteDataSizeMismatch = 0x00B00000;
+        public const int errCliItemNotAvailable = 0x00C00000;
+        public const int errCliInvalidValue = 0x00D00000;
+        public const int errCliCannotStartPLC = 0x00E00000;
+        public const int errCliAlreadyRun = 0x00F00000;
+        public const int errCliCannotStopPLC = 0x01000000;
+        public const int errCliCannotCopyRamToRom = 0x01100000;
+        public const int errCliCannotCompress = 0x01200000;
+        public const int errCliAlreadyStop = 0x01300000;
+        public const int errCliFunNotAvailable = 0x01400000;
+        public const int errCliUploadSequenceFailed = 0x01500000;
+        public const int errCliInvalidDataSizeRecvd = 0x01600000;
+        public const int errCliInvalidBlockType = 0x01700000;
+        public const int errCliInvalidBlockNumber = 0x01800000;
+        public const int errCliInvalidBlockSize = 0x01900000;
+        public const int errCliNeedPassword = 0x01D00000;
+        public const int errCliInvalidPassword = 0x01E00000;
         public const int errCliNoPasswordToSetOrClear = 0x01F00000;
-        public const int errCliJobTimeout             = 0x02000000;
-        public const int errCliPartialDataRead        = 0x02100000;
-        public const int errCliBufferTooSmall         = 0x02200000;
-        public const int errCliFunctionRefused        = 0x02300000;
-        public const int errCliDestroying             = 0x02400000;
-        public const int errCliInvalidParamNumber     = 0x02500000;
-        public const int errCliCannotChangeParam      = 0x02600000;
+        public const int errCliJobTimeout = 0x02000000;
+        public const int errCliPartialDataRead = 0x02100000;
+        public const int errCliBufferTooSmall = 0x02200000;
+        public const int errCliFunctionRefused = 0x02300000;
+        public const int errCliDestroying = 0x02400000;
+        public const int errCliInvalidParamNumber = 0x02500000;
+        public const int errCliCannotChangeParam = 0x02600000;
         public const int errCliFunctionNotImplemented = 0x02700000;
         //------------------------------------------------------------------------------
         //        PARAMS LIST FOR COMPATIBILITY WITH Snap7.net.cs           
         //------------------------------------------------------------------------------
-        public const Int32 p_u16_LocalPort     = 1;  // Not applicable here
-        public const Int32 p_u16_RemotePort    = 2;
-        public const Int32 p_i32_PingTimeout   = 3;
-        public const Int32 p_i32_SendTimeout   = 4;
-        public const Int32 p_i32_RecvTimeout   = 5;
-        public const Int32 p_i32_WorkInterval  = 6;  // Not applicable here
-        public const Int32 p_u16_SrcRef        = 7;  // Not applicable here
-        public const Int32 p_u16_DstRef        = 8;  // Not applicable here
-        public const Int32 p_u16_SrcTSap       = 9;  // Not applicable here
-        public const Int32 p_i32_PDURequest    = 10;
-        public const Int32 p_i32_MaxClients    = 11; // Not applicable here
-        public const Int32 p_i32_BSendTimeout  = 12; // Not applicable here
-        public const Int32 p_i32_BRecvTimeout  = 13; // Not applicable here
-        public const Int32 p_u32_RecoveryTime  = 14; // Not applicable here
+        public const Int32 p_u16_LocalPort = 1;  // Not applicable here
+        public const Int32 p_u16_RemotePort = 2;
+        public const Int32 p_i32_PingTimeout = 3;
+        public const Int32 p_i32_SendTimeout = 4;
+        public const Int32 p_i32_RecvTimeout = 5;
+        public const Int32 p_i32_WorkInterval = 6;  // Not applicable here
+        public const Int32 p_u16_SrcRef = 7;  // Not applicable here
+        public const Int32 p_u16_DstRef = 8;  // Not applicable here
+        public const Int32 p_u16_SrcTSap = 9;  // Not applicable here
+        public const Int32 p_i32_PDURequest = 10;
+        public const Int32 p_i32_MaxClients = 11; // Not applicable here
+        public const Int32 p_i32_BSendTimeout = 12; // Not applicable here
+        public const Int32 p_i32_BRecvTimeout = 13; // Not applicable here
+        public const Int32 p_u32_RecoveryTime = 14; // Not applicable here
         public const Int32 p_u32_KeepAliveTime = 15; // Not applicable here
         // Area ID
         public const byte S7AreaPE = 0x81;
@@ -586,20 +586,20 @@ namespace Sharp7
         public const byte S7AreaCT = 0x1C;
         public const byte S7AreaTM = 0x1D;
         // Word Length
-        public const int S7WLBit     = 0x01;
-        public const int S7WLByte    = 0x02;
-        public const int S7WLChar    = 0x03;
-        public const int S7WLWord    = 0x04;
-        public const int S7WLInt     = 0x05;
-        public const int S7WLDWord   = 0x06;
-        public const int S7WLDInt    = 0x07;
-        public const int S7WLReal    = 0x08;
+        public const int S7WLBit = 0x01;
+        public const int S7WLByte = 0x02;
+        public const int S7WLChar = 0x03;
+        public const int S7WLWord = 0x04;
+        public const int S7WLInt = 0x05;
+        public const int S7WLDWord = 0x06;
+        public const int S7WLDInt = 0x07;
+        public const int S7WLReal = 0x08;
         public const int S7WLCounter = 0x1C;
-        public const int S7WLTimer   = 0x1D;
+        public const int S7WLTimer = 0x1D;
         // PLC Status
         public const int S7CpuStatusUnknown = 0x00;
-        public const int S7CpuStatusRun     = 0x08;
-        public const int S7CpuStatusStop    = 0x04;
+        public const int S7CpuStatusRun = 0x08;
+        public const int S7CpuStatusStop = 0x04;
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         public struct S7Tag
@@ -621,17 +621,17 @@ namespace Sharp7
 
         private static int BCDtoByte(byte B)
         {
-             return ((B >> 4) * 10) + (B & 0x0F);        
+            return ((B >> 4) * 10) + (B & 0x0F);
         }
 
         private static byte ByteToBCD(int Value)
         {
             return (byte)(((Value / 10) << 4) | (Value % 10));
         }
-        
+
         private static byte[] CopyFrom(byte[] Buffer, int Pos, int Size)
         {
-            byte[] Result=new byte[Size];
+            byte[] Result = new byte[Size];
             Array.Copy(Buffer, Pos, Result, 0, Size);
             return Result;
         }
@@ -656,15 +656,15 @@ namespace Sharp7
 
         #region Get/Set the bit at Pos.Bit
         public static bool GetBitAt(byte[] Buffer, int Pos, int Bit)
-        {           
-            byte[] Mask = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
+        {
+            byte[] Mask = { 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80 };
             if (Bit < 0) Bit = 0;
             if (Bit > 7) Bit = 7;
             return (Buffer[Pos] & Mask[Bit]) != 0;
         }
         public static void SetBitAt(ref byte[] Buffer, int Pos, int Bit, bool Value)
         {
-            byte[] Mask = {0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
+            byte[] Mask = { 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80 };
             if (Bit < 0) Bit = 0;
             if (Bit > 7) Bit = 7;
 
@@ -682,7 +682,7 @@ namespace Sharp7
             if (Value < 128)
                 return Value;
             else
-                return (int) (Value - 256);
+                return (int)(Value - 256);
         }
         public static void SetSIntAt(byte[] Buffer, int Pos, int Value)
         {
@@ -734,7 +734,7 @@ namespace Sharp7
             Result += Buffer[Pos + 4]; Result <<= 8;
             Result += Buffer[Pos + 5]; Result <<= 8;
             Result += Buffer[Pos + 6]; Result <<= 8;
-            Result += Buffer[Pos + 7]; 
+            Result += Buffer[Pos + 7];
             return Result;
         }
         public static void SetLIntAt(byte[] Buffer, int Pos, Int64 Value)
@@ -803,7 +803,7 @@ namespace Sharp7
             Result |= Buffer[Pos + 4]; Result <<= 8;
             Result |= Buffer[Pos + 5]; Result <<= 8;
             Result |= Buffer[Pos + 6]; Result <<= 8;
-            Result |= Buffer[Pos + 7];                  
+            Result |= Buffer[Pos + 7];
             return Result;
         }
         public static void SetULintAt(byte[] Buffer, int Pos, UInt64 Value)
@@ -827,13 +827,13 @@ namespace Sharp7
         public static void SetByteAt(byte[] Buffer, int Pos, byte Value)
         {
             Buffer[Pos] = Value;
-        }       
+        }
         #endregion
 
         #region Get/Set 16 bit word (S7 Word) 16#0000..16#FFFF
         public static UInt16 GetWordAt(byte[] Buffer, int Pos)
         {
-            return GetUIntAt(Buffer,Pos);
+            return GetUIntAt(Buffer, Pos);
         }
         public static void SetWordAt(byte[] Buffer, int Pos, UInt16 Value)
         {
@@ -988,17 +988,17 @@ namespace Sharp7
         public static void SetTODAt(byte[] Buffer, int Pos, DateTime Value)
         {
             TimeSpan Time = Value.TimeOfDay;
-            SetDIntAt(Buffer, Pos, (Int32)Math.Round(Time.TotalMilliseconds));          
+            SetDIntAt(Buffer, Pos, (Int32)Math.Round(Time.TotalMilliseconds));
         }
         #endregion
-        
+
         #region Get/Set LTOD (S7 1500 LONG TIME_OF_DAY)
         public static DateTime GetLTODAt(byte[] Buffer, int Pos)
         {
             // .NET Tick = 100 ns, S71500 Tick = 1 ns
             try
-            { 
-                return new DateTime(Math.Abs(GetLIntAt(Buffer,Pos)/100));
+            {
+                return new DateTime(Math.Abs(GetLIntAt(Buffer, Pos) / 100));
             }
             catch (System.ArgumentOutOfRangeException)
             {
@@ -1016,17 +1016,17 @@ namespace Sharp7
         public static DateTime GetLDTAt(byte[] Buffer, int Pos)
         {
             try
-            { 
-                return new DateTime((GetLIntAt(Buffer, Pos) / 100) + bias); 
+            {
+                return new DateTime((GetLIntAt(Buffer, Pos) / 100) + bias);
             }
             catch (System.ArgumentOutOfRangeException)
             {
                 return new DateTime(0);
-            }                 
+            }
         }
         public static void SetLDTAt(byte[] Buffer, int Pos, DateTime Value)
         {
-            SetLIntAt(Buffer, Pos, (Value.Ticks-bias) * 100);
+            SetLIntAt(Buffer, Pos, (Value.Ticks - bias) * 100);
         }
         #endregion
 
@@ -1042,7 +1042,7 @@ namespace Sharp7
             Hour = Buffer[Pos + 5];
             Min = Buffer[Pos + 6];
             Sec = Buffer[Pos + 7];
-            MSec = (int)GetUDIntAt(Buffer, Pos + 8)/1000000;
+            MSec = (int)GetUDIntAt(Buffer, Pos + 8) / 1000000;
 
             try
             {
@@ -1099,13 +1099,13 @@ namespace Sharp7
         #region Get/Set Array of char (S7 ARRAY OF CHARS)
         public static string GetCharsAt(byte[] Buffer, int Pos, int Size)
         {
-            return Encoding.UTF8.GetString(Buffer, Pos , Size);
+            return Encoding.UTF8.GetString(Buffer, Pos, Size);
         }
         public static void SetCharsAt(byte[] Buffer, int Pos, string Value)
-        {          
+        {
             int MaxLen = Buffer.Length - Pos;
             // Truncs the string if there's no room enough        
-            if (MaxLen > Value.Length) MaxLen = Value.Length; 
+            if (MaxLen > Value.Length) MaxLen = Value.Length;
             Encoding.UTF8.GetBytes(Value, 0, MaxLen, Buffer, Pos);
         }
         #endregion
@@ -1168,7 +1168,7 @@ namespace Sharp7
                     Start = Start * 8;
                     WordLen = S7Consts.S7WLByte;
                 }
-            }   
+            }
             return true;
         }
 
@@ -1298,58 +1298,58 @@ namespace Sharp7
         #region [Constants and TypeDefs]
 
         // Block type
-        public const int Block_OB  = 0x38;
-        public const int Block_DB  = 0x41;
+        public const int Block_OB = 0x38;
+        public const int Block_DB = 0x41;
         public const int Block_SDB = 0x42;
-        public const int Block_FC  = 0x43;
+        public const int Block_FC = 0x43;
         public const int Block_SFC = 0x44;
-        public const int Block_FB  = 0x45;
+        public const int Block_FB = 0x45;
         public const int Block_SFB = 0x46;
 
         // Sub Block Type 
-        public const byte SubBlk_OB  = 0x08;
-        public const byte SubBlk_DB  = 0x0A;
+        public const byte SubBlk_OB = 0x08;
+        public const byte SubBlk_DB = 0x0A;
         public const byte SubBlk_SDB = 0x0B;
-        public const byte SubBlk_FC  = 0x0C;
+        public const byte SubBlk_FC = 0x0C;
         public const byte SubBlk_SFC = 0x0D;
-        public const byte SubBlk_FB  = 0x0E;
+        public const byte SubBlk_FB = 0x0E;
         public const byte SubBlk_SFB = 0x0F;
 
         // Block languages
-        public const byte BlockLangAWL   = 0x01;
-        public const byte BlockLangKOP   = 0x02;
-        public const byte BlockLangFUP   = 0x03;
-        public const byte BlockLangSCL   = 0x04;
-        public const byte BlockLangDB    = 0x05;
+        public const byte BlockLangAWL = 0x01;
+        public const byte BlockLangKOP = 0x02;
+        public const byte BlockLangFUP = 0x03;
+        public const byte BlockLangSCL = 0x04;
+        public const byte BlockLangDB = 0x05;
         public const byte BlockLangGRAPH = 0x06;
 
         // Max number of vars (multiread/write)
         public static readonly int MaxVars = 20;
-        
+
         // Result transport size
-        const byte TS_ResBit   = 0x03;
-        const byte TS_ResByte  = 0x04;
-        const byte TS_ResInt   = 0x05;
-        const byte TS_ResReal  = 0x07;
+        const byte TS_ResBit = 0x03;
+        const byte TS_ResByte = 0x04;
+        const byte TS_ResInt = 0x05;
+        const byte TS_ResReal = 0x07;
         const byte TS_ResOctet = 0x09;
 
-        const ushort Code7Ok                    = 0x0000;
-        const ushort Code7AddressOutOfRange     = 0x0005;
-        const ushort Code7InvalidTransportSize  = 0x0006;
+        const ushort Code7Ok = 0x0000;
+        const ushort Code7AddressOutOfRange = 0x0005;
+        const ushort Code7InvalidTransportSize = 0x0006;
         const ushort Code7WriteDataSizeMismatch = 0x0007;
-        const ushort Code7ResItemNotAvailable   = 0x000A;
-        const ushort Code7ResItemNotAvailable1  = 0xD209;
-        const ushort Code7InvalidValue          = 0xDC01;
-        const ushort Code7NeedPassword          = 0xD241;
-        const ushort Code7InvalidPassword       = 0xD602;
-        const ushort Code7NoPasswordToClear     = 0xD604;
-        const ushort Code7NoPasswordToSet       = 0xD605;
-        const ushort Code7FunNotAvailable       = 0x8104;
-        const ushort Code7DataOverPDU           = 0x8500;
+        const ushort Code7ResItemNotAvailable = 0x000A;
+        const ushort Code7ResItemNotAvailable1 = 0xD209;
+        const ushort Code7InvalidValue = 0xDC01;
+        const ushort Code7NeedPassword = 0xD241;
+        const ushort Code7InvalidPassword = 0xD602;
+        const ushort Code7NoPasswordToClear = 0xD604;
+        const ushort Code7NoPasswordToSet = 0xD605;
+        const ushort Code7FunNotAvailable = 0x8104;
+        const ushort Code7DataOverPDU = 0x8500;
 
         // Client Connection Type
-        public static readonly UInt16 CONNTYPE_PG    = 0x01;  // Connect to the PLC as a PG
-        public static readonly UInt16 CONNTYPE_OP    = 0x02;  // Connect to the PLC as an OP
+        public static readonly UInt16 CONNTYPE_PG = 0x01;  // Connect to the PLC as a PG
+        public static readonly UInt16 CONNTYPE_OP = 0x02;  // Connect to the PLC as an OP
         public static readonly UInt16 CONNTYPE_BASIC = 0x03;  // Basic connection 
 
         public int _LastError = 0;
@@ -1454,7 +1454,7 @@ namespace Sharp7
 
         // S7 Protection
         // See §33.19 of "System Software for S7-300/400 System and Standard Functions"
-        public struct S7Protection  
+        public struct S7Protection
         {
             public ushort sch_schal;
             public ushort sch_par;
@@ -1504,18 +1504,18 @@ namespace Sharp7
 
         // S7 PDU Negotiation Telegram (contains also ISO Header and COTP Header)
         byte[] S7_PN = {
-            0x03, 0x00, 0x00, 0x19, 
+            0x03, 0x00, 0x00, 0x19,
             0x02, 0xf0, 0x80, // TPKT + COTP (see above for info)
-            0x32, 0x01, 0x00, 0x00, 
-            0x04, 0x00, 0x00, 0x08, 
-            0x00, 0x00, 0xf0, 0x00, 
-            0x00, 0x01, 0x00, 0x01, 
+            0x32, 0x01, 0x00, 0x00,
+            0x04, 0x00, 0x00, 0x08,
+            0x00, 0x00, 0xf0, 0x00,
+            0x00, 0x01, 0x00, 0x01,
             0x00, 0x1e        // PDU Length Requested = HI-LO Here Default 480 bytes
         };
-        
+
         // S7 Read/Write Request Header (contains also ISO Header and COTP Header)
         byte[] S7_RW = { // 31-35 bytes
-            0x03,0x00, 
+            0x03,0x00,
             0x00,0x1f,       // Telegram Length (Data Size + 31 or 35)
             0x02,0xf0, 0x80, // COTP (see above for info)
             0x32,            // S7 Protocol ID 
@@ -1544,7 +1544,7 @@ namespace Sharp7
 
         // S7 Variable MultiRead Header
         byte[] S7_MRD_HEADER = {
-            0x03,0x00, 
+            0x03,0x00,
             0x00,0x1f,       // Telegram Length 
             0x02,0xf0, 0x80, // COTP (see above for info)
             0x32,            // S7 Protocol ID 
@@ -1723,8 +1723,8 @@ namespace Sharp7
             0x50, 0x52, 0x4f, 0x47,
             0x52, 0x41, 0x4d
         };
-        const byte pduStart          = 0x28;   // CPU start
-        const byte pduStop           = 0x29;   // CPU stop
+        const byte pduStart = 0x28;   // CPU start
+        const byte pduStop = 0x29;   // CPU stop
         const byte pduAlreadyStarted = 0x02;   // CPU already in run mode
         const byte pduAlreadyStopped = 0x07;   // CPU already in stop mode
 
@@ -1743,18 +1743,18 @@ namespace Sharp7
 
         // S7 Get Block Info Request Header (contains also ISO Header and COTP Header)
         byte[] S7_BI = {
-            0x03, 0x00, 0x00, 0x25, 
-            0x02, 0xf0, 0x80, 0x32, 
-            0x07, 0x00, 0x00, 0x05, 
-            0x00, 0x00, 0x08, 0x00, 
-            0x0c, 0x00, 0x01, 0x12, 
-            0x04, 0x11, 0x43, 0x03, 
-            0x00, 0xff, 0x09, 0x00, 
-            0x08, 0x30, 
+            0x03, 0x00, 0x00, 0x25,
+            0x02, 0xf0, 0x80, 0x32,
+            0x07, 0x00, 0x00, 0x05,
+            0x00, 0x00, 0x08, 0x00,
+            0x0c, 0x00, 0x01, 0x12,
+            0x04, 0x11, 0x43, 0x03,
+            0x00, 0xff, 0x09, 0x00,
+            0x08, 0x30,
             0x41, // Block Type
             0x30, 0x30, 0x30, 0x30, 0x30, // ASCII Block Number
-            0x41 
-	    };    
+            0x41
+        };
 
         #endregion
 
@@ -1792,7 +1792,7 @@ namespace Sharp7
         {
             try
             {
-                Socket = new MsgSocket(); 
+                Socket = new MsgSocket();
                 Socket.ConnectTimeout = _ConnTimeout;
                 Socket.ReadTimeout = _RecvTimeout;
                 Socket.WriteTimeout = _SendTimeout;
@@ -1803,19 +1803,19 @@ namespace Sharp7
         }
 
         private int TCPConnect()
-        {           
-            if (_LastError==0)
-            try
-            {
-                _LastError=Socket.Connect(IPAddress, _PLCPort);
-            }
-            catch
-            {
-                _LastError = S7Consts.errTCPConnectionFailed;
-            }
+        {
+            if (_LastError == 0)
+                try
+                {
+                    _LastError = Socket.Connect(IPAddress, _PLCPort);
+                }
+                catch
+                {
+                    _LastError = S7Consts.errTCPConnectionFailed;
+                }
             return _LastError;
         }
-       
+
         private void RecvPacket(byte[] Buffer, int Start, int Size)
         {
             if (Connected)
@@ -1930,24 +1930,24 @@ namespace Sharp7
 
         private int CpuError(ushort Error)
         {
-          switch(Error)
-          {
-            case 0                          : return 0;
-            case Code7AddressOutOfRange     : return S7Consts.errCliAddressOutOfRange;
-            case Code7InvalidTransportSize  : return S7Consts.errCliInvalidTransportSize;
-            case Code7WriteDataSizeMismatch : return S7Consts.errCliWriteDataSizeMismatch;
-            case Code7ResItemNotAvailable   :
-            case Code7ResItemNotAvailable1  : return S7Consts.errCliItemNotAvailable;
-            case Code7DataOverPDU           : return S7Consts.errCliSizeOverPDU;
-            case Code7InvalidValue          : return S7Consts.errCliInvalidValue;
-            case Code7FunNotAvailable       : return S7Consts.errCliFunNotAvailable;
-            case Code7NeedPassword          : return S7Consts.errCliNeedPassword;
-            case Code7InvalidPassword       : return S7Consts.errCliInvalidPassword;
-            case Code7NoPasswordToSet       :
-            case Code7NoPasswordToClear     : return S7Consts.errCliNoPasswordToSetOrClear;
-          default:
-            return S7Consts.errCliFunctionRefused;
-          };
+            switch (Error)
+            {
+                case 0: return 0;
+                case Code7AddressOutOfRange: return S7Consts.errCliAddressOutOfRange;
+                case Code7InvalidTransportSize: return S7Consts.errCliInvalidTransportSize;
+                case Code7WriteDataSizeMismatch: return S7Consts.errCliWriteDataSizeMismatch;
+                case Code7ResItemNotAvailable:
+                case Code7ResItemNotAvailable1: return S7Consts.errCliItemNotAvailable;
+                case Code7DataOverPDU: return S7Consts.errCliSizeOverPDU;
+                case Code7InvalidValue: return S7Consts.errCliInvalidValue;
+                case Code7FunNotAvailable: return S7Consts.errCliFunNotAvailable;
+                case Code7NeedPassword: return S7Consts.errCliNeedPassword;
+                case Code7InvalidPassword: return S7Consts.errCliInvalidPassword;
+                case Code7NoPasswordToSet:
+                case Code7NoPasswordToClear: return S7Consts.errCliNoPasswordToSetOrClear;
+                default:
+                    return S7Consts.errCliFunctionRefused;
+            };
         }
 
         #endregion
@@ -1972,10 +1972,10 @@ namespace Sharp7
             if (!Connected)
             {
                 TCPConnect(); // First stage : TCP Connection
-                if (_LastError == 0) 
+                if (_LastError == 0)
                 {
                     ISOConnect(); // Second stage : ISOTCP (ISO 8073) Connection
-                    if (_LastError == 0) 
+                    if (_LastError == 0)
                     {
                         _LastError = NegotiatePduLength(); // Third stage : S7 PDU negotiation
                     }
@@ -2063,7 +2063,7 @@ namespace Sharp7
         public int SetParam(Int32 ParamNumber, ref int Value)
         {
             int Result = 0;
-            switch(ParamNumber)
+            switch (ParamNumber)
             {
                 case S7Consts.p_u16_RemotePort:
                     {
@@ -2096,7 +2096,7 @@ namespace Sharp7
                         break;
                     }
             }
-            return Result; 
+            return Result;
         }
 
         public delegate void S7CliCompletion(IntPtr usrPtr, int opCode, int opResult);
@@ -2150,7 +2150,7 @@ namespace Sharp7
                     WordSize = 1;
                     WordLen = S7Consts.S7WLByte;
                 }
-            }        
+            }
 
             MaxElements = (_PDULength - 18) / WordSize; // 18 = Reply telegram header
             TotElements = Amount;
@@ -2196,7 +2196,7 @@ namespace Sharp7
                     Length = RecvIsoPacket();
                     if (_LastError == 0)
                     {
-                        if (Length<25)
+                        if (Length < 25)
                             _LastError = S7Consts.errIsoInvalidDataSize;
                         else
                         {
@@ -2266,7 +2266,7 @@ namespace Sharp7
                     WordSize = 1;
                     WordLen = S7Consts.S7WLByte;
                 }
-            }        
+            }
 
             MaxElements = (_PDULength - 35) / WordSize; // 35 = Reply telegram header
             TotElements = Amount;
@@ -2374,8 +2374,8 @@ namespace Sharp7
             int Length;
             int ItemSize;
             byte[] S7Item = new byte[12];
-            byte[] S7ItemRead = new byte[1024]; 
-            
+            byte[] S7ItemRead = new byte[1024];
+
             _LastError = 0;
             Time_ms = 0;
             int Elapsed = Environment.TickCount;
@@ -2383,7 +2383,7 @@ namespace Sharp7
             // Checks items
             if (ItemsCount > MaxVars)
                 return S7Consts.errCliTooManyItems;
-            
+
             // Fills Header
             Array.Copy(S7_MRD_HEADER, 0, PDU, 0, S7_MRD_HEADER.Length);
             S7.SetWordAt(PDU, 13, (ushort)(ItemsCount * S7Item.Length + 2));
@@ -2398,7 +2398,7 @@ namespace Sharp7
                 if (Items[c].Area == S7Consts.S7AreaDB)
                     S7.SetWordAt(S7Item, 6, (ushort)Items[c].DBNumber);
                 S7Item[8] = (byte)Items[c].Area;
-                
+
                 // Address into the PLC
                 int Address = Items[c].Start;
                 S7Item[11] = (byte)(Address & 0x0FF);
@@ -2416,7 +2416,7 @@ namespace Sharp7
 
             S7.SetWordAt(PDU, 2, (ushort)Offset); // Whole size
             SendPacket(PDU, Offset);
-            
+
             if (_LastError != 0)
                 return _LastError;
             // Get Answer
@@ -2435,17 +2435,17 @@ namespace Sharp7
                 return _LastError;
             // Get true ItemsCount
             int ItemsRead = S7.GetByteAt(PDU, 20);
-            if ((ItemsRead != ItemsCount) || (ItemsRead>MaxVars))
+            if ((ItemsRead != ItemsCount) || (ItemsRead > MaxVars))
             {
                 _LastError = S7Consts.errCliInvalidPlcAnswer;
                 return _LastError;
             }
             // Get Data
-            Offset = 21;           
+            Offset = 21;
             for (int c = 0; c < ItemsCount; c++)
             {
                 // Get the Item
-                Array.Copy(PDU, Offset, S7ItemRead, 0, Length-Offset);
+                Array.Copy(PDU, Offset, S7ItemRead, 0, Length - Offset);
                 if (S7ItemRead[0] == 0xff)
                 {
                     ItemSize = (int)S7.GetWordAt(S7ItemRead, 2);
@@ -2462,7 +2462,7 @@ namespace Sharp7
                     Items[c].Result = CpuError(S7ItemRead[0]);
                     Offset += 4; // Skip the Item header                           
                 }
-            }         
+            }
             Time_ms = Environment.TickCount - Elapsed;
             return _LastError;
         }
@@ -2490,7 +2490,7 @@ namespace Sharp7
             PDU[18] = (byte)ItemsCount;
             // Fills Params
             Offset = S7_MWR_HEADER.Length;
-            for (int c=0; c<ItemsCount; c++)
+            for (int c = 0; c < ItemsCount; c++)
             {
                 Array.Copy(S7_MWR_PARAM, 0, S7ParItem, 0, S7_MWR_PARAM.Length);
                 S7ParItem[3] = (byte)Items[c].WordLen;
@@ -2525,23 +2525,23 @@ namespace Sharp7
                         S7DataItem[1] = TS_ResByte; // byte/word/dword etc.
                         break;
                 };
-                if ((Items[c].WordLen==S7Consts.S7WLTimer) || (Items[c].WordLen == S7Consts.S7WLCounter))
+                if ((Items[c].WordLen == S7Consts.S7WLTimer) || (Items[c].WordLen == S7Consts.S7WLCounter))
                     ItemDataSize = Items[c].Amount * 2;
                 else
                     ItemDataSize = Items[c].Amount;
 
                 if ((S7DataItem[1] != TS_ResOctet) && (S7DataItem[1] != TS_ResBit))
-                    S7.SetWordAt(S7DataItem, 2, (ushort)(ItemDataSize*8));
+                    S7.SetWordAt(S7DataItem, 2, (ushort)(ItemDataSize * 8));
                 else
                     S7.SetWordAt(S7DataItem, 2, (ushort)ItemDataSize);
 
                 Marshal.Copy(Items[c].pData, S7DataItem, 4, ItemDataSize);
                 if (ItemDataSize % 2 != 0)
                 {
-                    S7DataItem[ItemDataSize+4] = 0x00;
+                    S7DataItem[ItemDataSize + 4] = 0x00;
                     ItemDataSize++;
                 }
-                Array.Copy(S7DataItem, 0, PDU, Offset, ItemDataSize+4);
+                Array.Copy(S7DataItem, 0, PDU, Offset, ItemDataSize + 4);
                 Offset = Offset + ItemDataSize + 4;
                 DataLength = DataLength + ItemDataSize + 4;
             }
@@ -2555,7 +2555,7 @@ namespace Sharp7
             SendPacket(PDU, Offset);
 
             RecvIsoPacket();
-            if (_LastError==0)
+            if (_LastError == 0)
             {
                 // Check Global Operation Result
                 _LastError = CpuError(S7.GetWordAt(PDU, 17));
@@ -2569,7 +2569,7 @@ namespace Sharp7
                     return _LastError;
                 }
 
-                for (int c=0; c<ItemsCount; c++)
+                for (int c = 0; c < ItemsCount; c++)
                 {
                     if (PDU[c + 21] == 0xFF)
                         Items[c].Result = 0;
@@ -2654,9 +2654,9 @@ namespace Sharp7
         {
             byte[] sBuffer = new byte[Amount * 2];
             int Result = ReadArea(S7Consts.S7AreaCT, 0, Start, Amount, S7Consts.S7WLCounter, sBuffer);
-            if (Result==0)
+            if (Result == 0)
             {
-                for (int c=0; c<Amount; c++)
+                for (int c = 0; c < Amount; c++)
                 {
                     Buffer[c] = (ushort)((sBuffer[c * 2 + 1] << 8) + (sBuffer[c * 2]));
                 }
@@ -2669,8 +2669,8 @@ namespace Sharp7
             byte[] sBuffer = new byte[Amount * 2];
             for (int c = 0; c < Amount; c++)
             {
-                sBuffer[c * 2 + 1] = (byte)((Buffer[c] & 0xFF00)>>8);
-                sBuffer[c * 2]= (byte)(Buffer[c] & 0x00FF);
+                sBuffer[c * 2 + 1] = (byte)((Buffer[c] & 0xFF00) >> 8);
+                sBuffer[c * 2] = (byte)(Buffer[c] & 0x00FF);
             }
             return WriteArea(S7Consts.S7AreaCT, 0, Start, Amount, S7Consts.S7WLCounter, sBuffer);
         }
@@ -2686,7 +2686,7 @@ namespace Sharp7
 
         private string SiemensTimestamp(long EncodedDate)
         {
-            DateTime DT = new DateTime(1984, 1, 1).AddSeconds(EncodedDate*86400);
+            DateTime DT = new DateTime(1984, 1, 1).AddSeconds(EncodedDate * 86400);
 #if WINDOWS_UWP || NETFX_CORE
             return DT.ToString(System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern);
 #else
@@ -2722,19 +2722,19 @@ namespace Sharp7
                     ushort Result = S7.GetWordAt(PDU, 27);
                     if (Result == 0)
                     {
-                        Info.BlkFlags= PDU[42];
+                        Info.BlkFlags = PDU[42];
                         Info.BlkLang = PDU[43];
                         Info.BlkType = PDU[44];
                         Info.BlkNumber = S7.GetWordAt(PDU, 45);
                         Info.LoadSize = S7.GetDIntAt(PDU, 47);
                         Info.CodeDate = SiemensTimestamp(S7.GetWordAt(PDU, 59));
-                        Info.IntfDate = SiemensTimestamp(S7.GetWordAt(PDU, 65)); 
+                        Info.IntfDate = SiemensTimestamp(S7.GetWordAt(PDU, 65));
                         Info.SBBLength = S7.GetWordAt(PDU, 67);
                         Info.LocalData = S7.GetWordAt(PDU, 71);
                         Info.MC7Size = S7.GetWordAt(PDU, 73);
-                        Info.Author = S7.GetCharsAt(PDU, 75, 8).Trim(new char[]{(char)0});
-                        Info.Family = S7.GetCharsAt(PDU, 83, 8).Trim(new char[]{(char)0});
-                        Info.Header = S7.GetCharsAt(PDU, 91, 8).Trim(new char[]{(char)0}); 
+                        Info.Author = S7.GetCharsAt(PDU, 75, 8).Trim(new char[] { (char)0 });
+                        Info.Family = S7.GetCharsAt(PDU, 83, 8).Trim(new char[] { (char)0 });
+                        Info.Header = S7.GetCharsAt(PDU, 91, 8).Trim(new char[] { (char)0 });
                         Info.Version = PDU[99];
                         Info.CheckSum = S7.GetWordAt(PDU, 101);
                     }
@@ -2748,7 +2748,7 @@ namespace Sharp7
                 Time_ms = Environment.TickCount - Elapsed;
 
             return _LastError;
-            
+
         }
 
         public int GetPgBlockInfo(ref S7BlockInfo Info, byte[] Buffer, int Size)
@@ -2793,7 +2793,7 @@ namespace Sharp7
 
             _LastError = GetAgBlockInfo(Block_DB, DBNumber, ref BI);
 
-            if (_LastError==0)
+            if (_LastError == 0)
             {
                 int DBSize = BI.MC7Size;
                 if (DBSize <= UsrData.Length)
@@ -2804,7 +2804,7 @@ namespace Sharp7
                         Size = DBSize;
                 }
                 else
-                    _LastError = S7Consts.errCliBufferTooSmall;                  
+                    _LastError = S7Consts.errCliBufferTooSmall;
             }
             if (_LastError == 0)
                 Time_ms = Environment.TickCount - Elapsed;
@@ -2816,9 +2816,9 @@ namespace Sharp7
             S7BlockInfo BI = new S7BlockInfo();
             int Elapsed = Environment.TickCount;
             Time_ms = 0;
-            
+
             _LastError = GetAgBlockInfo(Block_DB, DBNumber, ref BI);
-            
+
             if (_LastError == 0)
             {
                 byte[] Buffer = new byte[BI.MC7Size];
@@ -2859,7 +2859,7 @@ namespace Sharp7
                     _LastError = S7Consts.errIsoInvalidPDU;
             }
 
-            if(_LastError==0)
+            if (_LastError == 0)
                 Time_ms = Environment.TickCount - Elapsed;
 
             return _LastError;
@@ -3041,7 +3041,7 @@ namespace Sharp7
                 First = false;
             }
             while (!Done && (_LastError == 0));
-            if (_LastError==0)
+            if (_LastError == 0)
             {
                 Size = SZL.Header.LENTHDR;
                 Time_ms = Environment.TickCount - Elapsed;
@@ -3127,11 +3127,11 @@ namespace Sharp7
                 int Length = RecvIsoPacket();
                 if (Length > 18) // 18 is the minimum expected
                 {
-                    if (PDU[19]!=pduStop)
+                    if (PDU[19] != pduStop)
                         _LastError = S7Consts.errCliCannotStopPLC;
                     else
-                    { 
-                        if (PDU[20]== pduAlreadyStopped)
+                    {
+                        if (PDU[20] == pduAlreadyStopped)
                             _LastError = S7Consts.errCliAlreadyStop;
                         else
                             _LastError = S7Consts.errCliCannotStopPLC;
@@ -3292,10 +3292,10 @@ namespace Sharp7
                 return S7Consts.errIsoInvalidPDU;
             }
             SendPacket(PDU, TPKT_ISO.Length + Size);
-            if (_LastError==0)
+            if (_LastError == 0)
             {
-                int Length=RecvIsoPacket();
-                if (_LastError==0)
+                int Length = RecvIsoPacket();
+                if (_LastError == 0)
                 {
                     Array.Copy(PDU, TPKT_ISO.Length, Buffer, 0, Length - TPKT_ISO.Length);
                     Size = Length - TPKT_ISO.Length;
@@ -3553,7 +3553,7 @@ namespace Sharp7
                     value = MinPduSizeToRequest;
                 if (value > MaxPduSizeToRequest)
                     value = MaxPduSizeToRequest;
-                _PduSizeRequested = value;       
+                _PduSizeRequested = value;
             }
         }
 

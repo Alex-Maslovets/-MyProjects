@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using Sharp7;
-using Npgsql;
-using NModbus.Device;
-using System.IO;
-using System.IO.Ports;
+﻿using Npgsql;
 using ReadWriteS7;
+using Sharp7;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Heineken_DL
 {
@@ -55,7 +53,7 @@ namespace Heineken_DL
 
             double db1dbw16 = S7.GetWordAt(db1Buffer, 16);
             Console.WriteLine("DB1.DBD16: " + db1dbw16);
-            
+
             // Disconnect the client
             client.Disconnect();
         }
@@ -83,7 +81,7 @@ namespace Heineken_DL
             for (int i = 0; i <= 99; i++)
             {
                 byte[] db1Buffer = new byte[4];
-                result = client.DBRead(2000, 432 + 4*i, 4, db1Buffer);
+                result = client.DBRead(2000, 432 + 4 * i, 4, db1Buffer);
                 if (result != 0)
                 {
                     Console.WriteLine("Error: " + client.ErrorText(result));
@@ -119,14 +117,14 @@ namespace Heineken_DL
 
             var con = new NpgsqlConnection(cs);
             con.Open();
-            
+
             // Запиись данных в PostgreSQL
             var cmd_insert = new NpgsqlCommand();
             cmd_insert.Connection = con;
 
             //cmd_insert.CommandText = "INSERT INTO _test_table (id, value, date_time) VALUES ( 2, 33, '" + s + "')";
             cmd_insert.CommandText = "INSERT INTO _test_table (id, value, date_time) VALUES " + test;
- //           Console.WriteLine(cmd_insert.CommandText);
+            //           Console.WriteLine(cmd_insert.CommandText);
             cmd_insert.ExecuteNonQuery();
 
             // Чтение данных из PostgreSQL
@@ -203,15 +201,15 @@ namespace Heineken_DL
             string[] subs = temp.Split(';');
 
             //foreach (string sub in subs)
-            for (int t = 0; t < subs.Length; t ++)
+            for (int t = 0; t < subs.Length; t++)
             {
                 string sub = subs[t];
                 string[] subsubs = sub.Split('=');
 
-                for (int i = 0; i < subsubs.Length; i ++)
+                for (int i = 0; i < subsubs.Length; i++)
                 {
                     if (i == 1)
-                    Console.WriteLine($"SubSubstring: {subsubs[i]}");
+                        Console.WriteLine($"SubSubstring: {subsubs[i]}");
                 }
                 Console.WriteLine(t);
             }
@@ -250,7 +248,7 @@ namespace Heineken_DL
 
         private void b_PGSQL_connect_Click(object sender, EventArgs e)
         {
-            List <string> tempList = new List<string>();
+            List<string> tempList = new List<string>();
             for (int i = 0; i < comboB_PGSQL_savedConf.Items.Count; i++)
             {
                 tempList.Add((comboB_PGSQL_savedConf.SelectedItem as ComboboxItem).Value.ToString());
@@ -302,10 +300,10 @@ namespace Heineken_DL
                     Console.WriteLine("Error on s7MultiVar.Read()");
                 }
                 */
-                
-                List<double> mReal = readClient.DB_ReadRealArray(client,2000,432,4);
+
+                List<double> mReal = readClient.DB_ReadRealArray(client, 2000, 432, 4);
                 List<double> mReal_532 = readClient.DB_ReadRealArray(client, 2000, 532, 4);
-                
+
             }
             /*
             double db2000dbd432 = S7.GetRealAt(db1, 0);
@@ -354,7 +352,8 @@ namespace Heineken_DL
                 if (adress.StartsWith("M"))
                 {
                     result = mAdressCompare(adress);
-                    if (result) {
+                    if (result)
+                    {
                         listBox1.Items.Add(adress);
                         listBoxUpdate(listBox1);
                     }
@@ -400,7 +399,9 @@ namespace Heineken_DL
                         if (!Char.IsDigit(ch))
                         {
                             return false;
+#pragma warning disable CS0162 // Unreachable code detected
                             break;
+#pragma warning restore CS0162 // Unreachable code detected
                         }
                     }
                     return true;
@@ -422,10 +423,11 @@ namespace Heineken_DL
             if (oneCutAdress.Contains("."))
             {
                 int dbPointAmount = new Regex("[.]").Matches(oneCutAdress).Count;
-                switch (dbPointAmount) {
+                switch (dbPointAmount)
+                {
                     case 1:
                         string[] twoStrings = oneCutAdress.Split('.');
-                        
+
                         bool sw1_partOne, sw1_partTwo;
 
                         if (twoStrings[0].ToCharArray().Length != 0)
@@ -465,7 +467,9 @@ namespace Heineken_DL
 
                         return sw1_partOne && sw1_partTwo;
 
+#pragma warning disable CS0162 // Unreachable code detected
                         break;
+#pragma warning restore CS0162 // Unreachable code detected
                     case 2:
                         string[] threeStrings = oneCutAdress.Split('.');
                         bool sw2_partOne, sw2_partTwo, sw2_partThree;
@@ -511,7 +515,8 @@ namespace Heineken_DL
                                 {
                                     chIsDigit = false;
                                 }
-                                else {
+                                else
+                                {
                                     int chToInt = Int32.Parse(ch.ToString());
                                     if (chToInt <= 0 || chToInt >= 7) chIsInRange = false;
                                 }
@@ -519,13 +524,17 @@ namespace Heineken_DL
                             sw2_partThree = chIsDigit && chIsInRange;
                         }
                         else sw2_partThree = false;
-                        
+
                         return sw2_partOne && sw2_partTwo && sw2_partThree;
-                        
+
+#pragma warning disable CS0162 // Unreachable code detected
                         break;
+#pragma warning restore CS0162 // Unreachable code detected
                     default:
                         return false;
+#pragma warning disable CS0162 // Unreachable code detected
                         break;
+#pragma warning restore CS0162 // Unreachable code detected
                 }
             }
             else return false;
