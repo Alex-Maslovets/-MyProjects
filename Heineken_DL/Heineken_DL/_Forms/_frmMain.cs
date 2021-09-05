@@ -3,9 +3,12 @@ using ReadWriteS7;
 using Sharp7;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Heineken_DL
@@ -15,6 +18,10 @@ namespace Heineken_DL
         public Form1()
         {
             InitializeComponent();
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
+            backgroundWorker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker1_RunWorkerCompleted);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -561,6 +568,162 @@ namespace Heineken_DL
             Console.WriteLine(holding_register);
             Console.ReadKey();
             */
+        }
+
+        public List<double> DB_ReadRealArray(S7Client client, int DBNumber, int Start, int Size)
+        {
+            List<double> tempList = new List<double>();
+            try
+            {
+                byte[] DBBuffer = new byte[4 * Size];
+                int result = client.DBRead(DBNumber, Start, 4 * Size, DBBuffer);
+                if (result != 0)
+                {
+                    Console.WriteLine("Error: (Read Real Array from DB" + DBNumber + ".DBD" + Start + " Text: " + client.ErrorText(result));
+                }
+                for (int i = 0; i < Size; i++)
+                {
+                    double value = S7.GetRealAt(DBBuffer, 4 * i);
+                    tempList.Add(value);
+                }
+                return tempList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                tempList.Clear();
+                return tempList;
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            while (true)
+            {
+                if (worker.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+                else
+                {
+                    try
+                    {
+
+                        string s = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff");
+                        DateTime s1 = DateTime.Now;
+                        Console.WriteLine(s);
+
+                        // Create and connect the client
+                        var client = new S7Client();
+                        int result = client.ConnectTo("192.168.100.150", 0, 1);
+                        if (result == 0)
+                        {
+                            //Console.WriteLine("Connected to 192.168.100.150");
+                        }
+                        else
+                        {
+                            Console.WriteLine(client.ErrorText(result));
+                        }
+
+                        // --- Work with Reals --- //
+                        //List<double> realsFromS7 = new List<double>();
+                        //realsFromS7 = DB_ReadRealArray(client, 2000, 432, 13);
+                        //realsFromS7 = DB_ReadRealArray(client, 2000, 432, 600);
+
+                        List<string> myList = new List<string>();
+
+                        for (int i = 0; i <= 199; i++)
+                        {
+                            byte[] db1Buffer = new byte[4];
+                            result = client.DBRead(2000, 432 + 4 * i, 4, db1Buffer);
+                            if (result != 0)
+                            {
+                                Console.WriteLine("Error: " + client.ErrorText(result));
+                            }
+
+                            double db1ddd4 = S7.GetRealAt(db1Buffer, 0);
+                            myList.Add("(" + i + "," + db1ddd4.ToString().Replace(",", ".") + ",'" + s + "')");
+                        }
+                        var test = String.Join(", ", myList.ToArray());
+
+
+                        var cs = "Host=" + tB_PGSQL_host.Text + ";Username=" + tB_PGSQL_userName.Text + ";Password=" + tB_PGSQL_password.Text + ";Database=" + tB_PGSQL_DB.Text + "";
+
+                        var con = new NpgsqlConnection(cs);
+                        con.Open();
+
+                        // Запиись данных в PostgreSQL
+                        var cmd_insert = new NpgsqlCommand();
+                        cmd_insert.Connection = con;
+
+                        cmd_insert.CommandText = "INSERT INTO _test_table (id, value, date_time) VALUES " + test;
+                        cmd_insert.ExecuteNonQuery();
+
+                        // Чтение данных из PostgreSQL
+                        /*
+                        string sql = "Select * from _test_table";
+
+                        //Console.WriteLine(s);
+                        using (NpgsqlCommand command = new NpgsqlCommand(sql, con))
+                        {
+                            //int val;
+                            NpgsqlDataReader reader = command.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                //val = Int32.Parse(reader[0].ToString());
+                                //Console.WriteLine(reader[0].ToString());
+                                //Console.WriteLine(reader[1].ToString());
+                                //Console.WriteLine(reader[2].ToString());
+                                //do whatever you like
+                            }
+                        }
+                        */
+
+                        // Закрытие соединения
+                        con.Close();
+                        client.Disconnect();
+
+                        s = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff");
+                        Console.WriteLine(s);
+                        timeLabel.Invoke(new Action(() => timeLabel.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1)));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    // Perform a time consuming operation and report progress.
+                    Thread.Sleep(500);
+                }
+            }
+        }
+        private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            Stopwatch sw = Stopwatch.StartNew();
+            sw.Start();
+            if (backgroundWorker1.IsBusy != true)
+            {
+                // Start the asynchronous operation.
+                backgroundWorker1.RunWorkerAsync();
+            }
+            sw.Stop();
+            Console.WriteLine("Array.Copy: {0:N0} ticks", sw.ElapsedTicks);
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            if (backgroundWorker1.WorkerSupportsCancellation == true)
+            {
+                // Cancel the asynchronous operation.
+                backgroundWorker1.CancelAsync();
+            }
         }
     }
 }

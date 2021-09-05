@@ -31,7 +31,11 @@ namespace Heineken_DL
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.b_ModBus = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
+            this.timeLabel = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.tB_PGSQL_DB = new System.Windows.Forms.TextBox();
@@ -48,7 +52,7 @@ namespace Heineken_DL
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.b_ModBus = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -65,10 +69,23 @@ namespace Heineken_DL
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "S7PLC";
             // 
+            // b_ModBus
+            // 
+            this.b_ModBus.Location = new System.Drawing.Point(20, 20);
+            this.b_ModBus.Name = "b_ModBus";
+            this.b_ModBus.Size = new System.Drawing.Size(75, 23);
+            this.b_ModBus.TabIndex = 0;
+            this.b_ModBus.Text = "ModBus";
+            this.b_ModBus.UseVisualStyleBackColor = true;
+            this.b_ModBus.Click += new System.EventHandler(this.button3_Click);
+            // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Transparent;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage1.Controls.Add(this.stopButton);
+            this.tabPage1.Controls.Add(this.startButton);
+            this.tabPage1.Controls.Add(this.timeLabel);
             this.tabPage1.Controls.Add(this.listBox1);
             this.tabPage1.Controls.Add(this.textBox2);
             this.tabPage1.Controls.Add(this.tB_PGSQL_DB);
@@ -90,6 +107,35 @@ namespace Heineken_DL
             this.tabPage1.Size = new System.Drawing.Size(789, 415);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "SQL";
+            // 
+            // stopButton
+            // 
+            this.stopButton.Location = new System.Drawing.Point(440, 302);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(75, 23);
+            this.stopButton.TabIndex = 25;
+            this.stopButton.Text = "stopButton";
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
+            // startButton
+            // 
+            this.startButton.Location = new System.Drawing.Point(440, 273);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(75, 23);
+            this.startButton.TabIndex = 24;
+            this.startButton.Text = "startButton";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
+            // timeLabel
+            // 
+            this.timeLabel.AutoSize = true;
+            this.timeLabel.Location = new System.Drawing.Point(458, 328);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(52, 13);
+            this.timeLabel.TabIndex = 23;
+            this.timeLabel.Text = "timeLabel";
             // 
             // listBox1
             // 
@@ -145,9 +191,9 @@ namespace Heineken_DL
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(524, 336);
+            this.button5.Location = new System.Drawing.Point(158, 323);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(115, 59);
+            this.button5.Size = new System.Drawing.Size(115, 86);
             this.button5.TabIndex = 20;
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = true;
@@ -246,16 +292,6 @@ namespace Heineken_DL
             this.tabControl1.Size = new System.Drawing.Size(797, 441);
             this.tabControl1.TabIndex = 8;
             // 
-            // b_ModBus
-            // 
-            this.b_ModBus.Location = new System.Drawing.Point(20, 20);
-            this.b_ModBus.Name = "b_ModBus";
-            this.b_ModBus.Size = new System.Drawing.Size(75, 23);
-            this.b_ModBus.TabIndex = 0;
-            this.b_ModBus.Text = "ModBus";
-            this.b_ModBus.UseVisualStyleBackColor = true;
-            this.b_ModBus.Click += new System.EventHandler(this.button3_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -296,6 +332,10 @@ namespace Heineken_DL
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Button b_ModBus;
+        private System.Windows.Forms.Button stopButton;
+        private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.Label timeLabel;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

@@ -1668,11 +1668,6 @@
             </summary>
             <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None"/>.</param>
         </member>
-        <member name="P:Npgsql.NpgsqlConnection.IsBound">
-            <summary>
-            Returns whether the connection is currently bound to a connector.
-            </summary>
-        </member>
         <member name="M:Npgsql.NpgsqlConnection.TryGetBoundConnector(Npgsql.NpgsqlConnector@)">
             <summary>
             Checks whether the connection is currently bound to a connector, and if so, returns it via
@@ -2137,6 +2132,7 @@
         <member name="P:Npgsql.NpgsqlConnectionStringBuilder.CancellationTimeout">
             <summary>
             The time to wait (in milliseconds) while trying to read a response for a cancellation request for a timed out or cancelled query, before terminating the attempt and generating an error.
+            Zero for infinity, -1 to skip the wait.
             Defaults to 2000 milliseconds.
             </summary>
         </member>
@@ -2740,7 +2736,7 @@
             PostgreSQL cancellation will be skipped and client-socket cancellation will occur immediately.
             </param>
         </member>
-        <member name="M:Npgsql.NpgsqlConnector.CloseOngoingOperations(System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Npgsql.NpgsqlConnector.CloseOngoingOperations(System.Boolean)">
             <summary>
             Closes ongoing operations, i.e. an open reader exists or a COPY operation still in progress, as
             part of a connection close.
@@ -2769,12 +2765,18 @@
             This method doesn't actually perform any meaningful I/O, and therefore is sync-only.
             </remarks>
         </member>
-        <member name="M:Npgsql.NpgsqlConnector.Reset(System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Npgsql.NpgsqlConnector.Reset(System.Boolean)">
             <summary>
             Called when a pooled connection is closed, and its connector is returned to the pool.
             Resets the connector back to its initial state, releasing server-side sources
             (e.g. prepared statements), resetting parameters to their defaults, and resetting client-side
             state
+            </summary>
+        </member>
+        <member name="M:Npgsql.NpgsqlConnector.ResetReadBuffer">
+            <summary>
+            The connector may have allocated an oversize read buffer, to hold big rows in non-sequential reading.
+            This switches us back to the original one and returns the buffer to <see cref="T:System.Buffers.ArrayPool`1" />.
             </summary>
         </member>
         <member name="M:Npgsql.NpgsqlConnector.StartUserAction(Npgsql.ConnectorState,Npgsql.NpgsqlCommand,System.Threading.CancellationToken,System.Boolean)">
@@ -6723,6 +6725,25 @@
             <param name="cancellationToken">The token to monitor for cancellation requests.
             The default value is <see cref="P:System.Threading.CancellationToken.None"/>.</param>
             <returns>The timeline history file for timeline tli</returns>
+        </member>
+        <member name="M:Npgsql.Replication.ReplicationConnection.SetReplicationStatus(NpgsqlTypes.NpgsqlLogSequenceNumber)">
+            <summary>
+            Sets the current status of the replication as it is interpreted by the consuming client. The value supplied
+            in <see paramref="lastAppliedAndFlushedLsn" /> will be sent to the server via <see cref="P:Npgsql.Replication.ReplicationConnection.LastAppliedLsn"/> and
+            <see cref="P:Npgsql.Replication.ReplicationConnection.LastFlushedLsn"/> with the next status update.
+            <para>
+            A status update which will happen upon server request, upon expiration of <see cref="P:Npgsql.Replication.ReplicationConnection.WalReceiverStatusInterval"/>
+            our upon an enforced status update via <see cref="M:Npgsql.Replication.ReplicationConnection.SendStatusUpdate(System.Threading.CancellationToken)"/>, whichever happens first.
+            If you want the value you set here to be pushed to the server immediately (e. g. in synchronous replication scenarios),
+            call <see cref="M:Npgsql.Replication.ReplicationConnection.SendStatusUpdate(System.Threading.CancellationToken)"/> after calling this method.
+            </para>
+            </summary>
+            <remarks>
+            This is a convenience method setting both <see cref="P:Npgsql.Replication.ReplicationConnection.LastAppliedLsn"/> and <see cref="P:Npgsql.Replication.ReplicationConnection.LastFlushedLsn"/> in one operation.
+            You can use it if your application processes replication messages in  a way that doesn't care about the difference between
+            writing a message and flushing it to a permanent storage medium.
+            </remarks>
+            <param name="lastAppliedAndFlushedLsn">The location of the last WAL byte + 1 applied (e. g. processed or written to disk) and flushed to disk in the standby.</param>
         </member>
         <member name="M:Npgsql.Replication.ReplicationConnection.SendStatusUpdate(System.Threading.CancellationToken)">
             <summary>
