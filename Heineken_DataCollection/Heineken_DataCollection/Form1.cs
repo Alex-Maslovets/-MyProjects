@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Net.Sockets;
+using Modbus.Data;
+using Modbus.Device;
+using Modbus.Utility;
 
 namespace Heineken_DataCollection
 {
@@ -61,18 +65,12 @@ namespace Heineken_DataCollection
                     {
                         Stopwatch sw = Stopwatch.StartNew();
                         sw.Start();
+                        
                         // Установка соединения с PLC
                         S7Client plcClient = new S7Client();
                         //connectionClient.S7Client = new S7Client();
-                        int result = plcClient.ConnectTo("192.168.100.150", 0, 1);
-                        if (result == 0)
-                        {
-                            //Console.WriteLine("Connected to 192.168.100.150");
-                        }
-                        else
-                        {
-                            MessageBox.Show(plcClient.ErrorText(result));
-                        }
+                        int result = plcClient.ConnectTo("192.168.127.150", 0, 1);
+                        if (result != 0) MessageBox.Show(plcClient.ErrorText(result));
                         
                         // Установка соединения с PostgreSQL
                         NpgsqlConnection PGCon = new NpgsqlConnection("Host=localhost;Username=postgres;Password=123456789;Database=postgres");
@@ -91,13 +89,14 @@ namespace Heineken_DataCollection
                             double db1ddd4 = S7.GetRealAt(db1Buffer, 4*i);
                             myList.Add("(" + i + "," + db1ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
                         }
-                        var test = String.Join(", ", myList.ToArray());
-
+                        
+                        var sqlValues = String.Join(", ", myList.ToArray());
+                        
                         // Запиись данных в PostgreSQL
                         var cmd_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
-                            CommandText = "INSERT INTO _test_table (id, value, date_time) VALUES " + test
+                            CommandText = "INSERT INTO _test_table (id, value, date_time) VALUES " + sqlValues
                         };
                         cmd_insert.ExecuteNonQuery();
 
@@ -109,16 +108,6 @@ namespace Heineken_DataCollection
                         // Закрытие соединений с PLC и PostgreSQL
                         plcClient.Disconnect();
                         PGCon.Close();
-                        // !!! For Grafana --- Do not DELETE !!!
-                        /*
-                        SELECT
-                        ((date_time) - INTERVAL '7 HOUR') AS "time",
-                        value
-                        FROM _test_table
-                        WHERE
-                        id = 1
-                        ORDER BY 1
-                        */
                     }
                     catch (Exception ex)
                     {
@@ -131,6 +120,23 @@ namespace Heineken_DataCollection
         {
             progressBarRead.Invoke(new Action(() => progressBarRead.Value = 0));
             progressBarRead.Invoke(new Action(() => progressBarRead.Style = ProgressBarStyle.Blocks));
+        }
+
+
+
+        // Tест для Modbus
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TcpClient client = new TcpClient("127.0.0.1", 502);
+            ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
+
+            // read five input values
+            ushort startAddress = 100;
+            ushort numInputs = 5;
+            bool[] inputs = master.ReadInputs(startAddress, numInputs);
+
+            for (int i = 0; i < numInputs; i++)
+                Console.WriteLine("Input {0}={1}", startAddress + i, inputs[i] ? 1 : 0);
         }
     }
 }
