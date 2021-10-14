@@ -2069,6 +2069,12 @@
             When enabled, parameter values are logged when commands are executed. Defaults to false.
             </summary>
         </member>
+        <member name="P:Npgsql.NpgsqlConnectionStringBuilder.IncludeErrorDetail">
+            <summary>
+            When enabled, PostgreSQL error details are included on <see cref="P:Npgsql.PostgresException.Detail" /> and
+            <see cref="P:Npgsql.PostgresNotice.Detail" />. These can contain sensitive data.
+            </summary>
+        </member>
         <member name="P:Npgsql.NpgsqlConnectionStringBuilder.IncludeErrorDetails">
             <summary>
             When enabled, PostgreSQL error details are included on <see cref="P:Npgsql.PostgresException.Detail" /> and
@@ -4958,7 +4964,7 @@
             Disposes the transaction, rolling it back if it is still pending.
             </summary>
         </member>
-        <member name="M:Npgsql.NpgsqlTransaction.DisposeImmediately">
+        <member name="M:Npgsql.NpgsqlTransaction.DisposeImmediately(System.Exception)">
             <summary>
             Disposes the transaction, without rolling back. Used only in special circumstances, e.g. when
             the connection is broken.
@@ -8736,7 +8742,7 @@
         </member>
         <member name="T:Npgsql.TypeHandlers.NumericHandlers.UInt32Handler">
              <summary>
-             A type handler for the PostgreSQL real data type.
+             A type handler for PostgreSQL unsigned 32-bit data types. This is only used for internal types.
              </summary>
              <remarks>
              See https://www.postgresql.org/docs/current/static/datatype-oid.html.
@@ -8756,6 +8762,28 @@
             <inheritdoc />
         </member>
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.UInt32Handler.Write(System.UInt32,Npgsql.NpgsqlWriteBuffer,Npgsql.NpgsqlParameter)">
+            <inheritdoc />
+        </member>
+        <member name="T:Npgsql.TypeHandlers.NumericHandlers.UInt64Handler">
+            <summary>
+            A type handler for PostgreSQL unsigned 64-bit data types. This is only used for internal types.
+            </summary>
+            <remarks>
+            The type handler API allows customizing Npgsql's behavior in powerful ways. However, although it is public, it
+            should be considered somewhat unstable, and may change in breaking ways, including in non-major releases.
+            Use it at your own risk.
+            </remarks>
+        </member>
+        <member name="M:Npgsql.TypeHandlers.NumericHandlers.UInt64Handler.#ctor(Npgsql.PostgresTypes.PostgresType)">
+            <inheritdoc />
+        </member>
+        <member name="M:Npgsql.TypeHandlers.NumericHandlers.UInt64Handler.Read(Npgsql.NpgsqlReadBuffer,System.Int32,Npgsql.BackendMessages.FieldDescription)">
+            <inheritdoc />
+        </member>
+        <member name="M:Npgsql.TypeHandlers.NumericHandlers.UInt64Handler.ValidateAndGetLength(System.UInt64,Npgsql.NpgsqlParameter)">
+            <inheritdoc />
+        </member>
+        <member name="M:Npgsql.TypeHandlers.NumericHandlers.UInt64Handler.Write(System.UInt64,Npgsql.NpgsqlWriteBuffer,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
         <member name="T:Npgsql.TypeHandlers.IRangeHandler">
@@ -10429,6 +10457,12 @@
         <member name="F:NpgsqlTypes.NpgsqlDbType.Xid">
             <summary>
             Corresponds to the PostgreSQL "xid" type, an internal transaction identifier.
+            </summary>
+            <remarks>See https://www.postgresql.org/docs/current/static/datatype-oid.html</remarks>
+        </member>
+        <member name="F:NpgsqlTypes.NpgsqlDbType.Xid8">
+            <summary>
+            Corresponds to the PostgreSQL "xid8" type, an internal transaction identifier.
             </summary>
             <remarks>See https://www.postgresql.org/docs/current/static/datatype-oid.html</remarks>
         </member>

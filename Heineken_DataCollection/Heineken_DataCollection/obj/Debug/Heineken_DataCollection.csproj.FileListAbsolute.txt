@@ -30,3 +30,10 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataColle
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Numerics.Vectors.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\obj\Debug\Heineken_DataCollection.csproj.SuggestedBindingRedirects.cache
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\NModbus.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\NModbus4.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\NuGet.Frameworks.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Windows.Forms.Ribbon.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\NModbus.xml
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\NModbus4.xml
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\NuGet.Frameworks.xml

@@ -127,16 +127,20 @@ namespace Heineken_DataCollection
         // Tест для Modbus
         private void button1_Click(object sender, EventArgs e)
         {
-            TcpClient client = new TcpClient("127.0.0.1", 502);
+            Stopwatch sw = Stopwatch.StartNew();
+            sw.Start();
+            TcpClient client = new TcpClient("10.129.31.151",502);
             ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
 
             // read five input values
-            ushort startAddress = 100;
-            ushort numInputs = 5;
-            bool[] inputs = master.ReadInputs(startAddress, numInputs);
-
+            ushort startAddress = 0;
+            ushort numInputs = 100;
+            //bool[] inputs = master.ReadInputs(startAddress, numInputs);
+            ushort[] inputs = master.ReadHoldingRegisters(startAddress,numInputs);
             for (int i = 0; i < numInputs; i++)
-                Console.WriteLine("Input {0}={1}", startAddress + i, inputs[i] ? 1 : 0);
+                Console.WriteLine("Input {0}={1}", startAddress + i, inputs[i]);
+            sw.Stop();
+            Console.WriteLine("Read: {0:N0} ticks", sw.ElapsedTicks);
         }
     }
 }
