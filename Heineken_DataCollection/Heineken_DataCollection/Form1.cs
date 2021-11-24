@@ -8,7 +8,6 @@ using System.Windows.Forms;
 using System.Net.Sockets;
 using Modbus.Data;
 using Modbus.Device;
-using Modbus.Utility;
 
 namespace Heineken_DataCollection
 {
@@ -23,7 +22,7 @@ namespace Heineken_DataCollection
             backgroundWorkerRead.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorkerRead_RunWorkerCompleted);
         }
 
-        private void Button_Read_Click(object sender, EventArgs e)
+        private void Button_Read_s7_Click(object sender, EventArgs e)
         {
             if (backgroundWorkerRead.IsBusy != true)
             {
@@ -32,7 +31,7 @@ namespace Heineken_DataCollection
             }
         }
 
-        private void Button_notRead_Click(object sender, EventArgs e)
+        private void Button_notRead_s7_Click(object sender, EventArgs e)
         {
             try
             {
@@ -63,30 +62,35 @@ namespace Heineken_DataCollection
                 {
                     try
                     {
-                        Stopwatch sw = Stopwatch.StartNew();
-                        sw.Start();
-                        
+                        //Stopwatch sw = Stopwatch.StartNew();
+                        DateTime s1 = DateTime.Now;
+                        //sw.Start();
+
                         // Установка соединения с PLC
-                        S7Client plcClient = new S7Client();
+                        // закоменчено для теста 18.11.21 - раскоментить сразу по завершению --- S7Client plcClient = new S7Client();
                         //connectionClient.S7Client = new S7Client();
-                        int result = plcClient.ConnectTo("192.168.127.150", 0, 1);
-                        if (result != 0) MessageBox.Show(plcClient.ErrorText(result));
-                        
+                        // закоменчено для теста 18.11.21 - раскоментить сразу по завершению --- int result = plcClient.ConnectTo("192.168.127.150", 0, 1);
+                        // закоменчено для теста 18.11.21 - раскоментить сразу по завершению --- if (result != 0) MessageBox.Show(plcClient.ErrorText(result));
+
                         // Установка соединения с PostgreSQL
-                        NpgsqlConnection PGCon = new NpgsqlConnection("Host=localhost;Username=postgres;Password=123456789;Database=postgres");
+                        //NpgsqlConnection PGCon = new NpgsqlConnection("Host=192.168.127.50;Username=postgres;Password=123456789;Database=postgres");
+                        NpgsqlConnection PGCon = new NpgsqlConnection("Host=10.129.20.179;Username=postgres;Password=123456;Database=postgres");
                         PGCon.Open();
                         
                         List<string> myList = new List<string>();
 
                         byte[] db1Buffer = new byte[800];
+                        // закоменчено для теста 18.11.21 - раскоментить сразу по завершению
+                        /*
                         result = plcClient.DBRead(2000, 432, 800, db1Buffer);
                         if (result != 0)
                         {
                             Console.WriteLine("Error: " + plcClient.ErrorText(result));
                         }
-
-                        for (int i = 0; i <= 199; i++) {
-                            double db1ddd4 = S7.GetRealAt(db1Buffer, 4*i);
+                        */
+                        for (int i = 0; i <= 99; i++) {
+                            //double db1ddd4 = S7.GetRealAt(db1Buffer, 4*i);
+                            double db1ddd4 = 4 * i;
                             myList.Add("(" + i + "," + db1ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
                         }
                         
@@ -96,17 +100,18 @@ namespace Heineken_DataCollection
                         var cmd_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
-                            CommandText = "INSERT INTO _test_table (id, value, date_time) VALUES " + sqlValues
+                            CommandText = "INSERT INTO _temp_table (id, value, date_time) VALUES " + sqlValues
                         };
                         cmd_insert.ExecuteNonQuery();
 
-                        progressBarRead.Invoke(new Action(() => progressBarRead.Style = ProgressBarStyle.Marquee));
+                        progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Style = ProgressBarStyle.Marquee));
 
-                        sw.Stop();
-                        Console.WriteLine("Read: {0:N0} ticks", sw.ElapsedTicks);
+                        //sw.Stop();
+                        //Console.WriteLine("Read: {0:N0} ticks", sw.ElapsedTicks);
+                        timeLabel_s7.Invoke(new Action(() => timeLabel_s7.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1)));
 
                         // Закрытие соединений с PLC и PostgreSQL
-                        plcClient.Disconnect();
+                        // закоменчено для теста 18.11.21 - раскоментить сразу по завершению --- plcClient.Disconnect();
                         PGCon.Close();
                     }
                     catch (Exception ex)
@@ -118,29 +123,37 @@ namespace Heineken_DataCollection
         }
         private void BackgroundWorkerRead_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            progressBarRead.Invoke(new Action(() => progressBarRead.Value = 0));
-            progressBarRead.Invoke(new Action(() => progressBarRead.Style = ProgressBarStyle.Blocks));
+            progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Value = 0));
+            progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Style = ProgressBarStyle.Blocks));
         }
 
-
-
         // Tест для Modbus
-        private void button1_Click(object sender, EventArgs e)
+        private void Button_Read_mb_Click(object sender, EventArgs e)
         {
-            Stopwatch sw = Stopwatch.StartNew();
-            sw.Start();
-            TcpClient client = new TcpClient("10.129.31.151",502);
-            ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
+            try
+            {
+                DateTime s1 = DateTime.Now;
+                TcpClient client = new TcpClient("10.129.31.228", 502);
+                ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
 
-            // read five input values
-            ushort startAddress = 0;
-            ushort numInputs = 100;
-            //bool[] inputs = master.ReadInputs(startAddress, numInputs);
-            ushort[] inputs = master.ReadHoldingRegisters(startAddress,numInputs);
-            for (int i = 0; i < numInputs; i++)
-                Console.WriteLine("Input {0}={1}", startAddress + i, inputs[i]);
-            sw.Stop();
-            Console.WriteLine("Read: {0:N0} ticks", sw.ElapsedTicks);
+                List<ushort> modbusList = new List<ushort>();
+
+                // read five input values
+                for (int i = 0; i <= 7; i++)
+                {
+                    ushort startAddress = (ushort)(1 + 15 * i);
+                    //ushort numInputs = 1;
+                    ushort[] inputs = master.ReadHoldingRegisters(startAddress, 1);
+                    modbusList.Add(inputs[0]);
+                }
+
+                timeLabel_mb.Invoke(new Action(() => timeLabel_mb.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1)));
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

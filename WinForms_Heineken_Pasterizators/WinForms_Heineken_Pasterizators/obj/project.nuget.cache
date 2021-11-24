@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "myysWIKCMchEpi9CofqXLLJYJhWMTkXlgVzrblnsBPQZ38PhvljiT0vyZ83Q1TYHzsk0fH2xkaEXV99w1BxBWA==",
+  "dgSpecHash": "mOI5hf0z+ivKyzjQWg+0mXy+cF83+ifbQ9aPvXbVZjUvOYs755g9GPXr1D8tYrR3KWWy64Q/CeffsWC3I0o6Zg==",
   "success": true,
   "projectFilePath": "C:\\Users\\alexo\\OneDrive\\Документы\\GitHub\\-MyProjects\\WinForms_Heineken_Pasterizators\\WinForms_Heineken_Pasterizators\\WinForms_Heineken_Pasterizators.csproj",
   "expectedPackageFiles": [
@@ -8,7 +8,7 @@
     "C:\\Users\\alexo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
     "C:\\Users\\alexo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
     "C:\\Users\\alexo\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\alexo\\.nuget\\packages\\microsoft.netcore.app.host.win-x86\\3.1.17\\microsoft.netcore.app.host.win-x86.3.1.17.nupkg.sha512"
+    "C:\\Users\\alexo\\.nuget\\packages\\microsoft.netcore.app.host.win-x86\\3.1.20\\microsoft.netcore.app.host.win-x86.3.1.20.nupkg.sha512"
   ],
   "logs": []
 }
