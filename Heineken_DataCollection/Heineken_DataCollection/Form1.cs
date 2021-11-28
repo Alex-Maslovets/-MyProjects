@@ -3,11 +3,11 @@ using Sharp7;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows.Forms;
 using System.Net.Sockets;
 using Modbus.Data;
 using Modbus.Device;
+using System.IO;
 
 namespace Heineken_DataCollection
 {
@@ -20,6 +20,11 @@ namespace Heineken_DataCollection
             backgroundWorkerRead.WorkerSupportsCancellation = true;
             backgroundWorkerRead.DoWork += new DoWorkEventHandler(BackgroundWorkerRead_DoWork);
             backgroundWorkerRead.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorkerRead_RunWorkerCompleted);
+
+            bgWReadModBus.WorkerReportsProgress = true;
+            bgWReadModBus.WorkerSupportsCancellation = true;
+            bgWReadModBus.DoWork += new DoWorkEventHandler(BgWReadModBus_DoWork);
+            bgWReadModBus.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BgWReadModBus_RunWorkerCompleted);
         }
 
         private void Button_Read_s7_Click(object sender, EventArgs e)
@@ -62,35 +67,30 @@ namespace Heineken_DataCollection
                 {
                     try
                     {
-                        //Stopwatch sw = Stopwatch.StartNew();
                         DateTime s1 = DateTime.Now;
-                        //sw.Start();
 
                         // Установка соединения с PLC
-                        // закоменчено для теста 18.11.21 - раскоментить сразу по завершению --- S7Client plcClient = new S7Client();
-                        //connectionClient.S7Client = new S7Client();
-                        // закоменчено для теста 18.11.21 - раскоментить сразу по завершению --- int result = plcClient.ConnectTo("192.168.127.150", 0, 1);
-                        // закоменчено для теста 18.11.21 - раскоментить сразу по завершению --- if (result != 0) MessageBox.Show(plcClient.ErrorText(result));
+                        S7Client plcClient = new S7Client();
+                        //int result = plcClient.ConnectTo("10.129.31.147", 0, 4);
+                        int result = plcClient.ConnectTo(textBox1.Text, Int32.Parse(textBox2.Text), Int32.Parse(textBox3.Text));
+                        if (result != 0) MessageBox.Show(plcClient.ErrorText(result));
 
                         // Установка соединения с PostgreSQL
-                        //NpgsqlConnection PGCon = new NpgsqlConnection("Host=192.168.127.50;Username=postgres;Password=123456789;Database=postgres");
                         NpgsqlConnection PGCon = new NpgsqlConnection("Host=10.129.20.179;Username=postgres;Password=123456;Database=postgres");
                         PGCon.Open();
                         
                         List<string> myList = new List<string>();
 
-                        byte[] db1Buffer = new byte[800];
-                        // закоменчено для теста 18.11.21 - раскоментить сразу по завершению
-                        /*
-                        result = plcClient.DBRead(2000, 432, 800, db1Buffer);
+                        byte[] db1Buffer = new byte[Int32.Parse(textBox4.Text)];
+                        
+                        result = plcClient.DBRead(Int32.Parse(textBox5.Text), Int32.Parse(textBox6.Text), Int32.Parse(textBox4.Text), db1Buffer);
                         if (result != 0)
                         {
                             Console.WriteLine("Error: " + plcClient.ErrorText(result));
                         }
-                        */
-                        for (int i = 0; i <= 99; i++) {
-                            //double db1ddd4 = S7.GetRealAt(db1Buffer, 4*i);
-                            double db1ddd4 = 4 * i;
+                        
+                        for (int i = 0; i <= Int32.Parse(textBox7.Text); i++) {
+                            double db1ddd4 = S7.GetRealAt(db1Buffer, 4*i);
                             myList.Add("(" + i + "," + db1ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
                         }
                         
@@ -106,17 +106,26 @@ namespace Heineken_DataCollection
 
                         progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Style = ProgressBarStyle.Marquee));
 
-                        //sw.Stop();
-                        //Console.WriteLine("Read: {0:N0} ticks", sw.ElapsedTicks);
                         timeLabel_s7.Invoke(new Action(() => timeLabel_s7.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1)));
 
                         // Закрытие соединений с PLC и PostgreSQL
-                        // закоменчено для теста 18.11.21 - раскоментить сразу по завершению --- plcClient.Disconnect();
+                        plcClient.Disconnect();
                         PGCon.Close();
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
+                        string writePath = @"C:\Users\admin\Desktop\messageArchive.txt";
+                        string text = ex.Message;
+                        try
+                        {
+                            using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
+                                sw.WriteLine(text);
+                        }
+                        catch (Exception exe)
+                        {
+                            MessageBox.Show(exe.Message);
+                        }
                     }
                 }
             }
@@ -126,6 +135,8 @@ namespace Heineken_DataCollection
             progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Value = 0));
             progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Style = ProgressBarStyle.Blocks));
         }
+
+
 
         // Tест для Modbus
         private void Button_Read_mb_Click(object sender, EventArgs e)
@@ -154,6 +165,17 @@ namespace Heineken_DataCollection
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void BgWReadModBus_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+        }
+
+        private void BgWReadModBus_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Value = 0));
+            //progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Style = ProgressBarStyle.Blocks));
         }
     }
 }
