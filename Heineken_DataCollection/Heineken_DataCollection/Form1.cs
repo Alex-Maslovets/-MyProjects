@@ -29,10 +29,17 @@ namespace Heineken_DataCollection
 
         private void Button_Read_s7_Click(object sender, EventArgs e)
         {
-            if (backgroundWorkerRead.IsBusy != true)
+            try
             {
-                // Start the asynchronous operation.
-                backgroundWorkerRead.RunWorkerAsync();
+                if (backgroundWorkerRead.IsBusy != true)
+                {
+                    // Start the asynchronous operation.
+                    backgroundWorkerRead.RunWorkerAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -71,9 +78,13 @@ namespace Heineken_DataCollection
 
                         // Установка соединения с PLC
                         S7Client plcClient = new S7Client();
-                        //int result = plcClient.ConnectTo("10.129.31.147", 0, 4);
-                        int result = plcClient.ConnectTo(textBox1.Text, Int32.Parse(textBox2.Text), Int32.Parse(textBox3.Text));
-                        if (result != 0) MessageBox.Show(plcClient.ErrorText(result));
+                        int result = plcClient.ConnectTo("10.129.31.147", 0, 2);
+
+                        if (result != 0)
+                        {
+                            string v = plcClient.ErrorText(result);
+                            string errorText = v;
+                        }
 
                         // Установка соединения с PostgreSQL
                         NpgsqlConnection PGCon = new NpgsqlConnection("Host=10.129.20.179;Username=postgres;Password=123456;Database=postgres");
@@ -81,15 +92,15 @@ namespace Heineken_DataCollection
                         
                         List<string> myList = new List<string>();
 
-                        byte[] db1Buffer = new byte[Int32.Parse(textBox4.Text)];
+                        byte[] db1Buffer = new byte[128];
                         
-                        result = plcClient.DBRead(Int32.Parse(textBox5.Text), Int32.Parse(textBox6.Text), Int32.Parse(textBox4.Text), db1Buffer);
+                        result = plcClient.DBRead(20, 0, 128, db1Buffer);
                         if (result != 0)
                         {
                             Console.WriteLine("Error: " + plcClient.ErrorText(result));
                         }
                         
-                        for (int i = 0; i <= Int32.Parse(textBox7.Text); i++) {
+                        for (int i = 0; i <= 31; i++) {
                             double db1ddd4 = S7.GetRealAt(db1Buffer, 4*i);
                             myList.Add("(" + i + "," + db1ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
                         }
@@ -114,13 +125,13 @@ namespace Heineken_DataCollection
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        //MessageBox.Show(ex.Message);
                         string writePath = @"C:\Users\admin\Desktop\messageArchive.txt";
                         string text = ex.Message;
                         try
                         {
                             using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
-                                sw.WriteLine(text);
+                                sw.WriteLine(text + DateTime.Now);
                         }
                         catch (Exception exe)
                         {
@@ -136,29 +147,35 @@ namespace Heineken_DataCollection
             progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Style = ProgressBarStyle.Blocks));
         }
 
-
-
         // Tест для Modbus
         private void Button_Read_mb_Click(object sender, EventArgs e)
         {
             try
             {
                 DateTime s1 = DateTime.Now;
-                TcpClient client = new TcpClient("10.129.31.228", 502);
+                TcpClient client = new TcpClient("192.168.255.15", 502);
                 ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
 
                 List<ushort> modbusList = new List<ushort>();
 
-                // read five input values
-                for (int i = 0; i <= 7; i++)
+                // read eight input values
+                //for (int i = 0; i <= 7; i++)
+                //{
+                //ushort startAddress = (ushort)(1 + 15 * i);
+                //ushort numInputs = 1;
+                //ushort[] inputs = master.ReadHoldingRegisters(startAddress, 1);
+                //modbusList.Add(inputs[0]);
+                //}
+
+                for (int i = 0; i <= 19; i++)
                 {
-                    ushort startAddress = (ushort)(1 + 15 * i);
+                    ushort startAddress = (ushort)(1301 + i);
                     //ushort numInputs = 1;
-                    ushort[] inputs = master.ReadHoldingRegisters(startAddress, 1);
+                    ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
                     modbusList.Add(inputs[0]);
                 }
 
-                timeLabel_mb.Invoke(new Action(() => timeLabel_mb.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1)));
+                    timeLabel_mb.Invoke(new Action(() => timeLabel_mb.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1)));
 
             }
             catch (Exception ex)
