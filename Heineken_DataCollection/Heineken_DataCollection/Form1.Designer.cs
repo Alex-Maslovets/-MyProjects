@@ -41,6 +41,8 @@ namespace Heineken_DataCollection
             this.Button_Read_mb = new System.Windows.Forms.Button();
             this.bgWReadModBus = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.progressBarRead_mb = new System.Windows.Forms.ProgressBar();
+            this.Button_notRead_mb = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -73,7 +75,7 @@ namespace Heineken_DataCollection
             // timeLabel_s7
             // 
             this.timeLabel_s7.AutoSize = true;
-            this.timeLabel_s7.Location = new System.Drawing.Point(6, 101);
+            this.timeLabel_s7.Location = new System.Drawing.Point(6, 110);
             this.timeLabel_s7.Name = "timeLabel_s7";
             this.timeLabel_s7.Size = new System.Drawing.Size(144, 13);
             this.timeLabel_s7.TabIndex = 11;
@@ -110,6 +112,8 @@ namespace Heineken_DataCollection
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.Button_notRead_mb);
+            this.tabPage2.Controls.Add(this.progressBarRead_mb);
             this.tabPage2.Controls.Add(this.timeLabel_mb);
             this.tabPage2.Controls.Add(this.Button_Read_mb);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -123,7 +127,7 @@ namespace Heineken_DataCollection
             // timeLabel_mb
             // 
             this.timeLabel_mb.AutoSize = true;
-            this.timeLabel_mb.Location = new System.Drawing.Point(6, 52);
+            this.timeLabel_mb.Location = new System.Drawing.Point(6, 110);
             this.timeLabel_mb.Name = "timeLabel_mb";
             this.timeLabel_mb.Size = new System.Drawing.Size(144, 13);
             this.timeLabel_mb.TabIndex = 12;
@@ -131,13 +135,32 @@ namespace Heineken_DataCollection
             // 
             // Button_Read_mb
             // 
-            this.Button_Read_mb.Location = new System.Drawing.Point(9, 6);
+            this.Button_Read_mb.Location = new System.Drawing.Point(6, 6);
             this.Button_Read_mb.Name = "Button_Read_mb";
-            this.Button_Read_mb.Size = new System.Drawing.Size(86, 23);
+            this.Button_Read_mb.Size = new System.Drawing.Size(346, 23);
             this.Button_Read_mb.TabIndex = 7;
-            this.Button_Read_mb.Text = "ModBus";
+            this.Button_Read_mb.Text = "Пуск";
             this.Button_Read_mb.UseVisualStyleBackColor = true;
             this.Button_Read_mb.Click += new System.EventHandler(this.Button_Read_mb_Click);
+            // 
+            // progressBarRead_mb
+            // 
+            this.progressBarRead_mb.Location = new System.Drawing.Point(6, 64);
+            this.progressBarRead_mb.MarqueeAnimationSpeed = 50;
+            this.progressBarRead_mb.Name = "progressBarRead_mb";
+            this.progressBarRead_mb.Size = new System.Drawing.Size(346, 23);
+            this.progressBarRead_mb.Step = 1;
+            this.progressBarRead_mb.TabIndex = 13;
+            // 
+            // Button_notRead_mb
+            // 
+            this.Button_notRead_mb.Location = new System.Drawing.Point(6, 35);
+            this.Button_notRead_mb.Name = "Button_notRead_mb";
+            this.Button_notRead_mb.Size = new System.Drawing.Size(346, 23);
+            this.Button_notRead_mb.TabIndex = 14;
+            this.Button_notRead_mb.Text = "Стоп";
+            this.Button_notRead_mb.UseVisualStyleBackColor = true;
+            this.Button_notRead_mb.Click += new System.EventHandler(this.Button_notRead_mb_Click);
             // 
             // Form1
             // 
@@ -170,6 +193,8 @@ namespace Heineken_DataCollection
         private System.Windows.Forms.Button Button_Read_mb;
         private System.ComponentModel.BackgroundWorker bgWReadModBus;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ProgressBar progressBarRead_mb;
+        private System.Windows.Forms.Button Button_notRead_mb;
     }
 }
 

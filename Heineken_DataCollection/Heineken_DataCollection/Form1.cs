@@ -80,12 +80,6 @@ namespace Heineken_DataCollection
                         S7Client plcClient = new S7Client();
                         int result = plcClient.ConnectTo("10.129.31.147", 0, 2);
 
-                        if (result != 0)
-                        {
-                            string v = plcClient.ErrorText(result);
-                            string errorText = v;
-                        }
-
                         // Установка соединения с PostgreSQL
                         NpgsqlConnection PGCon = new NpgsqlConnection("Host=10.129.20.179;Username=postgres;Password=123456;Database=postgres");
                         PGCon.Open();
@@ -147,36 +141,32 @@ namespace Heineken_DataCollection
             progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Style = ProgressBarStyle.Blocks));
         }
 
-        // Tест для Modbus
+        // Read Modbus
         private void Button_Read_mb_Click(object sender, EventArgs e)
         {
             try
             {
-                DateTime s1 = DateTime.Now;
-                TcpClient client = new TcpClient("192.168.255.15", 502);
-                ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
-
-                List<ushort> modbusList = new List<ushort>();
-
-                // read eight input values
-                //for (int i = 0; i <= 7; i++)
-                //{
-                //ushort startAddress = (ushort)(1 + 15 * i);
-                //ushort numInputs = 1;
-                //ushort[] inputs = master.ReadHoldingRegisters(startAddress, 1);
-                //modbusList.Add(inputs[0]);
-                //}
-
-                for (int i = 0; i <= 19; i++)
+                if (bgWReadModBus.IsBusy != true)
                 {
-                    ushort startAddress = (ushort)(1301 + i);
-                    //ushort numInputs = 1;
-                    ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
-                    modbusList.Add(inputs[0]);
+                    // Start the asynchronous operation.
+                    bgWReadModBus.RunWorkerAsync();
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
-                    timeLabel_mb.Invoke(new Action(() => timeLabel_mb.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1)));
-
+        private void Button_notRead_mb_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (bgWReadModBus.WorkerSupportsCancellation == true)
+                {
+                    // Cancel the asynchronous operation.
+                    bgWReadModBus.CancelAsync();
+                }
             }
             catch (Exception ex)
             {
@@ -187,12 +177,147 @@ namespace Heineken_DataCollection
         private void BgWReadModBus_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-        }
+            while (true)
+            {
+                if (worker.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+                else
+                {
+                    try
+                    {
+                        // Установка соединения с PostgreSQL
+                        NpgsqlConnection PGCon = new NpgsqlConnection("Host=10.129.20.179;Username=postgres;Password=123456;Database=postgres");
+                        PGCon.Open();
 
+                        // Connect to Packaging
+                        DateTime s1 = DateTime.Now;
+                        TcpClient client = new TcpClient("10.129.31.160", 502);
+                        ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
+
+                        List<ushort> modbusList = new List<ushort>();
+
+                        for (int i = 0; i <= 29; i++)
+                        {
+                            ushort startAddress = (ushort)(1301 + i);
+                            //ushort numInputs = 1;
+                            ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
+                            modbusList.Add(inputs[0]);
+                        }
+
+                        List<float> values = new List<float>();
+
+                        for (int j = 0; j <= 29; j += 2)
+                        {
+                            ushort[] buffer = { modbusList[j], modbusList[j + 1] };
+                            byte[] bytes = new byte[4];
+                            bytes[3] = (byte)(buffer[1] & 0xFF);
+                            bytes[2] = (byte)(buffer[1] >> 8);
+                            bytes[1] = (byte)(buffer[0] & 0xFF);
+                            bytes[0] = (byte)(buffer[0] >> 8);
+                            values.Add(BitConverter.ToSingle(bytes, 0));
+                        }
+
+                        // Connect to EnergyBlock --- WaterReady
+                        s1 = DateTime.Now;
+                        client = new TcpClient("10.129.31.164", 502);
+                        master = ModbusIpMaster.CreateIp(client);
+
+                        modbusList.Clear();
+
+                        for (int i = 0; i <= 9; i++)
+                        {
+                            ushort startAddress = (ushort)(1301 + i);
+                            //ushort numInputs = 1;
+                            ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
+                            modbusList.Add(inputs[0]);
+                        }
+
+                        for (int j = 0; j <= 9; j += 2)
+                        {
+                            ushort[] buffer = { modbusList[j], modbusList[j + 1] };
+                            byte[] bytes = new byte[4];
+                            bytes[3] = (byte)(buffer[1] & 0xFF);
+                            bytes[2] = (byte)(buffer[1] >> 8);
+                            bytes[1] = (byte)(buffer[0] & 0xFF);
+                            bytes[0] = (byte)(buffer[0] >> 8);
+                            values.Add(BitConverter.ToSingle(bytes, 0));
+                        }
+
+                        // Connect to VAO
+                        s1 = DateTime.Now;
+                        client = new TcpClient("10.129.31.163", 502);
+                        master = ModbusIpMaster.CreateIp(client);
+
+                        modbusList.Clear();
+
+                        for (int i = 0; i <= 49; i++)
+                        {
+                            ushort startAddress = (ushort)(1301 + i);
+                            //ushort numInputs = 1;
+                            ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
+                            modbusList.Add(inputs[0]);
+                        }
+
+                        for (int j = 0; j <= 49; j += 2)
+                        {
+                            ushort[] buffer = { modbusList[j], modbusList[j + 1] };
+                            byte[] bytes = new byte[4];
+                            bytes[3] = (byte)(buffer[1] & 0xFF);
+                            bytes[2] = (byte)(buffer[1] >> 8);
+                            bytes[1] = (byte)(buffer[0] & 0xFF);
+                            bytes[0] = (byte)(buffer[0] >> 8);
+                            values.Add(BitConverter.ToSingle(bytes, 0));
+                        }
+
+                        List<string> myList = new List<string>();
+
+                        for (int i = 0; i < values.Count; i++)
+                        {
+                            myList.Add("(" + i + "," + values[i].ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
+                        }
+
+                        var sqlValues = String.Join(", ", myList.ToArray());
+
+                        // Запиись данных в PostgreSQL
+                        var cmd_insert = new NpgsqlCommand
+                        {
+                            Connection = PGCon,
+                            CommandText = "INSERT INTO _temp_table_mb (id, value, date_time) VALUES " + sqlValues
+                        };
+                        cmd_insert.ExecuteNonQuery();
+
+                        progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Marquee));
+
+                        timeLabel_mb.Invoke(new Action(() => timeLabel_mb.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1)));
+
+                        // Закрытие соединений с PLC и PostgreSQL
+                        PGCon.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        //MessageBox.Show(ex.Message);
+                        string writePath = @"C:\Users\admin\Desktop\messageArchive.txt";
+                        string text = ex.Message;
+                        try
+                        {
+                            using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
+                                sw.WriteLine(text + DateTime.Now);
+                        }
+                        catch (Exception exe)
+                        {
+                            MessageBox.Show(exe.Message);
+                        }
+                    }
+                }
+            }
+        }
         private void BgWReadModBus_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Value = 0));
-            //progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Style = ProgressBarStyle.Blocks));
+            progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Value = 0));
+            progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Blocks));
         }
     }
 }
