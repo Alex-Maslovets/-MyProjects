@@ -99,6 +99,24 @@ namespace Heineken_DataCollection
                             myList.Add("(" + i + "," + db1ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
                         }
                         
+                        plcClient.Disconnect();
+
+                        // Соединение и считывание данных с контроллера в энергоблоке
+                        result = plcClient.ConnectTo("10.129.31.135", 0, 3);
+                        byte[] db2Buffer = new byte[20];
+
+                        result = plcClient.DBRead(2000, 1558, 20, db2Buffer);
+                        if (result != 0)
+                        {
+                            Console.WriteLine("Error: " + plcClient.ErrorText(result));
+                        }
+
+                        for (int i = 32; i <= 36; i++)
+                        {
+                            double db2ddd4 = S7.GetRealAt(db2Buffer, 4 * (i-32));
+                            myList.Add("(" + i + "," + db2ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
+                        }
+
                         var sqlValues = String.Join(", ", myList.ToArray());
                         
                         // Запиись данных в PostgreSQL
@@ -202,7 +220,6 @@ namespace Heineken_DataCollection
                         for (int i = 0; i <= 29; i++)
                         {
                             ushort startAddress = (ushort)(1301 + i);
-                            //ushort numInputs = 1;
                             ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
                             modbusList.Add(inputs[0]);
                         }
@@ -219,10 +236,10 @@ namespace Heineken_DataCollection
                             bytes[0] = (byte)(buffer[0] >> 8);
                             values.Add(BitConverter.ToSingle(bytes, 0));
                         }
-
-                        // Connect to EnergyBlock --- WaterReady
+                        
+                        // Connect to BLO --- Propogators
                         s1 = DateTime.Now;
-                        client = new TcpClient("10.129.31.164", 502);
+                        client = new TcpClient("10.129.31.162", 502);
                         master = ModbusIpMaster.CreateIp(client);
 
                         modbusList.Clear();
@@ -230,7 +247,6 @@ namespace Heineken_DataCollection
                         for (int i = 0; i <= 9; i++)
                         {
                             ushort startAddress = (ushort)(1301 + i);
-                            //ushort numInputs = 1;
                             ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
                             modbusList.Add(inputs[0]);
                         }
@@ -256,7 +272,6 @@ namespace Heineken_DataCollection
                         for (int i = 0; i <= 49; i++)
                         {
                             ushort startAddress = (ushort)(1301 + i);
-                            //ushort numInputs = 1;
                             ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
                             modbusList.Add(inputs[0]);
                         }
@@ -272,7 +287,66 @@ namespace Heineken_DataCollection
                             values.Add(BitConverter.ToSingle(bytes, 0));
                         }
 
+                        // Connect to EnergyBlock --- WaterReady
+                        s1 = DateTime.Now;
+                        client = new TcpClient("10.129.31.164", 502);
+                        master = ModbusIpMaster.CreateIp(client);
+
+                        modbusList.Clear();
+
+                        for (int i = 0; i <= 9; i++)
+                        {
+                            ushort startAddress = (ushort)(1301 + i);
+                            ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
+                            modbusList.Add(inputs[0]);
+                        }
+
+                        for (int j = 0; j <= 9; j += 2)
+                        {
+                            ushort[] buffer = { modbusList[j], modbusList[j + 1] };
+                            byte[] bytes = new byte[4];
+                            bytes[3] = (byte)(buffer[1] & 0xFF);
+                            bytes[2] = (byte)(buffer[1] >> 8);
+                            bytes[1] = (byte)(buffer[0] & 0xFF);
+                            bytes[0] = (byte)(buffer[0] >> 8);
+                            values.Add(BitConverter.ToSingle(bytes, 0));
+                        }
+
+                        
+                        // Connect to Filtration
+                        s1 = DateTime.Now;
+                        client = new TcpClient("10.129.31.161", 502);
+                        master = ModbusIpMaster.CreateIp(client);
+
+                        modbusList.Clear();
+
+                        for (int i = 0; i <= 29; i++)
+                        {
+                            ushort startAddress = (ushort)(1301 + i);
+                            ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
+                            modbusList.Add(inputs[0]);
+                        }
+
+                        for (int j = 0; j <= 29; j += 2)
+                        {
+                            ushort[] buffer = { modbusList[j], modbusList[j + 1] };
+                            byte[] bytes = new byte[4];
+                            bytes[3] = (byte)(buffer[1] & 0xFF);
+                            bytes[2] = (byte)(buffer[1] >> 8);
+                            bytes[1] = (byte)(buffer[0] & 0xFF);
+                            bytes[0] = (byte)(buffer[0] >> 8);
+                            values.Add(BitConverter.ToSingle(bytes, 0));
+                        }
+                        
+
                         List<string> myList = new List<string>();
+
+                        int x = values.Count / 5;
+
+                        for (int i = 4, j = 0; j < x; i += 5, j++)
+                        {
+                            values.RemoveAt(i - j);
+                        }
 
                         for (int i = 0; i < values.Count; i++)
                         {

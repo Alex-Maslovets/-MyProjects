@@ -37,12 +37,12 @@ namespace Heineken_DataCollection
             this.Button_notRead_s7 = new System.Windows.Forms.Button();
             this.Button_Read_s7 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.Button_notRead_mb = new System.Windows.Forms.Button();
+            this.progressBarRead_mb = new System.Windows.Forms.ProgressBar();
             this.timeLabel_mb = new System.Windows.Forms.Label();
             this.Button_Read_mb = new System.Windows.Forms.Button();
             this.bgWReadModBus = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.progressBarRead_mb = new System.Windows.Forms.ProgressBar();
-            this.Button_notRead_mb = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -124,6 +124,25 @@ namespace Heineken_DataCollection
             this.tabPage2.Text = "Modbus";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // Button_notRead_mb
+            // 
+            this.Button_notRead_mb.Location = new System.Drawing.Point(6, 35);
+            this.Button_notRead_mb.Name = "Button_notRead_mb";
+            this.Button_notRead_mb.Size = new System.Drawing.Size(346, 23);
+            this.Button_notRead_mb.TabIndex = 14;
+            this.Button_notRead_mb.Text = "Стоп";
+            this.Button_notRead_mb.UseVisualStyleBackColor = true;
+            this.Button_notRead_mb.Click += new System.EventHandler(this.Button_notRead_mb_Click);
+            // 
+            // progressBarRead_mb
+            // 
+            this.progressBarRead_mb.Location = new System.Drawing.Point(6, 64);
+            this.progressBarRead_mb.MarqueeAnimationSpeed = 50;
+            this.progressBarRead_mb.Name = "progressBarRead_mb";
+            this.progressBarRead_mb.Size = new System.Drawing.Size(346, 23);
+            this.progressBarRead_mb.Step = 1;
+            this.progressBarRead_mb.TabIndex = 13;
+            // 
             // timeLabel_mb
             // 
             this.timeLabel_mb.AutoSize = true;
@@ -142,25 +161,6 @@ namespace Heineken_DataCollection
             this.Button_Read_mb.Text = "Пуск";
             this.Button_Read_mb.UseVisualStyleBackColor = true;
             this.Button_Read_mb.Click += new System.EventHandler(this.Button_Read_mb_Click);
-            // 
-            // progressBarRead_mb
-            // 
-            this.progressBarRead_mb.Location = new System.Drawing.Point(6, 64);
-            this.progressBarRead_mb.MarqueeAnimationSpeed = 50;
-            this.progressBarRead_mb.Name = "progressBarRead_mb";
-            this.progressBarRead_mb.Size = new System.Drawing.Size(346, 23);
-            this.progressBarRead_mb.Step = 1;
-            this.progressBarRead_mb.TabIndex = 13;
-            // 
-            // Button_notRead_mb
-            // 
-            this.Button_notRead_mb.Location = new System.Drawing.Point(6, 35);
-            this.Button_notRead_mb.Name = "Button_notRead_mb";
-            this.Button_notRead_mb.Size = new System.Drawing.Size(346, 23);
-            this.Button_notRead_mb.TabIndex = 14;
-            this.Button_notRead_mb.Text = "Стоп";
-            this.Button_notRead_mb.UseVisualStyleBackColor = true;
-            this.Button_notRead_mb.Click += new System.EventHandler(this.Button_notRead_mb_Click);
             // 
             // Form1
             // 
