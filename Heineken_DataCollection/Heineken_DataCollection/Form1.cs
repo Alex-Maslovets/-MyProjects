@@ -72,17 +72,17 @@ namespace Heineken_DataCollection
                 }
                 else
                 {
+                    // Установка соединения с PLC
+                    S7Client plcClient = new S7Client();
+                    int result = plcClient.ConnectTo("10.129.31.147", 0, 2);
+
+                    // Установка соединения с PostgreSQL
+                    NpgsqlConnection PGCon = new NpgsqlConnection("Host=10.129.20.179;Username=postgres;Password=123456;Database=postgres");
+                    PGCon.Open();
+
                     try
                     {
                         DateTime s1 = DateTime.Now;
-
-                        // Установка соединения с PLC
-                        S7Client plcClient = new S7Client();
-                        int result = plcClient.ConnectTo("10.129.31.147", 0, 2);
-
-                        // Установка соединения с PostgreSQL
-                        NpgsqlConnection PGCon = new NpgsqlConnection("Host=10.129.20.179;Username=postgres;Password=123456;Database=postgres");
-                        PGCon.Open();
                         
                         List<string> myList = new List<string>();
 
@@ -131,9 +131,6 @@ namespace Heineken_DataCollection
 
                         timeLabel_s7.Invoke(new Action(() => timeLabel_s7.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1)));
 
-                        // Закрытие соединений с PLC и PostgreSQL
-                        plcClient.Disconnect();
-                        PGCon.Close();
                     }
                     catch (Exception ex)
                     {
@@ -143,13 +140,17 @@ namespace Heineken_DataCollection
                         try
                         {
                             using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
-                                sw.WriteLine(text + DateTime.Now);
+                                //sw.WriteLine(text + DateTime.Now);
+                                sw.Write(DateTime.Now + "; " + text + ";\n");
                         }
                         catch (Exception exe)
                         {
                             MessageBox.Show(exe.Message);
                         }
                     }
+                    // Закрытие соединений с PLC и PostgreSQL
+                    plcClient.Disconnect();
+                    PGCon.Close();
                 }
             }
         }
@@ -204,12 +205,13 @@ namespace Heineken_DataCollection
                 }
                 else
                 {
+                    // Установка соединения с PostgreSQL
+                    NpgsqlConnection PGCon = new NpgsqlConnection("Host=10.129.20.179;Username=postgres;Password=123456;Database=postgres");
+                    PGCon.Open();
+
                     try
                     {
-                        // Установка соединения с PostgreSQL
-                        NpgsqlConnection PGCon = new NpgsqlConnection("Host=10.129.20.179;Username=postgres;Password=123456;Database=postgres");
-                        PGCon.Open();
-
+                        DateTime s2 = DateTime.Now;
                         // Connect to Packaging
                         DateTime s1 = DateTime.Now;
                         TcpClient client = new TcpClient("10.129.31.160", 502);
@@ -365,26 +367,26 @@ namespace Heineken_DataCollection
 
                         progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Marquee));
 
-                        timeLabel_mb.Invoke(new Action(() => timeLabel_mb.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1)));
+                        timeLabel_mb.Invoke(new Action(() => timeLabel_mb.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s2)));
 
-                        // Закрытие соединений с PLC и PostgreSQL
-                        PGCon.Close();
                     }
                     catch (Exception ex)
                     {
-                        //MessageBox.Show(ex.Message);
                         string writePath = @"C:\Users\admin\Desktop\messageArchive.txt";
                         string text = ex.Message;
                         try
                         {
                             using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
-                                sw.WriteLine(text + DateTime.Now);
+                                sw.Write(DateTime.Now + "; " + text + ";\n");
                         }
                         catch (Exception exe)
                         {
                             MessageBox.Show(exe.Message);
                         }
                     }
+
+                    // Закрытие соединений с PLC и PostgreSQL
+                    PGCon.Close();
                 }
             }
         }
