@@ -9,6 +9,10 @@ using Modbus.Data;
 using Modbus.Device;
 using System.IO;
 
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using X.Extensions.Logging.Telegram;
+
 namespace Heineken_DataCollection
 {
     public partial class Form1 : Form
@@ -139,7 +143,7 @@ namespace Heineken_DataCollection
                         string text = ex.Message;
                         try
                         {
-                            using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
+                            using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.Default))
                                 //sw.WriteLine(text + DateTime.Now);
                                 sw.Write(DateTime.Now + "; " + text + ";\n");
                         }
@@ -152,6 +156,7 @@ namespace Heineken_DataCollection
                     plcClient.Disconnect();
                     PGCon.Close();
                 }
+
             }
         }
         private void BackgroundWorkerRead_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -376,7 +381,7 @@ namespace Heineken_DataCollection
                         string text = ex.Message;
                         try
                         {
-                            using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
+                            using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.Default))
                                 sw.Write(DateTime.Now + "; " + text + ";\n");
                         }
                         catch (Exception exe)
@@ -395,5 +400,55 @@ namespace Heineken_DataCollection
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Value = 0));
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Blocks));
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            {
+                var options = new TelegramLoggerOptions
+                {
+                    AccessToken = "1234567890:AAAaaAAaa_AaAAaa-AAaAAAaAAaAaAaAAAA",
+                    ChatId = "-0000000000000",
+                    LogLevel = LogLevel.Information,
+                    Source = "TEST APP",
+                    UseEmoji = true
+                };
+
+                var factory = LoggerFactory.Create(builder =>
+                {
+                    builder
+                        .ClearProviders()
+                        .AddTelegram(options)
+                        .AddConsole(); ;
+                }
+                );
+
+                var logger1 = factory.CreateLogger<ExampleClass>();
+                var logger2 = factory.CreateLogger<AnotherExampleClass>();
+
+                for (var i = 0; i < 1; i++)
+                {
+                    logger1.LogTrace($"Message {i}");
+                    logger2.LogDebug($"Debug message text {i}");
+                    logger1.LogInformation($"Information message text {i}");
+
+                    try
+                    {
+                        throw new SystemException("Exception message description. <br /> This message contains " +
+                                                  "<html> <tags /> And some **special** symbols _");
+                    }
+                    catch (Exception exception)
+                    {
+                        logger2.LogWarning(exception, $"Warning message text {i}");
+                        logger1.LogError(exception, $"Error message  text {i}");
+                        logger2.LogCritical(exception, $"Critical error message  text {i}");
+                    }
+
+                    Task.WaitAll(Task.Delay(500));
+                }
+
+
+                Console.WriteLine("Hello World!");
+                Console.ReadKey();
+            }
     }
 }
