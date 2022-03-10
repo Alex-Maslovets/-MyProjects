@@ -9,15 +9,16 @@ using Modbus.Data;
 using Modbus.Device;
 using System.IO;
 
-using System.Threading.Tasks;
+
 using Microsoft.Extensions.Logging;
 using X.Extensions.Logging.Telegram;
+using System.Threading.Tasks;
 
 namespace Heineken_DataCollection
 {
-    public partial class Form1 : Form
+    public partial class MainScreen : Form
     {
-        public Form1()
+        public MainScreen()
         {
             InitializeComponent();
             backgroundWorkerRead.WorkerReportsProgress = true;
@@ -87,22 +88,23 @@ namespace Heineken_DataCollection
                     try
                     {
                         DateTime s1 = DateTime.Now;
-                        
+
                         List<string> myList = new List<string>();
 
                         byte[] db1Buffer = new byte[128];
-                        
+
                         result = plcClient.DBRead(20, 0, 128, db1Buffer);
                         if (result != 0)
                         {
                             Console.WriteLine("Error: " + plcClient.ErrorText(result));
                         }
-                        
-                        for (int i = 0; i <= 31; i++) {
-                            double db1ddd4 = S7.GetRealAt(db1Buffer, 4*i);
+
+                        for (int i = 0; i <= 31; i++)
+                        {
+                            double db1ddd4 = S7.GetRealAt(db1Buffer, 4 * i);
                             myList.Add("(" + i + "," + db1ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
                         }
-                        
+
                         plcClient.Disconnect();
 
                         // Соединение и считывание данных с контроллера в энергоблоке
@@ -117,12 +119,12 @@ namespace Heineken_DataCollection
 
                         for (int i = 32; i <= 36; i++)
                         {
-                            double db2ddd4 = S7.GetRealAt(db2Buffer, 4 * (i-32));
+                            double db2ddd4 = S7.GetRealAt(db2Buffer, 4 * (i - 32));
                             myList.Add("(" + i + "," + db2ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
                         }
 
                         var sqlValues = String.Join(", ", myList.ToArray());
-                        
+
                         // Запиись данных в PostgreSQL
                         var cmd_insert = new NpgsqlCommand
                         {
@@ -243,7 +245,7 @@ namespace Heineken_DataCollection
                             bytes[0] = (byte)(buffer[0] >> 8);
                             values.Add(BitConverter.ToSingle(bytes, 0));
                         }
-                        
+
                         // Connect to BLO --- Propogators
                         s1 = DateTime.Now;
                         client = new TcpClient("10.129.31.162", 502);
@@ -319,7 +321,7 @@ namespace Heineken_DataCollection
                             values.Add(BitConverter.ToSingle(bytes, 0));
                         }
 
-                        
+
                         // Connect to Filtration
                         s1 = DateTime.Now;
                         client = new TcpClient("10.129.31.161", 502);
@@ -344,7 +346,7 @@ namespace Heineken_DataCollection
                             bytes[0] = (byte)(buffer[0] >> 8);
                             values.Add(BitConverter.ToSingle(bytes, 0));
                         }
-                        
+
 
                         List<string> myList = new List<string>();
 
@@ -400,55 +402,64 @@ namespace Heineken_DataCollection
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Value = 0));
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Blocks));
         }
+        public class Message
+        {
+        }
 
+        bool[] boolArray = new bool[100];
+        
         private void button1_Click(object sender, EventArgs e)
         {
+            var options = new TelegramLoggerOptions
             {
-                var options = new TelegramLoggerOptions
-                {
-                    AccessToken = "1234567890:AAAaaAAaa_AaAAaa-AAaAAAaAAaAaAaAAAA",
-                    ChatId = "-0000000000000",
-                    LogLevel = LogLevel.Information,
-                    Source = "TEST APP",
-                    UseEmoji = true
-                };
+                AccessToken = "5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4",
+                ChatId = "-1001749496684",
+                LogLevel = LogLevel.Information,
+                Source = "Heineken_DB",
+                UseEmoji = true
+            };
 
-                var factory = LoggerFactory.Create(builder =>
-                {
-                    builder
-                        .ClearProviders()
-                        .AddTelegram(options)
-                        .AddConsole(); ;
-                }
-                );
-
-                var logger1 = factory.CreateLogger<ExampleClass>();
-                var logger2 = factory.CreateLogger<AnotherExampleClass>();
-
-                for (var i = 0; i < 1; i++)
-                {
-                    logger1.LogTrace($"Message {i}");
-                    logger2.LogDebug($"Debug message text {i}");
-                    logger1.LogInformation($"Information message text {i}");
-
-                    try
-                    {
-                        throw new SystemException("Exception message description. <br /> This message contains " +
-                                                  "<html> <tags /> And some **special** symbols _");
-                    }
-                    catch (Exception exception)
-                    {
-                        logger2.LogWarning(exception, $"Warning message text {i}");
-                        logger1.LogError(exception, $"Error message  text {i}");
-                        logger2.LogCritical(exception, $"Critical error message  text {i}");
-                    }
-
-                    Task.WaitAll(Task.Delay(500));
-                }
-
-
-                Console.WriteLine("Hello World!");
-                Console.ReadKey();
+            var factory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .ClearProviders()
+                    .AddTelegram(options)
+                    .AddConsole();
             }
+            );
+
+            bool[] newboolArray = new bool[100];
+
+            newboolArray[50] = !newboolArray[50];
+
+            for (int i = 0; i < newboolArray.Length; i++)
+            {
+                if (boolArray[i] != newboolArray[i] && newboolArray[i] == true){
+                    boolArray[i] = newboolArray[i];
+                    var logger1 = factory.CreateLogger<Message>();
+                    logger1.LogWarning($"AAAAAAAAAAAA! = {i}");
+                }
+                else {
+                    boolArray[i] = false;
+                }
+            }
+    
+            //logger1.LogTrace($"Message {i}");
+            //logger2.LogDebug($"Debug message text {i}");
+            //logger1.LogWarning($"Information message text {i}");
+            /*
+            try
+            {
+            //throw new SystemException("Exception message description. <br /> This message contains " + "<html> <tags /> And some **special** symbols _");
+            }
+            catch (Exception exception)
+            {
+            logger2.LogWarning(exception, $"Warning message text {i}");
+            logger1.LogError(exception, $"Error message  text {i}");
+            logger2.LogCritical(exception, $"Critical error message  text {i}");
+            }
+            */
+            Task.WaitAll(Task.Delay(500));
+        }
     }
 }

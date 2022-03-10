@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Heineken_DataCollection
@@ -16,7 +15,9 @@ namespace Heineken_DataCollection
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            
+            
+            Application.Run(new MainScreen());
         }
     }
 }
