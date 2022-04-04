@@ -72,6 +72,4 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataColle
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\Microsoft.Extensions.Logging.Console.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\Microsoft.Extensions.Options.ConfigurationExtensions.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Threading.AccessControl.dll
-C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Threading.Tasks.Extensions.dll
-C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\obj\Debug\Heineken_DataCollection.MainScreen.resources
