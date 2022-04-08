@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Modbus.Device;
+﻿using Modbus.Device;
 using Npgsql;
 using Sharp7;
 using System;
@@ -7,16 +6,23 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using X.Extensions.Logging.Telegram;
 using System.Diagnostics;
 using System.Text;
 
 using Telegram.Bot;
+using Telegram.Bot.Types.Enums;
 
- using System.Net;
- using System.Net.Http;
+using System.Net;
+using System.Net.Http;
+
+//using System.Threading.Tasks;
+//using Microsoft.Extensions.Logging;
+//using Telegram.Bot.Exceptions;
+//using Telegram.Bot.Extensions.Polling;
+//using Telegram.Bot.Types;
+//using Telegram.Bot.Types.ReplyMarkups;
+//using System.Threading;
 
 namespace Heineken_DataCollection
 {
@@ -520,53 +526,50 @@ namespace Heineken_DataCollection
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Value = 0));
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Blocks));
         }
-        public class Message
-        {
-        }
-
+        
         bool[] boolArray = new bool[100];
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            try {
 
+                var webProxy = new WebProxy(Host: "10.23.5.4", Port: 80)
+                {
+                    // Credentials if needed:
+                    // Credentials = new NetworkCredential("USERNAME", "PASSWORD")
+                };
+                var httpClient = new HttpClient(
+                    new HttpClientHandler { Proxy = webProxy, UseProxy = true }
+                );
 
-            /*
-            var webProxy = new WebProxy(Host: "https://example.org", Port: 8080)
-            {
-                // Credentials if needed:
-                Credentials = new NetworkCredential("USERNAME", "PASSWORD")
-            };
-            var httpClient = new HttpClient(
-                new HttpClientHandler { Proxy = webProxy, UseProxy = true }
-            );
+                var botClient = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4", httpClient);
 
+                var me = await botClient.GetMeAsync();
+                // Console.WriteLine($"Hello, World! I am user {me.Id} and my name is {me.FirstName}.");
 
-            var botClient = new TelegramBotClient("YOUR_API_TOKEN", httpClient);
-            */
+                Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
+                    chatId: "-1001749496684",//chatId,
+                    text: "🟧 Warning Message 1",
+                    parseMode: ParseMode.MarkdownV2,
+                    disableNotification: true);
 
-            var botClient = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4");
+                message = await botClient.SendTextMessageAsync(
+                    chatId: "-1001749496684",//chatId,
+                    text: "🟥 Error Message 1",
+                    parseMode: ParseMode.MarkdownV2,
+                    disableNotification: true);
 
-            var me = await botClient.GetMeAsync();
-            Console.WriteLine($"Hello, World! I am user {me.Id} and my name is {me.FirstName}.");
+                message = await botClient.SendTextMessageAsync(
+                    chatId: "-1001749496684",//chatId,
+                    text: "🟦 Info Message 1",
+                    parseMode: ParseMode.MarkdownV2,
+                    disableNotification: true);
 
-            var options = new TelegramLoggerOptions
-            {
-                AccessToken = "5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4",
-                ChatId = "-1001749496684",
-                LogLevel = LogLevel.Information,
-                Source = "Heineken_DB",
-                UseEmoji = true
-            };
-
-            var factory = LoggerFactory.Create(builder =>
-            {
-                builder
-                    .ClearProviders()
-                    .AddTelegram(options)
-                    .AddConsole();
             }
-            );
-
+            catch (Exception exe) {
+                Console.WriteLine(exe.Message);
+            }
+            
             bool[] newboolArray = new bool[100];
 
             newboolArray[50] = !newboolArray[50];
@@ -576,15 +579,14 @@ namespace Heineken_DataCollection
                 if (boolArray[i] != newboolArray[i] && newboolArray[i] == true)
                 {
                     boolArray[i] = newboolArray[i];
-                    var logger1 = factory.CreateLogger<Message>();
-                    logger1.LogWarning($"AAAAAAAAAAAA! = {i}");
+                    //var logger1 = factory.CreateLogger<Message>();
+                    //logger1.LogWarning($"AAAAAAAAAAAA! = {i}");
                 }
                 else
                 {
                     boolArray[i] = false;
                 }
             }
-            Task.WaitAll(Task.Delay(500));
         }
 
 
@@ -606,27 +608,24 @@ namespace Heineken_DataCollection
                 int days_now = DateTime.Now.Day;
 
 
-                if (seconds_now != seconds_last && seconds_now != 0)
+                if (seconds_now != seconds_last)
                 {
                     seconds_last = seconds_now;
                     Console.WriteLine("Seconds_S:" + seconds_last);
                 }
-                if (minutes_now != minutes_last && seconds_now == 0)
+                if (minutes_now != minutes_last)
                 {
                     minutes_last = minutes_now;
-                    Console.WriteLine("Seconds_M:" + seconds_now);
                     Console.WriteLine("Minutes_M:" + minutes_last);
                 }
-                if (hours_now != hours_last && minutes_now == 0)
+                if (hours_now != hours_last)
                 {
                     hours_last = hours_now;
-                    Console.WriteLine("Minutes_H:" + minutes_now);
                     Console.WriteLine("Hours_H:" + hours_last);
                 }
-                if (days_now != days_last && hours_now == 0)
+                if (days_now != days_last)
                 {
                     days_last = days_now;
-                    Console.WriteLine("Hours_D:" + hours_now);
                     Console.WriteLine("Days_D:" + days_last);
                 }
             }
