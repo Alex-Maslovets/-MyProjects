@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32414.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CO2_Monitoring", "CO2_Monitoring\CO2_Monitoring.csproj", "{66BFA0CB-F40F-499F-A5F7-1E1B4DB87B7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66BFA0CB-F40F-499F-A5F7-1E1B4DB87B7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66BFA0CB-F40F-499F-A5F7-1E1B4DB87B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66BFA0CB-F40F-499F-A5F7-1E1B4DB87B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66BFA0CB-F40F-499F-A5F7-1E1B4DB87B7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C97A899-B08E-43DD-9335-EC044A08C7E1}
+	EndGlobalSection
+EndGlobal

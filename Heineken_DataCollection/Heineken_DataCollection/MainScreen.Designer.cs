@@ -30,103 +30,24 @@ namespace Heineken_DataCollection
         private void InitializeComponent()
         {
             this.backgroundWorkerRead = new System.ComponentModel.BackgroundWorker();
-            this.tabControl = new System.Windows.Forms.TabControl();
+            this.bgWReadModBus = new System.ComponentModel.BackgroundWorker();
+            this.bgWMessages = new System.ComponentModel.BackgroundWorker();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.Button_notRead_mb = new System.Windows.Forms.Button();
+            this.progressBarRead_mb = new System.Windows.Forms.ProgressBar();
+            this.timeLabel_mb = new System.Windows.Forms.Label();
+            this.Button_Read_mb = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button2 = new System.Windows.Forms.Button();
             this.timeLabel_s7 = new System.Windows.Forms.Label();
             this.progressBarRead_s7 = new System.Windows.Forms.ProgressBar();
             this.Button_notRead_s7 = new System.Windows.Forms.Button();
             this.Button_Read_s7 = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.Button_notRead_mb = new System.Windows.Forms.Button();
-            this.progressBarRead_mb = new System.Windows.Forms.ProgressBar();
-            this.timeLabel_mb = new System.Windows.Forms.Label();
-            this.Button_Read_mb = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.progressBar_Messages = new System.Windows.Forms.ProgressBar();
-            this.timeLabel_Messages = new System.Windows.Forms.Label();
-            this.ButtonMessages = new System.Windows.Forms.Button();
-            this.bgWReadModBus = new System.ComponentModel.BackgroundWorker();
-            this.bgWMessages = new System.ComponentModel.BackgroundWorker();
-            this.tabControl.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabControl.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tabControl
-            // 
-            this.tabControl.Controls.Add(this.tabPage1);
-            this.tabControl.Controls.Add(this.tabPage2);
-            this.tabControl.Controls.Add(this.tabPage3);
-            this.tabControl.Location = new System.Drawing.Point(12, 12);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(366, 152);
-            this.tabControl.TabIndex = 8;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.timeLabel_s7);
-            this.tabPage1.Controls.Add(this.progressBarRead_s7);
-            this.tabPage1.Controls.Add(this.Button_notRead_s7);
-            this.tabPage1.Controls.Add(this.Button_Read_s7);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(358, 126);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "S7";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(288, 110);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(64, 28);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Тест";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
-            // 
-            // timeLabel_s7
-            // 
-            this.timeLabel_s7.AutoSize = true;
-            this.timeLabel_s7.Location = new System.Drawing.Point(6, 110);
-            this.timeLabel_s7.Name = "timeLabel_s7";
-            this.timeLabel_s7.Size = new System.Drawing.Size(144, 13);
-            this.timeLabel_s7.TabIndex = 11;
-            this.timeLabel_s7.Text = "Время последнего цикла : ";
-            // 
-            // progressBarRead_s7
-            // 
-            this.progressBarRead_s7.Location = new System.Drawing.Point(6, 64);
-            this.progressBarRead_s7.MarqueeAnimationSpeed = 50;
-            this.progressBarRead_s7.Name = "progressBarRead_s7";
-            this.progressBarRead_s7.Size = new System.Drawing.Size(346, 23);
-            this.progressBarRead_s7.Step = 1;
-            this.progressBarRead_s7.TabIndex = 10;
-            // 
-            // Button_notRead_s7
-            // 
-            this.Button_notRead_s7.Location = new System.Drawing.Point(6, 35);
-            this.Button_notRead_s7.Name = "Button_notRead_s7";
-            this.Button_notRead_s7.Size = new System.Drawing.Size(346, 23);
-            this.Button_notRead_s7.TabIndex = 9;
-            this.Button_notRead_s7.Text = "Стоп";
-            this.Button_notRead_s7.UseVisualStyleBackColor = true;
-            this.Button_notRead_s7.Click += new System.EventHandler(this.Button_notRead_s7_Click);
-            // 
-            // Button_Read_s7
-            // 
-            this.Button_Read_s7.Location = new System.Drawing.Point(6, 6);
-            this.Button_Read_s7.Name = "Button_Read_s7";
-            this.Button_Read_s7.Size = new System.Drawing.Size(346, 23);
-            this.Button_Read_s7.TabIndex = 8;
-            this.Button_Read_s7.Text = "Пуск";
-            this.Button_Read_s7.UseVisualStyleBackColor = true;
-            this.Button_Read_s7.Click += new System.EventHandler(this.Button_Read_s7_Click);
             // 
             // tabPage2
             // 
@@ -180,86 +101,113 @@ namespace Heineken_DataCollection
             this.Button_Read_mb.UseVisualStyleBackColor = true;
             this.Button_Read_mb.Click += new System.EventHandler(this.Button_Read_mb_Click);
             // 
-            // tabPage3
+            // tabPage1
             // 
-            this.tabPage3.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage3.Controls.Add(this.progressBar_Messages);
-            this.tabPage3.Controls.Add(this.timeLabel_Messages);
-            this.tabPage3.Controls.Add(this.ButtonMessages);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(358, 126);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Messages";
+            this.tabPage1.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.timeLabel_s7);
+            this.tabPage1.Controls.Add(this.progressBarRead_s7);
+            this.tabPage1.Controls.Add(this.Button_notRead_s7);
+            this.tabPage1.Controls.Add(this.Button_Read_s7);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(358, 126);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "S7";
             // 
-            // progressBar_Messages
+            // button2
             // 
-            this.progressBar_Messages.Location = new System.Drawing.Point(6, 64);
-            this.progressBar_Messages.MarqueeAnimationSpeed = 50;
-            this.progressBar_Messages.Name = "progressBar_Messages";
-            this.progressBar_Messages.Size = new System.Drawing.Size(346, 23);
-            this.progressBar_Messages.Step = 1;
-            this.progressBar_Messages.TabIndex = 15;
+            this.button2.Location = new System.Drawing.Point(288, 92);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(64, 28);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "Тест";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
-            // timeLabel_Messages
+            // timeLabel_s7
             // 
-            this.timeLabel_Messages.AutoSize = true;
-            this.timeLabel_Messages.Location = new System.Drawing.Point(6, 110);
-            this.timeLabel_Messages.Name = "timeLabel_Messages";
-            this.timeLabel_Messages.Size = new System.Drawing.Size(144, 13);
-            this.timeLabel_Messages.TabIndex = 14;
-            this.timeLabel_Messages.Text = "Время последнего цикла : ";
+            this.timeLabel_s7.AutoSize = true;
+            this.timeLabel_s7.Location = new System.Drawing.Point(6, 110);
+            this.timeLabel_s7.Name = "timeLabel_s7";
+            this.timeLabel_s7.Size = new System.Drawing.Size(144, 13);
+            this.timeLabel_s7.TabIndex = 11;
+            this.timeLabel_s7.Text = "Время последнего цикла : ";
             // 
-            // ButtonMessages
+            // progressBarRead_s7
             // 
-            this.ButtonMessages.Location = new System.Drawing.Point(6, 6);
-            this.ButtonMessages.Name = "ButtonMessages";
-            this.ButtonMessages.Size = new System.Drawing.Size(346, 23);
-            this.ButtonMessages.TabIndex = 13;
-            this.ButtonMessages.Text = "Пуск";
-            this.ButtonMessages.UseVisualStyleBackColor = true;
-            this.ButtonMessages.Click += new System.EventHandler(this.ButtonMessages_Click);
+            this.progressBarRead_s7.Location = new System.Drawing.Point(6, 64);
+            this.progressBarRead_s7.MarqueeAnimationSpeed = 50;
+            this.progressBarRead_s7.Name = "progressBarRead_s7";
+            this.progressBarRead_s7.Size = new System.Drawing.Size(346, 23);
+            this.progressBarRead_s7.Step = 1;
+            this.progressBarRead_s7.TabIndex = 10;
+            // 
+            // Button_notRead_s7
+            // 
+            this.Button_notRead_s7.Location = new System.Drawing.Point(6, 35);
+            this.Button_notRead_s7.Name = "Button_notRead_s7";
+            this.Button_notRead_s7.Size = new System.Drawing.Size(346, 23);
+            this.Button_notRead_s7.TabIndex = 9;
+            this.Button_notRead_s7.Text = "Стоп";
+            this.Button_notRead_s7.UseVisualStyleBackColor = true;
+            this.Button_notRead_s7.Click += new System.EventHandler(this.Button_notRead_s7_Click);
+            // 
+            // Button_Read_s7
+            // 
+            this.Button_Read_s7.Location = new System.Drawing.Point(6, 6);
+            this.Button_Read_s7.Name = "Button_Read_s7";
+            this.Button_Read_s7.Size = new System.Drawing.Size(346, 23);
+            this.Button_Read_s7.TabIndex = 8;
+            this.Button_Read_s7.Text = "Пуск";
+            this.Button_Read_s7.UseVisualStyleBackColor = true;
+            this.Button_Read_s7.Click += new System.EventHandler(this.Button_Read_s7_Click);
+            // 
+            // tabControl
+            // 
+            this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Location = new System.Drawing.Point(12, 12);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(366, 152);
+            this.tabControl.TabIndex = 8;
             // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 167);
+            this.ClientSize = new System.Drawing.Size(388, 169);
             this.Controls.Add(this.tabControl);
             this.KeyPreview = true;
             this.Name = "MainScreen";
             this.Text = "HeinekenDC";
-            this.tabControl.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.ComponentModel.BackgroundWorker backgroundWorkerRead;
-        private System.Windows.Forms.TabControl tabControl;
+        private System.ComponentModel.BackgroundWorker bgWReadModBus;
+        private System.ComponentModel.BackgroundWorker bgWMessages;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button Button_notRead_mb;
+        private System.Windows.Forms.ProgressBar progressBarRead_mb;
+        private System.Windows.Forms.Label timeLabel_mb;
+        private System.Windows.Forms.Button Button_Read_mb;
         private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label timeLabel_s7;
         private System.Windows.Forms.ProgressBar progressBarRead_s7;
         private System.Windows.Forms.Button Button_notRead_s7;
         private System.Windows.Forms.Button Button_Read_s7;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Label timeLabel_mb;
-        private System.Windows.Forms.Button Button_Read_mb;
-        private System.ComponentModel.BackgroundWorker bgWReadModBus;
-        private System.ComponentModel.BackgroundWorker bgWMessages;
-        private System.Windows.Forms.ProgressBar progressBarRead_mb;
-        private System.Windows.Forms.Button Button_notRead_mb;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ProgressBar progressBar_Messages;
-        private System.Windows.Forms.Label timeLabel_Messages;
-        private System.Windows.Forms.Button ButtonMessages;
+        private System.Windows.Forms.TabControl tabControl;
     }
 }
 

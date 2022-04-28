@@ -13,8 +13,8 @@ using System.Text;
 using System.Windows.Forms;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
+using System.Threading.Tasks;
 
-//using System.Threading.Tasks;
 //using Microsoft.Extensions.Logging;
 //using Telegram.Bot.Exceptions;
 //using Telegram.Bot.Extensions.Polling;
@@ -32,6 +32,8 @@ namespace Heineken_DataCollection
         string[] messageText = new string[numberOfMessage];
         bool firstScan = false;
 
+        string alarmMessagesArchivePath = @"C:\Users\admin\Desktop\messageArchive.txt";
+
         public MainScreen()
         {
             InitializeComponent();
@@ -44,11 +46,6 @@ namespace Heineken_DataCollection
             bgWReadModBus.WorkerSupportsCancellation = true;
             bgWReadModBus.DoWork += new DoWorkEventHandler(BgWReadModBus_DoWork);
             bgWReadModBus.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BgWReadModBus_RunWorkerCompleted);
-
-            bgWMessages.WorkerReportsProgress = true;
-            bgWMessages.WorkerSupportsCancellation = true;
-            bgWMessages.DoWork += new DoWorkEventHandler(BgWMessages_DoWork);
-            bgWMessages.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BgWMessages_RunWorkerCompleted);
 
             // Alarm - 🟥; Warning - 🟧; Info - 🟦
             messageText[0] = "🟥 Alarm Reserve 0";
@@ -72,8 +69,19 @@ namespace Heineken_DataCollection
             messageText[18] = "🟥 Уровень воды в баке оборотного водоснабжения \\>\\= 95\\%";
             messageText[19] = "🟥 Уровень воды в баке оборотного водоснабжения \\<\\= 25\\%";
             messageText[20] = "🟥 Температура ледяной воды \\>\\= 6\\,5 град\\. С";
-            messageText[21] = "🟥 Температура ледяной воды \\<\\= 1\\,8 град\\. С";
+            messageText[21] = "🟥 Температура ледяной воды \\<\\= 0\\,0 град\\. С";
         }
+
+        public int seconds_last = new int();
+        public int minutes_last = new int();
+        public int hours_last = new int();
+        public int days_last = new int();
+
+        public int seconds_last_mb = new int();
+        public int minutes_last_mb = new int();
+        public int hours_last_mb = new int();
+        public int days_last_mb = new int();
+
         // Read S7
         private void Button_Read_s7_Click(object sender, EventArgs e)
         {
@@ -105,7 +113,7 @@ namespace Heineken_DataCollection
                 MessageBox.Show(ex.Message);
             }
         }
-        public void ReadwriteS7()
+        public async void ReadwriteS7()
         {
 
             // Установка соединения с PostgreSQL
@@ -124,8 +132,6 @@ namespace Heineken_DataCollection
             {
                 var trace = new StackTrace(e, true);
 
-                string writePath = @"C:\Users\admin\Desktop\messageArchive.txt";
-
                 foreach (var frame in trace.GetFrames())
                 {
                     var sb = new StringBuilder();
@@ -137,7 +143,7 @@ namespace Heineken_DataCollection
 
                     try
                     {
-                        using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.Default))
+                        using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
                             sw.Write("Siemens; " + DateTime.Now + "; " + sb + ";\n");
                     }
                     catch (Exception exe)
@@ -152,6 +158,11 @@ namespace Heineken_DataCollection
             {
                 try
                 {
+                    int seconds_now = DateTime.Now.Second;
+                    int minutes_now = DateTime.Now.Minute;
+                    int hours_now = DateTime.Now.Hour;
+                    int days_now = DateTime.Now.Day;
+
                     DateTime s1 = DateTime.Now;
 
                     List<string> myList = new List<string>();
@@ -165,7 +176,15 @@ namespace Heineken_DataCollection
                     result = plcClient.DBRead(20, 0, 128, db1Buffer);
                     if (result != 0)
                     {
-                        Console.WriteLine("Error: " + plcClient.ErrorText(result));
+                        try
+                        {
+                            using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
+                                sw.Write("S7; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                     }
                     else
                     {
@@ -185,7 +204,15 @@ namespace Heineken_DataCollection
                     result = plcClient.DBRead(2000, 1838, 64, db2Buffer);
                     if (result != 0)
                     {
-                        Console.WriteLine("Error: " + plcClient.ErrorText(result));
+                        try
+                        {
+                            using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
+                                sw.Write("S7; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                     }
                     else
                     {
@@ -196,17 +223,135 @@ namespace Heineken_DataCollection
                         }
                     }
 
+                    ////////// Работа с сообщениями //////////
+
+                    db2Buffer = new byte[3];
+
+                    result = plcClient.DBRead(2000, 8, 3, db2Buffer);
+                    if (result != 0)
+                    {
+                        try
+                        {
+                            using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
+                                sw.Write("Messages; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    else
+                    {
+                        bool[] currentMessageState = new bool[numberOfMessage];
+                        bool[] createMessage = new bool[numberOfMessage];
+                        string[] messageType = new string[numberOfMessage];
+
+                        for (int i = 0; i < db2Buffer.Length; i++)
+                        {
+                            for (int j = 0; j <= 7; j++)
+                            {
+                                bool bit = S7.GetBitAt(db2Buffer, i, j);
+                                currentMessageState[i * 8 + j] = bit;
+                            }
+                        }
+
+                        for (int i = 0; i < currentMessageState.Length; i++)
+                        {
+                            if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == true)
+                            {
+                                previousMessageState[i] = currentMessageState[i];
+                                createMessage[i] = true;
+                                messageType[i] = "⬆️";
+                            }
+                            else if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == false)
+                            {
+                                previousMessageState[i] = currentMessageState[i];
+                                createMessage[i] = true;
+                                messageType[i] = "⬇️";
+                            }
+                        }
+
+                        if (firstScan)
+                        {
+                            for (int i = 0; i < createMessage.Length; i++)
+                            {
+                                if (createMessage[i] == true)
+                                {
+                                    var webProxy = new WebProxy(Host: "10.23.5.4", Port: 80)
+                                    {
+                                        // Credentials if needed:
+                                        // Credentials = new NetworkCredential("USERNAME", "PASSWORD")
+                                    };
+                                    var httpClient = new HttpClient(
+                                        new HttpClientHandler { Proxy = webProxy, UseProxy = true }
+                                    );
+
+                                    var botClient = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4", httpClient);
+
+                                    //var me = await botClient.GetMeAsync();
+
+                                    Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
+                                        chatId: "-1001749496684",//chatId,
+                                        text: messageType[i] + messageText[i],
+                                    parseMode: ParseMode.MarkdownV2,
+                                    disableNotification: true);
+                                }
+                            }
+                            createMessage = null;
+                        }
+                        firstScan = true;
+                    }
+
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
                     plcClient.Disconnect();
 
                     var sqlValues = String.Join(", ", myList.ToArray());
 
-                    // Запиись данных в PostgreSQL
-                    var cmd_insert = new NpgsqlCommand
+                    if (seconds_now != seconds_last)
                     {
-                        Connection = PGCon,
-                        CommandText = "INSERT INTO _temp_table (id, value, date_time) VALUES " + sqlValues
-                    };
-                    cmd_insert.ExecuteNonQuery();
+                        seconds_last = seconds_now;
+                        // Запиись данных в PostgreSQL 1 раз в 1 секунду
+                        var cmd_sec_insert = new NpgsqlCommand
+                        {
+                            Connection = PGCon,
+                            CommandText = "INSERT INTO _seconds_table (id, value, date_time) VALUES " + sqlValues
+                        };
+                        cmd_sec_insert.ExecuteNonQuery();
+                    }
+                    if (minutes_now != minutes_last)
+                    {
+                        minutes_last = minutes_now;
+                        // Запиись данных в PostgreSQL 1 раз в 1 минуту
+                        var cmd_min_insert = new NpgsqlCommand
+                        {
+                            Connection = PGCon,
+                            CommandText = "INSERT INTO _minutes_table (id, value, date_time) VALUES " + sqlValues
+                        };
+                        cmd_min_insert.ExecuteNonQuery();
+                    }
+                    if (hours_now != hours_last)
+                    {
+                        hours_last = hours_now;
+                        // Запиись данных в PostgreSQL 1 раз в 1 час
+                        var cmd_hour_insert = new NpgsqlCommand
+                        {
+                            Connection = PGCon,
+                            CommandText = "INSERT INTO _hours_table (id, value, date_time) VALUES " + sqlValues
+                        };
+                        cmd_hour_insert.ExecuteNonQuery();
+                    }
+                    if (days_now != days_last)
+                    {
+                        days_last = days_now;
+                        // Запиись данных в PostgreSQL 1 раз в 1 день
+                        var cmd_day_insert = new NpgsqlCommand
+                        {
+                            Connection = PGCon,
+                            CommandText = "INSERT INTO _days_table (id, value, date_time) VALUES " + sqlValues
+                        };
+                        cmd_day_insert.ExecuteNonQuery();
+                    }
 
                     progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Style = ProgressBarStyle.Marquee));
 
@@ -216,8 +361,6 @@ namespace Heineken_DataCollection
                 catch (Exception ex)
                 {
                     var trace = new StackTrace(ex, true);
-
-                    string writePath = @"C:\Users\admin\Desktop\messageArchive.txt";
 
                     foreach (var frame in trace.GetFrames())
                     {
@@ -230,7 +373,7 @@ namespace Heineken_DataCollection
 
                         try
                         {
-                            using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.Default))
+                            using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
                                 sw.Write("Siemens; " + DateTime.Now + "; " + sb + ";\n");
                         }
                         catch (Exception exe)
@@ -315,8 +458,6 @@ namespace Heineken_DataCollection
             {
                 var trace = new StackTrace(e, true);
 
-                string writePath = @"C:\Users\admin\Desktop\messageArchive.txt";
-
                 foreach (var frame in trace.GetFrames())
                 {
                     var sb = new StringBuilder();
@@ -328,7 +469,7 @@ namespace Heineken_DataCollection
 
                     try
                     {
-                        using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.Default))
+                        using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
                             sw.Write("Modbus; " + DateTime.Now + "; " + sb + ";\n");
                     }
                     catch (Exception exe)
@@ -343,6 +484,11 @@ namespace Heineken_DataCollection
             {
                 try
                 {
+                    int seconds_now = DateTime.Now.Second;
+                    int minutes_now = DateTime.Now.Minute;
+                    int hours_now = DateTime.Now.Hour;
+                    int days_now = DateTime.Now.Day;
+                 
                     DateTime s2 = DateTime.Now;
                     // Connect to Packaging
                     DateTime s1 = DateTime.Now;
@@ -488,7 +634,7 @@ namespace Heineken_DataCollection
                     }
 
                     var sqlValues = String.Join(", ", myList.ToArray());
-
+                    /*
                     // Запиись данных в PostgreSQL
                     var cmd_insert = new NpgsqlCommand
                     {
@@ -496,6 +642,52 @@ namespace Heineken_DataCollection
                         CommandText = "INSERT INTO _temp_table_mb (id, value, date_time) VALUES " + sqlValues
                     };
                     cmd_insert.ExecuteNonQuery();
+                    */
+
+                    if (seconds_now != seconds_last_mb)
+                    {
+                        seconds_last_mb = seconds_now;
+                        // Запиись данных в PostgreSQL 1 раз в 1 секунду
+                        var cmd_sec_insert = new NpgsqlCommand
+                        {
+                            Connection = PGCon,
+                            CommandText = "INSERT INTO _seconds_table_mb (id, value, date_time) VALUES " + sqlValues
+                        };
+                        cmd_sec_insert.ExecuteNonQuery();
+                    }
+                    if (minutes_now != minutes_last_mb)
+                    {
+                        minutes_last_mb = minutes_now;
+                        // Запиись данных в PostgreSQL 1 раз в 1 минуту
+                        var cmd_min_insert = new NpgsqlCommand
+                        {
+                            Connection = PGCon,
+                            CommandText = "INSERT INTO _minutes_table_mb (id, value, date_time) VALUES " + sqlValues
+                        };
+                        cmd_min_insert.ExecuteNonQuery();
+                    }
+                    if (hours_now != hours_last_mb)
+                    {
+                        hours_last_mb = hours_now;
+                        // Запиись данных в PostgreSQL 1 раз в 1 час
+                        var cmd_hour_insert = new NpgsqlCommand
+                        {
+                            Connection = PGCon,
+                            CommandText = "INSERT INTO _hours_table_mb (id, value, date_time) VALUES " + sqlValues
+                        };
+                        cmd_hour_insert.ExecuteNonQuery();
+                    }
+                    if (days_now != days_last_mb)
+                    {
+                        days_last_mb = days_now;
+                        // Запиись данных в PostgreSQL 1 раз в 1 день
+                        var cmd_day_insert = new NpgsqlCommand
+                        {
+                            Connection = PGCon,
+                            CommandText = "INSERT INTO _days_table_mb (id, value, date_time) VALUES " + sqlValues
+                        };
+                        cmd_day_insert.ExecuteNonQuery();
+                    }
 
                     progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Marquee));
 
@@ -505,8 +697,6 @@ namespace Heineken_DataCollection
                 catch (Exception ex)
                 {
                     var trace = new StackTrace(ex, true);
-
-                    string writePath = @"C:\Users\admin\Desktop\messageArchive.txt";
 
                     foreach (var frame in trace.GetFrames())
                     {
@@ -519,7 +709,7 @@ namespace Heineken_DataCollection
 
                         try
                         {
-                            using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.Default))
+                            using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
                                 sw.Write("Modbus; " + DateTime.Now + "; " + sb + ";\n");
                         }
                         catch (Exception exe)
@@ -553,181 +743,7 @@ namespace Heineken_DataCollection
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Value = 0));
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Blocks));
         }
-        // Telegram Messages
-        private void ButtonMessages_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (bgWMessages.IsBusy != true)
-                {
-                    // Start the asynchronous operation
-                    bgWMessages.RunWorkerAsync();
-                }
-                else
-                {
-                    try
-                    {
-                        if (bgWReadModBus.WorkerSupportsCancellation == true)
-                        {
-                            // Cancel the asynchronous operation
-                            bgWMessages.CancelAsync();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        private void BgWMessages_DoWork(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = sender as BackgroundWorker;
-            while (true)
-            {
-                if (worker.CancellationPending == true)
-                {
-                    e.Cancel = true;
-                    break;
-                }
-                else
-                {
-                    ReadMessages();
-                }
-            }
-        }
-        private void BgWMessages_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            ButtonMessages.Invoke(new Action(() => ButtonMessages.Text = "Пуск"));
-            progressBar_Messages.Invoke(new Action(() => progressBar_Messages.Value = 0));
-            progressBar_Messages.Invoke(new Action(() => progressBar_Messages.Style = ProgressBarStyle.Blocks));
-        }
-        public async void ReadMessages()
-        {
-            try
-            {
-
-                DateTime s1 = DateTime.Now;
-
-                bool[] currentMessageState = new bool[numberOfMessage];
-                bool[] createMessage = new bool[numberOfMessage];
-                string[] messageType = new string[numberOfMessage];
-                
-                S7Client plcClient = new S7Client();
-                // Соединение и считывание данных с контроллера в энергоблоке
-                int result = plcClient.ConnectTo("192.168.127.150", 0, 1);
-                byte[] db2Buffer = new byte[3];
-
-                result = plcClient.DBRead(2000, 23, 3, db2Buffer);
-                if (result != 0)
-                {
-                    Console.WriteLine("Error: " + plcClient.ErrorText(result));
-                }
-                else
-                {
-                    for (int i = 0; i < db2Buffer.Length; i++)
-                    {
-                        for (int j = 0; j <= 7; j++)
-                        {
-                            bool bit = S7.GetBitAt(db2Buffer, i, j);
-                            currentMessageState[i * 8 + j] = bit;
-                        }
-                    }
-                }
-
-                plcClient.Disconnect();
-
-                for (int i = 0; i < currentMessageState.Length; i++)
-                {
-                    if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == true)
-                    {
-                        previousMessageState[i] = currentMessageState[i];
-                        createMessage[i] = true;
-                        messageType[i] = "⬆️";
-                    }
-                    else if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == false)
-                    {
-                        previousMessageState[i] = currentMessageState[i];
-                        createMessage[i] = true;
-                        messageType[i] = "⬇️";
-                    }
-                }
-
-                if (firstScan)
-                {
-                    for (int i = 0; i < createMessage.Length; i++)
-                    {
-                        if (createMessage[i] == true)
-                        {
-                            /*
-                            var webProxy = new WebProxy(Host: "10.23.5.4", Port: 80)
-                            {
-                                // Credentials if needed:
-                                // Credentials = new NetworkCredential("USERNAME", "PASSWORD")
-                            };
-                            var httpClient = new HttpClient(
-                                new HttpClientHandler { Proxy = webProxy, UseProxy = true }
-                            );
-                
-                            var botClient = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4", httpClient);
-                            */
-                            var botClient = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4");
-
-                            var me = await botClient.GetMeAsync();
-
-                            Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
-                                chatId: "-1001749496684",//chatId,
-                                text: messageType[i] + messageText[i],
-                            parseMode: ParseMode.MarkdownV2,
-                            disableNotification: true);
-                        }
-                    }
-                }
-                
-                createMessage = null;
-                firstScan = true;
-
-                ButtonMessages.Invoke(new Action(() => ButtonMessages.Text = "Стоп"));
-                progressBar_Messages.Invoke(new Action(() => progressBar_Messages.Style = ProgressBarStyle.Marquee));
-                timeLabel_Messages.Invoke(new Action(() => timeLabel_Messages.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1)));
-            }
-            catch (Exception exe)
-            {
-                var trace = new StackTrace(exe, true);
-
-                string writePath = @"C:\Users\admin\Desktop\messageArchive.txt";
-
-                foreach (var frame in trace.GetFrames())
-                {
-                    var sb = new StringBuilder();
-
-                    sb.Append($"Файл: {frame.GetFileName()}" + "; ");
-                    sb.Append($"Строка: {frame.GetFileLineNumber()}" + "; ");
-                    sb.Append($"Столбец: {frame.GetFileColumnNumber()}" + "; ");
-                    sb.Append($"Метод: {frame.GetMethod()}");
-
-                    try
-                    {
-                        using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.Default))
-                            sw.Write("Modbus; " + DateTime.Now + "; " + sb + ";\n");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-            }
-        }
-
-        public int seconds_last = new int();
-        public int minutes_last = new int();
-        public int hours_last = new int();
-        public int days_last = new int();
-
+        
         private void Button2_Click(object sender, EventArgs e)
         {
 
@@ -744,22 +760,18 @@ namespace Heineken_DataCollection
                 if (seconds_now != seconds_last)
                 {
                     seconds_last = seconds_now;
-                    Console.WriteLine("Seconds_S:" + seconds_last);
                 }
                 if (minutes_now != minutes_last)
                 {
                     minutes_last = minutes_now;
-                    Console.WriteLine("Minutes_M:" + minutes_last);
                 }
                 if (hours_now != hours_last)
                 {
                     hours_last = hours_now;
-                    Console.WriteLine("Hours_H:" + hours_last);
                 }
                 if (days_now != days_last)
                 {
                     days_last = days_now;
-                    Console.WriteLine("Days_D:" + days_last);
                 }
             }
         }
