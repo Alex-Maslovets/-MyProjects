@@ -8,11 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Brewing.png" />
+    <None Remove="Packaging.png" />
     <None Remove="Plant_CO2.png" />
+    <None Remove="Utilities.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Npgsql" Version="6.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Brewing.png" />
+    <Resource Include="Packaging.png" />
     <Resource Include="Plant_CO2.png" />
+    <Resource Include="Utilities.png" />
   </ItemGroup>
 
 </Project>

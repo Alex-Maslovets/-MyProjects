@@ -20,3 +20,6 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\CO2_Monitoring\CO2
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\CO2_Monitoring\CO2_Monitoring\obj\Debug\net5.0-windows\CO2_Monitoring.pdb
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\CO2_Monitoring\CO2_Monitoring\obj\Debug\net5.0-windows\CO2_Monitoring.genruntimeconfig.cache
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\CO2_Monitoring\CO2_Monitoring\obj\Debug\net5.0-windows\ref\CO2_Monitoring.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\CO2_Monitoring\CO2_Monitoring\bin\Debug\net5.0-windows\Npgsql.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\CO2_Monitoring\CO2_Monitoring\bin\Debug\net5.0-windows\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\CO2_Monitoring\CO2_Monitoring\obj\Debug\net5.0-windows\CO2_Monitoring.csproj.CopyComplete

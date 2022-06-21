@@ -53,7 +53,7 @@ namespace Heineken_DataCollection
             messageText[2] = "🟥 Alarm Reserve 2";
             messageText[3] = "🟥 Alarm Reserve 3";
             messageText[4] = "🟥 Alarm Reserve 4";
-            messageText[5] = "🟥 Alarm Reserve 5";
+            messageText[5] = "🟥 Показания СО2 прибора ZIROX \\>\\= 10\\ ppm";
             messageText[6] = "🟥 Нажата аварийная кнопка в аммиачном/СО2 отделении";
             messageText[7] = "🟥 Уровень в отделители NH3 \\>\\= 40\\%";
             messageText[8] = "🟥 Уровень в отделители NH3 \\<\\= 10\\%";
@@ -199,9 +199,9 @@ namespace Heineken_DataCollection
 
                     // Соединение и считывание данных с контроллера в энергоблоке
                     result = plcClient.ConnectTo("10.129.31.135", 0, 3);
-                    byte[] db2Buffer = new byte[64];
+                    byte[] db2Buffer = new byte[80];
 
-                    result = plcClient.DBRead(2000, 1838, 64, db2Buffer);
+                    result = plcClient.DBRead(2000, 1838, 80, db2Buffer);
                     if (result != 0)
                     {
                         try
@@ -216,7 +216,7 @@ namespace Heineken_DataCollection
                     }
                     else
                     {
-                        for (int i = 32; i <= 45; i++)
+                        for (int i = 32; i <= 49; i++)
                         {
                             double db2ddd4 = S7.GetRealAt(db2Buffer, 4 * (i - 32));
                             myList.Add("(" + i + "," + db2ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
@@ -492,7 +492,7 @@ namespace Heineken_DataCollection
                     DateTime s2 = DateTime.Now;
                     // Connect to Packaging
                     DateTime s1 = DateTime.Now;
-                    TcpClient client = new TcpClient("10.129.31.160", 502);
+                    TcpClient client = new TcpClient("10.129.31.165", 502);
                     ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
 
                     List<ushort> modbusList = new List<ushort>();

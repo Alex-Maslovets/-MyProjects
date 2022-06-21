@@ -5,24 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CO2_Monitoring"
         mc:Ignorable="d"
+        Topmost="True"
+        WindowStartupLocation="Manual" 
+        Left="0" Top="0"
         Title="MainWindow" Height="1080" Width="1920">
-    <TabControl x:Name="MainTabControl" Margin="0,0,0,0">
-        <TabItem FontFamily="Times New Roman" Header="ЗАВОД" FontWeight="Normal"/>
-        <TabItem Background="#FF00CAFF" Foreground="Black" FontFamily="Times New Roman" FontWeight="Normal" Header="ЭНЕРГОБЛОК"/>
-        <TabItem Header="ЦР" Background="#FF178C07" Foreground="Black" FontFamily="Times New Roman" FontWeight="Normal">
-            <Grid Background="#FF3BC71F">
-                <Ellipse HorizontalAlignment="Left" Height="33" Margin="60,41,0,0" Stroke="Black" VerticalAlignment="Top" Width="42"/>
-                <Ellipse HorizontalAlignment="Left" Height="139" Margin="196,58,0,0" Stroke="Black" VerticalAlignment="Top" Width="86"/>
-            </Grid>
-        </TabItem>
-        <TabItem Header="ЦПП" Background="#FF1D4BDA" Foreground="Black" FontFamily="Times New Roman">
-            <Grid Background="#FF901C1C">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button Content="Button" HorizontalAlignment="Left" Height="109" Margin="115,55,0,0" VerticalAlignment="Top" Width="156"/>
-                <Button Content="Button" HorizontalAlignment="Left" Height="105" Margin="271,119,0,0" VerticalAlignment="Top" Width="136"/>
-            </Grid>
-        </TabItem>
-    </TabControl>
+    <Grid>
+        <TabControl x:Name="MainTabControl" Margin="0,0,0,100" Background="{x:Null}">
+            <TabItem FontFamily="Times New Roman" Header="ЗАВОД" FontWeight="Normal">
+                <TabItem.Background>
+                    <ImageBrush/>
+                </TabItem.Background>
+                <Grid Height="850" VerticalAlignment="Top">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/Plant_CO2.png"/>
+                    </Grid.Background>
+                    <Button Content="Button" HorizontalAlignment="Left" Height="51" Margin="60,91,0,0" VerticalAlignment="Top" Width="105" Click="Button_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="ЭНЕРГОБЛОК" Background="#FFD60EEC" Foreground="Black" FontFamily="Times New Roman" FontWeight="Normal" >
+                <Grid Height="860" VerticalAlignment="Top">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/Utilities.png"/>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+            <TabItem Header="ЦР" Background="#FF0EEC4E" Foreground="Black" FontFamily="Times New Roman" FontWeight="Normal">
+                <Grid Height="860" VerticalAlignment="Top">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/Packaging.png"/>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+            <TabItem Header="ЦПП" Background="#FF1D4BDA" Foreground="Black" FontFamily="Times New Roman">
+                <Grid Height="860" VerticalAlignment="Top">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/Brewing.png"/>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <DataGrid HorizontalAlignment="Center" Height="140" Margin="0,880,0,0" VerticalAlignment="Top" Width="1920" x:Name="Grid_MainMessages" AutoGenerateColumns="True" MinColumnWidth="30">
+
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding State}" Value="Авария">
+                            <Setter Property="Background" Value="Red"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding State}" Value="Предупреждение">
+                            <Setter Property="Background" Value="Green"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+    </Grid>
+
+
+
+
 </Window>
