@@ -1,0 +1,10 @@
+is_global = true
+build_property.TargetFramework = net6.0-windows7.0
+build_property.TargetPlatformMinVersion = 7.0
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = CO2_Monitoring_vnvsmnya_wpftmp
+build_property.ProjectDir = C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\CO2_Monitoring\CO2_Monitoring\

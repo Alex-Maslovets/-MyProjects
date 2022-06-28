@@ -58,11 +58,11 @@
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding State}" Value="Авария">
+                        <DataTrigger Binding="{Binding Message_Type}" Value="Авария">
                             <Setter Property="Background" Value="Red"></Setter>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding State}" Value="Предупреждение">
-                            <Setter Property="Background" Value="Green"></Setter>
+                        <DataTrigger Binding="{Binding Message_Type}" Value="Предупреждение">
+                            <Setter Property="Background" Value="#FFE7F307"></Setter>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

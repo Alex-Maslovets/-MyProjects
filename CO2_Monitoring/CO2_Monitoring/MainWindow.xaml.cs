@@ -13,13 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Npgsql;
+using Npgsql.EntityFrameworkCore;
+using System.Runtime;
 
+using System.Threading;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Net.Sockets;
 
 namespace CO2_Monitoring
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -27,50 +36,66 @@ namespace CO2_Monitoring
             InitializeComponent();
         }
 
-        public class Phone
+        public class messageCO2
         {
-            public string Title { get; set; }
-            public string Company { get; set; }
-            public string State { get; set; }
-            public int Price { get; set; }
+            public string? Time_Start { get; set; }
+            public string? Time_End { get; set; }
+            public string? Message_Type { get; set; }
+            public string? Message_Text { get; set; }
+            public string? Department { get; set; }
+            public string? Number { get; set; }
         }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //MainTabControl.SelectedIndex = 2;
-
-            List<Phone> phonesList = new List<Phone>
+            try
             {
-            new Phone {Title="iPhone 6S", Company="Apple", Price=54990, State = "Авария" },
-            new Phone {Title="Lumia 950", Company="Microsoft", Price=39990, State = "Предупреждение" },
-            new Phone {Title="Nexus 5X", Company="Google", Price=29990, State = "Авария" }
-            };
-            Grid_MainMessages.ItemsSource = phonesList;
+                // Установка соединения с PostgreSQL
+                NpgsqlConnection PGCon = new NpgsqlConnection("Host=localhost;" +
+                            "Port=5433;" +
+                            "Username=postgres;" +
+                            "Password=123456789;" +
+                            "Database=postgres");
 
-            // Установка соединения с PostgreSQL
-            NpgsqlConnection PGCon = new NpgsqlConnection("Host=localhost;" +
-                "Username=postgres;" +
-                "Password=123456789;" +
-                "Database=postgres;" +
-                "Timeout = 300;" +
-                "CommandTimeout = 300");
-            if (PGCon.State == System.Data.ConnectionState.Open)
-            {
+                PGCon.Open();
 
-                string sql = "SELECT * FROM messages_CO2";
-
-                using (NpgsqlCommand command = new NpgsqlCommand(sql, PGCon))
+                if (PGCon.State == System.Data.ConnectionState.Open)
                 {
-                    int val;
-                    NpgsqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
+
+                    string sql = "SELECT * FROM \"messages_CO2\"";
+
+                    List<messageCO2> messagesList = new List<messageCO2>();
+
+                    using (NpgsqlCommand command = new NpgsqlCommand(sql, PGCon))
                     {
-                        val = Int32.Parse(reader[0].ToString());
-                        //do whatever you like
-                    }
+
+                        NpgsqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            messagesList.Add(new messageCO2
+                            {
+                                Time_Start = reader[0].ToString(),
+                                Time_End = reader[1].ToString(),
+                                Message_Type = reader[5].ToString(),
+                                Message_Text = reader[4].ToString(),
+                                Department = reader[3].ToString(),
+                                Number = reader[2].ToString()
+                            }
+                            );
+                        };
+                    };
+
+                    Grid_MainMessages.ItemsSource = messagesList;
+                    Grid_MainMessages.ScrollIntoView(messagesList[messagesList.Count-1]);
                 }
+                // Закрытие соединения с PostgreSQL
+                PGCon.Close();
             }
-            // Закрытие соединения с PostgreSQL
-            PGCon.Close();
+            catch (Exception ex)
+            {
+            MessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }
