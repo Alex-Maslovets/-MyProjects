@@ -7,9 +7,21 @@ namespace WinFormsApp_ForTests
             InitializeComponent();
         }
 
+        private static Form1 _Instance;
+        public static Form1 Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                    _Instance = new Form1();
+                return _Instance;
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 if (treeView1.Nodes.Count != 0)
                 {
                     if (treeView1.SelectedNode.Parent is null) treeView1.SelectedNode.Nodes.Add(treeView1.SelectedNode.Text);
@@ -45,7 +57,8 @@ namespace WinFormsApp_ForTests
 
         private void button3_Click(object sender, EventArgs e)
         {
-            treeView1.SelectedNode.Text
+            Form2 f2 = new Form2();
+            f2.ShowDialog(); // Shows Form2
         }
     }
 }
