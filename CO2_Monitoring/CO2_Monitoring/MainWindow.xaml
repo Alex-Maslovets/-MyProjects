@@ -20,6 +20,10 @@
                         <ImageBrush ImageSource="/Plant_CO2.png"/>
                     </Grid.Background>
                     <Button Content="Button" HorizontalAlignment="Left" Height="51" Margin="60,91,0,0" VerticalAlignment="Top" Width="105" Click="Button_Click"/>
+                    <GroupBox x:Name="ARHF_1066_Grp" HorizontalAlignment="Left" Height="46" Header="ARHF 1066" Margin="192,107,0,0" VerticalAlignment="Top" Width="88" Background="#FFC3C3C3">
+                        <Label x:Name="CO2_Value" Content="{Binding Value, ElementName=slider_Value}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="21,0,0,0"/>
+                    </GroupBox>
+                    <Slider x:Name="slider_Value" HorizontalAlignment="Left" Margin="303,124,0,0" VerticalAlignment="Top" Width="120"/>
                 </Grid>
             </TabItem>
             <TabItem Header="ЭНЕРГОБЛОК" Background="#FFD60EEC" Foreground="Black" FontFamily="Times New Roman" FontWeight="Normal" >

@@ -12,7 +12,6 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataColle
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Text.Encodings.Web.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Text.Json.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Threading.Channels.dll
-C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Memory.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Buffers.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\Npgsql.xml
@@ -74,3 +73,4 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataColle
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\Telegram.Bot.Extensions.Polling.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Threading.Tasks.Extensions.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.ValueTuple.dll

@@ -1,0 +1,17 @@
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\bin\Debug\net6.0-windows\WinFormsApp_ForTests.exe
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\bin\Debug\net6.0-windows\WinFormsApp_ForTests.deps.json
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\bin\Debug\net6.0-windows\WinFormsApp_ForTests.runtimeconfig.json
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\bin\Debug\net6.0-windows\WinFormsApp_ForTests.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\bin\Debug\net6.0-windows\WinFormsApp_ForTests.pdb
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\WinFormsApp_ForTests.csproj.AssemblyReference.cache
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\WinFormsApp_ForTests.Form1.resources
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\WinFormsApp_ForTests.csproj.GenerateResource.cache
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\WinFormsApp_ForTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\WinFormsApp_ForTests.AssemblyInfoInputs.cache
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\WinFormsApp_ForTests.AssemblyInfo.cs
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\WinFormsApp_ForTests.csproj.CoreCompileInputs.cache
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\WinFormsApp_ForTests.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\refint\WinFormsApp_ForTests.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\WinFormsApp_ForTests.pdb
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\WinFormsApp_ForTests.genruntimeconfig.cache
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\ref\WinFormsApp_ForTests.dll

@@ -13,7 +13,6 @@ using System.Text;
 using System.Windows.Forms;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
-using System.Threading.Tasks;
 
 //using Microsoft.Extensions.Logging;
 //using Telegram.Bot.Exceptions;
@@ -32,7 +31,7 @@ namespace Heineken_DataCollection
         string[] messageText = new string[numberOfMessage];
         bool firstScan = false;
 
-        string alarmMessagesArchivePath = @"C:\Users\admin\Desktop\messageArchive.txt";
+        readonly string alarmMessagesArchivePath = @"C:\Users\admin\Desktop\messageArchive.txt";
 
         public MainScreen()
         {
@@ -488,7 +487,7 @@ namespace Heineken_DataCollection
                     int minutes_now = DateTime.Now.Minute;
                     int hours_now = DateTime.Now.Hour;
                     int days_now = DateTime.Now.Day;
-                 
+
                     DateTime s2 = DateTime.Now;
                     // Connect to Packaging
                     DateTime s1 = DateTime.Now;
@@ -743,37 +742,15 @@ namespace Heineken_DataCollection
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Value = 0));
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Blocks));
         }
-        
-        private void Button2_Click(object sender, EventArgs e)
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
+        }
 
-            while (true)
-            {
+        private void button2_Click(object sender, EventArgs e)
+        {
 
-                int seconds_now = DateTime.Now.Second;
-                int minutes_now = DateTime.Now.Minute;
-                int hours_now = DateTime.Now.Hour;
-                int days_now = DateTime.Now.Day;
-
-
-                if (seconds_now != seconds_last)
-                {
-                    seconds_last = seconds_now;
-                }
-                if (minutes_now != minutes_last)
-                {
-                    minutes_last = minutes_now;
-                }
-                if (hours_now != hours_last)
-                {
-                    hours_last = hours_now;
-                }
-                if (days_now != days_last)
-                {
-                    days_last = days_now;
-                }
-            }
         }
     }
 }
