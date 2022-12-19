@@ -16,3 +16,5 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTes
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\WinFormsApp_ForTests.genruntimeconfig.cache
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\ref\WinFormsApp_ForTests.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\WinFormsApp_ForTests.Form2.resources
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\bin\Debug\net6.0-windows\Sharp7.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\WinFormsApp_ForTests\WinFormsApp_ForTests\obj\Debug\net6.0-windows\WinFormsApp_ForTests.csproj.CopyComplete

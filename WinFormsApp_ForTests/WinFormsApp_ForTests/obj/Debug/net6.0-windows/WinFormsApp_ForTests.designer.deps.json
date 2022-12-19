@@ -5,7 +5,24 @@
   },
   "compilationOptions": {},
   "targets": {
-    ".NETCoreApp,Version=v6.0": {}
+    ".NETCoreApp,Version=v6.0": {
+      "Sharp7/1.1.82": {
+        "runtime": {
+          "lib/netstandard2.0/Sharp7.dll": {
+            "assemblyVersion": "1.1.82.0",
+            "fileVersion": "1.1.82.0"
+          }
+        }
+      }
+    }
   },
-  "libraries": {}
+  "libraries": {
+    "Sharp7/1.1.82": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pYq9FsiFCIyXr/q5yUFJNpFdtX/yxesKdGICUn3yBZ/DUQRsTBR6dunQH3HezdeNbHdNPc4Ev23/Zubiqw4uhQ==",
+      "path": "sharp7/1.1.82",
+      "hashPath": "sharp7.1.1.82.nupkg.sha512"
+    }
+  }
 }

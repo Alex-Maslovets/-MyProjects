@@ -1,11 +1,43 @@
 {
   "version": 3,
   "targets": {
-    "net6.0-windows7.0": {}
+    "net6.0-windows7.0": {
+      "Sharp7/1.1.82": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Sharp7.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Sharp7.dll": {
+            "related": ".pdb"
+          }
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Sharp7/1.1.82": {
+      "sha512": "pYq9FsiFCIyXr/q5yUFJNpFdtX/yxesKdGICUn3yBZ/DUQRsTBR6dunQH3HezdeNbHdNPc4Ev23/Zubiqw4uhQ==",
+      "type": "package",
+      "path": "sharp7/1.1.82",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Sharp7.dll",
+        "lib/net40/Sharp7.pdb",
+        "lib/netstandard2.0/Sharp7.dll",
+        "lib/netstandard2.0/Sharp7.pdb",
+        "sharp7.1.1.82.nupkg.sha512",
+        "sharp7.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0-windows7.0": []
+    "net6.0-windows7.0": [
+      "Sharp7 >= 1.1.82"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\alexo\\.nuget\\packages\\": {},
@@ -50,6 +82,12 @@
     "frameworks": {
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
+        "dependencies": {
+          "Sharp7": {
+            "target": "Package",
+            "version": "[1.1.82, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

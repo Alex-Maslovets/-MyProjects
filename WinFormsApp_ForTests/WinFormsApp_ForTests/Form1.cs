@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using Sharp7;
 
 
 namespace WinFormsApp_ForTests
@@ -97,5 +98,29 @@ namespace WinFormsApp_ForTests
             }
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            S7Client plcClient = new S7Client();
+            int result = plcClient.ConnectTo("192.168.127.150", 0, 1);
+
+            byte[] db2Buffer = new byte[10];
+
+            result = plcClient.DBRead(2000, 8, 10, db2Buffer);
+            if (result != 0)
+            {
+                try
+                {
+                    MessageBox.Show("Messages; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine(db2Buffer[0] + " --- " + db2Buffer[1] + " --- " + db2Buffer[2] + " --- " + db2Buffer[3] + " --- " + db2Buffer[4] + " --- " + db2Buffer[5] + " --- " + db2Buffer[6]);
+            }
+        }
     }
 }
