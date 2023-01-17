@@ -442,11 +442,9 @@ namespace Heineken_DataCollection
         public void ReadwriteModbus()
         {
             // Установка соединения с PostgreSQL
-            NpgsqlConnection PGCon = new NpgsqlConnection(//"Host=10.129.20.179;"
-                "Host=localhost;" +
+            NpgsqlConnection PGCon = new NpgsqlConnection("Host=10.129.20.179;"+
                 "Username=postgres;" +
-                //"Password=123456789;" +
-                "Password=spb161222;" +
+                "Password=123456789;" +
                 "Database=postgres;" +
                 "Timeout = 300;" +
                 "CommandTimeout = 300");
@@ -493,14 +491,12 @@ namespace Heineken_DataCollection
                     DateTime s2 = DateTime.Now;
                     // Connect to Packaging
                     DateTime s1 = DateTime.Now;
-                    //TcpClient client = new TcpClient("10.129.31.165", 502);
-                    TcpClient client = new TcpClient("10.129.7.197", 502);                   // L8_Past
+                    TcpClient client = new TcpClient("10.129.31.165", 502);
                     ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
 
                     List<ushort> modbusList = new List<ushort>();
 
-                    //for (int i = 0; i <= 29; i++)
-                    for (int i = 0; i <= 9; i++)
+                    for (int i = 0; i <= 29; i++)
                     {
                         ushort startAddress = (ushort)(1301 + i);
                         ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
@@ -509,8 +505,7 @@ namespace Heineken_DataCollection
 
                     List<float> values = new List<float>();
 
-                    //for (int j = 0; j <= 29; j += 2)
-                    for (int j = 0; j <= 9; j += 2)
+                    for (int j = 0; j <= 29; j += 2)
                     {
                         ushort[] buffer = { modbusList[j], modbusList[j + 1] };
                         byte[] bytes = new byte[4];
@@ -523,8 +518,7 @@ namespace Heineken_DataCollection
 
                     // Connect to BLO --- Propogators
                     s1 = DateTime.Now;
-                    //client = new TcpClient("10.129.31.162", 502);                        // L6_CIP
-                    client = new TcpClient("10.129.7.198", 502);
+                    client = new TcpClient("10.129.31.162", 502);
                     master = ModbusIpMaster.CreateIp(client);
 
                     modbusList.Clear();
@@ -549,22 +543,19 @@ namespace Heineken_DataCollection
 
                     // Connect to VAO
                     s1 = DateTime.Now;
-                    //client = new TcpClient("10.129.31.163", 502);                         // L6_Past
-                    client = new TcpClient("10.129.7.199", 502);
+                    client = new TcpClient("10.129.31.163", 502);
                     master = ModbusIpMaster.CreateIp(client);
 
                     modbusList.Clear();
 
-                    //for (int i = 0; i <= 49; i++)
-                    for (int i = 0; i <= 9; i++)
+                    for (int i = 0; i <= 49; i++)
                     {
                         ushort startAddress = (ushort)(1301 + i);
                         ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
                         modbusList.Add(inputs[0]);
                     }
 
-                    //for (int j = 0; j <= 49; j += 2)
-                    for (int j = 0; j <= 9; j += 2)
+                    for (int j = 0; j <= 49; j += 2)
                     {
                         ushort[] buffer = { modbusList[j], modbusList[j + 1] };
                         byte[] bytes = new byte[4];
@@ -577,8 +568,7 @@ namespace Heineken_DataCollection
 
                     // Connect to EnergyBlock --- WaterReady
                     s1 = DateTime.Now;
-                    //client = new TcpClient("10.129.31.164", 502);
-                    client = new TcpClient("10.129.7.200", 502);                              // L6_BMM
+                    client = new TcpClient("10.129.31.164", 502);
                     master = ModbusIpMaster.CreateIp(client);
 
                     modbusList.Clear();
@@ -604,22 +594,19 @@ namespace Heineken_DataCollection
 
                     // Connect to Filtration
                     s1 = DateTime.Now;
-                    //client = new TcpClient("10.129.31.161", 502);
-                    client = new TcpClient("10.129.7.201", 502);                                 // L9_Past
+                    client = new TcpClient("10.129.31.161", 502);
                     master = ModbusIpMaster.CreateIp(client);
 
                     modbusList.Clear();
 
-                    //for (int i = 0; i <= 29; i++)
-                    for (int i = 0; i <= 9; i++)
+                    for (int i = 0; i <= 29; i++)
                     {
                         ushort startAddress = (ushort)(1301 + i);
                         ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
                         modbusList.Add(inputs[0]);
                     }
 
-                    //for (int j = 0; j <= 29; j += 2)
-                    for (int j = 0; j <= 9; j += 2)
+                    for (int j = 0; j <= 29; j += 2)
                     {
                         ushort[] buffer = { modbusList[j], modbusList[j + 1] };
                         byte[] bytes = new byte[4];
@@ -629,160 +616,7 @@ namespace Heineken_DataCollection
                         bytes[0] = (byte)(buffer[0] >> 8);
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
-
-                    // SPB ---> L9_CIP
-                    s1 = DateTime.Now;
-                    client = new TcpClient("10.129.7.202", 502);
-                    master = ModbusIpMaster.CreateIp(client);
-
-                    modbusList.Clear();
-
-                    for (int i = 0; i <= 9; i++)
-                    {
-                        ushort startAddress = (ushort)(1301 + i);
-                        ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
-                        modbusList.Add(inputs[0]);
-                    }
-
-                    for (int j = 0; j <= 9; j += 2)
-                    {
-                        ushort[] buffer = { modbusList[j], modbusList[j + 1] };
-                        byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
-                        values.Add(BitConverter.ToSingle(bytes, 0));
-                    }
-
-                    // SPB ---> L10
-                    s1 = DateTime.Now;
-                    client = new TcpClient("10.129.7.203", 502);
-                    master = ModbusIpMaster.CreateIp(client);
-
-                    modbusList.Clear();
-
-                    for (int i = 0; i <= 9; i++)
-                    {
-                        ushort startAddress = (ushort)(1301 + i);
-                        ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
-                        modbusList.Add(inputs[0]);
-                    }
-
-                    for (int j = 0; j <= 9; j += 2)
-                    {
-                        ushort[] buffer = { modbusList[j], modbusList[j + 1] };
-                        byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
-                        values.Add(BitConverter.ToSingle(bytes, 0));
-                    }
-
-                    // SPB ---> L4
-                    /*
-                    s1 = DateTime.Now;
-                    client = new TcpClient("10.129.7.204", 502);
-                    master = ModbusIpMaster.CreateIp(client);
-
-                    modbusList.Clear();
-
-                    for (int i = 0; i <= 9; i++)
-                    {
-                        ushort startAddress = (ushort)(1301 + i);
-                        ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
-                        modbusList.Add(inputs[0]);
-                    }
-
-                    for (int j = 0; j <= 9; j += 2)
-                    {
-                        ushort[] buffer = { modbusList[j], modbusList[j + 1] };
-                        byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
-                        values.Add(BitConverter.ToSingle(bytes, 0));
-                    }
-                    */
-                    // SPB ---> CIP_Huppman
-                    s1 = DateTime.Now;
-                    client = new TcpClient("10.129.7.205", 502);
-                    master = ModbusIpMaster.CreateIp(client);
-
-                    modbusList.Clear();
-
-                    for (int i = 0; i <= 9; i++)
-                    {
-                        ushort startAddress = (ushort)(1301 + i);
-                        ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
-                        modbusList.Add(inputs[0]);
-                    }
-
-                    for (int j = 0; j <= 9; j += 2)
-                    {
-                        ushort[] buffer = { modbusList[j], modbusList[j + 1] };
-                        byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
-                        values.Add(BitConverter.ToSingle(bytes, 0));
-                    }
-
-
-                    // SPB ---> CIP_2
-                    s1 = DateTime.Now;
-                    client = new TcpClient("10.129.7.206", 502);
-                    master = ModbusIpMaster.CreateIp(client);
-
-                    modbusList.Clear();
-
-                    for (int i = 0; i <= 9; i++)
-                    {
-                        ushort startAddress = (ushort)(1301 + i);
-                        ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
-                        modbusList.Add(inputs[0]);
-                    }
-
-                    for (int j = 0; j <= 9; j += 2)
-                    {
-                        ushort[] buffer = { modbusList[j], modbusList[j + 1] };
-                        byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
-                        values.Add(BitConverter.ToSingle(bytes, 0));
-                    }
-
-
-                    // SPB ---> Теплопукт
-                    s1 = DateTime.Now;
-                    client = new TcpClient("10.129.7.207", 502);
-                    master = ModbusIpMaster.CreateIp(client);
-
-                    modbusList.Clear();
-
-                    for (int i = 0; i <= 9; i++)
-                    {
-                        ushort startAddress = (ushort)(1301 + i);
-                        ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
-                        modbusList.Add(inputs[0]);
-                    }
-
-                    for (int j = 0; j <= 9; j += 2)
-                    {
-                        ushort[] buffer = { modbusList[j], modbusList[j + 1] };
-                        byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
-                        values.Add(BitConverter.ToSingle(bytes, 0));
-                    }
-
+                                      
                     List<string> myList = new List<string>();
 
                     int x = values.Count / 5;
@@ -807,8 +641,7 @@ namespace Heineken_DataCollection
                         var cmd_sec_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
-                            //CommandText = "INSERT INTO _seconds_table_mb (id, value, date_time) VALUES " + sqlValues
-                            CommandText = "INSERT INTO \"DC_seconds\" (id, value, date_time) VALUES " + sqlValues
+                            CommandText = "INSERT INTO _seconds_table_mb (id, value, date_time) VALUES " + sqlValues
                         };
                         cmd_sec_insert.ExecuteNonQuery();
                     }
@@ -819,8 +652,7 @@ namespace Heineken_DataCollection
                         var cmd_min_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
-                            //CommandText = "INSERT INTO _minutes_table_mb (id, value, date_time) VALUES " + sqlValues
-                            CommandText = "INSERT INTO \"DC_minutes\" (id, value, date_time) VALUES " + sqlValues
+                            CommandText = "INSERT INTO _minutes_table_mb (id, value, date_time) VALUES " + sqlValues
                         };
                         cmd_min_insert.ExecuteNonQuery();
                     }
@@ -831,8 +663,7 @@ namespace Heineken_DataCollection
                         var cmd_hour_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
-                            //CommandText = "INSERT INTO _hours_table_mb (id, value, date_time) VALUES " + sqlValues
-                            CommandText = "INSERT INTO \"DC_hours\" (id, value, date_time) VALUES " + sqlValues
+                            CommandText = "INSERT INTO _hours_table_mb (id, value, date_time) VALUES " + sqlValues
                         };
                         cmd_hour_insert.ExecuteNonQuery();
                     }
@@ -843,8 +674,7 @@ namespace Heineken_DataCollection
                         var cmd_day_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
-                            //CommandText = "INSERT INTO _days_table_mb (id, value, date_time) VALUES " + sqlValues
-                            CommandText = "INSERT INTO \"DC_days\" (id, value, date_time) VALUES " + sqlValues
+                            CommandText = "INSERT INTO _days_table_mb (id, value, date_time) VALUES " + sqlValues
                         };
                         cmd_day_insert.ExecuteNonQuery();
                     }
@@ -902,16 +732,6 @@ namespace Heineken_DataCollection
         {
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Value = 0));
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Blocks));
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
