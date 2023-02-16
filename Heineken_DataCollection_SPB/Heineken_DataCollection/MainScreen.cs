@@ -31,7 +31,7 @@ namespace Heineken_DataCollection
         string[] messageText = new string[numberOfMessage];
         bool firstScan = false;
 
-        string alarmMessagesArchivePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\messageArchive.txt";//@"C:\Users\AdmPcdMasloA01\Desktop\messageArchive.txt";
+        string alarmMessagesArchivePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\messageArchive.txt";
 
         public MainScreen()
         {
@@ -81,11 +81,27 @@ namespace Heineken_DataCollection
         public int hours_last_mb = new int();
         public int days_last_mb = new int();
 
+        public float[] values_sum = new float[200];
+        public float[] values_last = new float[200];
+        public DateTime date_time_last = new DateTime();
+
+
+        public float[] values_sum_S7 = new float[200];
+        public float[] values_last_S7 = new float[200];
+        public DateTime date_time_last_S7 = new DateTime();
+
         // Read S7
         private void Button_Read_s7_Click(object sender, EventArgs e)
         {
             try
             {
+                for (int i = 0; i < values_last_S7.Length; i++)
+                {
+                    values_last_S7[i] = 0;
+                }
+
+                date_time_last_S7 = DateTime.Now;
+
                 if (backgroundWorkerRead.IsBusy != true)
                 {
                     // Start the asynchronous operation.
@@ -116,9 +132,9 @@ namespace Heineken_DataCollection
         {
 
             // Установка соединения с PostgreSQL
-            NpgsqlConnection PGCon = new NpgsqlConnection("Host=10.129.20.179;" +
+            NpgsqlConnection PGCon = new NpgsqlConnection("Host=localhost;" +
                 "Username=postgres;" +
-                "Password=123456;" +
+                "Password=spb161222;" +
                 "Database=postgres;" +
                 "Timeout = 300;" +
                 "CommandTimeout = 300");
@@ -166,13 +182,16 @@ namespace Heineken_DataCollection
 
                     List<string> myList = new List<string>();
 
-                    byte[] db1Buffer = new byte[128];
+                    byte[] db1Buffer = new byte[4];
 
-                    // Установка соединения с PLC в щитовой ТП-3679
+                    List<float> values = new List<float>();
+
+                    // Установка соединения с PLC
                     S7Client plcClient = new S7Client();
-                    int result = plcClient.ConnectTo("10.129.31.147", 0, 2);
+                    int result = plcClient.ConnectTo("10.129.7.224", 0, 2);
 
-                    result = plcClient.DBRead(20, 0, 128, db1Buffer);
+                    //// Read DB101.DBD1846
+                    result = plcClient.DBRead(101, 1846, 4, db1Buffer);
                     if (result != 0)
                     {
                         try
@@ -187,20 +206,12 @@ namespace Heineken_DataCollection
                     }
                     else
                     {
-                        for (int i = 0; i <= 31; i++)
-                        {
-                            double db1ddd4 = S7.GetRealAt(db1Buffer, 4 * i);
-                            myList.Add("(" + i + "," + db1ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
-                        }
+                        double db1ddd4 = S7.GetRealAt(db1Buffer, 0);
+                        values.Add((float)db1ddd4);
                     }
 
-                    plcClient.Disconnect();
-
-                    // Соединение и считывание данных с контроллера в энергоблоке
-                    result = plcClient.ConnectTo("10.129.31.135", 0, 3);
-                    byte[] db2Buffer = new byte[80];
-
-                    result = plcClient.DBRead(2000, 1838, 80, db2Buffer);
+                    //// Read DB101.DBD1916
+                    result = plcClient.DBRead(101, 1916, 4, db1Buffer);
                     if (result != 0)
                     {
                         try
@@ -215,24 +226,18 @@ namespace Heineken_DataCollection
                     }
                     else
                     {
-                        for (int i = 32; i <= 49; i++)
-                        {
-                            double db2ddd4 = S7.GetRealAt(db2Buffer, 4 * (i - 32));
-                            myList.Add("(" + i + "," + db2ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
-                        }
+                        double db1ddd4 = S7.GetRealAt(db1Buffer, 0);
+                        values.Add((float)db1ddd4);
                     }
 
-                    ////////// Работа с сообщениями //////////
-
-                    db2Buffer = new byte[3];
-
-                    result = plcClient.DBRead(2000, 8, 3, db2Buffer);
+                    //// Read DB101.DBD1986
+                    result = plcClient.DBRead(101, 1986, 4, db1Buffer);
                     if (result != 0)
                     {
                         try
                         {
                             using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
-                                sw.Write("Messages; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
+                                sw.Write("S7; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
                         }
                         catch (Exception ex)
                         {
@@ -241,113 +246,139 @@ namespace Heineken_DataCollection
                     }
                     else
                     {
-                        bool[] currentMessageState = new bool[numberOfMessage];
-                        bool[] createMessage = new bool[numberOfMessage];
-                        string[] messageType = new string[numberOfMessage];
-
-                        for (int i = 0; i < db2Buffer.Length; i++)
-                        {
-                            for (int j = 0; j <= 7; j++)
-                            {
-                                bool bit = S7.GetBitAt(db2Buffer, i, j);
-                                currentMessageState[i * 8 + j] = bit;
-                            }
-                        }
-
-                        for (int i = 0; i < currentMessageState.Length; i++)
-                        {
-                            if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == true)
-                            {
-                                previousMessageState[i] = currentMessageState[i];
-                                createMessage[i] = true;
-                                messageType[i] = "⬆️";
-                            }
-                            else if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == false)
-                            {
-                                previousMessageState[i] = currentMessageState[i];
-                                createMessage[i] = true;
-                                messageType[i] = "⬇️";
-                            }
-                        }
-
-                        if (firstScan)
-                        {
-                            for (int i = 0; i < createMessage.Length; i++)
-                            {
-                                if (createMessage[i] == true)
-                                {
-                                    var webProxy = new WebProxy(Host: "10.23.5.4", Port: 80)
-                                    {
-                                        // Credentials if needed:
-                                        // Credentials = new NetworkCredential("USERNAME", "PASSWORD")
-                                    };
-                                    var httpClient = new HttpClient(
-                                        new HttpClientHandler { Proxy = webProxy, UseProxy = true }
-                                    );
-
-                                    var botClient = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4", httpClient);
-
-                                    //var me = await botClient.GetMeAsync();
-
-                                    Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
-                                        chatId: "-1001749496684",//chatId,
-                                        text: messageType[i] + messageText[i],
-                                    parseMode: ParseMode.MarkdownV2,
-                                    disableNotification: true);
-                                }
-                            }
-                            createMessage = null;
-                        }
-                        firstScan = true;
+                        double db1ddd4 = S7.GetRealAt(db1Buffer, 0);
+                        values.Add((float)db1ddd4);
                     }
 
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    //// Read DB101.DBD2056
+                    result = plcClient.DBRead(101, 2056, 4, db1Buffer);
+                    if (result != 0)
+                    {
+                        try
+                        {
+                            using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
+                                sw.Write("S7; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    else
+                    {
+                        double db1ddd4 = S7.GetRealAt(db1Buffer, 0);
+                        values.Add((float)db1ddd4);
+                    }
 
+                    //// Read DB125.DBD2034
+                    result = plcClient.DBRead(125, 2034, 4, db1Buffer);
+                    if (result != 0)
+                    {
+                        try
+                        {
+                            using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
+                                sw.Write("S7; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    else
+                    {
+                        double db1ddd4 = S7.GetRealAt(db1Buffer, 0);
+                        values.Add((float)db1ddd4);
+                    }
+
+                    //// Read DB125.DBD2082
+                    result = plcClient.DBRead(125, 2082, 4, db1Buffer);
+                    if (result != 0)
+                    {
+                        try
+                        {
+                            using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
+                                sw.Write("S7; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    else
+                    {
+                        double db1ddd4 = S7.GetRealAt(db1Buffer, 0);
+                        values.Add((float)db1ddd4);
+                    }
                     plcClient.Disconnect();
+
+                    // Работа с моментальными расходами
+                    if (values_last_S7[0] != 0 || values_last_S7[0] == 0)
+                    {
+                        for (int i = 0; i < values.Count; i++)
+                        {
+                            values_sum_S7[i] = values_sum_S7[i] + ((float)((((values[i] + values_last_S7[i]) / 2) / 3600) * (DateTime.Now.Subtract(date_time_last_S7).TotalSeconds)));
+                            values_last_S7[i] = values[i];
+                        }
+                        date_time_last_S7 = DateTime.Now;
+
+                    }
+                    else
+                    {
+                        for (int i = 0; i < values.Count; i++)
+                        {
+                            values_last_S7[i] = values[i];
+                        }
+                        date_time_last_S7 = DateTime.Now;
+                    }
+
+                    for (int i = 0; i < values.Count; i++)
+                    {
+                        myList.Add("(" + 50 + i + "," + values_sum_S7[i].ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
+                    }
 
                     var sqlValues = String.Join(", ", myList.ToArray());
 
                     if (seconds_now != seconds_last)
                     {
                         seconds_last = seconds_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 секунду
+                        // Запись данных в PostgreSQL 1 раз в 1 секунду
                         var cmd_sec_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
-                            CommandText = "INSERT INTO _seconds_table (id, value, date_time) VALUES " + sqlValues
+                            CommandText = "INSERT INTO \"DC_seconds\" (id, value, date_time) VALUES " + sqlValues
                         };
                         cmd_sec_insert.ExecuteNonQuery();
                     }
                     if (minutes_now != minutes_last)
                     {
                         minutes_last = minutes_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 минуту
+                        // Запись данных в PostgreSQL 1 раз в 1 минуту
                         var cmd_min_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
-                            CommandText = "INSERT INTO _minutes_table (id, value, date_time) VALUES " + sqlValues
+                            CommandText = "INSERT INTO \"DC_minutes\" (id, value, date_time) VALUES " + sqlValues
                         };
                         cmd_min_insert.ExecuteNonQuery();
                     }
                     if (hours_now != hours_last)
                     {
                         hours_last = hours_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 час
+                        // Запись данных в PostgreSQL 1 раз в 1 час
                         var cmd_hour_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
-                            CommandText = "INSERT INTO _hours_table (id, value, date_time) VALUES " + sqlValues
+                            CommandText = "INSERT INTO \"DC_hours\" (id, value, date_time) VALUES " + sqlValues
                         };
                         cmd_hour_insert.ExecuteNonQuery();
                     }
                     if (days_now != days_last)
                     {
                         days_last = days_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 день
+                        // Запись данных в PostgreSQL 1 раз в 1 день
                         var cmd_day_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
-                            CommandText = "INSERT INTO _days_table (id, value, date_time) VALUES " + sqlValues
+                            CommandText = "INSERT INTO \"DC_days\" (id, value, date_time) VALUES " + sqlValues
                         };
                         cmd_day_insert.ExecuteNonQuery();
                     }
@@ -413,6 +444,13 @@ namespace Heineken_DataCollection
         {
             try
             {
+                for (int i = 0; i < values_last.Length; i++)
+                {
+                    values_last[i] = 0;
+                }
+
+                date_time_last = DateTime.Now;
+
                 if (bgWReadModBus.IsBusy != true)
                 {
                     // Start the asynchronous operation.
@@ -442,10 +480,8 @@ namespace Heineken_DataCollection
         public void ReadwriteModbus()
         {
             // Установка соединения с PostgreSQL
-            NpgsqlConnection PGCon = new NpgsqlConnection(//"Host=10.129.20.179;"
-                "Host=localhost;" +
+            NpgsqlConnection PGCon = new NpgsqlConnection("Host=localhost;" +
                 "Username=postgres;" +
-                //"Password=123456789;" +
                 "Password=spb161222;" +
                 "Database=postgres;" +
                 "Timeout = 300;" +
@@ -491,15 +527,13 @@ namespace Heineken_DataCollection
                     int days_now = DateTime.Now.Day;
 
                     DateTime s2 = DateTime.Now;
-                    // Connect to Packaging
                     DateTime s1 = DateTime.Now;
-                    //TcpClient client = new TcpClient("10.129.31.165", 502);
-                    TcpClient client = new TcpClient("10.129.7.197", 502);                   // L8_Past
+                    // L8_Past
+                    TcpClient client = new TcpClient("10.129.7.197", 502);
                     ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
 
                     List<ushort> modbusList = new List<ushort>();
 
-                    //for (int i = 0; i <= 29; i++)
                     for (int i = 0; i <= 9; i++)
                     {
                         ushort startAddress = (ushort)(1301 + i);
@@ -509,21 +543,19 @@ namespace Heineken_DataCollection
 
                     List<float> values = new List<float>();
 
-                    //for (int j = 0; j <= 29; j += 2)
                     for (int j = 0; j <= 9; j += 2)
                     {
                         ushort[] buffer = { modbusList[j], modbusList[j + 1] };
                         byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
+                        bytes[2] = (byte)(buffer[1] & 0xFF);
+                        bytes[3] = (byte)(buffer[1] >> 8);
+                        bytes[0] = (byte)(buffer[0] & 0xFF);
+                        bytes[1] = (byte)(buffer[0] >> 8);
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
 
-                    // Connect to BLO --- Propogators
+                    // L6_CIP
                     s1 = DateTime.Now;
-                    //client = new TcpClient("10.129.31.162", 502);                        // L6_CIP
                     client = new TcpClient("10.129.7.198", 502);
                     master = ModbusIpMaster.CreateIp(client);
 
@@ -540,22 +572,20 @@ namespace Heineken_DataCollection
                     {
                         ushort[] buffer = { modbusList[j], modbusList[j + 1] };
                         byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
+                        bytes[2] = (byte)(buffer[1] & 0xFF);
+                        bytes[3] = (byte)(buffer[1] >> 8);
+                        bytes[0] = (byte)(buffer[0] & 0xFF);
+                        bytes[1] = (byte)(buffer[0] >> 8);
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
 
-                    // Connect to VAO
+                    // L6_Past
                     s1 = DateTime.Now;
-                    //client = new TcpClient("10.129.31.163", 502);                         // L6_Past
                     client = new TcpClient("10.129.7.199", 502);
                     master = ModbusIpMaster.CreateIp(client);
 
                     modbusList.Clear();
 
-                    //for (int i = 0; i <= 49; i++)
                     for (int i = 0; i <= 9; i++)
                     {
                         ushort startAddress = (ushort)(1301 + i);
@@ -563,22 +593,20 @@ namespace Heineken_DataCollection
                         modbusList.Add(inputs[0]);
                     }
 
-                    //for (int j = 0; j <= 49; j += 2)
                     for (int j = 0; j <= 9; j += 2)
                     {
                         ushort[] buffer = { modbusList[j], modbusList[j + 1] };
                         byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
+                        bytes[2] = (byte)(buffer[1] & 0xFF);
+                        bytes[3] = (byte)(buffer[1] >> 8);
+                        bytes[0] = (byte)(buffer[0] & 0xFF);
+                        bytes[1] = (byte)(buffer[0] >> 8);
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
 
-                    // Connect to EnergyBlock --- WaterReady
+                    // L6_BMM
                     s1 = DateTime.Now;
-                    //client = new TcpClient("10.129.31.164", 502);
-                    client = new TcpClient("10.129.7.200", 502);                              // L6_BMM
+                    client = new TcpClient("10.129.7.200", 502);
                     master = ModbusIpMaster.CreateIp(client);
 
                     modbusList.Clear();
@@ -594,23 +622,20 @@ namespace Heineken_DataCollection
                     {
                         ushort[] buffer = { modbusList[j], modbusList[j + 1] };
                         byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
+                        bytes[2] = (byte)(buffer[1] & 0xFF);
+                        bytes[3] = (byte)(buffer[1] >> 8);
+                        bytes[0] = (byte)(buffer[0] & 0xFF);
+                        bytes[1] = (byte)(buffer[0] >> 8);
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
 
-
-                    // Connect to Filtration
+                    // L9_Past
                     s1 = DateTime.Now;
-                    //client = new TcpClient("10.129.31.161", 502);
-                    client = new TcpClient("10.129.7.201", 502);                                 // L9_Past
+                    client = new TcpClient("10.129.7.201", 502);
                     master = ModbusIpMaster.CreateIp(client);
 
                     modbusList.Clear();
 
-                    //for (int i = 0; i <= 29; i++)
                     for (int i = 0; i <= 9; i++)
                     {
                         ushort startAddress = (ushort)(1301 + i);
@@ -618,15 +643,14 @@ namespace Heineken_DataCollection
                         modbusList.Add(inputs[0]);
                     }
 
-                    //for (int j = 0; j <= 29; j += 2)
                     for (int j = 0; j <= 9; j += 2)
                     {
                         ushort[] buffer = { modbusList[j], modbusList[j + 1] };
                         byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
+                        bytes[2] = (byte)(buffer[1] & 0xFF);
+                        bytes[3] = (byte)(buffer[1] >> 8);
+                        bytes[0] = (byte)(buffer[0] & 0xFF);
+                        bytes[1] = (byte)(buffer[0] >> 8);
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
 
@@ -648,10 +672,10 @@ namespace Heineken_DataCollection
                     {
                         ushort[] buffer = { modbusList[j], modbusList[j + 1] };
                         byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
+                        bytes[2] = (byte)(buffer[1] & 0xFF);
+                        bytes[3] = (byte)(buffer[1] >> 8);
+                        bytes[0] = (byte)(buffer[0] & 0xFF);
+                        bytes[1] = (byte)(buffer[0] >> 8);
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
 
@@ -673,10 +697,10 @@ namespace Heineken_DataCollection
                     {
                         ushort[] buffer = { modbusList[j], modbusList[j + 1] };
                         byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
+                        bytes[2] = (byte)(buffer[1] & 0xFF);
+                        bytes[3] = (byte)(buffer[1] >> 8);
+                        bytes[0] = (byte)(buffer[0] & 0xFF);
+                        bytes[1] = (byte)(buffer[0] >> 8);
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
 
@@ -699,10 +723,10 @@ namespace Heineken_DataCollection
                     {
                         ushort[] buffer = { modbusList[j], modbusList[j + 1] };
                         byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
+                        bytes[2] = (byte)(buffer[1] & 0xFF);
+                        bytes[3] = (byte)(buffer[1] >> 8);
+                        bytes[0] = (byte)(buffer[0] & 0xFF);
+                        bytes[1] = (byte)(buffer[0] >> 8);
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
                     */
@@ -724,13 +748,12 @@ namespace Heineken_DataCollection
                     {
                         ushort[] buffer = { modbusList[j], modbusList[j + 1] };
                         byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
+                        bytes[2] = (byte)(buffer[1] & 0xFF);
+                        bytes[3] = (byte)(buffer[1] >> 8);
+                        bytes[0] = (byte)(buffer[0] & 0xFF);
+                        bytes[1] = (byte)(buffer[0] >> 8);
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
-
 
                     // SPB ---> CIP_2
                     s1 = DateTime.Now;
@@ -750,13 +773,12 @@ namespace Heineken_DataCollection
                     {
                         ushort[] buffer = { modbusList[j], modbusList[j + 1] };
                         byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
+                        bytes[2] = (byte)(buffer[1] & 0xFF);
+                        bytes[3] = (byte)(buffer[1] >> 8);
+                        bytes[0] = (byte)(buffer[0] & 0xFF);
+                        bytes[1] = (byte)(buffer[0] >> 8);
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
-
 
                     // SPB ---> Теплопукт
                     s1 = DateTime.Now;
@@ -771,20 +793,21 @@ namespace Heineken_DataCollection
                         ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
                         modbusList.Add(inputs[0]);
                     }
-
+                    // First Round
                     for (int j = 0; j <= 9; j += 2)
                     {
                         ushort[] buffer = { modbusList[j], modbusList[j + 1] };
                         byte[] bytes = new byte[4];
-                        bytes[3] = (byte)(buffer[1] & 0xFF);
-                        bytes[2] = (byte)(buffer[1] >> 8);
-                        bytes[1] = (byte)(buffer[0] & 0xFF);
-                        bytes[0] = (byte)(buffer[0] >> 8);
+                        bytes[2] = (byte)(buffer[1] & 0xFF);
+                        bytes[3] = (byte)(buffer[1] >> 8);
+                        bytes[0] = (byte)(buffer[0] & 0xFF);
+                        bytes[1] = (byte)(buffer[0] >> 8);
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
 
                     List<string> myList = new List<string>();
 
+                    // Удаление пятого элемента в массиве, т.к. в этом преобразователе он не несёт никакой полезной информации 
                     int x = values.Count / 5;
 
                     for (int i = 4, j = 0; j < x; i += 5, j++)
@@ -792,9 +815,29 @@ namespace Heineken_DataCollection
                         values.RemoveAt(i - j);
                     }
 
+                    // Работа с моментальными расходами
+                    if (values_last[0] != 0 || values_last[0] == 0)
+                    {
+                        for (int i = 0; i < values.Count; i++)
+                        {
+                            values_sum[i] = values_sum[i] + ((float)((((values[i] + values_last[i]) / 2) / 3600) * (DateTime.Now.Subtract(date_time_last).TotalSeconds)));
+                            values_last[i] = values[i];
+                        }
+                        date_time_last = DateTime.Now;
+
+                    }
+                    else {
+                        for (int i = 0; i < values.Count; i++)
+                        {
+                            values_last[i] = values[i];
+                        }
+                        date_time_last = DateTime.Now;
+                    }
+
+
                     for (int i = 0; i < values.Count; i++)
                     {
-                        myList.Add("(" + i + "," + values[i].ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
+                        myList.Add("(" + i + "," + values_sum[i].ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
                     }
 
                     var sqlValues = String.Join(", ", myList.ToArray());
@@ -803,11 +846,10 @@ namespace Heineken_DataCollection
                     if (seconds_now != seconds_last_mb)
                     {
                         seconds_last_mb = seconds_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 секунду
+                        // Запись данных в PostgreSQL 1 раз в 1 секунду
                         var cmd_sec_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
-                            //CommandText = "INSERT INTO _seconds_table_mb (id, value, date_time) VALUES " + sqlValues
                             CommandText = "INSERT INTO \"DC_seconds\" (id, value, date_time) VALUES " + sqlValues
                         };
                         cmd_sec_insert.ExecuteNonQuery();
@@ -815,11 +857,10 @@ namespace Heineken_DataCollection
                     if (minutes_now != minutes_last_mb)
                     {
                         minutes_last_mb = minutes_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 минуту
+                        // Запись данных в PostgreSQL 1 раз в 1 минуту
                         var cmd_min_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
-                            //CommandText = "INSERT INTO _minutes_table_mb (id, value, date_time) VALUES " + sqlValues
                             CommandText = "INSERT INTO \"DC_minutes\" (id, value, date_time) VALUES " + sqlValues
                         };
                         cmd_min_insert.ExecuteNonQuery();
@@ -827,11 +868,10 @@ namespace Heineken_DataCollection
                     if (hours_now != hours_last_mb)
                     {
                         hours_last_mb = hours_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 час
+                        // Запись данных в PostgreSQL 1 раз в 1 час
                         var cmd_hour_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
-                            //CommandText = "INSERT INTO _hours_table_mb (id, value, date_time) VALUES " + sqlValues
                             CommandText = "INSERT INTO \"DC_hours\" (id, value, date_time) VALUES " + sqlValues
                         };
                         cmd_hour_insert.ExecuteNonQuery();
@@ -839,11 +879,10 @@ namespace Heineken_DataCollection
                     if (days_now != days_last_mb)
                     {
                         days_last_mb = days_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 день
+                        // Запись данных в PostgreSQL 1 раз в 1 день
                         var cmd_day_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
-                            //CommandText = "INSERT INTO _days_table_mb (id, value, date_time) VALUES " + sqlValues
                             CommandText = "INSERT INTO \"DC_days\" (id, value, date_time) VALUES " + sqlValues
                         };
                         cmd_day_insert.ExecuteNonQuery();
@@ -902,16 +941,6 @@ namespace Heineken_DataCollection
         {
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Value = 0));
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Blocks));
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

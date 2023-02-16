@@ -198,9 +198,9 @@ namespace Heineken_DataCollection
 
                     // Соединение и считывание данных с контроллера в энергоблоке
                     result = plcClient.ConnectTo("10.129.31.135", 0, 3);
-                    byte[] db2Buffer = new byte[80];
+                    byte[] db2Buffer = new byte[160];
 
-                    result = plcClient.DBRead(2000, 1838, 80, db2Buffer);
+                    result = plcClient.DBRead(2000, 1838, 160, db2Buffer);
                     if (result != 0)
                     {
                         try
@@ -215,7 +215,7 @@ namespace Heineken_DataCollection
                     }
                     else
                     {
-                        for (int i = 32; i <= 49; i++)
+                        for (int i = 32; i <= 71; i++)
                         {
                             double db2ddd4 = S7.GetRealAt(db2Buffer, 4 * (i - 32));
                             myList.Add("(" + i + "," + db2ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
@@ -444,7 +444,7 @@ namespace Heineken_DataCollection
             // Установка соединения с PostgreSQL
             NpgsqlConnection PGCon = new NpgsqlConnection("Host=10.129.20.179;"+
                 "Username=postgres;" +
-                "Password=123456789;" +
+                "Password=123456;" +
                 "Database=postgres;" +
                 "Timeout = 300;" +
                 "CommandTimeout = 300");
