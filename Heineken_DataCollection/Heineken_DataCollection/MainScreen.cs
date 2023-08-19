@@ -31,7 +31,7 @@ namespace Heineken_DataCollection
         string[] messageText = new string[numberOfMessage];
         bool firstScan = false;
 
-        string alarmMessagesArchivePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\messageArchive.txt";//@"C:\Users\AdmPcdMasloA01\Desktop\messageArchive.txt";
+        string alarmMessagesArchivePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\messageArchive.txt";
 
         public MainScreen()
         {
@@ -116,7 +116,8 @@ namespace Heineken_DataCollection
         {
 
             // Установка соединения с PostgreSQL
-            NpgsqlConnection PGCon = new NpgsqlConnection("Host=10.129.20.179;" +
+            NpgsqlConnection PGCon = new NpgsqlConnection(//"Host=10.129.20.253;" +
+                "Host=localhost;" +
                 "Username=postgres;" +
                 "Password=123456;" +
                 "Database=postgres;" +
@@ -442,7 +443,8 @@ namespace Heineken_DataCollection
         public void ReadwriteModbus()
         {
             // Установка соединения с PostgreSQL
-            NpgsqlConnection PGCon = new NpgsqlConnection("Host=10.129.20.179;"+
+            NpgsqlConnection PGCon = new NpgsqlConnection(//"Host=10.129.20.253;" +
+                "Host=localhost;" +
                 "Username=postgres;" +
                 "Password=123456;" +
                 "Database=postgres;" +
