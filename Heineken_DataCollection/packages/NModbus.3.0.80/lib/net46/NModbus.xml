@@ -712,10 +712,11 @@
             <param name="startAddress">Address to begin writing values.</param>
             <param name="data">Values to write.</param>
         </member>
-        <member name="M:NModbus.Extensions.Enron.EnronModbus.Convert(System.UInt32[])">
-            <summary>
-                Convert the 32 bit registers to two 16 bit values.
-            </summary>
+        <member name="M:NModbus.Extensions.Enron.EnronModbus.ConvertFrom32(System.UInt32[])">
+            <summary> Convert the 32 bit registers to two 16 bit values. </summary>
+        </member>
+        <member name="M:NModbus.Extensions.Enron.EnronModbus.ConvertTo32(System.UInt16[])">
+            <summary> Convert the double 16 bit registers to single 32 bit values. </summary>
         </member>
         <member name="T:NModbus.Extensions.Functions.Endian">
             <summary>
@@ -885,6 +886,14 @@
             <param name="streamResource"></param>
             <returns></returns>
         </member>
+        <member name="M:NModbus.FactoryExtensions.CreateIpMaster(NModbus.IModbusFactory,NModbus.IO.IStreamResource)">
+            <summary>
+            Creates a TCP or UDP master.
+            </summary>
+            <param name="factory"></param>
+            <param name="streamResource"></param>
+            <returns></returns>
+        </member>
         <member name="M:NModbus.FactoryExtensions.CreateRtuSlaveNetwork(NModbus.IModbusFactory,NModbus.IO.IStreamResource)">
             <summary>
             Creates an RTU slave network.
@@ -986,6 +995,13 @@
         <member name="M:NModbus.IModbusFactory.CreateAsciiTransport(NModbus.IO.IStreamResource)">
             <summary>
             Creates an Ascii Transport.
+            </summary>
+            <param name="streamResource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NModbus.IModbusFactory.CreateIpTransport(NModbus.IO.IStreamResource)">
+            <summary>
+            Creates an IP Transport
             </summary>
             <param name="streamResource"></param>
             <returns></returns>
@@ -1345,6 +1361,16 @@
             Removes a slave from the network.
             </summary>
             <param name="unitId"></param>
+        </member>
+        <member name="T:NModbus.IModbusTcpSlaveNetwork">
+            <summary>
+                Modbus TCP slave device.
+            </summary>
+        </member>
+        <member name="P:NModbus.IModbusTcpSlaveNetwork.Masters">
+            <summary>
+                Gets the Modbus TCP Masters connected to this Modbus TCP Slave.
+            </summary>
         </member>
         <member name="T:NModbus.IPointSource`1">
             <summary>
@@ -1801,6 +1827,16 @@
         <member name="T:NModbus.ModbusFunctionCodes">
             <summary>
             Supported function codes
+            </summary>
+        </member>
+        <member name="F:NModbus.ModbusIPPorts.Insecure">
+            <summary>
+            502: mbap/TCP
+            </summary>
+        </member>
+        <member name="F:NModbus.ModbusIPPorts.Secure">
+            <summary>
+            802: mbap/TLS/TCP
             </summary>
         </member>
         <member name="T:NModbus.SlaveException">

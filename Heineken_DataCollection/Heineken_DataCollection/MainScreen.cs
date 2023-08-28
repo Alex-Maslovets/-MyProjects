@@ -31,6 +31,16 @@ namespace Heineken_DataCollection
         string[] messageText = new string[numberOfMessage];
         bool firstScan = false;
 
+        public int seconds_last = new int();
+        public int minutes_last = new int();
+        public int hours_last = new int();
+        public int days_last = new int();
+
+        public int seconds_last_mb = new int();
+        public int minutes_last_mb = new int();
+        public int hours_last_mb = new int();
+        public int days_last_mb = new int();
+
         string alarmMessagesArchivePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\messageArchive.txt";
 
         public MainScreen()
@@ -70,16 +80,6 @@ namespace Heineken_DataCollection
             messageText[20] = "🟥 Температура ледяной воды \\>\\= 6\\,5 град\\. С";
             messageText[21] = "🟥 Температура ледяной воды \\<\\= 0\\,0 град\\. С";
         }
-
-        public int seconds_last = new int();
-        public int minutes_last = new int();
-        public int hours_last = new int();
-        public int days_last = new int();
-
-        public int seconds_last_mb = new int();
-        public int minutes_last_mb = new int();
-        public int hours_last_mb = new int();
-        public int days_last_mb = new int();
 
         // Read S7
         private void Button_Read_s7_Click(object sender, EventArgs e)
@@ -158,10 +158,22 @@ namespace Heineken_DataCollection
             {
                 try
                 {
-                    int seconds_now = DateTime.Now.Second;
-                    int minutes_now = DateTime.Now.Minute;
-                    int hours_now = DateTime.Now.Hour;
-                    int days_now = DateTime.Now.Day;
+                    if (!firstScan)
+                    {
+                        var cmd_select_time = new NpgsqlCommand
+                        {
+                            Connection = PGCon,
+                            CommandText = "SELECT date_time FROM _minutes_table ORDER BY date_time DESC LIMIT 1"
+                        };
+                        NpgsqlDataReader reader = cmd_select_time.ExecuteReader();
+                        reader.Read();
+
+                        seconds_last = reader.GetDateTime(0).Second;
+                        minutes_last = reader.GetDateTime(0).Minute;
+                        hours_last = reader.GetDateTime(0).Hour;
+                        days_last = reader.GetDateTime(0).Day;
+
+                    }
 
                     DateTime s1 = DateTime.Now;
 
@@ -308,10 +320,15 @@ namespace Heineken_DataCollection
 
                     var sqlValues = String.Join(", ", myList.ToArray());
 
+                    int seconds_now = DateTime.Now.Second;
+                    int minutes_now = DateTime.Now.Minute;
+                    int hours_now = DateTime.Now.Hour;
+                    int days_now = DateTime.Now.Day;
+
                     if (seconds_now != seconds_last)
                     {
                         seconds_last = seconds_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 секунду
+                        // Запись данных в PostgreSQL 1 раз в 1 секунду
                         var cmd_sec_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
@@ -322,7 +339,7 @@ namespace Heineken_DataCollection
                     if (minutes_now != minutes_last)
                     {
                         minutes_last = minutes_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 минуту
+                        // Запись данных в PostgreSQL 1 раз в 1 минуту
                         var cmd_min_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
@@ -333,7 +350,7 @@ namespace Heineken_DataCollection
                     if (hours_now != hours_last)
                     {
                         hours_last = hours_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 час
+                        // Запись данных в PostgreSQL 1 раз в 1 час
                         var cmd_hour_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
@@ -344,7 +361,7 @@ namespace Heineken_DataCollection
                     if (days_now != days_last)
                     {
                         days_last = days_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 день
+                        // Запись данных в PostgreSQL 1 раз в 1 день
                         var cmd_day_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
@@ -485,10 +502,22 @@ namespace Heineken_DataCollection
             {
                 try
                 {
-                    int seconds_now = DateTime.Now.Second;
-                    int minutes_now = DateTime.Now.Minute;
-                    int hours_now = DateTime.Now.Hour;
-                    int days_now = DateTime.Now.Day;
+                    if (!firstScan)
+                    {
+                        var cmd_select_time = new NpgsqlCommand
+                        {
+                            Connection = PGCon,
+                            CommandText = "SELECT date_time FROM _minutes_table_mb ORDER BY date_time DESC LIMIT 1"
+                        };
+
+                        NpgsqlDataReader reader = cmd_select_time.ExecuteReader();
+                        reader.Read();
+
+                        seconds_last_mb = reader.GetDateTime(0).Second;
+                        minutes_last_mb = reader.GetDateTime(0).Minute;
+                        hours_last_mb = reader.GetDateTime(0).Hour;
+                        days_last_mb = reader.GetDateTime(0).Day;
+                    }
 
                     DateTime s2 = DateTime.Now;
                     // Connect to Packaging
@@ -593,7 +622,6 @@ namespace Heineken_DataCollection
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
 
-
                     // Connect to Filtration
                     s1 = DateTime.Now;
                     client = new TcpClient("10.129.31.161", 502);
@@ -634,12 +662,16 @@ namespace Heineken_DataCollection
                     }
 
                     var sqlValues = String.Join(", ", myList.ToArray());
-                    
+
+                    int seconds_now = DateTime.Now.Second;
+                    int minutes_now = DateTime.Now.Minute;
+                    int hours_now = DateTime.Now.Hour;
+                    int days_now = DateTime.Now.Day;
 
                     if (seconds_now != seconds_last_mb)
                     {
                         seconds_last_mb = seconds_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 секунду
+                        // Запись данных в PostgreSQL 1 раз в 1 секунду
                         var cmd_sec_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
@@ -650,7 +682,7 @@ namespace Heineken_DataCollection
                     if (minutes_now != minutes_last_mb)
                     {
                         minutes_last_mb = minutes_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 минуту
+                        // Запись данных в PostgreSQL 1 раз в 1 минуту
                         var cmd_min_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
@@ -661,7 +693,7 @@ namespace Heineken_DataCollection
                     if (hours_now != hours_last_mb)
                     {
                         hours_last_mb = hours_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 час
+                        // Запись данных в PostgreSQL 1 раз в 1 час
                         var cmd_hour_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
@@ -672,7 +704,7 @@ namespace Heineken_DataCollection
                     if (days_now != days_last_mb)
                     {
                         days_last_mb = days_now;
-                        // Запиись данных в PostgreSQL 1 раз в 1 день
+                        // Запись данных в PostgreSQL 1 раз в 1 день
                         var cmd_day_insert = new NpgsqlCommand
                         {
                             Connection = PGCon,
