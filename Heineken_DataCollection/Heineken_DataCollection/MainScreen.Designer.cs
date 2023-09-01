@@ -43,6 +43,7 @@ namespace Heineken_DataCollection
             this.Button_notRead_s7 = new System.Windows.Forms.Button();
             this.Button_Read_s7 = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -103,6 +104,7 @@ namespace Heineken_DataCollection
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.timeLabel_s7);
             this.tabPage1.Controls.Add(this.progressBarRead_s7);
             this.tabPage1.Controls.Add(this.Button_notRead_s7);
@@ -162,6 +164,16 @@ namespace Heineken_DataCollection
             this.tabControl.Size = new System.Drawing.Size(366, 152);
             this.tabControl.TabIndex = 8;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(275, 97);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -195,6 +207,7 @@ namespace Heineken_DataCollection
         private System.Windows.Forms.Button Button_notRead_s7;
         private System.Windows.Forms.Button Button_Read_s7;
         private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.Button button1;
     }
 }
 

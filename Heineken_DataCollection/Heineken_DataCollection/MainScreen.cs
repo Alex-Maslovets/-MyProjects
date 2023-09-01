@@ -13,6 +13,8 @@ using System.Text;
 using System.Windows.Forms;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
+using Lextm.SharpSnmpLib;
+using Lextm.SharpSnmpLib.Messaging;
 
 //using Microsoft.Extensions.Logging;
 //using Telegram.Bot.Exceptions;
@@ -766,6 +768,30 @@ namespace Heineken_DataCollection
         {
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Value = 0));
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Blocks));
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var result1 = Messenger.Set(VersionCode.V1,
+                           new IPEndPoint(IPAddress.Parse("192.168.108.50"), 161),
+                           new OctetString("public"),
+                           new List<Variable> { new Variable(new ObjectIdentifier("1.3.6.1.4.1.21796.4.10.2.2.0"), new OctetString("+79612208424")) },
+                           6000);
+            var result2 = Messenger.Set(VersionCode.V1,
+                           new IPEndPoint(IPAddress.Parse("192.168.108.50"), 161),
+                           new OctetString("public"),
+                           new List<Variable> { new Variable(new ObjectIdentifier("1.3.6.1.4.1.21796.4.10.2.1.0"), new OctetString("C# --- Hello World!")) },
+                           6000);
+            var result3 = Messenger.Set(VersionCode.V1,
+                           new IPEndPoint(IPAddress.Parse("192.168.108.50"), 161),
+                           new OctetString("public"),
+                           new List<Variable> { new Variable(new ObjectIdentifier("1.3.6.1.4.1.21796.4.10.2.3.0"), new OctetString("1")) },
+                           6000);
+
+            //snmpset - v 1 - c private 192.168.100.169 1.3.6.1.4.1.21796.4.10.2.2.0 s: 123456789
+            //snmpset -v 1 -c private 192.168.100.169 1.3.6.1.4.1.21796.4.10.2.1.0 s "Hello World!" 
+            //snmpset -v 1 -c private 192.168.100.169 1.3.6.1.4.1.21796.4.10.2.3.0 i: 1
+
         }
     }
 }
