@@ -77,3 +77,4 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataColle
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\SharpSnmpLib.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\SharpSnmpLib.pdb
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\SharpSnmpLib.xml
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\SnmpSharpNet.dll

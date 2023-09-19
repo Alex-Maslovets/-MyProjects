@@ -13,15 +13,7 @@ using System.Text;
 using System.Windows.Forms;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
-using Lextm.SharpSnmpLib;
-using Lextm.SharpSnmpLib.Messaging;
-
-//using Microsoft.Extensions.Logging;
-//using Telegram.Bot.Exceptions;
-//using Telegram.Bot.Extensions.Polling;
-//using Telegram.Bot.Types;
-//using Telegram.Bot.Types.ReplyMarkups;
-//using System.Threading;
+using SnmpSharpNet;
 
 namespace Heineken_DataCollection
 {
@@ -30,8 +22,29 @@ namespace Heineken_DataCollection
 
         const int numberOfMessage = 50;
         bool[] previousMessageState = new bool[numberOfMessage];
+        DateTime[] messageTime = new DateTime[numberOfMessage];
+        TimeSpan[] messageDuration = new TimeSpan[numberOfMessage];
         string[] messageText = new string[numberOfMessage];
         bool firstScan = false;
+        bool firstStart = false;
+        bool firstStartMB = false;
+
+        public uint counterTime = new uint();
+        public uint counterPLC3679 = new uint();
+        public uint counterPLC2 = new uint();
+        public uint counterMessages = new uint();
+        public uint counterDB = new uint();
+        public uint counterS7 = new uint();
+
+        public uint counterTime_mb = new uint();
+        public uint counterPackaging_mb = new uint();
+        public uint counterBLO_mb = new uint();
+        public uint counterVAO_mb = new uint();
+        public uint counterEnergoBlock_mb = new uint();
+        public uint counterFiltration_mb = new uint();
+        public uint counterDB_mb = new uint();
+        public uint countermb = new uint();
+
 
         public int seconds_last = new int();
         public int minutes_last = new int();
@@ -86,6 +99,13 @@ namespace Heineken_DataCollection
         // Read S7
         private void Button_Read_s7_Click(object sender, EventArgs e)
         {
+            counterTime = 0;
+            counterPLC3679 = 0;
+            counterPLC2 = 0;
+            counterMessages = 0;
+            counterDB = 0;
+            counterS7 = 0;
+
             try
             {
                 if (backgroundWorkerRead.IsBusy != true)
@@ -101,6 +121,13 @@ namespace Heineken_DataCollection
         }
         private void Button_notRead_s7_Click(object sender, EventArgs e)
         {
+            counterTime = 0;
+            counterPLC3679 = 0;
+            counterPLC2 = 0;
+            counterMessages = 0;
+            counterDB = 0;
+            counterS7 = 0;
+
             try
             {
                 if (backgroundWorkerRead.WorkerSupportsCancellation == true)
@@ -116,6 +143,8 @@ namespace Heineken_DataCollection
         }
         public async void ReadwriteS7()
         {
+
+            DateTime s1 = DateTime.Now;
 
             // Установка соединения с PostgreSQL
             NpgsqlConnection PGCon = new NpgsqlConnection(//"Host=10.129.20.253;" +
@@ -160,7 +189,8 @@ namespace Heineken_DataCollection
             {
                 try
                 {
-                    if (!firstScan)
+                    DateTime s2 = DateTime.Now;
+                    if (!firstStart)
                     {
                         var cmd_select_time = new NpgsqlCommand
                         {
@@ -175,9 +205,15 @@ namespace Heineken_DataCollection
                         hours_last = reader.GetDateTime(0).Hour;
                         days_last = reader.GetDateTime(0).Day;
 
+                        counterTime++;
                     }
+                    firstStart = true;
 
-                    DateTime s1 = DateTime.Now;
+                    TimeSpan s3 = DateTime.Now.Subtract(s2);
+
+                    timeLabel_s7_1.Invoke(new Action(() => timeLabel_s7_1.Text = "Время обнов. даты: " + s3.TotalMilliseconds + " Счётчик: " + counterTime));
+
+                    s2 = DateTime.Now;
 
                     List<string> myList = new List<string>();
 
@@ -207,9 +243,16 @@ namespace Heineken_DataCollection
                             double db1ddd4 = S7.GetRealAt(db1Buffer, 4 * i);
                             myList.Add("(" + i + "," + db1ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
                         }
+                        counterPLC3679++;
                     }
 
                     plcClient.Disconnect();
+
+                    s3 = DateTime.Now.Subtract(s2);
+
+                    timeLabel_s7_2.Invoke(new Action(() => timeLabel_s7_2.Text = "Время PLC_3679: " + s3.TotalMilliseconds + " Счётчик: " + counterPLC3679));
+
+                    s2 = DateTime.Now;
 
                     // Соединение и считывание данных с контроллера в энергоблоке
                     result = plcClient.ConnectTo("10.129.31.135", 0, 3);
@@ -235,7 +278,14 @@ namespace Heineken_DataCollection
                             double db2ddd4 = S7.GetRealAt(db2Buffer, 4 * (i - 32));
                             myList.Add("(" + i + "," + db2ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
                         }
+                        counterPLC2++;
                     }
+
+                    s3 = DateTime.Now.Subtract(s2);
+
+                    timeLabel_s7_3.Invoke(new Action(() => timeLabel_s7_3.Text = "Время PLC_2: " + s3.TotalMilliseconds + " Счётчик: " + counterPLC2));
+
+                    s2 = DateTime.Now;
 
                     ////////// Работа с сообщениями //////////
 
@@ -276,12 +326,14 @@ namespace Heineken_DataCollection
                                 previousMessageState[i] = currentMessageState[i];
                                 createMessage[i] = true;
                                 messageType[i] = "⬆️";
+                                messageTime[i] = DateTime.Now;
                             }
                             else if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == false)
                             {
                                 previousMessageState[i] = currentMessageState[i];
                                 createMessage[i] = true;
                                 messageType[i] = "⬇️";
+                                messageDuration[i] = DateTime.Now.Subtract(messageTime[i]);
                             }
                         }
 
@@ -291,7 +343,7 @@ namespace Heineken_DataCollection
                             {
                                 if (createMessage[i] == true)
                                 {
-                                    var webProxy = new WebProxy(Host: "10.23.5.4", Port: 80)
+                                    var webProxy = new WebProxy(Host: "10.129.24.100", Port: 8080)
                                     {
                                         // Credentials if needed:
                                         // Credentials = new NetworkCredential("USERNAME", "PASSWORD")
@@ -306,7 +358,7 @@ namespace Heineken_DataCollection
 
                                     Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
                                         chatId: "-1001749496684",//chatId,
-                                        text: messageType[i] + messageText[i],
+                                        text: messageType[i] + messageText[i] + " Длительность: " + messageDuration[i] + " мс",
                                     parseMode: ParseMode.MarkdownV2,
                                     disableNotification: true);
                                 }
@@ -314,11 +366,17 @@ namespace Heineken_DataCollection
                             createMessage = null;
                         }
                         firstScan = true;
+                        counterMessages++;
                     }
 
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
                     plcClient.Disconnect();
+
+                    s3 = DateTime.Now.Subtract(s2);
+
+                    timeLabel_s7_4.Invoke(new Action(() => timeLabel_s7_4.Text = "Время сообщений: " + s3.TotalMilliseconds + " Счётчик: " + counterMessages));
+
+                    s2 = DateTime.Now;
 
                     var sqlValues = String.Join(", ", myList.ToArray());
 
@@ -338,7 +396,7 @@ namespace Heineken_DataCollection
                         };
                         cmd_sec_insert.ExecuteNonQuery();
                     }
-                    if (minutes_now != minutes_last)
+                    if (minutes_now != minutes_last && seconds_now >= 4)
                     {
                         minutes_last = minutes_now;
                         // Запись данных в PostgreSQL 1 раз в 1 минуту
@@ -349,7 +407,7 @@ namespace Heineken_DataCollection
                         };
                         cmd_min_insert.ExecuteNonQuery();
                     }
-                    if (hours_now != hours_last)
+                    if (hours_now != hours_last && seconds_now >= 4)
                     {
                         hours_last = hours_now;
                         // Запись данных в PostgreSQL 1 раз в 1 час
@@ -360,7 +418,7 @@ namespace Heineken_DataCollection
                         };
                         cmd_hour_insert.ExecuteNonQuery();
                     }
-                    if (days_now != days_last)
+                    if (days_now != days_last && seconds_now >= 4)
                     {
                         days_last = days_now;
                         // Запись данных в PostgreSQL 1 раз в 1 день
@@ -372,9 +430,17 @@ namespace Heineken_DataCollection
                         cmd_day_insert.ExecuteNonQuery();
                     }
 
+                    counterDB++;
+
+                    s3 = DateTime.Now.Subtract(s2);
+
+                    timeLabel_s7_5.Invoke(new Action(() => timeLabel_s7_5.Text = "Время записи: " + s3.TotalMilliseconds + " Счётчик: " + counterDB));
+
                     progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Style = ProgressBarStyle.Marquee));
 
-                    timeLabel_s7.Invoke(new Action(() => timeLabel_s7.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1)));
+                    counterS7++;
+
+                    timeLabel_s7.Invoke(new Action(() => timeLabel_s7.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1) + " Счётчик: " + counterS7));
 
                 }
                 catch (Exception ex)
@@ -431,6 +497,15 @@ namespace Heineken_DataCollection
         // Read Modbus
         private void Button_Read_mb_Click(object sender, EventArgs e)
         {
+            counterTime_mb = 0;
+            counterPackaging_mb = 0;
+            counterBLO_mb = 0;
+            counterVAO_mb = 0;
+            counterEnergoBlock_mb = 0;
+            counterFiltration_mb = 0;
+            counterDB_mb = 0;
+            countermb = 0;
+
             try
             {
                 if (bgWReadModBus.IsBusy != true)
@@ -446,6 +521,15 @@ namespace Heineken_DataCollection
         }
         private void Button_notRead_mb_Click(object sender, EventArgs e)
         {
+            counterTime_mb = 0;
+            counterPackaging_mb = 0;
+            counterBLO_mb = 0;
+            counterVAO_mb = 0;
+            counterEnergoBlock_mb = 0;
+            counterFiltration_mb = 0;
+            counterDB_mb = 0;
+            countermb = 0;
+
             try
             {
                 if (bgWReadModBus.WorkerSupportsCancellation == true)
@@ -462,7 +546,7 @@ namespace Heineken_DataCollection
         public void ReadwriteModbus()
         {
             // Установка соединения с PostgreSQL
-            NpgsqlConnection PGCon = new NpgsqlConnection(//"Host=10.129.20.253;" +
+            NpgsqlConnection PGCon = new NpgsqlConnection(
                 "Host=localhost;" +
                 "Username=postgres;" +
                 "Password=123456;" +
@@ -504,7 +588,9 @@ namespace Heineken_DataCollection
             {
                 try
                 {
-                    if (!firstScan)
+                    DateTime s1 = DateTime.Now;
+                    DateTime s2 = DateTime.Now;
+                    if (!firstStartMB)
                     {
                         var cmd_select_time = new NpgsqlCommand
                         {
@@ -519,11 +605,17 @@ namespace Heineken_DataCollection
                         minutes_last_mb = reader.GetDateTime(0).Minute;
                         hours_last_mb = reader.GetDateTime(0).Hour;
                         days_last_mb = reader.GetDateTime(0).Day;
+                        counterTime_mb++;
                     }
+                    firstStartMB = true;
 
-                    DateTime s2 = DateTime.Now;
+                    TimeSpan s3 = DateTime.Now.Subtract(s2);
+
+                    timeLabel_mb_1.Invoke(new Action(() => timeLabel_mb_1.Text = "Время обнов. даты: " + s3.TotalMilliseconds + " Счётчик: " + counterTime_mb));
+                    
+                    s2 = DateTime.Now;
+                    
                     // Connect to Packaging
-                    DateTime s1 = DateTime.Now;
                     TcpClient client = new TcpClient("10.129.31.165", 502);
                     ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
 
@@ -549,8 +641,13 @@ namespace Heineken_DataCollection
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
 
+                    counterPackaging_mb++;
+
+                    s3 = DateTime.Now.Subtract(s2);
+                    timeLabel_mb_2.Invoke(new Action(() => timeLabel_mb_2.Text = "Время TH_Pack: " + s3.TotalMilliseconds + " Счётчик: " + counterPackaging_mb));
+                    s2 = DateTime.Now;
+
                     // Connect to BLO --- Propogators
-                    s1 = DateTime.Now;
                     client = new TcpClient("10.129.31.162", 502);
                     master = ModbusIpMaster.CreateIp(client);
 
@@ -574,8 +671,13 @@ namespace Heineken_DataCollection
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
 
+                    counterBLO_mb++;
+
+                    s3 = DateTime.Now.Subtract(s2);
+                    timeLabel_mb_3.Invoke(new Action(() => timeLabel_mb_3.Text = "Время TH_BLO: " + s3.TotalMilliseconds + " Счётчик: " + counterBLO_mb));
+                    s2 = DateTime.Now;
+
                     // Connect to VAO
-                    s1 = DateTime.Now;
                     client = new TcpClient("10.129.31.163", 502);
                     master = ModbusIpMaster.CreateIp(client);
 
@@ -599,8 +701,13 @@ namespace Heineken_DataCollection
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
 
+                    counterVAO_mb++;
+
+                    s3 = DateTime.Now.Subtract(s2);
+                    timeLabel_mb_4.Invoke(new Action(() => timeLabel_mb_4.Text = "Время TH_VAO: " + s3.TotalMilliseconds + " Счётчик: " + counterVAO_mb));
+                    s2 = DateTime.Now;
+
                     // Connect to EnergyBlock --- WaterReady
-                    s1 = DateTime.Now;
                     client = new TcpClient("10.129.31.164", 502);
                     master = ModbusIpMaster.CreateIp(client);
 
@@ -624,8 +731,13 @@ namespace Heineken_DataCollection
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
 
+                    counterEnergoBlock_mb++;
+
+                    s3 = DateTime.Now.Subtract(s2);
+                    timeLabel_mb_5.Invoke(new Action(() => timeLabel_mb_5.Text = "Время TH_EnBlock: " + s3.TotalMilliseconds + " Счётчик: " + counterEnergoBlock_mb));
+                    s2 = DateTime.Now;
+
                     // Connect to Filtration
-                    s1 = DateTime.Now;
                     client = new TcpClient("10.129.31.161", 502);
                     master = ModbusIpMaster.CreateIp(client);
 
@@ -648,7 +760,13 @@ namespace Heineken_DataCollection
                         bytes[0] = (byte)(buffer[0] >> 8);
                         values.Add(BitConverter.ToSingle(bytes, 0));
                     }
-                                      
+
+                    counterFiltration_mb++;
+
+                    s3 = DateTime.Now.Subtract(s2);
+                    timeLabel_mb_6.Invoke(new Action(() => timeLabel_mb_6.Text = "Время TH_Filtr: " + s3.TotalMilliseconds + " Счётчик: " + counterFiltration_mb));
+                    s2 = DateTime.Now;
+
                     List<string> myList = new List<string>();
 
                     int x = values.Count / 5;
@@ -681,7 +799,7 @@ namespace Heineken_DataCollection
                         };
                         cmd_sec_insert.ExecuteNonQuery();
                     }
-                    if (minutes_now != minutes_last_mb)
+                    if (minutes_now != minutes_last_mb && seconds_now >= 4)
                     {
                         minutes_last_mb = minutes_now;
                         // Запись данных в PostgreSQL 1 раз в 1 минуту
@@ -692,7 +810,7 @@ namespace Heineken_DataCollection
                         };
                         cmd_min_insert.ExecuteNonQuery();
                     }
-                    if (hours_now != hours_last_mb)
+                    if (hours_now != hours_last_mb && seconds_now >= 4)
                     {
                         hours_last_mb = hours_now;
                         // Запись данных в PostgreSQL 1 раз в 1 час
@@ -703,7 +821,7 @@ namespace Heineken_DataCollection
                         };
                         cmd_hour_insert.ExecuteNonQuery();
                     }
-                    if (days_now != days_last_mb)
+                    if (days_now != days_last_mb && seconds_now >= 4)
                     {
                         days_last_mb = days_now;
                         // Запись данных в PostgreSQL 1 раз в 1 день
@@ -715,9 +833,15 @@ namespace Heineken_DataCollection
                         cmd_day_insert.ExecuteNonQuery();
                     }
 
+                    counterDB_mb++;
+
+                    s3 = DateTime.Now.Subtract(s2);
+                    timeLabel_mb_7.Invoke(new Action(() => timeLabel_mb_7.Text = "Время записи: " + s3.TotalMilliseconds + " Счётчик: " + counterDB_mb));
+                    s2 = DateTime.Now;
+
                     progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Marquee));
 
-                    timeLabel_mb.Invoke(new Action(() => timeLabel_mb.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s2)));
+                    timeLabel_mb.Invoke(new Action(() => timeLabel_mb.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1)));
 
                 }
                 catch (Exception ex)
@@ -770,27 +894,69 @@ namespace Heineken_DataCollection
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Blocks));
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            var result1 = Messenger.Set(VersionCode.V1,
-                           new IPEndPoint(IPAddress.Parse("192.168.108.50"), 161),
-                           new OctetString("public"),
-                           new List<Variable> { new Variable(new ObjectIdentifier("1.3.6.1.4.1.21796.4.10.2.2.0"), new OctetString("+79612208424")) },
-                           6000);
-            var result2 = Messenger.Set(VersionCode.V1,
-                           new IPEndPoint(IPAddress.Parse("192.168.108.50"), 161),
-                           new OctetString("public"),
-                           new List<Variable> { new Variable(new ObjectIdentifier("1.3.6.1.4.1.21796.4.10.2.1.0"), new OctetString("C# --- Hello World!")) },
-                           6000);
-            var result3 = Messenger.Set(VersionCode.V1,
-                           new IPEndPoint(IPAddress.Parse("192.168.108.50"), 161),
-                           new OctetString("public"),
-                           new List<Variable> { new Variable(new ObjectIdentifier("1.3.6.1.4.1.21796.4.10.2.3.0"), new OctetString("1")) },
-                           6000);
+            string[] telephoneNumbers = new string[10];
 
-            //snmpset - v 1 - c private 192.168.100.169 1.3.6.1.4.1.21796.4.10.2.2.0 s: 123456789
-            //snmpset -v 1 -c private 192.168.100.169 1.3.6.1.4.1.21796.4.10.2.1.0 s "Hello World!" 
-            //snmpset -v 1 -c private 192.168.100.169 1.3.6.1.4.1.21796.4.10.2.3.0 i: 1
+            telephoneNumbers[0] = "+79833202384";
+            telephoneNumbers[1] = "+79612208424";
+            telephoneNumbers[2] = "+79135240241";
+
+            foreach (string phoneNumber in telephoneNumbers)
+            {
+                if (!string.IsNullOrEmpty(phoneNumber))
+                {
+                    // Prepare target
+                    UdpTarget target = new UdpTarget((IPAddress)new IpAddress("10.129.31.118"));
+                    // Create a SET PDU
+                    Pdu pdu = new Pdu(PduType.Set);
+                    // Set sysLocation.0 to a new string
+                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.2.0"), new OctetString(phoneNumber));
+                    // Set a value to integer
+                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new OctetString("C# --- Test World! From DataLogger --- " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")));
+                    // Set a value to unsigned integer
+                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.3.0"), new Integer32(1));
+                    // Set Agent security parameters
+                    AgentParameters aparam = new AgentParameters(SnmpVersion.Ver2, new OctetString("public"));
+                    // Response packet
+                    SnmpV2Packet response;
+                    try
+                    {
+                        // Send request and wait for response
+                        response = target.Request(pdu, aparam) as SnmpV2Packet;
+                    }
+                    catch (Exception ex)
+                    {
+                        // If exception happens, it will be returned here
+                        Console.WriteLine(String.Format("Request failed with exception: {0}", ex.Message));
+                        target.Close();
+                        return;
+                    }
+                    // Make sure we received a response
+                    if (response == null)
+                    {
+                        Console.WriteLine("Error in sending SNMP request.");
+                    }
+                    else
+                    {
+                        // Check if we received an SNMP error from the agent
+                        if (response.Pdu.ErrorStatus != 0)
+                        {
+                            Console.WriteLine(String.Format("SNMP agent returned ErrorStatus {0} on index {1}",
+                              response.Pdu.ErrorStatus, response.Pdu.ErrorIndex));
+                        }
+                        else
+                        {
+                            // Everything is ok. Agent will return the new value for the OID we changed
+                            Console.WriteLine(String.Format("Agent response {0}: {1}",
+                              response.Pdu[0].Oid.ToString(), response.Pdu[0].Value.ToString()));
+                        }
+                    }
+                }
+            }
+            /*
+            
+            */
 
         }
     }

@@ -1,5 +1,4 @@
-﻿using Modbus.Device;
-using Npgsql;
+﻿using Npgsql;
 using Sharp7;
 using System;
 using System.Collections.Generic;
@@ -8,13 +7,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
-using Lextm.SharpSnmpLib;
-using Lextm.SharpSnmpLib.Messaging;
 
 //using Microsoft.Extensions.Logging;
 //using Telegram.Bot.Exceptions;
@@ -32,6 +28,7 @@ namespace Heineken_DataCollection
         bool[] previousMessageState = new bool[numberOfMessage];
         string[] messageText = new string[numberOfMessage];
         bool firstScan = false;
+        bool firstStart = false;
 
         public int seconds_last = new int();
         public int minutes_last = new int();
@@ -113,7 +110,7 @@ namespace Heineken_DataCollection
         {
 
             // Установка соединения с PostgreSQL
-            NpgsqlConnection PGCon = new NpgsqlConnection(//"Host=10.129.20.253;" +
+            NpgsqlConnection PGCon = new NpgsqlConnection(
                 "Host=localhost;" +
                 "Username=postgres;" +
                 "Password=123456;" +
@@ -155,7 +152,7 @@ namespace Heineken_DataCollection
             {
                 try
                 {
-                    if (!firstScan)
+                    if (!firstStart)
                     {
                         var cmd_select_time = new NpgsqlCommand
                         {
@@ -171,6 +168,7 @@ namespace Heineken_DataCollection
                         days_last = reader.GetDateTime(0).Day;
 
                     }
+                    firstStart = true;
 
                     DateTime s1 = DateTime.Now;
 
@@ -286,7 +284,7 @@ namespace Heineken_DataCollection
                             {
                                 if (createMessage[i] == true)
                                 {
-                                    var webProxy = new WebProxy(Host: "10.23.5.4", Port: 80)
+                                    var webProxy = new WebProxy(Host: "10.129.24.100", Port: 8080)
                                     {
                                         // Credentials if needed:
                                         // Credentials = new NetworkCredential("USERNAME", "PASSWORD")

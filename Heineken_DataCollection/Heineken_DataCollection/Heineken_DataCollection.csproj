@@ -98,6 +98,9 @@
     <Reference Include="SharpSnmpLib, Version=12.5.2.0, Culture=neutral, PublicKeyToken=4c00852d3788e005, processorArchitecture=MSIL">
       <HintPath>..\packages\Lextm.SharpSnmpLib.12.5.2\lib\net471\SharpSnmpLib.dll</HintPath>
     </Reference>
+    <Reference Include="SnmpSharpNet, Version=0.9.6.0, Culture=neutral, PublicKeyToken=b2181aa3b9571feb, processorArchitecture=MSIL">
+      <HintPath>..\packages\SnmpSharpNet.0.9.6\lib\SnmpSharpNet.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
