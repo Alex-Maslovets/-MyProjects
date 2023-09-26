@@ -20,11 +20,17 @@ namespace Heineken_DataCollection
     public partial class MainScreen : Form
     {
 
-        const int numberOfMessage = 50;
+        const int numberOfMessage = 200;
         bool[] previousMessageState = new bool[numberOfMessage];
         DateTime[] messageTime = new DateTime[numberOfMessage];
         TimeSpan[] messageDuration = new TimeSpan[numberOfMessage];
         string[] messageText = new string[numberOfMessage];
+        string[] messageText_SMS = new string[numberOfMessage];
+
+        bool[] currentMessageState = new bool[numberOfMessage];
+        bool[] createMessage = new bool[numberOfMessage];
+        string[] messageType = new string[numberOfMessage];
+
         bool firstScan = false;
         bool firstStart = false;
         bool firstStartMB = false;
@@ -71,6 +77,11 @@ namespace Heineken_DataCollection
             bgWReadModBus.DoWork += new DoWorkEventHandler(BgWReadModBus_DoWork);
             bgWReadModBus.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BgWReadModBus_RunWorkerCompleted);
 
+            bgWMessages.WorkerReportsProgress = true;
+            bgWMessages.WorkerSupportsCancellation = true;
+            bgWMessages.DoWork += new DoWorkEventHandler(BgWMessages_DoWork);
+            bgWMessages.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BgWMessages_RunWorkerCompleted);
+
             // Alarm - 🟥; Warning - 🟧; Info - 🟦
             messageText[0] = "🟥 Alarm Reserve 0";
             messageText[1] = "🟥 Alarm Reserve 1";
@@ -94,6 +105,11 @@ namespace Heineken_DataCollection
             messageText[19] = "🟥 Уровень воды в баке оборотного водоснабжения \\<\\= 25\\%";
             messageText[20] = "🟥 Температура ледяной воды \\>\\= 6\\,5 град\\. С";
             messageText[21] = "🟥 Температура ледяной воды \\<\\= 0\\,0 град\\. С";
+            for (int i = 0; i < messageText.Length; i++)
+            {
+                if (!string.IsNullOrEmpty(messageText[i])) messageText_SMS[i] = messageText[i].Replace("\\", "");
+            }
+
         }
 
         // Read S7
@@ -306,10 +322,6 @@ namespace Heineken_DataCollection
                     }
                     else
                     {
-                        bool[] currentMessageState = new bool[numberOfMessage];
-                        bool[] createMessage = new bool[numberOfMessage];
-                        string[] messageType = new string[numberOfMessage];
-
                         for (int i = 0; i < db2Buffer.Length; i++)
                         {
                             for (int j = 0; j <= 7; j++)
@@ -343,24 +355,18 @@ namespace Heineken_DataCollection
                             {
                                 if (createMessage[i] == true)
                                 {
-                                    var webProxy = new WebProxy(Host: "10.129.24.100", Port: 8080)
+                                    try
                                     {
-                                        // Credentials if needed:
-                                        // Credentials = new NetworkCredential("USERNAME", "PASSWORD")
-                                    };
-                                    var httpClient = new HttpClient(
-                                        new HttpClientHandler { Proxy = webProxy, UseProxy = true }
-                                    );
-
-                                    var botClient = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4", httpClient);
-
-                                    //var me = await botClient.GetMeAsync();
-
-                                    Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
-                                        chatId: "-1001749496684",//chatId,
-                                        text: messageType[i] + messageText[i] + " Длительность: " + messageDuration[i] + " мс",
-                                    parseMode: ParseMode.MarkdownV2,
-                                    disableNotification: true);
+                                        if (bgWMessages.IsBusy != true)
+                                        {
+                                            // Start the asynchronous operation.
+                                            bgWMessages.RunWorkerAsync(argument: i);
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MessageBox.Show(ex.Message);
+                                    }
                                 }
                             }
                             createMessage = null;
@@ -440,7 +446,7 @@ namespace Heineken_DataCollection
 
                     counterS7++;
 
-                    timeLabel_s7.Invoke(new Action(() => timeLabel_s7.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1) + " Счётчик: " + counterS7));
+                    timeLabel_s7.Invoke(new Action(() => timeLabel_s7.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1).TotalMilliseconds + " Счётчик: " + counterS7));
 
                 }
                 catch (Exception ex)
@@ -494,6 +500,111 @@ namespace Heineken_DataCollection
             progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Value = 0));
             progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Style = ProgressBarStyle.Blocks));
         }
+        // Work With Messages
+        private void BgWMessages_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+                        
+            WriteMessages((int)e.Argument);
+            
+        }
+        public async void WriteMessages(int i)
+        {
+            string[] telephoneNumbers = new string[10];
+
+            telephoneNumbers[0] = "+79612208424";
+            telephoneNumbers[1] = "+79833202384";
+            telephoneNumbers[2] = "+79135240241";
+
+            foreach (string phoneNumber in telephoneNumbers)
+            {
+                if (!string.IsNullOrEmpty(phoneNumber))
+                {
+                    // Prepare target
+                    UdpTarget target = new UdpTarget((IPAddress)new IpAddress("10.129.31.118"));
+                    // Create a SET PDU
+                    Pdu pdu = new Pdu(PduType.Set);
+                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.2.0"), new OctetString(phoneNumber));
+                    if (messageType[i] == "⬆️")
+                    {
+                        pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new OctetString(messageType[i] + messageText_SMS[i]));
+                    }
+                    else
+                    {
+                        pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new OctetString(messageType[i] + messageText_SMS[i] + " Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с"));
+                    }
+                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.3.0"), new Integer32(1));
+                    // Set Agent security parameters
+                    AgentParameters aparam = new AgentParameters(SnmpVersion.Ver2, new OctetString("public"));
+                    // Response packet
+                    SnmpV2Packet response;
+                    try
+                    {
+                        // Send request and wait for response
+                        response = target.Request(pdu, aparam) as SnmpV2Packet;
+                    }
+                    catch (Exception ex)
+                    {
+                        // If exception happens, it will be returned here
+                        Console.WriteLine(String.Format("Request failed with exception: {0}", ex.Message));
+                        target.Close();
+                        return;
+                    }
+                    // Make sure we received a response
+                    if (response == null)
+                    {
+                        Console.WriteLine("Error in sending SNMP request.");
+                    }
+                    else
+                    {
+                        // Check if we received an SNMP error from the agent
+                        if (response.Pdu.ErrorStatus != 0)
+                        {
+                            Console.WriteLine(String.Format("SNMP agent returned ErrorStatus {0} on index {1}",
+                              response.Pdu.ErrorStatus, response.Pdu.ErrorIndex));
+                        }
+                        else
+                        {
+                            // Everything is ok. Agent will return the new value for the OID we changed
+                            Console.WriteLine(String.Format("Agent response {0}: {1}",
+                              response.Pdu[0].Oid.ToString(), response.Pdu[0].Value.ToString()));
+                        }
+                    }
+                }
+            }
+
+            var webProxy = new WebProxy(Host: "10.129.24.100", Port: 8080)
+            {
+                // Credentials if needed:
+                // Credentials = new NetworkCredential("USERNAME", "PASSWORD")
+            };
+            var httpClient = new HttpClient(new HttpClientHandler { Proxy = webProxy, UseProxy = true });
+            var botClient = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4", httpClient);
+
+            if (messageType[i] == "⬆️")
+            {
+                Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
+                chatId: "-1001749496684",//chatId,
+                text: messageType[i] + messageText[i],
+                parseMode: ParseMode.MarkdownV2,
+                disableNotification: true);
+            }
+            else {
+                Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
+                chatId: "-1001749496684",//chatId,
+                text: messageType[i] + messageText[i] + " Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с",
+                parseMode: ParseMode.MarkdownV2,
+                disableNotification: true);
+            }
+
+        }
+        private void BgWMessages_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            /*
+             Something interesting comes next 
+             */
+        }
+
         // Read Modbus
         private void Button_Read_mb_Click(object sender, EventArgs e)
         {
@@ -841,7 +952,9 @@ namespace Heineken_DataCollection
 
                     progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Marquee));
 
-                    timeLabel_mb.Invoke(new Action(() => timeLabel_mb.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1)));
+                    countermb++;
+
+                    timeLabel_mb.Invoke(new Action(() => timeLabel_mb.Text = "Время последнего цикла: " + DateTime.Now.Subtract(s1).TotalMilliseconds + " Счётчик: " + countermb));
 
                 }
                 catch (Exception ex)
@@ -892,72 +1005,6 @@ namespace Heineken_DataCollection
         {
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Value = 0));
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Blocks));
-        }
-
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            string[] telephoneNumbers = new string[10];
-
-            telephoneNumbers[0] = "+79833202384";
-            telephoneNumbers[1] = "+79612208424";
-            telephoneNumbers[2] = "+79135240241";
-
-            foreach (string phoneNumber in telephoneNumbers)
-            {
-                if (!string.IsNullOrEmpty(phoneNumber))
-                {
-                    // Prepare target
-                    UdpTarget target = new UdpTarget((IPAddress)new IpAddress("10.129.31.118"));
-                    // Create a SET PDU
-                    Pdu pdu = new Pdu(PduType.Set);
-                    // Set sysLocation.0 to a new string
-                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.2.0"), new OctetString(phoneNumber));
-                    // Set a value to integer
-                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new OctetString("C# --- Test World! From DataLogger --- " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")));
-                    // Set a value to unsigned integer
-                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.3.0"), new Integer32(1));
-                    // Set Agent security parameters
-                    AgentParameters aparam = new AgentParameters(SnmpVersion.Ver2, new OctetString("public"));
-                    // Response packet
-                    SnmpV2Packet response;
-                    try
-                    {
-                        // Send request and wait for response
-                        response = target.Request(pdu, aparam) as SnmpV2Packet;
-                    }
-                    catch (Exception ex)
-                    {
-                        // If exception happens, it will be returned here
-                        Console.WriteLine(String.Format("Request failed with exception: {0}", ex.Message));
-                        target.Close();
-                        return;
-                    }
-                    // Make sure we received a response
-                    if (response == null)
-                    {
-                        Console.WriteLine("Error in sending SNMP request.");
-                    }
-                    else
-                    {
-                        // Check if we received an SNMP error from the agent
-                        if (response.Pdu.ErrorStatus != 0)
-                        {
-                            Console.WriteLine(String.Format("SNMP agent returned ErrorStatus {0} on index {1}",
-                              response.Pdu.ErrorStatus, response.Pdu.ErrorIndex));
-                        }
-                        else
-                        {
-                            // Everything is ok. Agent will return the new value for the OID we changed
-                            Console.WriteLine(String.Format("Agent response {0}: {1}",
-                              response.Pdu[0].Oid.ToString(), response.Pdu[0].Value.ToString()));
-                        }
-                    }
-                }
-            }
-            /*
-            
-            */
-
         }
     }
 }

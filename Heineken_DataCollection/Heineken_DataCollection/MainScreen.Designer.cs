@@ -33,6 +33,13 @@ namespace Heineken_DataCollection
             this.bgWReadModBus = new System.ComponentModel.BackgroundWorker();
             this.bgWMessages = new System.ComponentModel.BackgroundWorker();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.timeLabel_mb_6 = new System.Windows.Forms.Label();
+            this.timeLabel_mb_5 = new System.Windows.Forms.Label();
+            this.timeLabel_mb_7 = new System.Windows.Forms.Label();
+            this.timeLabel_mb_4 = new System.Windows.Forms.Label();
+            this.timeLabel_mb_3 = new System.Windows.Forms.Label();
+            this.timeLabel_mb_2 = new System.Windows.Forms.Label();
+            this.timeLabel_mb_1 = new System.Windows.Forms.Label();
             this.Button_notRead_mb = new System.Windows.Forms.Button();
             this.progressBarRead_mb = new System.Windows.Forms.ProgressBar();
             this.timeLabel_mb = new System.Windows.Forms.Label();
@@ -43,19 +50,11 @@ namespace Heineken_DataCollection
             this.timeLabel_s7_3 = new System.Windows.Forms.Label();
             this.timeLabel_s7_2 = new System.Windows.Forms.Label();
             this.timeLabel_s7_1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.timeLabel_s7 = new System.Windows.Forms.Label();
             this.progressBarRead_s7 = new System.Windows.Forms.ProgressBar();
             this.Button_notRead_s7 = new System.Windows.Forms.Button();
             this.Button_Read_s7 = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.timeLabel_mb_7 = new System.Windows.Forms.Label();
-            this.timeLabel_mb_4 = new System.Windows.Forms.Label();
-            this.timeLabel_mb_3 = new System.Windows.Forms.Label();
-            this.timeLabel_mb_2 = new System.Windows.Forms.Label();
-            this.timeLabel_mb_1 = new System.Windows.Forms.Label();
-            this.timeLabel_mb_5 = new System.Windows.Forms.Label();
-            this.timeLabel_mb_6 = new System.Windows.Forms.Label();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -81,6 +80,69 @@ namespace Heineken_DataCollection
             this.tabPage2.Size = new System.Drawing.Size(358, 256);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Modbus";
+            // 
+            // timeLabel_mb_6
+            // 
+            this.timeLabel_mb_6.AutoSize = true;
+            this.timeLabel_mb_6.Location = new System.Drawing.Point(6, 200);
+            this.timeLabel_mb_6.Name = "timeLabel_mb_6";
+            this.timeLabel_mb_6.Size = new System.Drawing.Size(83, 13);
+            this.timeLabel_mb_6.TabIndex = 24;
+            this.timeLabel_mb_6.Text = "Время TH_Filtr:";
+            // 
+            // timeLabel_mb_5
+            // 
+            this.timeLabel_mb_5.AutoSize = true;
+            this.timeLabel_mb_5.Location = new System.Drawing.Point(6, 180);
+            this.timeLabel_mb_5.Name = "timeLabel_mb_5";
+            this.timeLabel_mb_5.Size = new System.Drawing.Size(107, 13);
+            this.timeLabel_mb_5.TabIndex = 23;
+            this.timeLabel_mb_5.Text = "Время TH_EnBlock:";
+            // 
+            // timeLabel_mb_7
+            // 
+            this.timeLabel_mb_7.AutoSize = true;
+            this.timeLabel_mb_7.Location = new System.Drawing.Point(6, 220);
+            this.timeLabel_mb_7.Name = "timeLabel_mb_7";
+            this.timeLabel_mb_7.Size = new System.Drawing.Size(85, 13);
+            this.timeLabel_mb_7.TabIndex = 22;
+            this.timeLabel_mb_7.Text = "Время записи: ";
+            // 
+            // timeLabel_mb_4
+            // 
+            this.timeLabel_mb_4.AutoSize = true;
+            this.timeLabel_mb_4.Location = new System.Drawing.Point(6, 160);
+            this.timeLabel_mb_4.Name = "timeLabel_mb_4";
+            this.timeLabel_mb_4.Size = new System.Drawing.Size(89, 13);
+            this.timeLabel_mb_4.TabIndex = 21;
+            this.timeLabel_mb_4.Text = "Время TH_VAO:";
+            // 
+            // timeLabel_mb_3
+            // 
+            this.timeLabel_mb_3.AutoSize = true;
+            this.timeLabel_mb_3.Location = new System.Drawing.Point(6, 140);
+            this.timeLabel_mb_3.Name = "timeLabel_mb_3";
+            this.timeLabel_mb_3.Size = new System.Drawing.Size(88, 13);
+            this.timeLabel_mb_3.TabIndex = 20;
+            this.timeLabel_mb_3.Text = "Время TH_BLO:";
+            // 
+            // timeLabel_mb_2
+            // 
+            this.timeLabel_mb_2.AutoSize = true;
+            this.timeLabel_mb_2.Location = new System.Drawing.Point(6, 120);
+            this.timeLabel_mb_2.Name = "timeLabel_mb_2";
+            this.timeLabel_mb_2.Size = new System.Drawing.Size(92, 13);
+            this.timeLabel_mb_2.TabIndex = 19;
+            this.timeLabel_mb_2.Text = "Время TH_Pack:";
+            // 
+            // timeLabel_mb_1
+            // 
+            this.timeLabel_mb_1.AutoSize = true;
+            this.timeLabel_mb_1.Location = new System.Drawing.Point(6, 100);
+            this.timeLabel_mb_1.Name = "timeLabel_mb_1";
+            this.timeLabel_mb_1.Size = new System.Drawing.Size(107, 13);
+            this.timeLabel_mb_1.TabIndex = 18;
+            this.timeLabel_mb_1.Text = "Время обнов. даты:";
             // 
             // Button_notRead_mb
             // 
@@ -128,7 +190,6 @@ namespace Heineken_DataCollection
             this.tabPage1.Controls.Add(this.timeLabel_s7_3);
             this.tabPage1.Controls.Add(this.timeLabel_s7_2);
             this.tabPage1.Controls.Add(this.timeLabel_s7_1);
-            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.timeLabel_s7);
             this.tabPage1.Controls.Add(this.progressBarRead_s7);
             this.tabPage1.Controls.Add(this.Button_notRead_s7);
@@ -185,16 +246,6 @@ namespace Heineken_DataCollection
             this.timeLabel_s7_1.TabIndex = 13;
             this.timeLabel_s7_1.Text = "Время обнов. даты:";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(277, 227);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // timeLabel_s7
             // 
             this.timeLabel_s7.AutoSize = true;
@@ -243,69 +294,6 @@ namespace Heineken_DataCollection
             this.tabControl.Size = new System.Drawing.Size(366, 282);
             this.tabControl.TabIndex = 8;
             // 
-            // timeLabel_mb_7
-            // 
-            this.timeLabel_mb_7.AutoSize = true;
-            this.timeLabel_mb_7.Location = new System.Drawing.Point(6, 220);
-            this.timeLabel_mb_7.Name = "timeLabel_mb_7";
-            this.timeLabel_mb_7.Size = new System.Drawing.Size(85, 13);
-            this.timeLabel_mb_7.TabIndex = 22;
-            this.timeLabel_mb_7.Text = "Время записи: ";
-            // 
-            // timeLabel_mb_4
-            // 
-            this.timeLabel_mb_4.AutoSize = true;
-            this.timeLabel_mb_4.Location = new System.Drawing.Point(6, 160);
-            this.timeLabel_mb_4.Name = "timeLabel_mb_4";
-            this.timeLabel_mb_4.Size = new System.Drawing.Size(89, 13);
-            this.timeLabel_mb_4.TabIndex = 21;
-            this.timeLabel_mb_4.Text = "Время TH_VAO:";
-            // 
-            // timeLabel_mb_3
-            // 
-            this.timeLabel_mb_3.AutoSize = true;
-            this.timeLabel_mb_3.Location = new System.Drawing.Point(6, 140);
-            this.timeLabel_mb_3.Name = "timeLabel_mb_3";
-            this.timeLabel_mb_3.Size = new System.Drawing.Size(88, 13);
-            this.timeLabel_mb_3.TabIndex = 20;
-            this.timeLabel_mb_3.Text = "Время TH_BLO:";
-            // 
-            // timeLabel_mb_2
-            // 
-            this.timeLabel_mb_2.AutoSize = true;
-            this.timeLabel_mb_2.Location = new System.Drawing.Point(6, 120);
-            this.timeLabel_mb_2.Name = "timeLabel_mb_2";
-            this.timeLabel_mb_2.Size = new System.Drawing.Size(92, 13);
-            this.timeLabel_mb_2.TabIndex = 19;
-            this.timeLabel_mb_2.Text = "Время TH_Pack:";
-            // 
-            // timeLabel_mb_1
-            // 
-            this.timeLabel_mb_1.AutoSize = true;
-            this.timeLabel_mb_1.Location = new System.Drawing.Point(6, 100);
-            this.timeLabel_mb_1.Name = "timeLabel_mb_1";
-            this.timeLabel_mb_1.Size = new System.Drawing.Size(107, 13);
-            this.timeLabel_mb_1.TabIndex = 18;
-            this.timeLabel_mb_1.Text = "Время обнов. даты:";
-            // 
-            // timeLabel_mb_5
-            // 
-            this.timeLabel_mb_5.AutoSize = true;
-            this.timeLabel_mb_5.Location = new System.Drawing.Point(6, 180);
-            this.timeLabel_mb_5.Name = "timeLabel_mb_5";
-            this.timeLabel_mb_5.Size = new System.Drawing.Size(107, 13);
-            this.timeLabel_mb_5.TabIndex = 23;
-            this.timeLabel_mb_5.Text = "Время TH_EnBlock:";
-            // 
-            // timeLabel_mb_6
-            // 
-            this.timeLabel_mb_6.AutoSize = true;
-            this.timeLabel_mb_6.Location = new System.Drawing.Point(6, 200);
-            this.timeLabel_mb_6.Name = "timeLabel_mb_6";
-            this.timeLabel_mb_6.Size = new System.Drawing.Size(83, 13);
-            this.timeLabel_mb_6.TabIndex = 24;
-            this.timeLabel_mb_6.Text = "Время TH_Filtr:";
-            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,7 +327,6 @@ namespace Heineken_DataCollection
         private System.Windows.Forms.Button Button_notRead_s7;
         private System.Windows.Forms.Button Button_Read_s7;
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label timeLabel_s7_1;
         private System.Windows.Forms.Label timeLabel_s7_5;
         private System.Windows.Forms.Label timeLabel_s7_4;
