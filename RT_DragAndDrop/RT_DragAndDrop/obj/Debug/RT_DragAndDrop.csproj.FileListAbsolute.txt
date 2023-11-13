@@ -1,9 +1,0 @@
-C:\Users\alexo\OneDrive\Документы\#MyProjects\RT_DragAndDrop\RT_DragAndDrop\obj\Debug\RT_DragAndDrop.Properties.Resources.resources
-C:\Users\alexo\OneDrive\Документы\#MyProjects\RT_DragAndDrop\RT_DragAndDrop\obj\Debug\RT_DragAndDrop.csproj.GenerateResource.cache
-C:\Users\alexo\OneDrive\Документы\#MyProjects\RT_DragAndDrop\RT_DragAndDrop\obj\Debug\RT_DragAndDrop.csproj.CoreCompileInputs.cache
-C:\Users\alexo\OneDrive\Документы\#MyProjects\RT_DragAndDrop\RT_DragAndDrop\bin\Debug\RT_DragAndDrop.exe.config
-C:\Users\alexo\OneDrive\Документы\#MyProjects\RT_DragAndDrop\RT_DragAndDrop\bin\Debug\RT_DragAndDrop.exe
-C:\Users\alexo\OneDrive\Документы\#MyProjects\RT_DragAndDrop\RT_DragAndDrop\bin\Debug\RT_DragAndDrop.pdb
-C:\Users\alexo\OneDrive\Документы\#MyProjects\RT_DragAndDrop\RT_DragAndDrop\obj\Debug\RT_DragAndDrop.exe
-C:\Users\alexo\OneDrive\Документы\#MyProjects\RT_DragAndDrop\RT_DragAndDrop\obj\Debug\RT_DragAndDrop.pdb
-C:\Users\alexo\OneDrive\Документы\#MyProjects\RT_DragAndDrop\RT_DragAndDrop\obj\Debug\RT_DragAndDrop.csprojAssemblyReference.cache

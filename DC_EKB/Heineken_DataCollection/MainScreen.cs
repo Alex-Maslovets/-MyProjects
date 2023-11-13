@@ -8,13 +8,10 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using Telegram.Bot;
-using Telegram.Bot.Types.Enums;
 
 namespace Heineken_DataCollection
 {
