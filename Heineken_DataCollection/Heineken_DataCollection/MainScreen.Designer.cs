@@ -33,6 +33,7 @@ namespace Heineken_DataCollection
             this.bgWReadModBus = new System.ComponentModel.BackgroundWorker();
             this.bgWMessages = new System.ComponentModel.BackgroundWorker();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.timeLabel_mb_6 = new System.Windows.Forms.Label();
             this.timeLabel_mb_5 = new System.Windows.Forms.Label();
             this.timeLabel_mb_7 = new System.Windows.Forms.Label();
@@ -63,6 +64,7 @@ namespace Heineken_DataCollection
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.timeLabel_mb_6);
             this.tabPage2.Controls.Add(this.timeLabel_mb_5);
             this.tabPage2.Controls.Add(this.timeLabel_mb_7);
@@ -80,6 +82,16 @@ namespace Heineken_DataCollection
             this.tabPage2.Size = new System.Drawing.Size(358, 256);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Modbus";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(279, 227);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(73, 23);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "Пуск";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // timeLabel_mb_6
             // 
@@ -339,6 +351,7 @@ namespace Heineken_DataCollection
         private System.Windows.Forms.Label timeLabel_mb_1;
         private System.Windows.Forms.Label timeLabel_mb_6;
         private System.Windows.Forms.Label timeLabel_mb_5;
+        private System.Windows.Forms.Button button1;
     }
 }
 
