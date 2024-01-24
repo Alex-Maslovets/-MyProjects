@@ -1,4 +1,6 @@
-﻿using Modbus.Device;
+﻿using Lextm.SharpSnmpLib;
+using Modbus.Device;
+using Newtonsoft.Json.Linq;
 using Npgsql;
 using Sharp7;
 using SnmpSharpNet;
@@ -6,11 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
@@ -49,6 +53,7 @@ namespace Heineken_DataCollection
         public uint counterVAO_mb = new uint();
         public uint counterEnergoBlock_mb = new uint();
         public uint counterFiltration_mb = new uint();
+        public uint counterElectroCounters_mb = new uint();
         public uint counterDB_mb = new uint();
         public uint countermb = new uint();
 
@@ -531,24 +536,23 @@ namespace Heineken_DataCollection
                     // Create a SET PDU
 
                     Pdu pdu = new Pdu(PduType.Set);
-                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.2.0"), new OctetString(phoneNumber));
+                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.2.0"), new SnmpSharpNet.OctetString(phoneNumber));
 
                     if (messageType[i] == "⬆️")
                     {
-                        pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new OctetString(messageType[i] + messageText_SMS[i]));
-                        //pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new OctetString("IN: " + messageText_SMS[i]));
+                        pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new SnmpSharpNet.OctetString(messageType[i] + messageText_SMS[i]));
                     }
                     else
                     {
-                        pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new OctetString(messageType[i] + messageText_SMS[i] + " (Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с)"));
-                        //pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new OctetString("OUT: " + messageText_SMS[i] + " (Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с)"));
+                        pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new SnmpSharpNet.OctetString(messageType[i] + messageText_SMS[i] + " (Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с)"));
                     }
-                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.3.0"), new Integer32(1));
+                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.3.0"), new SnmpSharpNet.Integer32(1));
 
                     // Set Agent security parameters
-                    AgentParameters aparam = new AgentParameters(SnmpVersion.Ver2, new OctetString("public"));
+                    AgentParameters aparam = new AgentParameters(SnmpVersion.Ver2, new SnmpSharpNet.OctetString("public"));
                     // Response packet
                     SnmpV2Packet response;
+                    
                     try
                     {
                         // Send request and wait for response
@@ -644,6 +648,7 @@ namespace Heineken_DataCollection
             counterVAO_mb = 0;
             counterEnergoBlock_mb = 0;
             counterFiltration_mb = 0;
+            counterElectroCounters_mb = 0;
             counterDB_mb = 0;
             countermb = 0;
 
@@ -668,6 +673,7 @@ namespace Heineken_DataCollection
             counterVAO_mb = 0;
             counterEnergoBlock_mb = 0;
             counterFiltration_mb = 0;
+            counterElectroCounters_mb = 0;
             counterDB_mb = 0;
             countermb = 0;
 
@@ -765,7 +771,7 @@ namespace Heineken_DataCollection
                     for (int i = 0; i <= 29; i++)
                     {
                         ushort startAddress = (ushort)(1301 + i);
-                        ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
+                        ushort[] inputs = master.ReadInputRegisters(1, startAddress, 1);
                         modbusList.Add(inputs[0]);
                     }
 
@@ -797,7 +803,7 @@ namespace Heineken_DataCollection
                     for (int i = 0; i <= 9; i++)
                     {
                         ushort startAddress = (ushort)(1301 + i);
-                        ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
+                        ushort[] inputs = master.ReadInputRegisters(1, startAddress, 1);
                         modbusList.Add(inputs[0]);
                     }
 
@@ -827,7 +833,7 @@ namespace Heineken_DataCollection
                     for (int i = 0; i <= 49; i++)
                     {
                         ushort startAddress = (ushort)(1301 + i);
-                        ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
+                        ushort[] inputs = master.ReadInputRegisters(1, startAddress, 1);
                         modbusList.Add(inputs[0]);
                     }
 
@@ -857,7 +863,7 @@ namespace Heineken_DataCollection
                     for (int i = 0; i <= 9; i++)
                     {
                         ushort startAddress = (ushort)(1301 + i);
-                        ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
+                        ushort[] inputs = master.ReadInputRegisters(1, startAddress, 1);
                         modbusList.Add(inputs[0]);
                     }
 
@@ -887,7 +893,7 @@ namespace Heineken_DataCollection
                     for (int i = 0; i <= 29; i++)
                     {
                         ushort startAddress = (ushort)(1301 + i);
-                        ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
+                        ushort[] inputs = master.ReadInputRegisters(1, startAddress, 1);
                         modbusList.Add(inputs[0]);
                     }
 
@@ -908,6 +914,72 @@ namespace Heineken_DataCollection
                     timeLabel_mb_6.Invoke(new Action(() => timeLabel_mb_6.Text = "Время TH_Filtr: " + Math.Round(s3.TotalMilliseconds, 0) + " мс Счётчик: " + counterFiltration_mb));
                     s2 = DateTime.Now;
 
+                    // Connect to New Electro Counters
+                    /*
+                    string[] electroCounters = new string[50];
+
+                    electroCounters[0] = "10.129.31.179";
+                    electroCounters[1] = "10.129.31.178";
+                    electroCounters[2] = "10.129.31.177";
+                    electroCounters[3] = "10.129.31.176";
+                    electroCounters[4] = "10.129.31.175";
+
+                    foreach (string electroCounter in electroCounters)
+                    {
+                        if (!string.IsNullOrEmpty(electroCounter))
+                        {
+                            try {
+                                client = new TcpClient(electroCounter, 502);
+                                master = ModbusIpMaster.CreateIp(client);
+
+                                modbusList.Clear();
+
+                                for (int i = 0; i <= 3; i++)
+                                {
+                                    ushort startAddress = (ushort)(287 + i);
+                                    ushort[] inputs = master.ReadHoldingRegisters(1, startAddress, 1);
+                                    modbusList.Add(inputs[0]);
+                                }
+
+                                for (int j = 0; j <= 3; j += 2)
+                                {
+                                    ushort temp = (ushort)(modbusList[j] + modbusList[j + 1] * 10000);
+                                    values.Add(temp);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                var trace = new StackTrace(ex, true);
+
+                                foreach (var frame in trace.GetFrames())
+                                {
+                                    var sb = new StringBuilder();
+
+                                    sb.Append($"Файл: {frame.GetFileName()}" + "; ");
+                                    sb.Append($"Строка: {frame.GetFileLineNumber()}" + "; ");
+                                    sb.Append($"Столбец: {frame.GetFileColumnNumber()}" + "; ");
+                                    sb.Append($"Метод: {frame.GetMethod()}");
+
+                                    try
+                                    {
+                                        using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
+                                            sw.Write("Modbus_Electro; " + DateTime.Now + "; " + sb + ";\n");
+                                    }
+                                    catch (Exception exe)
+                                    {
+                                        MessageBox.Show(exe.Message);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    counterElectroCounters_mb++;
+
+                    s3 = DateTime.Now.Subtract(s2);
+                    timeLabel_mb_8.Invoke(new Action(() => timeLabel_mb_8.Text = "Время Electro: " + Math.Round(s3.TotalMilliseconds, 0) + " мс Счётчик: " + counterElectroCounters_mb));
+                    s2 = DateTime.Now;
+                    */
                     List<string> myList = new List<string>();
 
                     int x = values.Count / 5;
@@ -1035,72 +1107,6 @@ namespace Heineken_DataCollection
         {
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Value = 0));
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Blocks));
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Connect to RPO-1
-                TcpClient client = new TcpClient("10.129.31.165", 502);
-                ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
-
-                List<ushort> modbusList = new List<ushort>();
-
-                for (int i = 0; i <= 29; i++)
-                {
-                    ushort startAddress = (ushort)(1301 + i);
-                    ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
-                    modbusList.Add(inputs[0]);
-                }
-
-                List<float> values = new List<float>();
-
-                for (int j = 0; j <= 29; j += 2)
-                {
-                    ushort[] buffer = { modbusList[j], modbusList[j + 1] };
-                    byte[] bytes = new byte[4];
-                    bytes[3] = (byte)(buffer[1] & 0xFF);
-                    bytes[2] = (byte)(buffer[1] >> 8);
-                    bytes[1] = (byte)(buffer[0] & 0xFF);
-                    bytes[0] = (byte)(buffer[0] >> 8);
-                    values.Add(BitConverter.ToSingle(bytes, 0));
-                }
-                MessageBox.Show(modbusList[0].ToString());
-
-
-                client = new TcpClient("10.129.31.178", 502);
-                master = ModbusIpMaster.CreateIp(client);
-
-                modbusList = new List<ushort>();
-
-                for (int i = 0; i <= 29; i++)
-                {
-                    ushort startAddress = (ushort)(289 + i);
-                    ushort[] inputs = master.ReadInputRegisters(startAddress, 1);
-                    modbusList.Add(inputs[0]);
-                }
-
-                values = new List<float>();
-
-                for (int j = 0; j <= 29; j += 2)
-                {
-                    ushort[] buffer = { modbusList[j], modbusList[j + 1] };
-                    byte[] bytes = new byte[4];
-                    bytes[3] = (byte)(buffer[1] & 0xFF);
-                    bytes[2] = (byte)(buffer[1] >> 8);
-                    bytes[1] = (byte)(buffer[0] & 0xFF);
-                    bytes[0] = (byte)(buffer[0] >> 8);
-                    values.Add(BitConverter.ToSingle(bytes, 0));
-                }
-                
-                MessageBox.Show(modbusList.Count.ToString());
-
-            }
-            catch (Exception exe)
-            {
-                MessageBox.Show(exe.Message);
-            }
         }
     }
 }

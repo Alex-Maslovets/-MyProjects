@@ -87,7 +87,7 @@ namespace Heineken_DataCollection
             bgWMessages.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BgWMessages_RunWorkerCompleted);
 
             // Alarm - 🟥; Warning - 🟧; Info - 🟦
-            messageText[0] = "🟥 Alarm Reserve 0";
+            messageText[0] = "🟥 Тестовый Аlarm";
             messageText[1] = "🟥 Alarm Reserve 1";
             messageText[2] = "🟥 Alarm Reserve 2";
             messageText[3] = "🟥 Пустая канистра на водоподготовке";
@@ -243,9 +243,6 @@ namespace Heineken_DataCollection
                             }
                         }
                         
-                        label1.Invoke(new Action(() => label1.Text = "Test Bit = " + currentMessageState[0] + "-" + currentMessageState[1] + "-" + currentMessageState[2] + "-" + currentMessageState[3] + "-" + currentMessageState[4] + "-" + currentMessageState[5] + "-" + currentMessageState[6] + "-" + currentMessageState[7]));
-                        label2.Invoke(new Action(() => label2.Text = "Test Bit2 = " + currentMessageState[8] + "-" + currentMessageState[9] + "-" + currentMessageState[10] + "-" + currentMessageState[11] + "-" + currentMessageState[12] + "-" + currentMessageState[13] + "-" + currentMessageState[14] + "-" + currentMessageState[15]));
-
                         for (int i = 0; i < currentMessageState.Length; i++)
                         {
                             if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == true)
@@ -297,7 +294,7 @@ namespace Heineken_DataCollection
                     timeLabel_s7_4.Invoke(new Action(() => timeLabel_s7_4.Text = "Время сообщений: " + Math.Round(s3.TotalMilliseconds, 0) + " мс Счётчик: " + counterMessages));
 
                     // Задержка на опрос каждые 500 мсек
-                    int sleepmsek = 500 - ((int)Math.Round(s3.TotalMilliseconds, 0));
+                    int sleepmsek = Math.Abs(500 - ((int)Math.Round(s3.TotalMilliseconds, 0)));
                     Thread.Sleep(sleepmsek);
 
                     s2 = DateTime.Now;
@@ -372,50 +369,52 @@ namespace Heineken_DataCollection
             telephoneNumbers[0] = "+79617698639";
             telephoneNumbers[1] = "+79120365922";
             telephoneNumbers[2] = "+79120365912";
-            telephoneNumbers[3] = "+79833202384";
-
+            
             foreach (string phoneNumber in telephoneNumbers)
             {
-                if (!string.IsNullOrEmpty(phoneNumber))
+                if (i >= 3)
                 {
-                    // Prepare target
-                    UdpTarget target = new UdpTarget((IPAddress)new IpAddress("10.129.31.118"));
-                    // Create a SET PDU
-
-                    Pdu pdu = new Pdu(PduType.Set);
-                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.2.0"), new OctetString(phoneNumber));
-
-                    if (messageType[i] == "⬆️")
+                    if (!string.IsNullOrEmpty(phoneNumber))
                     {
-                        pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new OctetString(messageType[i] + messageText_SMS[i]));
-                    }
-                    else
-                    {
-                        pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new OctetString(messageType[i] + messageText_SMS[i] + " (Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с)"));
-                    }
-                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.3.0"), new Integer32(1));
+                        // Prepare target
+                        UdpTarget target = new UdpTarget((IPAddress)new IpAddress("10.129.31.118"));
+                        // Create a SET PDU
 
-                    // Set Agent security parameters
-                    AgentParameters aparam = new AgentParameters(SnmpVersion.Ver2, new OctetString("public"));
-                    // Response packet
-                    SnmpV2Packet response;
-                    try
-                    {
-                        // Send request and wait for response
-                        response = target.Request(pdu, aparam) as SnmpV2Packet;
-                    }
-                    catch (Exception ex)
-                    {
-                        // If exception happens, it will be returned here
-                        using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
-                            sw.Write("Messages SMS; " + DateTime.Now + "; " + "Request failed with exception: {0}", ex.Message + ";\n");
+                        Pdu pdu = new Pdu(PduType.Set);
+                        pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.2.0"), new OctetString(phoneNumber));
 
-                        target.Close();
-                        //return;
-                    }
-                    finally
-                    {
+                        if (messageType[i] == "⬆️")
+                        {
+                            pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new OctetString(messageType[i] + messageText_SMS[i]));
+                        }
+                        else
+                        {
+                            pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new SnmpSharpNet.OctetString(messageType[i] + messageText_SMS[i] + " (Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с)"));
+                        }
+                        pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.3.0"), new Integer32(1));
 
+                        // Set Agent security parameters
+                        AgentParameters aparam = new AgentParameters(SnmpVersion.Ver2, new OctetString("public"));
+                        // Response packet
+                        SnmpV2Packet response;
+                        try
+                        {
+                            // Send request and wait for response
+                            response = target.Request(pdu, aparam) as SnmpV2Packet;
+                        }
+                        catch (Exception ex)
+                        {
+                            // If exception happens, it will be returned here
+                            using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
+                                sw.Write("Messages SMS; " + DateTime.Now + "; " + "Request failed with exception: {0}", ex.Message + ";\n");
+
+                            target.Close();
+                            //return;
+                        }
+                        finally
+                        {
+
+                        }
                     }
                 }
             }

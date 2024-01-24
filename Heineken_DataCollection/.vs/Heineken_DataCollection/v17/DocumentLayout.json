@@ -1,0 +1,64 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|c:\\users\\alexo\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\-myprojects\\heineken_datacollection\\heineken_datacollection\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|solutionrelative:heineken_datacollection\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\heineken_datacollection\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|solutionrelative:heineken_datacollection\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainScreen.cs",
+              "DocumentMoniker": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs",
+              "RelativeDocumentMoniker": "Heineken_DataCollection\\MainScreen.cs",
+              "ToolTip": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs",
+              "RelativeToolTip": "Heineken_DataCollection\\MainScreen.cs",
+              "ViewState": "AQIAAAwCAAAAAAAAAAAWwCMCAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2022-03-10T03:58:19.718Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainScreen.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs",
+              "RelativeDocumentMoniker": "Heineken_DataCollection\\MainScreen.cs",
+              "ToolTip": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "Heineken_DataCollection\\MainScreen.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2022-09-05T14:10:40.592Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

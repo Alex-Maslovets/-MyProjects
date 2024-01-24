@@ -33,7 +33,6 @@ namespace Heineken_DataCollection
             this.bgWReadModBus = new System.ComponentModel.BackgroundWorker();
             this.bgWMessages = new System.ComponentModel.BackgroundWorker();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.timeLabel_mb_6 = new System.Windows.Forms.Label();
             this.timeLabel_mb_5 = new System.Windows.Forms.Label();
             this.timeLabel_mb_7 = new System.Windows.Forms.Label();
@@ -56,6 +55,7 @@ namespace Heineken_DataCollection
             this.Button_notRead_s7 = new System.Windows.Forms.Button();
             this.Button_Read_s7 = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.timeLabel_mb_8 = new System.Windows.Forms.Label();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -64,7 +64,7 @@ namespace Heineken_DataCollection
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.timeLabel_mb_8);
             this.tabPage2.Controls.Add(this.timeLabel_mb_6);
             this.tabPage2.Controls.Add(this.timeLabel_mb_5);
             this.tabPage2.Controls.Add(this.timeLabel_mb_7);
@@ -79,19 +79,9 @@ namespace Heineken_DataCollection
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(358, 256);
+            this.tabPage2.Size = new System.Drawing.Size(358, 280);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Modbus";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(279, 227);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(73, 23);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Пуск";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // timeLabel_mb_6
             // 
@@ -114,7 +104,7 @@ namespace Heineken_DataCollection
             // timeLabel_mb_7
             // 
             this.timeLabel_mb_7.AutoSize = true;
-            this.timeLabel_mb_7.Location = new System.Drawing.Point(6, 220);
+            this.timeLabel_mb_7.Location = new System.Drawing.Point(6, 240);
             this.timeLabel_mb_7.Name = "timeLabel_mb_7";
             this.timeLabel_mb_7.Size = new System.Drawing.Size(85, 13);
             this.timeLabel_mb_7.TabIndex = 22;
@@ -178,7 +168,7 @@ namespace Heineken_DataCollection
             // timeLabel_mb
             // 
             this.timeLabel_mb.AutoSize = true;
-            this.timeLabel_mb.Location = new System.Drawing.Point(6, 240);
+            this.timeLabel_mb.Location = new System.Drawing.Point(6, 260);
             this.timeLabel_mb.Name = "timeLabel_mb";
             this.timeLabel_mb.Size = new System.Drawing.Size(144, 13);
             this.timeLabel_mb.TabIndex = 12;
@@ -303,14 +293,23 @@ namespace Heineken_DataCollection
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(366, 282);
+            this.tabControl.Size = new System.Drawing.Size(366, 306);
             this.tabControl.TabIndex = 8;
+            // 
+            // timeLabel_mb_8
+            // 
+            this.timeLabel_mb_8.AutoSize = true;
+            this.timeLabel_mb_8.Location = new System.Drawing.Point(6, 220);
+            this.timeLabel_mb_8.Name = "timeLabel_mb_8";
+            this.timeLabel_mb_8.Size = new System.Drawing.Size(82, 13);
+            this.timeLabel_mb_8.TabIndex = 26;
+            this.timeLabel_mb_8.Text = "Время Electro: ";
             // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 315);
+            this.ClientSize = new System.Drawing.Size(389, 390);
             this.Controls.Add(this.tabControl);
             this.KeyPreview = true;
             this.Name = "MainScreen";
@@ -351,7 +350,7 @@ namespace Heineken_DataCollection
         private System.Windows.Forms.Label timeLabel_mb_1;
         private System.Windows.Forms.Label timeLabel_mb_6;
         private System.Windows.Forms.Label timeLabel_mb_5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label timeLabel_mb_8;
     }
 }
 
