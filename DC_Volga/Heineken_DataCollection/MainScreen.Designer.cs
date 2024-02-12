@@ -151,16 +151,6 @@ namespace Heineken_DataCollection
             this.timeLabel_mb_1.TabIndex = 18;
             this.timeLabel_mb_1.Text = "Время обнов. даты:";
             // 
-            // Button_notRead_mb
-            // 
-            this.Button_notRead_mb.Location = new System.Drawing.Point(6, 35);
-            this.Button_notRead_mb.Name = "Button_notRead_mb";
-            this.Button_notRead_mb.Size = new System.Drawing.Size(346, 23);
-            this.Button_notRead_mb.TabIndex = 14;
-            this.Button_notRead_mb.Text = "Стоп";
-            this.Button_notRead_mb.UseVisualStyleBackColor = true;
-            this.Button_notRead_mb.Click += new System.EventHandler(this.Button_notRead_mb_Click);
-            // 
             // progressBarRead_mb
             // 
             this.progressBarRead_mb.Location = new System.Drawing.Point(6, 64);
@@ -178,16 +168,6 @@ namespace Heineken_DataCollection
             this.timeLabel_mb.Size = new System.Drawing.Size(144, 13);
             this.timeLabel_mb.TabIndex = 12;
             this.timeLabel_mb.Text = "Время последнего цикла : ";
-            // 
-            // Button_Read_mb
-            // 
-            this.Button_Read_mb.Location = new System.Drawing.Point(6, 6);
-            this.Button_Read_mb.Name = "Button_Read_mb";
-            this.Button_Read_mb.Size = new System.Drawing.Size(346, 23);
-            this.Button_Read_mb.TabIndex = 7;
-            this.Button_Read_mb.Text = "Пуск";
-            this.Button_Read_mb.UseVisualStyleBackColor = true;
-            this.Button_Read_mb.Click += new System.EventHandler(this.Button_Read_mb_Click);
             // 
             // tabControl
             // 
