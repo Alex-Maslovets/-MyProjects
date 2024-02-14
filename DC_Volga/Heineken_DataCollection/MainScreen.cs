@@ -20,15 +20,17 @@ namespace Heineken_DataCollection
 {
     public partial class MainScreen : Form
     {
-        const int numberOfMessage = 200;
-        bool[] previousMessageState = new bool[numberOfMessage];
-        DateTime[] messageTime = new DateTime[numberOfMessage];
-        TimeSpan[] messageDuration = new TimeSpan[numberOfMessage];
-        string[] messageText = new string[numberOfMessage];
-        string[] messageText_SMS = new string[numberOfMessage];
+        #region initialisation
+        const int numberOfMessages = 200;
 
-        bool[] currentMessageState = new bool[numberOfMessage];
-        string[] messageType = new string[numberOfMessage];
+        class stdMessage {
+            public string text;
+            public string type;
+            public bool previousState;
+            public bool currentState;
+            public DateTime time;
+            public TimeSpan duration;
+        }
 
         bool firstScan = false;
         bool firstStart = false;
@@ -70,6 +72,18 @@ namespace Heineken_DataCollection
         public int days_last_mb = new int();
 
         string alarmMessagesArchivePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\messageArchive.txt";
+        #endregion
+
+        T[] InitializeArray<T>(int length) where T : new()
+        {
+            T[] array = new T[length];
+            for (int i = 0; i < length; ++i)
+            {
+                array[i] = new T();
+            }
+
+            return array;
+        }
 
         public MainScreen()
         {
@@ -85,153 +99,70 @@ namespace Heineken_DataCollection
             bgWMessages.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BgWMessages_RunWorkerCompleted);
 
             #region messages Text
-            // Alarm - 🟥; Warning - 🟧; Info - 🟦
-            messageText[0] = "🟥 AlarmReserve_0";
-            messageText[1] = "🟥 AlarmReserve_1";
-            messageText[2] = "🟥 AlarmReserve_2";
-            messageText[3] = "🟥 AlarmReserve_3";
-            messageText[4] = "🟥 AlarmReserve_4";
-            messageText[5] = "🟥 AlarmReserve_5";
-            messageText[6] = "🟥 AlarmReserve_6";
-            messageText[7] = "🟥 AlarmReserve_7";
-            messageText[8] = "🟥 AlarmReserve_8";
-            messageText[9] = "🟥 AlarmReserve_9";
-            messageText[10] = "🟥 AlarmReserve_10";
-            messageText[11] = "🟥 AlarmReserve_11";
-            messageText[12] = "🟥 AlarmReserve_12";
-            messageText[13] = "🟥 AlarmReserve_13";
-            messageText[14] = "🟥 AlarmReserve_14";
-            messageText[15] = "🟥 AlarmReserve_15";
-            messageText[16] = "🟥 AlarmReserve_16";
-            messageText[17] = "🟥 AlarmReserve_17";
-            messageText[18] = "🟥 AlarmReserve_18";
-            messageText[19] = "🟥 AlarmReserve_19";
-            messageText[20] = "🟥 AlarmReserve_20";
-            messageText[21] = "🟥 AlarmReserve_21";
-            messageText[22] = "🟥 AlarmReserve_22";
-            messageText[23] = "🟥 AlarmReserve_23";
-            messageText[24] = "🟥 AlarmReserve_24";
-            messageText[25] = "🟥 AlarmReserve_25";
-            messageText[26] = "🟥 AlarmReserve_26";
-            messageText[27] = "🟥 AlarmReserve_27";
-            messageText[28] = "🟥 AlarmReserve_28";
-            messageText[29] = "🟥 AlarmReserve_29";
-            messageText[30] = "🟥 AlarmReserve_30";
-            messageText[31] = "🟥 AlarmReserve_31";
-            messageText[32] = "🟥 AlarmReserve_32";
-            messageText[33] = "🟥 AlarmReserve_33";
-            messageText[34] = "🟥 AlarmReserve_34";
-            messageText[35] = "🟥 AlarmReserve_35";
-            messageText[36] = "🟥 AlarmReserve_36";
-            messageText[37] = "🟥 AlarmReserve_37";
-            messageText[38] = "🟥 AlarmReserve_38";
-            messageText[39] = "🟥 AlarmReserve_39";
-            messageText[40] = "🟥 AlarmReserve_40";
-            messageText[41] = "🟥 AlarmReserve_41";
-            messageText[42] = "🟥 AlarmReserve_42";
-            messageText[43] = "🟥 AlarmReserve_43";
-            messageText[44] = "🟥 AlarmReserve_44";
-            messageText[45] = "🟥 AlarmReserve_45";
-            messageText[46] = "🟥 AlarmReserve_46";
-            messageText[47] = "🟥 AlarmReserve_47";
-            messageText[48] = "🟥 AlarmReserve_48";
-            messageText[49] = "🟥 AlarmReserve_49";
-            messageText[50] = "🟥 AlarmReserve_50";
-            messageText[51] = "🟥 AlarmReserve_51";
-            messageText[52] = "🟥 AlarmReserve_52";
-            messageText[53] = "🟥 AlarmReserve_53";
-            messageText[54] = "🟥 AlarmReserve_54";
-            messageText[55] = "🟥 AlarmReserve_55";
-            messageText[56] = "🟥 AlarmReserve_56";
-            messageText[57] = "🟥 AlarmReserve_57";
-            messageText[58] = "🟥 AlarmReserve_58";
-            messageText[59] = "🟥 AlarmReserve_59";
-            messageText[60] = "🟥 AlarmReserve_60";
-            messageText[61] = "🟥 AlarmReserve_61";
-            messageText[62] = "🟥 AlarmReserve_62";
-            messageText[63] = "🟥 AlarmReserve_63";
-            messageText[64] = "🟥 AlarmReserve_64";
-            messageText[65] = "🟥 AlarmReserve_65";
-            messageText[66] = "🟥 AlarmReserve_66";
-            messageText[67] = "🟥 AlarmReserve_67";
-            messageText[68] = "🟥 AlarmReserve_68";
-            messageText[69] = "🟥 AlarmReserve_69";
-            messageText[70] = "🟥 AlarmReserve_70";
-            messageText[71] = "🟥 AlarmReserve_71";
-            messageText[72] = "🟥 AlarmReserve_72";
-            messageText[73] = "🟥 AlarmReserve_73";
-            messageText[74] = "🟥 AlarmReserve_74";
-            messageText[75] = "🟥 AlarmReserve_75";
-            messageText[76] = "🟥 AlarmReserve_76";
-            messageText[77] = "🟥 AlarmReserve_77";
-            messageText[78] = "🟥 AlarmReserve_78";
-            messageText[79] = "🟥 AlarmReserve_79";
-            messageText[80] = "🟥 AlarmReserve_80";
-            messageText[81] = "🟥 AlarmReserve_81";
-            messageText[82] = "🟥 AlarmReserve_82";
-            messageText[83] = "🟥 AlarmReserve_83";
-            messageText[84] = "🟥 AlarmReserve_84";
-            messageText[85] = "🟥 AlarmReserve_85";
-            messageText[86] = "🟥 AlarmReserve_86";
-            messageText[87] = "🟥 AlarmReserve_87";
-            messageText[88] = "🟥 AlarmReserve_88";
-            messageText[89] = "🟥 AlarmReserve_89";
-            messageText[90] = "🟥 AlarmReserve_90";
-            messageText[91] = "🟥 AlarmReserve_91";
-            messageText[92] = "🟥 AlarmReserve_92";
-            messageText[93] = "🟥 AlarmReserve_93";
-            messageText[94] = "🟥 AlarmReserve_94";
-            messageText[95] = "🟥 AlarmReserve_95";
-            messageText[96] = "🟥 AlarmReserve_96";
-            messageText[97] = "🟥 AlarmReserve_97";
-            messageText[98] = "🟥 AlarmReserve_98";
-            messageText[99] = "🟥 AlarmReserve_99";
-            messageText[100] = "🟥 AlarmReserve_100";
 
+            //GameObject[] houses = InitializeArray<GameObject>(200);
 
-            messageText[0] = "🟥 ВКУ. Низкое давление на входе";
+            stdMessage[] stdMessages = InitializeArray<stdMessage>(numberOfMessages);
 
-            messageText[25] = "🟥 Котёл 1. Неисправность котла";
-            messageText[26] = "🟥 Котёл 2. Неисправность котла";
-            messageText[27] = "🟥 Котёл 3. Неисправность котла";
-            messageText[34] = "🟥 Котельная. Неисправность питательного насоса 1";
-            messageText[36] = "🟥 Котельная. Неисправность питательного насоса 2";
-            messageText[38] = "🟥 Котельная. Неисправность питательного насоса 3";
-            messageText[39] = "🟥 Котельная. Неисправность питательного насоса 4";
-            messageText[40] = "🟥 Минимальное давление в деаэраторе";
-            messageText[8] = "🟥 Котельная. Ввод 1. Отключение электропитания";
-            messageText[9] = "🟥 Котельная. Ввод 2. Отключение электропитания";
-            messageText[62] = "🟥 Котельная. Превышен порог загазованности СО2";
-            messageText[51] = "🟥 Котельная. Превышен порог загазовaнности СН. Порог 1";
-            messageText[49] = "🟥 Котельная. Превышен порог загазовaнности СО. Порог 1";
-            messageText[48] = "🟥 Котельная. Пожар";
-            messageText[63] = "🟥 Просадка давления пара";
+            //Alarm - 🟥; Warning - 🟧; Info - 🟦
+            for (int i = 0; i < numberOfMessages; i++) {
+                stdMessages[i].text = "🟥 AlarmReserve_" + i;
+            }
 
-            messageText[67] = "🟥 Низкое давление технической воды";
+            stdMessages[0].text = "🟥 ВКУ. Низкое давление на входе";
 
-            messageText[73] = "🟥 Низкий уровень в танке FWT";
+            stdMessages[25].text = "🟥 Котёл 1. Неисправность котла";
+            stdMessages[26].text = "🟥 Котёл 2. Неисправность котла";
+            stdMessages[27].text = "🟥 Котёл 3. Неисправность котла";
+            stdMessages[34].text = "🟥 Котельная. Неисправность питательного насоса 1";
+            stdMessages[36].text = "🟥 Котельная. Неисправность питательного насоса 2";
+            stdMessages[38].text = "🟥 Котельная. Неисправность питательного насоса 3";
+            stdMessages[39].text = "🟥 Котельная. Неисправность питательного насоса 4";
+            stdMessages[40].text = "🟥 Минимальное давление в деаэраторе";
+            stdMessages[8].text = "🟥 Котельная. Ввод 1. Отключение электропитания";
+            stdMessages[9].text = "🟥 Котельная. Ввод 2. Отключение электропитания";
+            stdMessages[62].text = "🟥 Котельная. Превышен порог загазованности СО2";
+            stdMessages[51].text = "🟥 Котельная. Превышен порог загазовaнности СН. Порог 1";
+            stdMessages[49].text = "🟥 Котельная. Превышен порог загазовaнности СО. Порог 1";
+            stdMessages[48].text = "🟥 Котельная. Пожар";
+            stdMessages[63].text = "🟥 Просадка давления пара";
 
-            messageText[60] = "🟥 АХУ. Несправность одного из насосов оборотной воды";
-            messageText[61] = "🟥 АХУ. Несправность одного из КД";
+            stdMessages[67].text = "🟥 Низкое давление технической воды";
 
-            messageText[58] = "🟥 АХУ. Аварийная остановка";
+            stdMessages[73].text = "🟥 Низкий уровень в танке FWT";
 
-            messageText[57] = "🟥 АХУ. Неисправность гликолевого насоса внутреннего контура";
-            messageText[56] = "🟥 АХУ. Неисправность гликолевого насоса внешнего контура";
+            stdMessages[60].text = "🟥 АХУ. Несправность одного из насосов оборотной воды";
+            stdMessages[61].text = "🟥 АХУ. Несправность одного из КД";
+
+            stdMessages[58].text = "🟥 АХУ. Аварийная остановка";
+
+            stdMessages[57].text = "🟥 АХУ. Неисправность гликолевого насоса внутреннего контура";
+            stdMessages[56].text = "🟥 АХУ. Неисправность гликолевого насоса внешнего контура";
+
             #endregion
 
-            for (int i = 0; i < messageText.Length; i++)
+            for (int i = 0; i < stdMessages.Length; i++)
             {
-                if (!string.IsNullOrEmpty(messageText[i]))
+                if (!string.IsNullOrEmpty(stdMessages[i].text))
                 {
-                    messageText[i] = messageText[i].Replace("(", "\\(");
-                    messageText[i] = messageText[i].Replace(")", "\\)");
-                    messageText[i] = messageText[i].Replace(":", "\\:");
-                    messageText[i] = messageText[i].Replace(".", "\\.");
-                    messageText[i] = messageText[i].Replace(",", "\\,");
+                    stdMessages[i].text = stdMessages[i].text.Replace("(", "\\(");
+                    stdMessages[i].text = stdMessages[i].text.Replace(")", "\\)");
+                    stdMessages[i].text = stdMessages[i].text.Replace(":", "\\:");
+                    stdMessages[i].text = stdMessages[i].text.Replace(".", "\\.");
+                    stdMessages[i].text = stdMessages[i].text.Replace(",", "\\,");
 
                 }
             }
+        }
+
+        public class stdS7Adress
+        {
+            public String ipAdress;
+            public int rack;
+            public int slot;
+            public int dBNumber;
+            public int startPosition;
+            public int size;
         }
 
         public void CustomException(Exception ex, String module)
@@ -259,6 +190,131 @@ namespace Heineken_DataCollection
                 }
             }
         }
+
+        public class messageArrayState
+        {
+            public int reusultConnection;
+            public bool[] messageStates;
+        };
+
+        public messageArrayState Read(stdS7Adress stdS7)
+        {
+            try
+            {
+                messageArrayState[] mesArrState = InitializeArray<messageArrayState>(0);
+
+                mesArrState[0].messageStates = new bool[stdS7.size * 8];
+
+                // Установка соединения с PLC S7
+                S7Client plcClient = new S7Client();
+                int result = plcClient.ConnectTo(stdS7.ipAdress, stdS7.rack, stdS7.slot);
+
+                byte[] DBBuffer = new byte[stdS7.size];
+
+                result = plcClient.DBRead(stdS7.dBNumber, stdS7.startPosition, stdS7.size, DBBuffer);
+                if (result != 0)
+                {
+                    try
+                    {
+                        using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
+                            sw.Write("Messages; " + DateTime.Now + "; " + plcClient.ErrorText(result) + " # of error message -> " + result.ToString() + " --- " + ";\n");
+                        plcClient.Disconnect();
+                        for (int i = 0; i < stdS7.size * 8; i++)
+                        {
+                            mesArrState[0].messageStates[i] = false;
+                        }
+                        mesArrState[0].reusultConnection = result;
+                        return mesArrState[0];
+                    }
+                    catch (Exception ex)
+                    {
+                        plcClient.Disconnect();
+                        MessageBox.Show(ex.Message);
+                        for (int i = 0; i < stdS7.size * 8; i++)
+                        {
+                            mesArrState[0].messageStates[i] = false;
+                        }
+                        mesArrState[0].reusultConnection = result;
+                        return mesArrState[0];
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < stdS7.size; i++)
+                    {
+                        for (int j = 0; j <= 7; j++)
+                        {
+                            bool bit = S7.GetBitAt(DBBuffer, i, j);
+                            mesArrState[0].messageStates[i * 8 + j] = bit;
+                        }
+                    }
+                    mesArrState[0].reusultConnection = result;
+                }
+
+                plcClient.Disconnect();
+                return mesArrState[0];
+
+            }
+            catch (Exception ex)
+            {
+                CustomException(ex, "Siemens");
+
+                messageArrayState mesArrState = new messageArrayState();
+                for (int i = 0; i < stdS7.size * 8; i++)
+                {
+                    mesArrState.messageStates[i] = false;
+                }
+                mesArrState.reusultConnection = 100;
+                return mesArrState;
+            }
+        }
+
+
+        /*
+
+        bool[] createMessage = new bool[numberOfMessages];
+
+                    for (int i = 0; i<currentMessageState.Length; i++)
+                    {
+                        if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == true)
+                        {
+                            previousMessageState[i] = currentMessageState[i];
+                            createMessage[i] = true;
+                            messageType[i] = "⬆️";
+                            messageTime[i] = DateTime.Now;
+                        }
+                        else if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == false)
+                        {
+                            previousMessageState[i] = currentMessageState[i];
+                            createMessage[i] = true;
+                            messageType[i] = "⬇️";
+                            messageDuration[i] = DateTime.Now.Subtract(messageTime[i]);
+                        }
+                    }
+
+                    if (firstScan)
+{
+    for (int i = 0; i < createMessage.Length; i++)
+    {
+        if (createMessage[i] == true)
+        {
+            try
+            {
+                if (bgWMessages.IsBusy != true)
+                {
+                    // Start the asynchronous operation.
+                    bgWMessages.RunWorkerAsync(argument: i);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+    }
+    createMessage = null;
+}
+        */
 
         // Read S7
         private void Button_Read_s7_Click(object sender, EventArgs e)
@@ -293,94 +349,22 @@ namespace Heineken_DataCollection
         }
         public async void ReadWriteS7()
         {
+            stdS7Adress newStdS7Adress = new stdS7Adress();
 
-            try
-            {
-                // Установка соединения с PLC S7-416 10.129.32.72
-                S7Client plcClient = new S7Client();
-                int result = plcClient.ConnectTo("10.129.32.72", 0, 3);
+            newStdS7Adress.ipAdress = "192.168.0.1";
+            newStdS7Adress.rack = 0;
+            newStdS7Adress.slot = 1;
+            newStdS7Adress.dBNumber = 5;
+            newStdS7Adress.startPosition = 1;
+            newStdS7Adress.size = 2;
 
-                byte[] DB1Buffer = new byte[2];
+            messageArrayState nowRead = Read(newStdS7Adress);
 
-                result = plcClient.DBRead(21, 6, 2, DB1Buffer);
-                if (result != 0)
-                {
-                    try
-                    {
-                        using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
-                            sw.Write("Messages; " + DateTime.Now + "; " + plcClient.ErrorText(result) + " # of error message -> " + result.ToString() + " --- " + ";\n");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-                else
-                {
-                    bool[] createMessage = new bool[numberOfMessage];
+            List<bool> listBools = new List<bool>();
 
-                    for (int i = 0; i < DB1Buffer.Length; i++)
-                    {
-                        for (int j = 0; j <= 7; j++)
-                        {
-                            bool bit = S7.GetBitAt(DB1Buffer, i, j);
-                            currentMessageState[i * 8 + j] = bit;
-                        }
-                    }
-
-                    for (int i = 0; i < currentMessageState.Length; i++)
-                    {
-                        if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == true)
-                        {
-                            previousMessageState[i] = currentMessageState[i];
-                            createMessage[i] = true;
-                            messageType[i] = "⬆️";
-                            messageTime[i] = DateTime.Now;
-                        }
-                        else if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == false)
-                        {
-                            previousMessageState[i] = currentMessageState[i];
-                            createMessage[i] = true;
-                            messageType[i] = "⬇️";
-                            messageDuration[i] = DateTime.Now.Subtract(messageTime[i]);
-                        }
-                    }
-
-                    if (firstScan)
-                    {
-                        for (int i = 0; i < createMessage.Length; i++)
-                        {
-                            if (createMessage[i] == true)
-                            {
-                                try
-                                {
-                                    if (bgWMessages.IsBusy != true)
-                                    {
-                                        // Start the asynchronous operation.
-                                        bgWMessages.RunWorkerAsync(argument: i);
-                                    }
-                                }
-                                catch (Exception ex)
-                                {
-                                    MessageBox.Show(ex.Message);
-                                }
-                            }
-                        }
-                        createMessage = null;
-                    }
-                    firstScan = true;
-                }
-
-                plcClient.Disconnect();
-
-                progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Style = ProgressBarStyle.Marquee));
-
+            foreach (bool b in nowRead.messageStates) {
+                listBools.Add(b);
             }
-            catch (Exception ex)
-            {
-                CustomException(ex, "Siemens");
-            }
-
         }
         private void BackgroundWorkerRead_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -421,7 +405,7 @@ namespace Heineken_DataCollection
                 };
                 var httpClient = new HttpClient(new HttpClientHandler { Proxy = webProxy, UseProxy = true });
                 var botClient = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4", httpClient);
-
+                /*
                 if (messageType[i] == "⬆️")
                 {
                     Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
@@ -444,10 +428,10 @@ namespace Heineken_DataCollection
                     parseMode: ParseMode.MarkdownV2,
                     disableNotification: true);
                 }
+                */
             }
             catch (Exception ex)
             {
-
                 CustomException(ex, "Telegramm");
             }
         }
