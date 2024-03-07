@@ -17,10 +17,10 @@
         </member>
         <member name="P:Microsoft.Extensions.Configuration.BinderOptions.ErrorOnUnknownConfiguration">
             <summary>
-            When false (the default), no exceptions are thrown when a configuration key is found for which the
-            provided model object does not have an appropriate property which matches the key's name.
+            When false (the default), no exceptions are thrown when trying to convert a value or when a configuration
+            key is found for which the provided model object does not have an appropriate property which matches the key's name.
             When true, an <see cref="T:System.InvalidOperationException"/> is thrown with a description
-            of the missing properties.
+            of the error.
             </summary>
         </member>
         <member name="T:Microsoft.Extensions.Configuration.ConfigurationBinder">
@@ -135,6 +135,15 @@
             <summary>Throws an <see cref="T:System.ArgumentNullException"/> if <paramref name="argument"/> is null.</summary>
             <param name="argument">The reference type argument to validate as non-null.</param>
             <param name="paramName">The name of the parameter with which <paramref name="argument"/> corresponds.</param>
+        </member>
+        <member name="M:System.ThrowHelper.IfNullOrWhitespace(System.String,System.String)">
+            <summary>
+            Throws either an <see cref="T:System.ArgumentNullException"/> or an <see cref="T:System.ArgumentException"/>
+            if the specified string is <see langword="null"/> or whitespace respectively.
+            </summary>
+            <param name="argument">String to be checked for <see langword="null"/> or whitespace.</param>
+            <param name="paramName">The name of the parameter being checked.</param>
+            <returns>The original value of <paramref name="argument"/>.</returns>
         </member>
         <member name="T:System.Runtime.InteropServices.LibraryImportAttribute">
             <summary>
@@ -588,6 +597,9 @@
         </member>
         <member name="P:System.SR.Error_FailedToActivate">
             <summary>Failed to create instance of type '{0}'.</summary>
+        </member>
+        <member name="P:System.SR.Error_GeneralErrorWhenBinding">
+            <summary>'{0}' was set and binding has failed. The likely cause is an invalid configuration value.</summary>
         </member>
         <member name="P:System.SR.Error_MissingConfig">
             <summary>'{0}' was set on the provided {1}, but the following properties were not found on the instance of {2}: {3}</summary>

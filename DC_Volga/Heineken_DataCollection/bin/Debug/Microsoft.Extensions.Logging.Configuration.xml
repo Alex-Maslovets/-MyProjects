@@ -48,6 +48,11 @@
         <member name="T:Microsoft.Extensions.Logging.Configuration.LoggerProviderOptionsChangeTokenSource`2">
             <inheritdoc />
         </member>
+        <member name="M:Microsoft.Extensions.Logging.Configuration.LoggerProviderOptionsChangeTokenSource`2.#ctor(Microsoft.Extensions.Logging.Configuration.ILoggerProviderConfiguration{`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Extensions.Logging.Configuration.LoggerProviderOptionsChangeTokenSource`2"/> class.
+            </summary>
+        </member>
         <member name="T:Microsoft.Extensions.Logging.Configuration.LoggingBuilderConfigurationExtensions">
             <summary>
             Extension methods for setting up logging services in an <see cref="T:Microsoft.Extensions.Logging.ILoggingBuilder" />.
@@ -72,10 +77,22 @@
             <param name="configuration">The <see cref="T:Microsoft.Extensions.Configuration.IConfiguration" /> to add.</param>
             <returns>The builder.</returns>
         </member>
+        <member name="M:Microsoft.Extensions.Configuration.Binder.SourceGeneration.BindingExtensions.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String,``0)">
+            <summary>Extracts the value with the specified key and converts it to the specified type.</summary>
+        </member>
         <member name="M:System.ThrowHelper.ThrowIfNull(System.Object,System.String)">
             <summary>Throws an <see cref="T:System.ArgumentNullException"/> if <paramref name="argument"/> is null.</summary>
             <param name="argument">The reference type argument to validate as non-null.</param>
             <param name="paramName">The name of the parameter with which <paramref name="argument"/> corresponds.</param>
+        </member>
+        <member name="M:System.ThrowHelper.IfNullOrWhitespace(System.String,System.String)">
+            <summary>
+            Throws either an <see cref="T:System.ArgumentNullException"/> or an <see cref="T:System.ArgumentException"/>
+            if the specified string is <see langword="null"/> or whitespace respectively.
+            </summary>
+            <param name="argument">String to be checked for <see langword="null"/> or whitespace.</param>
+            <param name="paramName">The name of the parameter being checked.</param>
+            <returns>The original value of <paramref name="argument"/>.</returns>
         </member>
         <member name="T:System.Runtime.InteropServices.LibraryImportAttribute">
             <summary>
@@ -146,80 +163,6 @@
         <member name="F:System.Runtime.InteropServices.StringMarshalling.Utf16">
             <summary>
             Use the platform-provided UTF-16 marshaller.
-            </summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
-            <summary>
-            Suppresses reporting of a specific rule violation, allowing multiple suppressions on a
-            single code artifact.
-            </summary>
-            <remarks>
-            <see cref="T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute"/> is different than
-            <see cref="T:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute"/> in that it doesn't have a
-            <see cref="T:System.Diagnostics.ConditionalAttribute"/>. So it is always preserved in the compiled assembly.
-            </remarks>
-        </member>
-        <member name="M:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute"/>
-            class, specifying the category of the tool and the identifier for an analysis rule.
-            </summary>
-            <param name="category">The category for the attribute.</param>
-            <param name="checkId">The identifier of the analysis rule the attribute applies to.</param>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Category">
-            <summary>
-            Gets the category identifying the classification of the attribute.
-            </summary>
-            <remarks>
-            The <see cref="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Category"/> property describes the tool or tool analysis category
-            for which a message suppression attribute applies.
-            </remarks>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.CheckId">
-            <summary>
-            Gets the identifier of the analysis tool rule to be suppressed.
-            </summary>
-            <remarks>
-            Concatenated together, the <see cref="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Category"/> and <see cref="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.CheckId"/>
-            properties form a unique check identifier.
-            </remarks>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Scope">
-            <summary>
-            Gets or sets the scope of the code that is relevant for the attribute.
-            </summary>
-            <remarks>
-            The Scope property is an optional argument that specifies the metadata scope for which
-            the attribute is relevant.
-            </remarks>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Target">
-            <summary>
-            Gets or sets a fully qualified path that represents the target of the attribute.
-            </summary>
-            <remarks>
-            The <see cref="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Target"/> property is an optional argument identifying the analysis target
-            of the attribute. An example value is "System.IO.Stream.ctor():System.Void".
-            Because it is fully qualified, it can be long, particularly for targets such as parameters.
-            The analysis tool user interface should be capable of automatically formatting the parameter.
-            </remarks>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.MessageId">
-            <summary>
-            Gets or sets an optional argument expanding on exclusion criteria.
-            </summary>
-            <remarks>
-            The <see cref="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.MessageId"/> property is an optional argument that specifies additional
-            exclusion where the literal metadata target is not sufficiently precise. For example,
-            the <see cref="T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute"/> cannot be applied within a method,
-            and it may be desirable to suppress a violation against a statement in the method that will
-            give a rule violation, but not against all statements in the method.
-            </remarks>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Justification">
-            <summary>
-            Gets or sets the justification for suppressing the code analysis message.
             </summary>
         </member>
         <member name="T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute">

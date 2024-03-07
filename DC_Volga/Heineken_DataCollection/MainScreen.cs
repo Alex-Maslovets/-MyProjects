@@ -21,9 +21,9 @@ namespace Heineken_DataCollection
     public partial class MainScreen : Form
     {
         #region initialisation
-        const int numberOfMessages = 200;
+        static int numberOfMessages = 200;
 
-        class stdMessage {
+        public class stdMessage {
             public string text;
             public string type;
             public bool previousState;
@@ -36,22 +36,8 @@ namespace Heineken_DataCollection
         bool firstStart = false;
         bool firstStartMB = false;
 
-        public uint counterTime = new uint();
-        public uint counterPLC3679 = new uint();
-        public uint counterPLC2 = new uint();
         public uint counterMessages = new uint();
-        public uint counterDB = new uint();
         public uint counterS7 = new uint();
-
-        public uint counterTime_mb = new uint();
-        public uint counterHSS_0 = new uint();
-        public uint counterHSS_1 = new uint();
-        public uint counterHSS_1_add = new uint();
-        public uint counterHSS_2 = new uint();
-        public uint counterHSS_3 = new uint();
-        public uint counterHSS_4 = new uint();
-        public uint counterDB_mb = new uint();
-        public uint counter_mb = new uint();
 
         public float[] values_sum = new float[200];
         public float[] values_last = new float[200];
@@ -71,7 +57,8 @@ namespace Heineken_DataCollection
         public int hours_last_mb = new int();
         public int days_last_mb = new int();
 
-        string alarmMessagesArchivePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\messageArchive.txt";
+        string alarmMessagesArchivePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\messageArchive_Volga.txt";
+        
         #endregion
 
         T[] InitializeArray<T>(int length) where T : new()
@@ -84,6 +71,8 @@ namespace Heineken_DataCollection
 
             return array;
         }
+
+        public stdMessage[] stdMessages = new stdMessage[numberOfMessages];
 
         public MainScreen()
         {
@@ -100,9 +89,7 @@ namespace Heineken_DataCollection
 
             #region messages Text
 
-            //GameObject[] houses = InitializeArray<GameObject>(200);
-
-            stdMessage[] stdMessages = InitializeArray<stdMessage>(numberOfMessages);
+            stdMessages = InitializeArray<stdMessage>(numberOfMessages);
 
             //Alarm - 🟥; Warning - 🟧; Info - 🟦
             for (int i = 0; i < numberOfMessages; i++) {
@@ -201,7 +188,7 @@ namespace Heineken_DataCollection
         {
             try
             {
-                messageArrayState[] mesArrState = InitializeArray<messageArrayState>(0);
+                messageArrayState[] mesArrState = InitializeArray<messageArrayState>(1);
 
                 mesArrState[0].messageStates = new bool[stdS7.size * 8];
 
@@ -210,8 +197,8 @@ namespace Heineken_DataCollection
                 int result = plcClient.ConnectTo(stdS7.ipAdress, stdS7.rack, stdS7.slot);
 
                 byte[] DBBuffer = new byte[stdS7.size];
-
                 result = plcClient.DBRead(stdS7.dBNumber, stdS7.startPosition, stdS7.size, DBBuffer);
+
                 if (result != 0)
                 {
                     try
@@ -258,71 +245,31 @@ namespace Heineken_DataCollection
             catch (Exception ex)
             {
                 CustomException(ex, "Siemens");
+                
+                messageArrayState[] mesArrState = InitializeArray<messageArrayState>(0);
 
-                messageArrayState mesArrState = new messageArrayState();
+                mesArrState[0].messageStates = new bool[stdS7.size * 8];
+
                 for (int i = 0; i < stdS7.size * 8; i++)
                 {
-                    mesArrState.messageStates[i] = false;
+                    mesArrState[0].messageStates[i] = false;
                 }
-                mesArrState.reusultConnection = 100;
-                return mesArrState;
+                mesArrState[0].reusultConnection = 100;
+                return mesArrState[0];
             }
         }
-
-
-        /*
-
-        bool[] createMessage = new bool[numberOfMessages];
-
-                    for (int i = 0; i<currentMessageState.Length; i++)
-                    {
-                        if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == true)
-                        {
-                            previousMessageState[i] = currentMessageState[i];
-                            createMessage[i] = true;
-                            messageType[i] = "⬆️";
-                            messageTime[i] = DateTime.Now;
-                        }
-                        else if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == false)
-                        {
-                            previousMessageState[i] = currentMessageState[i];
-                            createMessage[i] = true;
-                            messageType[i] = "⬇️";
-                            messageDuration[i] = DateTime.Now.Subtract(messageTime[i]);
-                        }
-                    }
-
-                    if (firstScan)
-{
-    for (int i = 0; i < createMessage.Length; i++)
-    {
-        if (createMessage[i] == true)
-        {
-            try
-            {
-                if (bgWMessages.IsBusy != true)
-                {
-                    // Start the asynchronous operation.
-                    bgWMessages.RunWorkerAsync(argument: i);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-    }
-    createMessage = null;
-}
-        */
 
         // Read S7
         private void Button_Read_s7_Click(object sender, EventArgs e)
         {
+            counterMessages = 0;
+            counterS7 = 0;
+
             try
             {
                 if (backgroundWorkerRead.IsBusy != true)
                 {
+                    firstScan = true;
                     // Start the asynchronous operation.
                     backgroundWorkerRead.RunWorkerAsync();
                 }
@@ -334,6 +281,9 @@ namespace Heineken_DataCollection
         }
         private void Button_notRead_s7_Click(object sender, EventArgs e)
         {
+            counterMessages = 0;
+            counterS7 = 0;
+
             try
             {
                 if (backgroundWorkerRead.WorkerSupportsCancellation == true)
@@ -347,24 +297,117 @@ namespace Heineken_DataCollection
                 MessageBox.Show(ex.Message);
             }
         }
-        public async void ReadWriteS7()
+        public void ReadWriteS7()
         {
+            DateTime s1 = DateTime.Now;
+            DateTime s2 = DateTime.Now;
+
             stdS7Adress newStdS7Adress = new stdS7Adress();
 
-            newStdS7Adress.ipAdress = "192.168.0.1";
+            newStdS7Adress.ipAdress = "10.129.34.140";
             newStdS7Adress.rack = 0;
-            newStdS7Adress.slot = 1;
-            newStdS7Adress.dBNumber = 5;
-            newStdS7Adress.startPosition = 1;
-            newStdS7Adress.size = 2;
+            newStdS7Adress.slot = 3;
+            newStdS7Adress.dBNumber = 303;
+            newStdS7Adress.startPosition = 180;
+            newStdS7Adress.size = 1;
 
             messageArrayState nowRead = Read(newStdS7Adress);
 
-            List<bool> listBools = new List<bool>();
+            List<bool> currentMessagesState = new List<bool>();
 
-            foreach (bool b in nowRead.messageStates) {
-                listBools.Add(b);
+            foreach (bool mState in nowRead.messageStates) {
+                currentMessagesState.Add(mState);
             }
+
+            newStdS7Adress.ipAdress = "10.129.34.140";
+            newStdS7Adress.rack = 0;
+            newStdS7Adress.slot = 3;
+            newStdS7Adress.dBNumber = 303;
+            newStdS7Adress.startPosition = 208;
+            newStdS7Adress.size = 4;
+
+            nowRead = null;
+
+            nowRead = Read(newStdS7Adress);
+
+            foreach (bool mState in nowRead.messageStates)
+            {
+                currentMessagesState.Add(mState);
+            }
+
+            currentMessagesState.ToArray();
+
+            if (currentMessagesState.Count > 0)
+            {
+                if (currentMessagesState.Count >= stdMessages.Length)
+                {
+                    MessageBox.Show("Считано больше статусов чем инициализировано сообщений");
+                }
+                else {
+                    for (int i = 0; i < currentMessagesState.Count; i++)
+                    {
+                        stdMessages[i].currentState = currentMessagesState[i];
+                    }
+                }
+            }
+            else {
+                MessageBox.Show("В массиве статусов сообщений нет данных!");
+            }
+
+            bool[] createMessage = new bool[numberOfMessages];
+
+            for (int i = 0; i < stdMessages.Length; i++)
+            {
+                if (stdMessages[i].previousState != stdMessages[i].currentState && stdMessages[i].currentState == true)
+                {
+                    stdMessages[i].previousState = stdMessages[i].currentState;
+                    createMessage[i] = true;
+                    stdMessages[i].type = "⬆️";
+                    stdMessages[i].time = DateTime.Now;
+                }
+                else if (stdMessages[i].previousState != stdMessages[i].currentState && stdMessages[i].currentState == false)
+                {
+                    stdMessages[i].previousState = stdMessages[i].currentState;
+                    createMessage[i] = true;
+                    stdMessages[i].type = "⬇️";
+                    stdMessages[i].duration = DateTime.Now.Subtract(stdMessages[i].time);
+                }
+            }
+
+            if (firstScan)
+            {
+                for (int i = 0; i < createMessage.Length; i++)
+                {
+                    if (createMessage[i] == true)
+                    {
+                        try
+                        {
+                            if (bgWMessages.IsBusy != true)
+                            {
+                                // Start the asynchronous operation.
+                                bgWMessages.RunWorkerAsync(argument: i);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+                createMessage = null;
+            }
+
+            firstScan = false;
+
+            TimeSpan s3 = DateTime.Now.Subtract(s2);
+            counterMessages++;
+            timeLabel_s7_4.Invoke(new Action(() => timeLabel_s7_4.Text = "Время записи: " + Math.Round(s3.TotalMilliseconds, 0) + " мс Счётчик: " + counterMessages));
+
+            progressBarRead_s7.Invoke(new Action(() => progressBarRead_s7.Style = ProgressBarStyle.Marquee));
+
+            counterS7++;
+            timeLabel_s7.Invoke(new Action(() => timeLabel_s7.Text = "Время последнего цикла: " + Math.Round(DateTime.Now.Subtract(s1).TotalMilliseconds, 0) + " мс Счётчик: " + counterS7));
+
         }
         private void BackgroundWorkerRead_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -405,30 +448,30 @@ namespace Heineken_DataCollection
                 };
                 var httpClient = new HttpClient(new HttpClientHandler { Proxy = webProxy, UseProxy = true });
                 var botClient = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4", httpClient);
-                /*
-                if (messageType[i] == "⬆️")
+                
+                if (stdMessages[i].type == "⬆️")
                 {
                     Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
                     chatId: "-1001749496684",//chatId,
-                    text: messageType[i] + messageText[i],
+                    text: stdMessages[i].type + stdMessages[i].text,
                     parseMode: ParseMode.MarkdownV2,
                     disableNotification: true);
                 }
                 else
                 {
-                    string duration = " (Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с)";
+                    string duration = " (Длительность: " + Math.Round(stdMessages[i].duration.TotalSeconds, 2) + " с)";
                     duration = duration.Replace("(", "\\(");
                     duration = duration.Replace(")", "\\)");
                     duration = duration.Replace(":", "\\:");
                     duration = duration.Replace(".", "\\.");
                     duration = duration.Replace(",", "\\,");
+
                     Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
                     chatId: "-1001749496684",//chatId,
-                    text: messageType[i] + messageText[i] + duration,
+                    text: stdMessages[i].type + stdMessages[i].text + duration,
                     parseMode: ParseMode.MarkdownV2,
                     disableNotification: true);
                 }
-                */
             }
             catch (Exception ex)
             {
