@@ -235,6 +235,6 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_EKB\Heineken_Da
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_EKB\Heineken_DataCollection\obj\Debug\Heineken_DataCollection.Properties.Resources.resources
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_EKB\Heineken_DataCollection\obj\Debug\Heineken_DataCollection.csproj.GenerateResource.cache
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_EKB\Heineken_DataCollection\obj\Debug\Heineken_DataCollection.csproj.CoreCompileInputs.cache
-C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_EKB\Heineken_DataCollection\obj\Debug\Heineken_DataCollection.csproj.CopyComplete
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_EKB\Heineken_DataCollection\obj\Debug\Heineken_DataCollection.exe
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_EKB\Heineken_DataCollection\obj\Debug\Heineken_DataCollection.pdb
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_EKB\Heineken_DataCollection\obj\Debug\Heineken.0646FB01.Up2Date

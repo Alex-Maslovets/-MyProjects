@@ -283,10 +283,10 @@ namespace Heineken_DataCollection
                     s2 = DateTime.Now;
 
                     // Соединение и считывание данных с контроллера в энергоблоке
-                    result = plcClient.ConnectTo("10.129.31.135", 0, 3);
+                    result = plcClient.ConnectTo("10.129.31.134", 0, 3);
                     byte[] db2Buffer = new byte[160];
 
-                    result = plcClient.DBRead(2000, 1838, 160, db2Buffer);
+                    result = plcClient.DBRead(4000, 1838, 160, db2Buffer);
                     if (result != 0)
                     {
                         try
@@ -319,7 +319,7 @@ namespace Heineken_DataCollection
 
                     db2Buffer = new byte[3];
 
-                    result = plcClient.DBRead(2000, 8, 3, db2Buffer);
+                    result = plcClient.DBRead(4000, 8, 3, db2Buffer);
                     if (result != 0)
                     {
                         try

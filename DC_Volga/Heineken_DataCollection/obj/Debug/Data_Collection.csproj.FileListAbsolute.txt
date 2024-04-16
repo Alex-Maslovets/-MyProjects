@@ -78,3 +78,5 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\obj\Debug\Data_Col.816BFE51.Up2Date
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\obj\Debug\Heineken_DataCollection.exe
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\obj\Debug\Heineken_DataCollection.pdb
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\obj\Debug\Data_Collection.csproj.SuggestedBindingRedirects.cache
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\obj\Debug\Heineken_DataCollection.exe.config
