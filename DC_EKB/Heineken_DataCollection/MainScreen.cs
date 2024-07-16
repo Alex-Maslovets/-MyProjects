@@ -8,10 +8,13 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using Telegram.Bot.Types.Enums;
+using Telegram.Bot;
 
 namespace Heineken_DataCollection
 {
@@ -66,7 +69,7 @@ namespace Heineken_DataCollection
         public int hours_last_mb = new int();
         public int days_last_mb = new int();
 
-        string alarmMessagesArchivePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\messageArchive.txt";
+        string alarmMessagesArchivePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\messageArchive_Patra.txt";
 
         public MainScreen()
         {
@@ -363,6 +366,75 @@ namespace Heineken_DataCollection
         }
         public async void WriteMessages(int i)
         {
+            ///// Messages Telegramm /////
+            try
+            {
+                //MessageBox.Show("Зашли в метод WriteMessages - Try Telegramm");
+                var webProxy = new WebProxy(Host: "10.129.24.100", Port: 8080)
+                {
+                    // Credentials if needed:
+                    // Credentials = new NetworkCredential("USERNAME", "PASSWORD")
+                };
+                var httpClient = new HttpClient(new HttpClientHandler { Proxy = webProxy, UseProxy = true });
+                var botClient = new TelegramBotClient("6526345857:AAEq4ogV-4EDUjRLHfvItJFwrSprQI4gUbk", httpClient);
+
+                //MessageBox.Show("Telegramm Proxy и клиент сконфигурированы");
+
+                if (messageType[i] == "⬆️")
+                {
+                    Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
+                    chatId: "-1004119127172",//chatId,
+                    text: messageType[i] + messageText[i],
+                    parseMode: ParseMode.MarkdownV2,
+                    disableNotification: true);
+
+                    //MessageBox.Show("Telegramm Сообщение отправлено");
+                }
+                else
+                {
+                    string duration = " (Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с)";
+                    duration = duration.Replace("(", "\\(");
+                    duration = duration.Replace(")", "\\)");
+                    duration = duration.Replace(":", "\\:");
+                    duration = duration.Replace(".", "\\.");
+                    duration = duration.Replace(",", "\\,");
+                    Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
+                    chatId: "-1004119127172",//chatId,
+                    text: messageType[i] + messageText[i] + duration,
+                    parseMode: ParseMode.MarkdownV2,
+                    disableNotification: true);
+
+                    //MessageBox.Show("Telegramm Сообщение закрывающее отправлено");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                //MessageBox.Show("Зашли в метод WriteMessages - Catch Exception Telegramm Exception: --- " + ex.ToString());
+
+                var trace = new StackTrace(ex, true);
+
+                foreach (var frame in trace.GetFrames())
+                {
+                    var sb = new StringBuilder();
+
+                    sb.Append($"Файл: {frame.GetFileName()}" + "; ");
+                    sb.Append($"Строка: {frame.GetFileLineNumber()}" + "; ");
+                    sb.Append($"Столбец: {frame.GetFileColumnNumber()}" + "; ");
+                    sb.Append($"Метод: {frame.GetMethod()}");
+
+                    try
+                    {
+                        using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
+                            sw.Write("Messages Telegram; " + DateTime.Now + "; " + sb + ";\n");
+                    }
+                    catch (Exception exe)
+                    {
+                        MessageBox.Show(exe.Message);
+                    }
+                }
+            }
+
             ///// Messages SMS /////
             string[] telephoneNumbers = new string[50];
 
@@ -882,6 +954,19 @@ namespace Heineken_DataCollection
         {
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Value = 0));
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Blocks));
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (messageType[0] == "⬆️")
+            {
+                messageType[0] = "⬇️";
+            }
+            else
+            {
+                messageType[0] = "⬆️";
+            }
+            WriteMessages(0);
         }
     }
 }

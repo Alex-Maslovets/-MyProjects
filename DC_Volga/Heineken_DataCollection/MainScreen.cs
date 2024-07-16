@@ -15,6 +15,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot;
+using System.Linq;
 
 namespace Heineken_DataCollection
 {
@@ -183,10 +184,16 @@ namespace Heineken_DataCollection
             public bool[] messageStates;
         };
 
+        public class messageArrayState_Test
+        {
+            public bool[] messageStates;
+        };
+
         public messageArrayState Read(stdS7Adress stdS7)
         {
             try
             {
+                
                 messageArrayState[] mesArrState = InitializeArray<messageArrayState>(1);
 
                 mesArrState[0].messageStates = new bool[stdS7.size * 8];
@@ -223,6 +230,7 @@ namespace Heineken_DataCollection
                         mesArrState[0].reusultConnection = result;
                         return mesArrState[0];
                     }
+
                 }
                 else
                 {
@@ -239,10 +247,11 @@ namespace Heineken_DataCollection
 
                 plcClient.Disconnect();
                 return mesArrState[0];
-
+                
             }
             catch (Exception ex)
             {
+                
                 CustomException(ex, "Siemens");
                 
                 messageArrayState[] mesArrState = InitializeArray<messageArrayState>(0);
@@ -255,7 +264,63 @@ namespace Heineken_DataCollection
                 }
                 mesArrState[0].reusultConnection = 100;
                 return mesArrState[0];
+                
             }
+        }
+
+        public messageArrayState_Test Read_Test(stdS7Adress[] stdS7)
+        {
+            stdS7Adress[] internalList = stdS7;
+            
+            string[] ipAdresses = new string[internalList.Length];
+            int[] racks = new int[internalList.Length];
+            int[] slots = new int[internalList.Length];
+            int[] dbNunbers = new int[internalList.Length];
+            int[] strartPositions = new int[internalList.Length];
+            int[] sizes = new int[internalList.Length];
+            
+            for (int i = 0; i < internalList.Length; i++) {
+                ipAdresses[i] = internalList[i].ipAdress;
+                racks[i] = internalList[i].rack;
+                slots[i] = internalList[i].slot;
+                dbNunbers[i] = internalList[i].dBNumber;
+                strartPositions[i] = internalList[i].startPosition;
+                sizes[i] = internalList[i].size;
+            }
+
+            string[] uniqIPAdresses = ipAdresses.Distinct().ToArray();
+            uniqIPAdresses = uniqIPAdresses.Where(c => c != null).ToArray();
+            
+            int[] uniqRacks = racks.Distinct().ToArray();
+            
+            int[] uniqSlots = slots.Distinct().ToArray();
+            uniqSlots = uniqSlots.Where(c => c != 0).ToArray();
+
+            int[] uniqDbNumbers = dbNunbers.Distinct().ToArray();
+            uniqDbNumbers = uniqDbNumbers.Where(c => c != 0).ToArray();
+            
+            int[] uniqStartPos = strartPositions.Distinct().ToArray();
+            uniqStartPos = uniqStartPos.Where(c => c != 0).ToArray();
+
+            int[] uniqSizes = sizes.Distinct().ToArray();
+            uniqSizes = uniqSizes.Where(c => c != 0).ToArray();
+
+            messageArrayState[] mesArrState = InitializeArray<messageArrayState>(1);
+
+            // Установка соединения с PLC S7
+            S7Client plcClient = new S7Client();
+            int result = plcClient.ConnectTo(uniqIPAdresses[0], uniqRacks[0], uniqSlots[0]);
+
+
+            mesArrState[0].messageStates = new bool[uniqSizes * 8];
+
+
+            byte[] DBBuffer = new byte[stdS7.size];
+
+            result = plcClient.DBRead(stdS7.dBNumber, stdS7.startPosition, stdS7.size, DBBuffer);
+
+            messageArrayState_Test mesArrState = new messageArrayState_Test();
+            return mesArrState;
         }
 
         // Read S7
@@ -300,7 +365,7 @@ namespace Heineken_DataCollection
             DateTime s1 = DateTime.Now;
             DateTime s2 = DateTime.Now;
 
-            List <stdS7Adress> newStdS7Adress = new List<stdS7Adress>();
+            stdS7Adress[] newStdS7Adress = InitializeArray<stdS7Adress>(100);
 
             newStdS7Adress[0].ipAdress = "10.129.34.140";
             newStdS7Adress[0].rack = 0;
@@ -308,6 +373,17 @@ namespace Heineken_DataCollection
             newStdS7Adress[0].dBNumber = 305;
             newStdS7Adress[0].startPosition = 180;
             newStdS7Adress[0].size = 1;
+
+            newStdS7Adress[1].ipAdress = "10.129.34.140";
+            newStdS7Adress[1].rack = 0;
+            newStdS7Adress[1].slot = 3;
+            newStdS7Adress[1].dBNumber = 303;
+            newStdS7Adress[1].startPosition = 208;
+            newStdS7Adress[1].size = 4;
+
+
+
+            messageArrayState_Test nowRead_Test = Read_Test(newStdS7Adress);
 
             messageArrayState nowRead = Read(newStdS7Adress[0]);
 

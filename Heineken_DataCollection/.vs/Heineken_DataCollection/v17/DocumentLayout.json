@@ -7,10 +7,6 @@
       "RelativeMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|solutionrelative:heineken_datacollection\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\heineken_datacollection\\mainscreen.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|solutionrelative:heineken_datacollection\\mainscreen.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\heineken_datacollection\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|solutionrelative:heineken_datacollection\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
@@ -22,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,32 +30,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainScreen.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.Designer.cs",
-              "RelativeDocumentMoniker": "Heineken_DataCollection\\MainScreen.Designer.cs",
-              "ToolTip": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.Designer.cs",
-              "RelativeToolTip": "Heineken_DataCollection\\MainScreen.Designer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFABAAA9AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-07T06:33:22.363Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "MainScreen.cs",
               "DocumentMoniker": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs",
               "RelativeDocumentMoniker": "Heineken_DataCollection\\MainScreen.cs",
               "ToolTip": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs",
               "RelativeToolTip": "Heineken_DataCollection\\MainScreen.cs",
-              "ViewState": "AQIAAEQBAAAAAAAAAAAAAFABAAAnAAAA",
+              "ViewState": "AgIAAFwCAAAAAAAAAAAAAFECAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2022-03-10T03:58:19.718Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "MainScreen.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs",
               "RelativeDocumentMoniker": "Heineken_DataCollection\\MainScreen.cs",

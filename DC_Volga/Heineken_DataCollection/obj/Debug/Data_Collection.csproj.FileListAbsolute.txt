@@ -29,7 +29,6 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\System.Memory.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\System.Text.Encodings.Web.dll
-C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\System.Text.Json.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\System.Threading.Channels.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\System.Windows.Forms.Ribbon.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\Telegram.Bot.dll
@@ -46,7 +45,6 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\Microsoft.Extensions.Logging.xml
-C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\Microsoft.Extensions.Logging.Configuration.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\Microsoft.Extensions.Logging.Console.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\Microsoft.Extensions.Options.xml
@@ -60,11 +58,9 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\SharpSnmpLib.pdb
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\SharpSnmpLib.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\System.Collections.Immutable.xml
-C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\System.Diagnostics.DiagnosticSource.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\System.Memory.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\System.Text.Encodings.Web.xml
-C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\System.Text.Json.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\System.Threading.Channels.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\Telegram.Bot.pdb
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\DC_Volga\Heineken_DataCollection\bin\Debug\Telegram.Bot.xml
