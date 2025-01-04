@@ -25,7 +25,6 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataColle
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\NModbus.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\NModbus4.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\NuGet.Frameworks.dll
-C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Windows.Forms.Ribbon.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\NModbus.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\NModbus4.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\Microsoft.Bcl.HashCode.dll
@@ -79,3 +78,12 @@ C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataColle
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\SnmpSharpNet.dll
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\Heineken_DataCollection.xml
 C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\obj\Debug\Heineken.0646FB01.Up2Date
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\IndexRange.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.IO.Pipelines.dll
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\NuGet.Frameworks.xml
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Buffers.xml
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.IO.Pipelines.xml
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\obj\Debug\Heineken_DataCollection.csproj.SuggestedBindingRedirects.cache
+C:\Users\alexo\OneDrive\Документы\GitHub\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\obj\Debug\Heineken_DataCollection.exe.config

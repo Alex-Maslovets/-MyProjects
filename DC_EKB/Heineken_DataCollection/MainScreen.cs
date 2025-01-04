@@ -142,7 +142,7 @@ namespace Heineken_DataCollection
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
         private void Button_notRead_s7_Click(object sender, EventArgs e)
@@ -160,7 +160,7 @@ namespace Heineken_DataCollection
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
         public async void ReadWriteS7()
@@ -201,7 +201,7 @@ namespace Heineken_DataCollection
                     }
                     catch (Exception exe)
                     {
-                        MessageBox.Show(exe.Message);
+                        //MessageBox.Show(exe.Message);
                     }
                 }
                 PGCon.Close();
@@ -230,7 +230,7 @@ namespace Heineken_DataCollection
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message);
+                           //MessageBox.Show(ex.Message);
                         }
                     }
                     else
@@ -280,7 +280,7 @@ namespace Heineken_DataCollection
                                     }
                                     catch (Exception ex)
                                     {
-                                        MessageBox.Show(ex.Message);
+                                        //MessageBox.Show(ex.Message);
                                     }
                                 }
                             }
@@ -329,7 +329,7 @@ namespace Heineken_DataCollection
                         }
                         catch (Exception exe)
                         {
-                            MessageBox.Show(exe.Message);
+                            //MessageBox.Show(exe.Message);
                         }
                     }
                 }
@@ -369,49 +369,51 @@ namespace Heineken_DataCollection
             ///// Messages Telegramm /////
             try
             {
-                //MessageBox.Show("Зашли в метод WriteMessages - Try Telegramm");
-                var webProxy = new WebProxy(Host: "10.129.24.100", Port: 8080)
+                if (i >= 3)
                 {
-                    // Credentials if needed:
-                    // Credentials = new NetworkCredential("USERNAME", "PASSWORD")
-                };
-                var httpClient = new HttpClient(new HttpClientHandler { Proxy = webProxy, UseProxy = true });
-                var botClient = new TelegramBotClient("6526345857:AAEq4ogV-4EDUjRLHfvItJFwrSprQI4gUbk", httpClient);
+                    //MessageBox.Show("Зашли в метод WriteMessages - Try Telegramm");
+                    var webProxy = new WebProxy(Host: "10.129.24.100", Port: 8080)
+                    {
+                        //Credentials if needed:
+                        //Credentials = new NetworkCredential("USERNAME", "PASSWORD")
+                    };
+                    var httpClient = new HttpClient(new HttpClientHandler { Proxy = webProxy, UseProxy = true });
+                    var botClient = new TelegramBotClient("6526345857:AAEq4ogV-4EDUjRLHfvItJFwrSprQI4gUbk", httpClient);
 
-                //MessageBox.Show("Telegramm Proxy и клиент сконфигурированы");
+                    //MessageBox.Show("Telegramm Proxy и клиент сконфигурированы");
 
-                if (messageType[i] == "⬆️")
-                {
-                    Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
-                    chatId: "-1004119127172",//chatId,
-                    text: messageType[i] + messageText[i],
-                    parseMode: ParseMode.MarkdownV2,
-                    disableNotification: true);
+                    if (messageType[i] == "⬆️")
+                    {
+                        Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
+                        chatId: "-1002240306880",//chatId,
+                        text: messageType[i] + messageText[i],
+                        parseMode: ParseMode.MarkdownV2,
+                        disableNotification: true);
 
-                    //MessageBox.Show("Telegramm Сообщение отправлено");
+                        //MessageBox.Show("Telegramm Сообщение отправлено");
+                    }
+                    else
+                    {
+                        string duration = " (Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с)";
+                        duration = duration.Replace("(", "\\(");
+                        duration = duration.Replace(")", "\\)");
+                        duration = duration.Replace(":", "\\:");
+                        duration = duration.Replace(".", "\\.");
+                        duration = duration.Replace(",", "\\,");
+                        Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
+                        chatId: "-1002240306880",//chatId,
+                        text: messageType[i] + messageText[i] + duration,
+                        parseMode: ParseMode.MarkdownV2,
+                        disableNotification: true);
+                        //MessageBox.Show("Telegramm Сообщение закрывающее отправлено");
+                    }
                 }
-                else
-                {
-                    string duration = " (Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с)";
-                    duration = duration.Replace("(", "\\(");
-                    duration = duration.Replace(")", "\\)");
-                    duration = duration.Replace(":", "\\:");
-                    duration = duration.Replace(".", "\\.");
-                    duration = duration.Replace(",", "\\,");
-                    Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
-                    chatId: "-1004119127172",//chatId,
-                    text: messageType[i] + messageText[i] + duration,
-                    parseMode: ParseMode.MarkdownV2,
-                    disableNotification: true);
-
-                    //MessageBox.Show("Telegramm Сообщение закрывающее отправлено");
-                }
+                
             }
             catch (Exception ex)
             {
 
                 //MessageBox.Show("Зашли в метод WriteMessages - Catch Exception Telegramm Exception: --- " + ex.ToString());
-
                 var trace = new StackTrace(ex, true);
 
                 foreach (var frame in trace.GetFrames())
@@ -430,7 +432,7 @@ namespace Heineken_DataCollection
                     }
                     catch (Exception exe)
                     {
-                        MessageBox.Show(exe.Message);
+                        //MessageBox.Show(exe.Message);
                     }
                 }
             }
@@ -522,7 +524,7 @@ namespace Heineken_DataCollection
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
         private void Button_notRead_mb_Click(object sender, EventArgs e)
@@ -547,7 +549,7 @@ namespace Heineken_DataCollection
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
         }
         public void ReadWriteModbus()
@@ -585,7 +587,7 @@ namespace Heineken_DataCollection
                     }
                     catch (Exception exe)
                     {
-                        MessageBox.Show(exe.Message);
+                        //MessageBox.Show(exe.Message);
                     }
                 }
                 PGCon.Close();
@@ -926,7 +928,7 @@ namespace Heineken_DataCollection
                         }
                         catch (Exception exe)
                         {
-                            MessageBox.Show(exe.Message);
+                            //MessageBox.Show(exe.Message);
                         }
                     }
                 }

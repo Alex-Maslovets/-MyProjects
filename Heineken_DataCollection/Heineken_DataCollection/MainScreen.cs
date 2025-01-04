@@ -16,6 +16,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO.Ports;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 
@@ -24,7 +25,7 @@ namespace Heineken_DataCollection
     public partial class MainScreen : Form
     {
         ///////////////////////////////// TEST /////////////////////////////////
-        public int testCounter = new int();
+        public int testCounter = new();
 
         const int numberOfMessage = 200;
         bool[] previousMessageState = new bool[numberOfMessage];
@@ -40,33 +41,33 @@ namespace Heineken_DataCollection
         bool firstStart = false;
         bool firstStartMB = false;
 
-        public uint counterTime = new uint();
-        public uint counterPLC3679 = new uint();
-        public uint counterPLC2 = new uint();
-        public uint counterMessages = new uint();
-        public uint counterDB = new uint();
-        public uint counterS7 = new uint();
+        public uint counterTime = new ();
+        public uint counterPLC3679 = new ();
+        public uint counterPLC2 = new ();
+        public uint counterMessages = new ();
+        public uint counterDB = new ();
+        public uint counterS7 = new ();
 
-        public uint counterTime_mb = new uint();
-        public uint counterPackaging_mb = new uint();
-        public uint counterBLO_mb = new uint();
-        public uint counterVAO_mb = new uint();
-        public uint counterEnergoBlock_mb = new uint();
-        public uint counterFiltration_mb = new uint();
-        public uint counterElectroCounters_mb = new uint();
-        public uint counterDB_mb = new uint();
-        public uint countermb = new uint();
+        public uint counterTime_mb = new ();
+        public uint counterPackaging_mb = new ();
+        public uint counterBLO_mb = new ();
+        public uint counterVAO_mb = new ();
+        public uint counterEnergoBlock_mb = new ();
+        public uint counterFiltration_mb = new ();
+        public uint counterElectroCounters_mb = new ();
+        public uint counterDB_mb = new ();
+        public uint countermb = new ();
 
 
-        public int seconds_last = new int();
-        public int minutes_last = new int();
-        public int hours_last = new int();
-        public int days_last = new int();
+        public int seconds_last = new ();
+        public int minutes_last = new ();
+        public int hours_last = new ();
+        public int days_last = new ();
 
-        public int seconds_last_mb = new int();
-        public int minutes_last_mb = new int();
-        public int hours_last_mb = new int();
-        public int days_last_mb = new int();
+        public int seconds_last_mb = new ();
+        public int minutes_last_mb = new ();
+        public int hours_last_mb = new ();
+        public int days_last_mb = new ();
 
         string alarmMessagesArchivePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\messageArchive.txt";
 
@@ -177,7 +178,7 @@ namespace Heineken_DataCollection
             DateTime s1 = DateTime.Now;
 
             // Установка соединения с PostgreSQL
-            NpgsqlConnection PGCon = new NpgsqlConnection(//"Host=10.129.20.253;" +
+            NpgsqlConnection PGCon = new(//"Host=10.129.20.253;" +
                 "Host=localhost;" +
                 "Username=postgres;" +
                 "Password=123456;" +
@@ -204,8 +205,8 @@ namespace Heineken_DataCollection
 
                     try
                     {
-                        using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
-                            sw.Write("Siemens; " + DateTime.Now + "; " + sb + ";\n");
+                        using StreamWriter sw = new(alarmMessagesArchivePath, true, Encoding.Default);
+                        sw.Write("Siemens; " + DateTime.Now + "; " + sb + ";\n");
                     }
                     catch (Exception exe)
                     {
@@ -245,12 +246,12 @@ namespace Heineken_DataCollection
 
                     s2 = DateTime.Now;
 
-                    List<string> myList = new List<string>();
+                    List<string> myList = [];
 
                     byte[] db1Buffer = new byte[128];
 
                     // Установка соединения с PLC в щитовой ТП-3679
-                    S7Client plcClient = new S7Client();
+                    S7Client plcClient = new ();
                     int result = plcClient.ConnectTo("10.129.31.147", 0, 2);
 
                     result = plcClient.DBRead(20, 0, 128, db1Buffer);
@@ -258,8 +259,8 @@ namespace Heineken_DataCollection
                     {
                         try
                         {
-                            using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
-                                sw.Write("S7; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
+                            using StreamWriter sw = new(alarmMessagesArchivePath, true, System.Text.Encoding.Default);
+                            sw.Write("S7; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
                         }
                         catch (Exception ex)
                         {
@@ -293,12 +294,12 @@ namespace Heineken_DataCollection
                     {
                         try
                         {
-                            using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
-                                sw.Write("S7; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
+                            using StreamWriter sw = new(alarmMessagesArchivePath, true, System.Text.Encoding.Default);
+                            sw.Write("S7; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message);
+                            DialogResult dialogResult = MessageBox.Show(ex.Message);
                         }
                     }
                     else
@@ -326,8 +327,8 @@ namespace Heineken_DataCollection
                     {
                         try
                         {
-                            using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
-                                sw.Write("Messages; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
+                            using StreamWriter sw = new(alarmMessagesArchivePath, true, System.Text.Encoding.Default);
+                            sw.Write("Messages; " + DateTime.Now + "; " + plcClient.ErrorText(result) + ";\n");
                         }
                         catch (Exception ex)
                         {
@@ -480,8 +481,8 @@ namespace Heineken_DataCollection
 
                         try
                         {
-                            using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
-                                sw.Write("Siemens; " + DateTime.Now + "; " + sb + ";\n");
+                            using StreamWriter sw = new(alarmMessagesArchivePath, true, System.Text.Encoding.Default);
+                            sw.Write("Siemens; " + DateTime.Now + "; " + sb + ";\n");
                         }
                         catch (Exception exe)
                         {
@@ -521,6 +522,7 @@ namespace Heineken_DataCollection
         {
             WriteMessages((int)e.Argument);
         }
+
         public async void WriteMessages(int i)
         {
             ///// Messages SMS /////
@@ -534,24 +536,24 @@ namespace Heineken_DataCollection
                 if (!string.IsNullOrEmpty(phoneNumber))
                 {
                     // Prepare target
-                    UdpTarget target = new UdpTarget((IPAddress)new IpAddress("10.129.31.118"));
+                    UdpTarget target = new((IPAddress)new IpAddress("10.129.31.118"));
                     // Create a SET PDU
 
-                    Pdu pdu = new Pdu(PduType.Set);
-                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.2.0"), new SnmpSharpNet.OctetString(phoneNumber));
+                    Pdu pdu = new(PduType.Set);
+                    pdu.VbList.Add([.. "1.3.6.1.4.1.21796.4.10.2.2.0"], new SnmpSharpNet.OctetString(phoneNumber));
 
                     if (messageType[i] == "⬆️")
                     {
-                        pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new SnmpSharpNet.OctetString(messageType[i] + messageText_SMS[i]));
+                        pdu.VbList.Add([.. "1.3.6.1.4.1.21796.4.10.2.1.0"], new SnmpSharpNet.OctetString(messageType[i] + messageText_SMS[i]));
                     }
                     else
                     {
-                        pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.1.0"), new SnmpSharpNet.OctetString(messageType[i] + messageText_SMS[i] + " (Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с)"));
+                        pdu.VbList.Add([.. "1.3.6.1.4.1.21796.4.10.2.1.0"], new SnmpSharpNet.OctetString(messageType[i] + messageText_SMS[i] + " (Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с)"));
                     }
-                    pdu.VbList.Add(new Oid("1.3.6.1.4.1.21796.4.10.2.3.0"), new SnmpSharpNet.Integer32(1));
+                    pdu.VbList.Add([.. "1.3.6.1.4.1.21796.4.10.2.3.0"], new SnmpSharpNet.Integer32(1));
 
                     // Set Agent security parameters
-                    AgentParameters aparam = new AgentParameters(SnmpVersion.Ver2, new SnmpSharpNet.OctetString("public"));
+                    AgentParameters aparam = new(SnmpVersion.Ver2, new SnmpSharpNet.OctetString("public"));
                     // Response packet
                     SnmpV2Packet response;
                     
@@ -563,7 +565,7 @@ namespace Heineken_DataCollection
                     catch (Exception ex)
                     {
                         // If exception happens, it will be returned here
-                        using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
+                        using (StreamWriter sw = new(alarmMessagesArchivePath, true, Encoding.Default))
                             sw.Write("Messages SMS; " + DateTime.Now + "; " + "Request failed with exception: {0}", ex.Message + ";\n");
 
                         target.Close();
@@ -588,7 +590,7 @@ namespace Heineken_DataCollection
 
                 if (messageType[i] == "⬆️")
                 {
-                    Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
+                    Telegram.Bot.Types.Message message = await botClient.SendMessage(
                     chatId: "-1001749496684",//chatId,
                     text: messageType[i] + messageText[i],
                     parseMode: ParseMode.MarkdownV2,
@@ -602,7 +604,7 @@ namespace Heineken_DataCollection
                     duration = duration.Replace(":", "\\:");
                     duration = duration.Replace(".", "\\.");
                     duration = duration.Replace(",", "\\,");
-                    Telegram.Bot.Types.Message message = await botClient.SendTextMessageAsync(
+                    Telegram.Bot.Types.Message message = await botClient.SendMessage(
                     chatId: "-1001749496684",//chatId,
                     text: messageType[i] + messageText[i] + duration,
                     parseMode: ParseMode.MarkdownV2,
@@ -624,8 +626,8 @@ namespace Heineken_DataCollection
 
                     try
                     {
-                        using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
-                            sw.Write("Messages Telegram; " + DateTime.Now + "; " + sb + ";\n");
+                        using StreamWriter sw = new(alarmMessagesArchivePath, true, Encoding.Default);
+                        sw.Write("Messages Telegram; " + DateTime.Now + "; " + sb + ";\n");
                     }
                     catch (Exception exe)
                     {
@@ -695,7 +697,7 @@ namespace Heineken_DataCollection
         public void ReadwriteModbus()
         {
             // Установка соединения с PostgreSQL
-            NpgsqlConnection PGCon = new NpgsqlConnection(
+            NpgsqlConnection PGCon = new(
                 "Host=localhost;" +
                 "Username=postgres;" +
                 "Password=123456;" +
@@ -722,8 +724,8 @@ namespace Heineken_DataCollection
 
                     try
                     {
-                        using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
-                            sw.Write("Modbus; " + DateTime.Now + "; " + sb + ";\n");
+                        using StreamWriter sw = new(alarmMessagesArchivePath, true, Encoding.Default);
+                        sw.Write("Modbus; " + DateTime.Now + "; " + sb + ";\n");
                     }
                     catch (Exception exe)
                     {
@@ -765,10 +767,10 @@ namespace Heineken_DataCollection
                     s2 = DateTime.Now;
 
                     // Connect to Packaging
-                    TcpClient client = new TcpClient("10.129.31.165", 502);
+                    TcpClient client = new("10.129.31.165", 502);
                     ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
 
-                    List<ushort> modbusList = new List<ushort>();
+                    List<ushort> modbusList = [];
 
                     for (int i = 0; i <= 29; i++)
                     {
@@ -777,11 +779,11 @@ namespace Heineken_DataCollection
                         modbusList.Add(inputs[0]);
                     }
 
-                    List<float> values = new List<float>();
+                    List<float> values = [];
 
                     for (int j = 0; j <= 29; j += 2)
                     {
-                        ushort[] buffer = { modbusList[j], modbusList[j + 1] };
+                        ushort[] buffer = [modbusList[j], modbusList[j + 1]];
                         byte[] bytes = new byte[4];
                         bytes[3] = (byte)(buffer[1] & 0xFF);
                         bytes[2] = (byte)(buffer[1] >> 8);
@@ -811,7 +813,7 @@ namespace Heineken_DataCollection
 
                     for (int j = 0; j <= 9; j += 2)
                     {
-                        ushort[] buffer = { modbusList[j], modbusList[j + 1] };
+                        ushort[] buffer = [modbusList[j], modbusList[j + 1]];
                         byte[] bytes = new byte[4];
                         bytes[3] = (byte)(buffer[1] & 0xFF);
                         bytes[2] = (byte)(buffer[1] >> 8);
@@ -841,7 +843,7 @@ namespace Heineken_DataCollection
 
                     for (int j = 0; j <= 49; j += 2)
                     {
-                        ushort[] buffer = { modbusList[j], modbusList[j + 1] };
+                        ushort[] buffer = [modbusList[j], modbusList[j + 1]];
                         byte[] bytes = new byte[4];
                         bytes[3] = (byte)(buffer[1] & 0xFF);
                         bytes[2] = (byte)(buffer[1] >> 8);
@@ -871,7 +873,7 @@ namespace Heineken_DataCollection
 
                     for (int j = 0; j <= 9; j += 2)
                     {
-                        ushort[] buffer = { modbusList[j], modbusList[j + 1] };
+                        ushort[] buffer = [modbusList[j], modbusList[j + 1]];
                         byte[] bytes = new byte[4];
                         bytes[3] = (byte)(buffer[1] & 0xFF);
                         bytes[2] = (byte)(buffer[1] >> 8);
@@ -901,7 +903,7 @@ namespace Heineken_DataCollection
 
                     for (int j = 0; j <= 29; j += 2)
                     {
-                        ushort[] buffer = { modbusList[j], modbusList[j + 1] };
+                        ushort[] buffer = [modbusList[j], modbusList[j + 1]];
                         byte[] bytes = new byte[4];
                         bytes[3] = (byte)(buffer[1] & 0xFF);
                         bytes[2] = (byte)(buffer[1] >> 8);
@@ -982,7 +984,7 @@ namespace Heineken_DataCollection
                     timeLabel_mb_8.Invoke(new Action(() => timeLabel_mb_8.Text = "Время Electro: " + Math.Round(s3.TotalMilliseconds, 0) + " мс Счётчик: " + counterElectroCounters_mb));
                     s2 = DateTime.Now;
                     */
-                    List<string> myList = new List<string>();
+                    List<string> myList = [];
 
                     int x = values.Count / 5;
 
@@ -1076,8 +1078,8 @@ namespace Heineken_DataCollection
 
                         try
                         {
-                            using (StreamWriter sw = new StreamWriter(alarmMessagesArchivePath, true, System.Text.Encoding.Default))
-                                sw.Write("Modbus; " + DateTime.Now + "; " + sb + ";\n");
+                            using StreamWriter sw = new(alarmMessagesArchivePath, true, Encoding.Default);
+                            sw.Write("Modbus; " + DateTime.Now + "; " + sb + ";\n");
                         }
                         catch (Exception exe)
                         {
