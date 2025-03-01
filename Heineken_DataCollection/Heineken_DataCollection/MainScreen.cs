@@ -89,7 +89,7 @@ namespace Heineken_DataCollection
             bgWMessages.DoWork += new DoWorkEventHandler(BgWMessages_DoWork);
             bgWMessages.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BgWMessages_RunWorkerCompleted);
 
-            // Alarm - 🟥; Warning - 🟧; Info - 🟦
+            // Alarm - 🟥; Warning - 🟥; Info - 🟥 
             messageText[0] = "🟥 Alarm Reserve 0";
             messageText[1] = "🟥 Alarm Reserve 1";
             messageText[2] = "🟥 Alarm Reserve 2";
@@ -115,14 +115,23 @@ namespace Heineken_DataCollection
             messageText[22] = "🟥 Все насосы на водоподготовке отключены";
             messageText[23] = "🟥 Давление воды после водоподготовки ниже уставки";
 
+            messageText[24] = "🟥 ";
+            messageText[25] = "🟥 Alarm Reserve 25";
+            messageText[26] = "🟥 Alarm Reserve 26";
+            messageText[27] = "🟥 Alarm Reserve 27";
+            messageText[28] = "🟥 Alarm Reserve 28";
+            messageText[29] = "🟥 Alarm Reserve 29";
+            messageText[30] = "🟥 Alarm Reserve 30";
+            messageText[31] = "🟥 Alarm Reserve 31";
+
             for (int i = 0; i < messageText.Length; i++)
             {
                 if (!string.IsNullOrEmpty(messageText[i]))
                 {
                     messageText_SMS[i] = messageText[i].Replace("\\", "");
                     //messageText_SMS[i] = messageText_SMS[i].Replace("🟥", "Aвария:");
-                    //messageText_SMS[i] = messageText_SMS[i].Replace("🟧", "Предупреждение:");
-                    //messageText_SMS[i] = messageText_SMS[i].Replace("🟦", "Инфо:");
+                    //messageText_SMS[i] = messageText_SMS[i].Replace("🟥", "Предупреждение:");
+                    //messageText_SMS[i] = messageText_SMS[i].Replace("🟥", "Инфо:");
                 }
             }
         }
@@ -320,9 +329,9 @@ namespace Heineken_DataCollection
 
                     ////////// Работа с сообщениями //////////
 
-                    db2Buffer = new byte[3];
+                    db2Buffer = new byte[4];
 
-                    result = plcClient.DBRead(4000, 8, 3, db2Buffer);
+                    result = plcClient.DBRead(4000, 8, 4, db2Buffer);
                     if (result != 0)
                     {
                         try
@@ -354,14 +363,14 @@ namespace Heineken_DataCollection
                             {
                                 previousMessageState[i] = currentMessageState[i];
                                 createMessage[i] = true;
-                                messageType[i] = "⬆️";
+                                messageType[i] = "🟥";
                                 messageTime[i] = DateTime.Now;
                             }
                             else if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == false)
                             {
                                 previousMessageState[i] = currentMessageState[i];
                                 createMessage[i] = true;
-                                messageType[i] = "⬇️";
+                                messageType[i] = "🟥";
                                 messageDuration[i] = DateTime.Now.Subtract(messageTime[i]);
                             }
                         }
@@ -525,58 +534,6 @@ namespace Heineken_DataCollection
 
         public async void WriteMessages(int i)
         {
-            ///// Messages SMS /////
-            string[] telephoneNumbers = new string[50];
-
-            telephoneNumbers[0] = "+79659906230";
-            telephoneNumbers[1] = "+79835143748";
-
-            foreach (string phoneNumber in telephoneNumbers)
-            {
-                if (!string.IsNullOrEmpty(phoneNumber))
-                {
-                    // Prepare target
-                    UdpTarget target = new((IPAddress)new IpAddress("10.129.31.118"));
-                    // Create a SET PDU
-
-                    Pdu pdu = new(PduType.Set);
-                    pdu.VbList.Add([.. "1.3.6.1.4.1.21796.4.10.2.2.0"], new SnmpSharpNet.OctetString(phoneNumber));
-
-                    if (messageType[i] == "⬆️")
-                    {
-                        pdu.VbList.Add([.. "1.3.6.1.4.1.21796.4.10.2.1.0"], new SnmpSharpNet.OctetString(messageType[i] + messageText_SMS[i]));
-                    }
-                    else
-                    {
-                        pdu.VbList.Add([.. "1.3.6.1.4.1.21796.4.10.2.1.0"], new SnmpSharpNet.OctetString(messageType[i] + messageText_SMS[i] + " (Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с)"));
-                    }
-                    pdu.VbList.Add([.. "1.3.6.1.4.1.21796.4.10.2.3.0"], new SnmpSharpNet.Integer32(1));
-
-                    // Set Agent security parameters
-                    AgentParameters aparam = new(SnmpVersion.Ver2, new SnmpSharpNet.OctetString("public"));
-                    // Response packet
-                    SnmpV2Packet response;
-                    
-                    try
-                    {
-                        // Send request and wait for response
-                        response = target.Request(pdu, aparam) as SnmpV2Packet;
-                    }
-                    catch (Exception ex)
-                    {
-                        // If exception happens, it will be returned here
-                        using (StreamWriter sw = new(alarmMessagesArchivePath, true, Encoding.Default))
-                            sw.Write("Messages SMS; " + DateTime.Now + "; " + "Request failed with exception: {0}", ex.Message + ";\n");
-
-                        target.Close();
-                        //return;
-                    }
-                    finally
-                    {
-
-                    }
-                }
-            }
             ///// Messages Telegramm /////
             try
             {
@@ -588,7 +545,7 @@ namespace Heineken_DataCollection
                 var httpClient = new HttpClient(new HttpClientHandler { Proxy = webProxy, UseProxy = true });
                 var botClient = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4", httpClient);
 
-                if (messageType[i] == "⬆️")
+                if (messageType[i] == "🟥")
                 {
                     Telegram.Bot.Types.Message message = await botClient.SendMessage(
                     chatId: "-1001749496684",//chatId,
