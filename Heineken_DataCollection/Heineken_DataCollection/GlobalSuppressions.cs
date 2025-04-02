@@ -4,7 +4,6 @@
 // a specific target and scoped to a namespace, type, member, etc.
 
 using System.Diagnostics.CodeAnalysis;
-using Telegram.Bot.Types.Enums;
 
 [assembly: SuppressMessage("Interoperability", "CA1416:Проверка совместимости платформы", Justification = "<Ожидание>", Scope = "member", Target = "~M:Heineken_DataCollection.MainScreen.ReadwriteS7")]
 [assembly: SuppressMessage("Interoperability", "CA1416:Проверка совместимости платформы", Justification = "<Ожидание>", Scope = "member", Target = "~M:Heineken_DataCollection.MainScreen.Button_Read_s7_Click(System.Object,System.EventArgs)")]

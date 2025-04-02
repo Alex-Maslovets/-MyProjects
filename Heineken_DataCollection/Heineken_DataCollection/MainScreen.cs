@@ -1,22 +1,17 @@
-﻿using Lextm.SharpSnmpLib;
+﻿using Microsoft.Extensions.Hosting;
 using Modbus.Device;
-using Newtonsoft.Json.Linq;
 using Npgsql;
 using Sharp7;
-using SnmpSharpNet;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.Metrics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO.Ports;
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 
@@ -41,33 +36,33 @@ namespace Heineken_DataCollection
         bool firstStart = false;
         bool firstStartMB = false;
 
-        public uint counterTime = new ();
-        public uint counterPLC3679 = new ();
-        public uint counterPLC2 = new ();
-        public uint counterMessages = new ();
-        public uint counterDB = new ();
-        public uint counterS7 = new ();
+        public uint counterTime = new();
+        public uint counterPLC3679 = new();
+        public uint counterPLC2 = new();
+        public uint counterMessages = new();
+        public uint counterDB = new();
+        public uint counterS7 = new();
 
-        public uint counterTime_mb = new ();
-        public uint counterPackaging_mb = new ();
-        public uint counterBLO_mb = new ();
-        public uint counterVAO_mb = new ();
-        public uint counterEnergoBlock_mb = new ();
-        public uint counterFiltration_mb = new ();
-        public uint counterElectroCounters_mb = new ();
-        public uint counterDB_mb = new ();
-        public uint countermb = new ();
+        public uint counterTime_mb = new();
+        public uint counterPackaging_mb = new();
+        public uint counterBLO_mb = new();
+        public uint counterVAO_mb = new();
+        public uint counterEnergoBlock_mb = new();
+        public uint counterFiltration_mb = new();
+        public uint counterElectroCounters_mb = new();
+        public uint counterDB_mb = new();
+        public uint countermb = new();
 
 
-        public int seconds_last = new ();
-        public int minutes_last = new ();
-        public int hours_last = new ();
-        public int days_last = new ();
+        public int seconds_last = new();
+        public int minutes_last = new();
+        public int hours_last = new();
+        public int days_last = new();
 
-        public int seconds_last_mb = new ();
-        public int minutes_last_mb = new ();
-        public int hours_last_mb = new ();
-        public int days_last_mb = new ();
+        public int seconds_last_mb = new();
+        public int minutes_last_mb = new();
+        public int hours_last_mb = new();
+        public int days_last_mb = new();
 
         string alarmMessagesArchivePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\messageArchive.txt";
 
@@ -115,7 +110,7 @@ namespace Heineken_DataCollection
             messageText[22] = "🟥 Все насосы на водоподготовке отключены";
             messageText[23] = "🟥 Давление воды после водоподготовки ниже уставки";
 
-            messageText[24] = "🟥 ";
+            messageText[24] = "🟥 Значение О2 в СО2 выше уставки";
             messageText[25] = "🟥 Alarm Reserve 25";
             messageText[26] = "🟥 Alarm Reserve 26";
             messageText[27] = "🟥 Alarm Reserve 27";
@@ -260,7 +255,7 @@ namespace Heineken_DataCollection
                     byte[] db1Buffer = new byte[128];
 
                     // Установка соединения с PLC в щитовой ТП-3679
-                    S7Client plcClient = new ();
+                    S7Client plcClient = new();
                     int result = plcClient.ConnectTo("10.129.31.147", 0, 2);
 
                     result = plcClient.DBRead(20, 0, 128, db1Buffer);
@@ -296,9 +291,9 @@ namespace Heineken_DataCollection
 
                     // Соединение и считывание данных с контроллера в энергоблоке
                     result = plcClient.ConnectTo("10.129.31.134", 0, 3);
-                    byte[] db2Buffer = new byte[160];
+                    byte[] db2Buffer = new byte[200];
 
-                    result = plcClient.DBRead(4000, 1838, 160, db2Buffer);
+                    result = plcClient.DBRead(4000, 1838, 200, db2Buffer);
                     if (result != 0)
                     {
                         try
@@ -313,7 +308,7 @@ namespace Heineken_DataCollection
                     }
                     else
                     {
-                        for (int i = 32; i <= 71; i++)
+                        for (int i = 32; i <= 81; i++)
                         {
                             double db2ddd4 = S7.GetRealAt(db2Buffer, 4 * (i - 32));
                             myList.Add("(" + i + "," + db2ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
@@ -324,6 +319,18 @@ namespace Heineken_DataCollection
                     s3 = DateTime.Now.Subtract(s2);
 
                     timeLabel_s7_3.Invoke(new Action(() => timeLabel_s7_3.Text = "Время PLC_2: " + Math.Round(s3.TotalMilliseconds, 0) + " мс Счётчик: " + counterPLC2));
+
+                    double PressCondNH3 = db2Buffer[39];
+                    double PressVsasNH3 = db2Buffer[40];
+                    double LevSeparatorNH3 = db2Buffer[41];
+                    double TempGoOutGlycol = db2Buffer[42];
+                    double LevInCo2 = db2Buffer[44];
+                    double LevOutCo2 = db2Buffer[45];
+                    double LevCommonCo2 = db2Buffer[46];
+                    double PressInCo2 = db2Buffer[47];
+
+                    messageText[25] = "🟥 Кратий отчёт:\nДавлен. конден. NH3 = " + PressCondNH3.ToString() + "\nДавлен. всас. NH3 = " + PressVsasNH3.ToString() + "\nУров. отделит. NH3 = " + LevSeparatorNH3.ToString() + "\nТемп. гликоля на подаче = " + TempGoOutGlycol.ToString() + "\nОбъём СО2 = " + LevCommonCo2.ToString() + "\nДавлен. внут. емкост. СО2 = " + PressInCo2.ToString();
+                    messageText[25] = messageText[25].Replace("\n", Environment.NewLine);
 
                     s2 = DateTime.Now;
 
@@ -537,21 +544,26 @@ namespace Heineken_DataCollection
             ///// Messages Telegramm /////
             try
             {
-                var webProxy = new WebProxy(Host: "10.129.24.100", Port: 8080)
+                /*WebProxy webProxy = new(Host: "10.129.24.100", Port: 8080)
                 {
                     // Credentials if needed:
                     // Credentials = new NetworkCredential("USERNAME", "PASSWORD")
-                };
-                var httpClient = new HttpClient(new HttpClientHandler { Proxy = webProxy, UseProxy = true });
-                var botClient = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4", httpClient);
+                };*/
+                /*HttpClient httpClient = new(
+                    new HttpClientHandler { Proxy = webProxy, UseProxy = true, }
+                );*/
+
+                HttpClient httpClient = new(
+                    new HttpClientHandler { }
+                );
+
+                var bot = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4", httpClient);
 
                 if (messageType[i] == "🟥")
                 {
-                    Telegram.Bot.Types.Message message = await botClient.SendMessage(
+                    Telegram.Bot.Types.Message message = await bot.SendMessage(
                     chatId: "-1001749496684",//chatId,
-                    text: messageType[i] + messageText[i],
-                    parseMode: ParseMode.MarkdownV2,
-                    disableNotification: true);
+                    text: messageType[i] + messageText[i]);
                 }
                 else
                 {
@@ -561,11 +573,9 @@ namespace Heineken_DataCollection
                     duration = duration.Replace(":", "\\:");
                     duration = duration.Replace(".", "\\.");
                     duration = duration.Replace(",", "\\,");
-                    Telegram.Bot.Types.Message message = await botClient.SendMessage(
+                    Telegram.Bot.Types.Message message = await bot.SendMessage(
                     chatId: "-1001749496684",//chatId,
-                    text: messageType[i] + messageText[i] + duration,
-                    parseMode: ParseMode.MarkdownV2,
-                    disableNotification: true);
+                    text: messageType[i] + messageText[i] + duration);
                 }
             }
             catch (Exception ex)
@@ -1068,6 +1078,11 @@ namespace Heineken_DataCollection
         {
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Value = 0));
             progressBarRead_mb.Invoke(new Action(() => progressBarRead_mb.Style = ProgressBarStyle.Blocks));
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            WriteMessages(25);
         }
     }
 }
