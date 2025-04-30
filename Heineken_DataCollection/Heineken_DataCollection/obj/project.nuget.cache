@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "55hsl0lmsXo=",
+  "dgSpecHash": "sYUsxPKVOrk=",
   "success": true,
   "projectFilePath": "C:\\Users\\alexo\\OneDrive\\Документы\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\Heineken_DataCollection.csproj",
   "expectedPackageFiles": [
@@ -62,8 +62,10 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Пакет \"NModbus4 2.1.0\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\", а не целевой платформы проекта \"net9.0-windows7.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "projectPath": "C:\\Users\\alexo\\OneDrive\\Документы\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\Heineken_DataCollection.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\alexo\\OneDrive\\Документы\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\Heineken_DataCollection.csproj",
       "libraryId": "NModbus4",
       "targetGraphs": [
         "net9.0-windows7.0"

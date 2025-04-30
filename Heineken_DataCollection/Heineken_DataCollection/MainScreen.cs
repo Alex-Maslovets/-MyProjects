@@ -11,8 +11,11 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Telegram.Bot;
+using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types.Enums;
 
 namespace Heineken_DataCollection
@@ -544,18 +547,24 @@ namespace Heineken_DataCollection
             ///// Messages Telegramm /////
             try
             {
-                /*WebProxy webProxy = new(Host: "10.129.24.100", Port: 8080)
+                WebProxy webProxy = new(Host: "10.129.24.100", Port: 8080)
                 {
                     // Credentials if needed:
                     // Credentials = new NetworkCredential("USERNAME", "PASSWORD")
-                };*/
-                /*HttpClient httpClient = new(
-                    new HttpClientHandler { Proxy = webProxy, UseProxy = true, }
-                );*/
-
+                };
+                
                 HttpClient httpClient = new(
-                    new HttpClientHandler { }
+                    new HttpClientHandler
+                    {
+                        Proxy = webProxy,
+                        UseProxy = true,
+                        ServerCertificateCustomValidationCallback = (sender, cert, chain, errors) => true // Отключает проверку SSL
+                    } 
                 );
+
+                //HttpClient httpClient = new(
+                //new HttpClientHandler { }
+                //);
 
                 var bot = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4", httpClient);
 
@@ -575,9 +584,11 @@ namespace Heineken_DataCollection
                     duration = duration.Replace(",", "\\,");
                     Telegram.Bot.Types.Message message = await bot.SendMessage(
                     chatId: "-1001749496684",//chatId,
-                    text: messageType[i] + messageText[i] + duration);
+                    text: messageType[i] + messageText[i] + duration
+                    );
                 }
             }
+
             catch (Exception ex)
             {
                 var trace = new StackTrace(ex, true);
