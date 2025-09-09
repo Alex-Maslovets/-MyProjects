@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alexo\\OneDrive\\Документы\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\Heineken_DataCollection.csproj": {}
+    "C:\\Users\\Александр\\source\\repos\\Alex-Maslovets\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\Heineken_DataCollection.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alexo\\OneDrive\\Документы\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\Heineken_DataCollection.csproj": {
+    "C:\\Users\\Александр\\source\\repos\\Alex-Maslovets\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\Heineken_DataCollection.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alexo\\OneDrive\\Документы\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\Heineken_DataCollection.csproj",
+        "projectUniqueName": "C:\\Users\\Александр\\source\\repos\\Alex-Maslovets\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\Heineken_DataCollection.csproj",
         "projectName": "Heineken_DataCollection",
-        "projectPath": "C:\\Users\\alexo\\OneDrive\\Документы\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\Heineken_DataCollection.csproj",
-        "packagesPath": "C:\\Users\\alexo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alexo\\OneDrive\\Документы\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\obj\\",
+        "projectPath": "C:\\Users\\Александр\\source\\repos\\Alex-Maslovets\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\Heineken_DataCollection.csproj",
+        "packagesPath": "C:\\Users\\Александр\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Александр\\source\\repos\\Alex-Maslovets\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\alexo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Александр\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -53,11 +53,11 @@
           "dependencies": {
             "IndexRange": {
               "target": "Package",
-              "version": "[1.0.3, )"
+              "version": "[1.1.0, )"
             },
             "Microsoft.Bcl.AsyncInterfaces": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Bcl.HashCode": {
               "target": "Package",
@@ -69,51 +69,51 @@
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Configuration.Binder": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Logging": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Logging.Abstractions": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Logging.Configuration": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Logging.Console": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Options": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Options.ConfigurationExtensions": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "Microsoft.Extensions.Primitives": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "NModbus": {
               "target": "Package",
@@ -133,7 +133,7 @@
             },
             "NuGet.Frameworks": {
               "target": "Package",
-              "version": "[6.13.2, )"
+              "version": "[6.14.0, )"
             },
             "Sharp7": {
               "target": "Package",
@@ -141,11 +141,11 @@
             },
             "System.Collections.Immutable": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "System.Configuration.ConfigurationManager": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "System.Data.DataSetExtensions": {
               "target": "Package",
@@ -153,35 +153,35 @@
             },
             "System.Diagnostics.DiagnosticSource": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "System.IO.Pipelines": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "System.IO.Ports": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "System.Runtime.CompilerServices.Unsafe": {
               "target": "Package",
-              "version": "[6.1.0, )"
+              "version": "[6.1.2, )"
             },
             "System.Text.Encodings.Web": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "System.Text.Json": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "System.Threading.Channels": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.9, )"
             },
             "Telegram.Bot": {
               "target": "Package",
-              "version": "[22.4.4, )"
+              "version": "[22.7.2, )"
             },
             "Telegram.Bot.Extensions.Polling": {
               "target": "Package",
@@ -207,7 +207,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300-preview.0.25177.5/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

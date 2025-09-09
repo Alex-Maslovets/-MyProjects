@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-using Modbus.Device;
+﻿using Modbus.Device;
 using Npgsql;
 using Sharp7;
 using System;
@@ -11,12 +10,8 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Telegram.Bot;
-using Telegram.Bot.Exceptions;
-using Telegram.Bot.Types.Enums;
 
 namespace Heineken_DataCollection
 {
@@ -115,7 +110,7 @@ namespace Heineken_DataCollection
 
             messageText[24] = "🟥 Значение О2 в СО2 выше уставки";
             messageText[25] = "🟥 Alarm Reserve 25";
-            messageText[26] = "🟥 Alarm Reserve 26";
+            messageText[26] = "🟥 Давление в ребойлере СО2 \\>\\= 16 Бар";
             messageText[27] = "🟥 Alarm Reserve 27";
             messageText[28] = "🟥 Alarm Reserve 28";
             messageText[29] = "🟥 Alarm Reserve 29";

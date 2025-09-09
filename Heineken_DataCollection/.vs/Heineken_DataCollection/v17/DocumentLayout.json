@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\",
+  "WorkspaceRootPath": "C:\\Users\\\u0410\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440\\source\\repos\\Alex-Maslovets\\-MyProjects\\Heineken_DataCollection\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|c:\\users\\alexo\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\-myprojects\\heineken_datacollection\\heineken_datacollection\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|c:\\users\\\u0430\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440\\source\\repos\\alex-maslovets\\-myprojects\\heineken_datacollection\\heineken_datacollection\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|solutionrelative:heineken_datacollection\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\heineken_datacollection\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|C:\\Users\\\u0410\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440\\source\\repos\\Alex-Maslovets\\-MyProjects\\Heineken_DataCollection\\heineken_datacollection\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{D8773CA2-F825-489A-ABD1-686C7CD2C824}|Heineken_DataCollection\\Heineken_DataCollection.csproj|solutionrelative:heineken_datacollection\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -18,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainScreen.cs",
+              "DocumentMoniker": "C:\\Users\\\u0410\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440\\source\\repos\\Alex-Maslovets\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs",
+              "RelativeDocumentMoniker": "Heineken_DataCollection\\MainScreen.cs",
+              "ToolTip": "C:\\Users\\\u0410\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440\\source\\repos\\Alex-Maslovets\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs",
+              "RelativeToolTip": "Heineken_DataCollection\\MainScreen.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-04T15:17:44.637Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
@@ -34,27 +47,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainScreen.cs",
-              "DocumentMoniker": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs",
-              "RelativeDocumentMoniker": "Heineken_DataCollection\\MainScreen.cs",
-              "ToolTip": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs",
-              "RelativeToolTip": "Heineken_DataCollection\\MainScreen.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-04T15:17:44.637Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MainScreen.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs",
+              "Title": "MainScreen.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\\u0410\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440\\source\\repos\\Alex-Maslovets\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs",
               "RelativeDocumentMoniker": "Heineken_DataCollection\\MainScreen.cs",
-              "ToolTip": "C:\\Users\\alexo\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "Heineken_DataCollection\\MainScreen.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "ToolTip": "C:\\Users\\\u0410\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440\\source\\repos\\Alex-Maslovets\\-MyProjects\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs [Design]",
+              "RelativeToolTip": "Heineken_DataCollection\\MainScreen.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-04T15:17:21.907Z"
+              "WhenOpened": "2025-01-04T15:17:21.907Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }
