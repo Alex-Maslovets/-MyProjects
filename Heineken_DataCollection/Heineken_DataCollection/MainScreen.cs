@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -274,7 +275,8 @@ namespace Heineken_DataCollection
                         for (int i = 0; i <= 31; i++)
                         {
                             double db1ddd4 = S7.GetRealAt(db1Buffer, 4 * i);
-                            myList.Add("(" + i + "," + db1ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
+                            //myList.Add("(" + i + "," + db1ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
+                            myList.Add("(" + i + "," + db1ddd4.ToString() + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
                         }
                         counterPLC3679++;
                     }
@@ -309,7 +311,8 @@ namespace Heineken_DataCollection
                         for (int i = 32; i <= 81; i++)
                         {
                             double db2ddd4 = S7.GetRealAt(db2Buffer, 4 * (i - 32));
-                            myList.Add("(" + i + "," + db2ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
+                            //myList.Add("(" + i + "," + db2ddd4.ToString().Replace(",", ".") + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
+                            myList.Add("(" + i + "," + db2ddd4.ToString() + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')");
                         }
                         counterPLC2++;
                     }
@@ -368,14 +371,14 @@ namespace Heineken_DataCollection
                             {
                                 previousMessageState[i] = currentMessageState[i];
                                 createMessage[i] = true;
-                                messageType[i] = "🟥";
+                                messageType[i] = "⬆️";
                                 messageTime[i] = DateTime.Now;
                             }
                             else if (previousMessageState[i] != currentMessageState[i] && currentMessageState[i] == false)
                             {
                                 previousMessageState[i] = currentMessageState[i];
                                 createMessage[i] = true;
-                                messageType[i] = "🟥";
+                                messageType[i] = "⬇️";
                                 messageDuration[i] = DateTime.Now.Subtract(messageTime[i]);
                             }
                         }
@@ -557,13 +560,9 @@ namespace Heineken_DataCollection
                     } 
                 );
 
-                //HttpClient httpClient = new(
-                //new HttpClientHandler { }
-                //);
-
                 var bot = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4", httpClient);
 
-                if (messageType[i] == "🟥")
+                if (messageType[i] == "⬆️")
                 {
                     Telegram.Bot.Types.Message message = await bot.SendMessage(
                     chatId: "-1001749496684",//chatId,
@@ -572,11 +571,11 @@ namespace Heineken_DataCollection
                 else
                 {
                     string duration = " (Длительность: " + Math.Round(messageDuration[i].TotalSeconds, 2) + " с)";
-                    duration = duration.Replace("(", "\\(");
-                    duration = duration.Replace(")", "\\)");
-                    duration = duration.Replace(":", "\\:");
-                    duration = duration.Replace(".", "\\.");
-                    duration = duration.Replace(",", "\\,");
+                    //duration = duration.Replace("(", "\\(");
+                    //duration = duration.Replace(")", "\\)");
+                    //duration = duration.Replace(":", "\\:");
+                    //duration = duration.Replace(".", "\\.");
+                    //duration = duration.Replace(",", "\\,");
                     Telegram.Bot.Types.Message message = await bot.SendMessage(
                     chatId: "-1001749496684",//chatId,
                     text: messageType[i] + messageText[i] + duration
@@ -738,7 +737,7 @@ namespace Heineken_DataCollection
                     timeLabel_mb_1.Invoke(new Action(() => timeLabel_mb_1.Text = "Время обнов. даты: " + Math.Round(s3.TotalMilliseconds, 0) + " мс Счётчик: " + counterTime_mb));
 
                     s2 = DateTime.Now;
-
+                                        
                     // Connect to Packaging
                     TcpClient client = new("10.129.31.165", 502);
                     ModbusIpMaster master = ModbusIpMaster.CreateIp(client);
@@ -892,7 +891,7 @@ namespace Heineken_DataCollection
                     s2 = DateTime.Now;
 
                     // Connect to New Electro Counters
-                    /*
+                    
                     string[] electroCounters = new string[50];
 
                     electroCounters[0] = "10.129.31.179";
@@ -956,7 +955,7 @@ namespace Heineken_DataCollection
                     s3 = DateTime.Now.Subtract(s2);
                     timeLabel_mb_8.Invoke(new Action(() => timeLabel_mb_8.Text = "Время Electro: " + Math.Round(s3.TotalMilliseconds, 0) + " мс Счётчик: " + counterElectroCounters_mb));
                     s2 = DateTime.Now;
-                    */
+                    
                     List<string> myList = [];
 
                     int x = values.Count / 5;
