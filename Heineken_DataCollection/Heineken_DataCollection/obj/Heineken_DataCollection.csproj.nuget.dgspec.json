@@ -45,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net9.0-windows7.0": {
@@ -57,7 +57,7 @@
             },
             "Microsoft.Bcl.AsyncInterfaces": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.Bcl.HashCode": {
               "target": "Package",
@@ -69,51 +69,51 @@
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.Extensions.Configuration.Binder": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.Extensions.Logging": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.Extensions.Logging.Abstractions": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.Extensions.Logging.Configuration": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.Extensions.Logging.Console": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.Extensions.Options": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.Extensions.Options.ConfigurationExtensions": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "Microsoft.Extensions.Primitives": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "NModbus": {
               "target": "Package",
@@ -125,15 +125,15 @@
             },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[13.0.3, )"
+              "version": "[13.0.4, )"
             },
             "Npgsql": {
               "target": "Package",
-              "version": "[9.0.3, )"
+              "version": "[10.0.0, )"
             },
             "NuGet.Frameworks": {
               "target": "Package",
-              "version": "[6.14.0, )"
+              "version": "[7.0.1, )"
             },
             "Sharp7": {
               "target": "Package",
@@ -141,11 +141,11 @@
             },
             "System.Collections.Immutable": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "System.Configuration.ConfigurationManager": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "System.Data.DataSetExtensions": {
               "target": "Package",
@@ -153,15 +153,19 @@
             },
             "System.Diagnostics.DiagnosticSource": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[10.0.0, )"
             },
             "System.IO.Pipelines": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "System.IO.Ports": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "System.Runtime.CompilerServices.Unsafe": {
               "target": "Package",
@@ -169,19 +173,19 @@
             },
             "System.Text.Encodings.Web": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "System.Text.Json": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "System.Threading.Channels": {
               "target": "Package",
-              "version": "[9.0.9, )"
+              "version": "[10.0.0, )"
             },
             "Telegram.Bot": {
               "target": "Package",
-              "version": "[22.7.2, )"
+              "version": "[22.7.5, )"
             },
             "Telegram.Bot.Extensions.Polling": {
               "target": "Package",
@@ -207,7 +211,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

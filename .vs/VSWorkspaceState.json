@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Heineken_DataCollection",
+    "\\Heineken_DataCollection\\Heineken_DataCollection"
   ],
+  "SelectedNode": "\\Heineken_DataCollection\\Heineken_DataCollection\\MainScreen.cs",
   "PreviewInSolutionExplorer": false
 }
