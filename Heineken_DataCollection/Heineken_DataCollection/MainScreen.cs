@@ -545,20 +545,25 @@ namespace Heineken_DataCollection
             ///// Messages Telegramm /////
             try
             {
-                WebProxy webProxy = new(Host: "10.129.24.100", Port: 8080)
+                var httpClient = new HttpClient
                 {
+                    BaseAddress = new Uri("https://telegram-api-proxy-anonymous.pages.dev/api/")
+                };
+            
+                //WebProxy webProxy = new(Host: "10.129.24.100", Port: 8080)
+                //{
                     // Credentials if needed:
                     // Credentials = new NetworkCredential("USERNAME", "PASSWORD")
-                };
+//};
                 
-                HttpClient httpClient = new(
-                    new HttpClientHandler
-                    {
-                        Proxy = webProxy,
-                        UseProxy = true,
-                        ServerCertificateCustomValidationCallback = (sender, cert, chain, errors) => true // Отключает проверку SSL
-                    } 
-                );
+                //HttpClient httpClient = new(
+                    //new HttpClientHandler
+                    //{
+  //Proxy = webProxy,
+  //UseProxy = true,
+  //ServerCertificateCustomValidationCallback = (sender, cert, chain, errors) => true // Отключает проверку SSL
+                    //} 
+                //);
 
                 var bot = new TelegramBotClient("5211488879:AAEy5YGotJ1bK-vyegu1DaUVI-XDh98vCT4", httpClient);
 

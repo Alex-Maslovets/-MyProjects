@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .tab { display: none; }
+    .tab.active { display: block; }
+    .tabs { margin-bottom: 20px; }
+    .tab-button { padding: 10px 20px; cursor: pointer; }
+    .tab-button.active { background: #0078d7; color: white; }
+    .control-panel { margin-bottom: 20px; }
+    .btn { padding: 10px 30px; margin-right: 10px; font-size: 14px; }
+    .btn-start { background: #4caf50; color: white; border: none; }
+    .btn-stop { background: #f44336; color: white; border: none; }
+    .status-label { display: block; margin: 5px 0; font-size: 13px; }
+    progress { width: 100%; height: 20px; }
+  </style>
+</head>
+<body>
+  <div class="tabs">
+    <button class="tab-button active" onclick="switchTab('s7')">S7</button>
+    <button class="tab-button" onclick="switchTab('modbus')">Modbus</button>
+  </div>
+
+  <!-- S7 Tab -->
+  <div id="s7" class="tab active">
+    <div class="control-panel">
+      <button class="btn btn-start" onclick="startS7()">Пуск</button>
+      <button class="btn btn-stop" onclick="stopS7()">Стоп</button>
+    </div>
+    
+    <div id="s7-status">
+      <span class="status-label" id="timeUpdate">Время обнов. даты: -</span>
+      <span class="status-label" id="timePLC3679">Время PLC_3679: -</span>
+      <span class="status-label" id="timePLC2">Время PLC_2: -</span>
+      <span class="status-label" id="timeMessages">Время сообщений: -</span>
+      <span class="status-label" id="timeWrite">Время записи: -</span>
+      <span class="status-label" id="timeLastCycle">Время последнего цикла: -</span>
+    </div>
+    
+    <progress id="progressS7" value="0" max="100"></progress>
+    <button class="btn" onclick="testMessage()">Тестовое сообщение</button>
+  </div>
+
+  <!-- Modbus Tab -->
+  <div id="modbus" class="tab">
+    <div class="control-panel">
+      <button class="btn btn-start" onclick="startModbus()">Пуск</button>
+      <button class="btn btn-stop" onclick="stopModbus()">Стоп</button>
+    </div>
+    
+    <div id="modbus-status">
+      <span class="status-label" id="mbTimeUpdate">Время обнов. даты: -</span>
+      <span class="status-label" id="mbTimePackaging">Время TH_Pack: -</span>
+      <span class="status-label" id="mbTimeBLO">Время TH_BLO: -</span>
+      <span class="status-label" id="mbTimeVAO">Время TH_VAO: -</span>
+      <span class="status-label" id="mbTimeEnergy">Время TH_EnBlock: -</span>
+      <span class="status-label" id="mbTimeFiltr">Время TH_Filtr: -</span>
+      <span class="status-label" id="mbTimeElectro">Время Electro: -</span>
+      <span class="status-label" id="mbTimeWrite">Время записи: -</span>
+      <span class="status-label" id="mbTimeLastCycle">Время последнего цикла: -</span>
+    </div>
+    
+    <progress id="progressModbus" value="0" max="100"></progress>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

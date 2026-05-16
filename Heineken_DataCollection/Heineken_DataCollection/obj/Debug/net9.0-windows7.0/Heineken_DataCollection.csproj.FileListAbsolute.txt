@@ -74,3 +74,8 @@ C:\Users\Александр\source\repos\Alex-Maslovets\-MyProjects\Heineken_Dat
 C:\Users\Александр\source\repos\Alex-Maslovets\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\obj\Debug\net9.0-windows7.0\Heineken_DataCollection.pdb
 C:\Users\Александр\source\repos\Alex-Maslovets\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\obj\Debug\net9.0-windows7.0\Heineken_DataCollection.genruntimeconfig.cache
 C:\Users\Александр\source\repos\Alex-Maslovets\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\obj\Debug\net9.0-windows7.0\ref\Heineken_DataCollection.dll
+C:\Users\Александр\source\repos\Alex-Maslovets\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\net9.0-windows7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Александр\source\repos\Alex-Maslovets\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\net9.0-windows7.0\System.Drawing.Common.dll
+C:\Users\Александр\source\repos\Alex-Maslovets\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\net9.0-windows7.0\System.Private.Windows.Core.dll
+C:\Users\Александр\source\repos\Alex-Maslovets\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\net9.0-windows7.0\System.Private.Windows.GdiPlus.dll
+C:\Users\Александр\source\repos\Alex-Maslovets\-MyProjects\Heineken_DataCollection\Heineken_DataCollection\bin\Debug\net9.0-windows7.0\runtimes\win\lib\net9.0\Microsoft.Win32.SystemEvents.dll

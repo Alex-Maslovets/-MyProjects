@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Heineken_DataCollection</name>
+    </assembly>
+    <members>
+        <member name="F:Heineken_DataCollection.MainScreen.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Heineken_DataCollection.MainScreen.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Heineken_DataCollection.MainScreen.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Heineken_DataCollection.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:Heineken_DataCollection.Properties.Resources">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Heineken_DataCollection.Properties.Resources.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Heineken_DataCollection.Properties.Resources.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+    </members>
+</doc>
